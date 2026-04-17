@@ -1,31 +1,22 @@
 package com.academy.course.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
-@Entity
-@Table
-public class Product extends DataEntity {
-
-    @Column
-    private String name;
-
-    @Column
-    private Double price;
-
-    @Column
-    private String info;
+@MappedSuperclass
+public class DataEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id",unique = true)
+    private Integer id;
 
     @CreationTimestamp
     private LocalDateTime createDateTime;

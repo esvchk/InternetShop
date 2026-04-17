@@ -1,4 +1,14 @@
 package com.academy.course.dao;
 
-public interface DAO {
+import java.io.Serializable;
+import java.sql.SQLException;
+
+public interface DAO <T>{
+    T save(T entity) throws SQLException;
+
+    T get(Serializable id) throws SQLException;
+
+    void update(T entity) throws SQLException;
+
+    void delete(Serializable id) throws SQLException;
 }
