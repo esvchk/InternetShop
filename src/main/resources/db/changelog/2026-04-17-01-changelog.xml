@@ -10,11 +10,11 @@
             <column name="id" type="INT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_product"/>
             </column>
-            <column name="createDateTime" type="DATETIME"/>
-            <column name="updateDateTime" type="DATETIME"/>
             <column name="name" type="VARCHAR(255)"/>
             <column name="price" type="DOUBLE"/>
             <column name="info" type="VARCHAR(255)"/>
+            <column name="createDateTime" type="DATETIME"/>
+            <column name="updateDateTime" type="DATETIME"/>
         </createTable>
     </changeSet>
 
