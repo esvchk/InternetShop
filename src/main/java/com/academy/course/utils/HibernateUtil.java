@@ -10,7 +10,7 @@ public class HibernateUtil {
 
     private static final ThreadLocal<EntityManager> threadLocalEm = new ThreadLocal<>();
 
-    public static EntityManager getEntityManager(){
+    public static EntityManager getEntityManager() {
         EntityManager em = threadLocalEm.get();
         if (em == null || !em.isOpen()) {
             em = ENTITY_MANAGER_FACTORY.createEntityManager();
@@ -28,15 +28,10 @@ public class HibernateUtil {
             threadLocalEm.remove();
         }
     }
-    public static void beginTransaction(){
-        getEntityManager().getTransaction().begin();
-    }
 
-    public static void commit(){
-        getEntityManager().getTransaction().commit();
-    }
-
-    public static void rollback(){
-        getEntityManager().getTransaction().rollback();
+    public static void closeFactory() {
+        if (ENTITY_MANAGER_FACTORY.isOpen()) {
+            ENTITY_MANAGER_FACTORY.close();
+        }
     }
 }
