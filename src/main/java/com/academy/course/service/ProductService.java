@@ -7,4 +7,7 @@ import java.util.List;
 
 public interface ProductService {
     List<ProductDTO> findProductsByName(String name);
+    List<ProductDTO> findAllProducts();
+    Product mapToProduct(ProductDTO productDTO);
+    ProductDTO mapToProductDTO (Product product);
 }

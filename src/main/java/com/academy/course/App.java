@@ -19,6 +19,7 @@ public class App
 
         DAO<Product> dao = new DAOImpl<>(Product.class);
         ProductServiceImpl productService = new ProductServiceImpl();
-        System.out.println(productService.findProductsByName("Milk"));
+        dao.save(product);
+//        System.out.println(productService.findAllProducts());
     }
 }

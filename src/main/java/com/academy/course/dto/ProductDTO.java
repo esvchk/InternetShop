@@ -14,6 +14,8 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class ProductDTO {
 
+    private Integer id;
+
     private String name;
 
     private Double price;
