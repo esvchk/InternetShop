@@ -26,8 +26,6 @@ public class AddProduct extends HttpServlet {
         LocalDate bestBefore = LocalDate.parse(request.getParameter("bestBefore"));
 
 
-
-
         ProductDTO productDTO = ProductDTO.builder()
                 .name(name)
                 .price(price)

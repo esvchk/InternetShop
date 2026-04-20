@@ -4,6 +4,7 @@ import com.academy.course.dao.ProductDAOImpl;
 import com.academy.course.dto.ProductDTO;
 import com.academy.course.model.Product;
 
+import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +18,11 @@ public class ProductServiceImpl implements ProductService {
     public void addProduct(ProductDTO productDTO) throws SQLException {
         Product product = mapToProduct(productDTO);
         productDAO.save(product);
+    }
+
+    @Override
+    public ProductDTO findProductById(Serializable id) throws SQLException {
+        return mapToProductDTO(productDAO.get(id));
     }
 
     @Override

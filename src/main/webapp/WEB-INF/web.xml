@@ -17,6 +17,16 @@
         <servlet-class>com.academy.course.controller.AddProduct</servlet-class>
     </servlet>
 
+    <servlet>
+    <servlet-name>FindProductById</servlet-name>
+    <servlet-class>com.academy.course.controller.FindProductById</servlet-class>
+</servlet>
+
+    <servlet-mapping>
+        <servlet-name>FindProductById</servlet-name>
+        <url-pattern>/FindProductById</url-pattern>
+    </servlet-mapping>
+
     <servlet-mapping>
         <servlet-name>ShowProducts</servlet-name>
         <url-pattern>/ShowProducts</url-pattern>

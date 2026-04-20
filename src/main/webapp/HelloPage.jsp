@@ -14,6 +14,8 @@
 
     <a href="AddProduct.jsp">Add Product</a>
 
+    <a href="FindById.jsp">Find Product</a>
+
 </head>
 <body>
 
