@@ -28,7 +28,7 @@
     </servlet-mapping>
 
     <welcome-file-list>
-        <welcome-file>list.jsp</welcome-file>
+        <welcome-file>HelloPage.jsp</welcome-file>
     </welcome-file-list>
 
 </web-app>

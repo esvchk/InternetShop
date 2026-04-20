@@ -12,20 +12,20 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Enumeration;
 
 public class AddProduct extends HttpServlet {
 
     private final ProductService productService = new ProductServiceImpl();
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         String name = request.getParameter("name");
-        Double price = Double.parseDouble(request.getParameter("price"));
+        Double price = Double.valueOf(request.getParameter("price"));
         String info = request.getParameter("info");
         String manufacturer = request.getParameter("manufacturer");
         LocalDate bestBefore = LocalDate.parse(request.getParameter("bestBefore"));
-        Enumeration<String> params = request.getParameterNames();
+
+
 
 
         ProductDTO productDTO = ProductDTO.builder()
@@ -40,7 +40,7 @@ public class AddProduct extends HttpServlet {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/register.jsp");
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/AddProduct.jsp");
         dispatcher.forward(request, response);
 
     }

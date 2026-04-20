@@ -1,0 +1,24 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: User
+  Date: 20.04.2026
+  Time: 19:06
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>Add Product</title>
+    <form action = "AddProduct" method = "post">
+        Name: <input name = "name" type = "text"/><br/>
+        Price: <input name = "price" type = "text"/><br/>
+        Info: <input name = "info" type = "text"/><br/>
+        Manufacturer: <input name = "manufacturer" type = "text"/><br/>
+        Best Before: <input name = "bestBefore" type = "text"/><br/>
+        <input type = "submit">
+    </form>
+</head>
+<body>
+
+</body>
+</html>
