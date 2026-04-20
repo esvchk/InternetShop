@@ -12,9 +12,9 @@ public class App
 {
     public static void main( String[] args ) throws SQLException {
         Product product = Product.builder()
-                .name("Milk")
-                .price(3.32)
-                .info("3.2%")
+                .name("Cheese")
+                .price(4.44)
+                .info("Brest-Litovsk%")
                 .build();
 
         DAO<Product> dao = new DAOImpl<>(Product.class);

@@ -27,4 +27,23 @@ public class ProductDTO {
     private LocalDate bestBefore;
 
 
+    @Override
+    public String toString() {
+        return "ProductDTO{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", info='" + info + '\'' +
+                ", manufacturer='" + manufacturer + '\'' +
+                ", bestBefore=" + bestBefore +
+                '}';
+    }
+
+    public ProductDTO(String name, Double price, String info, String manufacturer, LocalDate bestBefore) {
+        this.name = name;
+        this.price = price;
+        this.info = info;
+        this.manufacturer = manufacturer;
+        this.bestBefore = bestBefore;
+    }
 }

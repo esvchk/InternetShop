@@ -4,12 +4,20 @@ import com.academy.course.dao.ProductDAOImpl;
 import com.academy.course.dto.ProductDTO;
 import com.academy.course.model.Product;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class ProductServiceImpl implements ProductService {
 
     private final ProductDAOImpl productDAO = new ProductDAOImpl();
+
+    @Override
+    public void addProduct(ProductDTO productDTO) throws SQLException {
+        Product product = mapToProduct(productDTO);
+        productDAO.save(product);
+    }
 
     @Override
     public List<ProductDTO> findProductsByName(String name) {

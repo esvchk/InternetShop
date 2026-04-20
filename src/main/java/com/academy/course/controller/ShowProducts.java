@@ -12,13 +12,12 @@ import java.io.IOException;
 
 public class ShowProducts extends HttpServlet {
 
-    ProductService productService = new ProductServiceImpl();
+    private final ProductService productService = new ProductServiceImpl();
 
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setAttribute("products",productService.findAllProducts());
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/productsDB");
-        dispatcher.forward(req,resp);
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("products",productService.findAllProducts());
+        request.getRequestDispatcher("/productsDB.jsp")
+                .forward(request,response);
 
     }
 }
