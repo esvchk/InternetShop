@@ -15,8 +15,11 @@
     </form>
     <%
         ProductDTO productDTO = (ProductDTO) request.getAttribute("product");
-    %>
+        if (productDTO != null) {%>
     <%= productDTO %>
+        <%}%>
+
+
 </head>
 <body>
 

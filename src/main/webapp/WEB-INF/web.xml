@@ -22,6 +22,26 @@
     <servlet-class>com.academy.course.controller.FindProductById</servlet-class>
 </servlet>
 
+    <servlet>
+        <servlet-name>FindProductByName</servlet-name>
+        <servlet-class>com.academy.course.controller.FindProductByName</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>UpdateProduct</servlet-name>
+        <servlet-class>com.academy.course.controller.UpdateProduct</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>UpdateProduct</servlet-name>
+        <url-pattern>/UpdateProduct</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>FindProductByName</servlet-name>
+        <url-pattern>/FindProductByName</url-pattern>
+    </servlet-mapping>
+
     <servlet-mapping>
         <servlet-name>FindProductById</servlet-name>
         <url-pattern>/FindProductById</url-pattern>

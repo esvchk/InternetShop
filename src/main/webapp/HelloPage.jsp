@@ -8,13 +8,17 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Hello</title>
+    <title>Hello Application</title>
 
     <a href="ShowProducts">Show Products</a>
 
     <a href="AddProduct.jsp">Add Product</a>
 
-    <a href="FindById.jsp">Find Product</a>
+    <a href="FindById.jsp">Find Product By Id</a>
+
+    <a href="FindByName.jsp">Find Product By Name</a>
+
+    <a href="ShowProducts">Choose any product to update</a>
 
 </head>
 <body>

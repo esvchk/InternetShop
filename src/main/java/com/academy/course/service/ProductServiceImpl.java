@@ -15,6 +15,12 @@ public class ProductServiceImpl implements ProductService {
     private final ProductDAOImpl productDAO = new ProductDAOImpl();
 
     @Override
+    public void updateProduct(ProductDTO productDTO) throws SQLException {
+        Product product = mapToProduct(productDTO);
+        productDAO.update(product);
+    }
+
+    @Override
     public void addProduct(ProductDTO productDTO) throws SQLException {
         Product product = mapToProduct(productDTO);
         productDAO.save(product);
@@ -28,8 +34,8 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<ProductDTO> findProductsByName(String name) {
         return productDAO.getAllProducts().stream()
-                .filter(product -> product.getName().equals(name))
                 .map(this::mapToProductDTO)
+                .filter(productDTO -> productDTO.getName().equalsIgnoreCase(name))
                 .collect(Collectors.toList());
     }
 
