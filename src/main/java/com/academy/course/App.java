@@ -16,9 +16,7 @@ import java.util.Set;
 public class App
 {
     public static void main( String[] args ) throws SQLException {
-        ;
 
-        Set<Operator> operators = new HashSet<>();
         Set<Order> orders = new HashSet<>();
         Set<Product> products = new HashSet<>();
         Set<Customer> customers = new HashSet<>();
@@ -29,7 +27,6 @@ public class App
                 .price(4.44)
                 .info("Cheder")
                 .manufacturer("Brest-Litovsk")
-                .orders(null)
                 .bestBefore(LocalDate.of(2026,4,23))
                 .build();
 
@@ -55,7 +52,6 @@ public class App
                 .operator(operator)
                 .build();
 
-        operators.add(operator);
         orders.add(order);
         products.add(product);
         customers.add(customer);
@@ -63,8 +59,16 @@ public class App
 
 
         DAO<Product> dao = new DAOImpl<>(Product.class);
+        DAO<Order> dao1 = new DAOImpl<>(Order.class);
+        DAO<Customer> dao2 = new DAOImpl<>(Customer.class);
+        DAO<Operator> dao3 = new DAOImpl<>(Operator.class);
 //        ProductServiceImpl productService = new ProductServiceImpl();
         dao.save(product);
+        dao3.save(operator);
+        dao2.save(customer);
+        dao1.save(order);
+
+
 //        System.out.println(productService.findAllProducts());
 
 
