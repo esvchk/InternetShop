@@ -18,7 +18,6 @@
 
     <a href="FindByName.jsp">Find Product By Name</a>
 
-    <a href="ShowProducts">Choose any product to update</a>
 
 </head>
 <body>
