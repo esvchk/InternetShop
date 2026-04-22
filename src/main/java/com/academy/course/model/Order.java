@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -28,7 +27,7 @@ public class Order extends DataEntity implements Serializable {
     @ManyToMany(mappedBy = "orders")
     private Set<Customer> customers = new HashSet<>();
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "operator_id")
     private Operator operator;
 
