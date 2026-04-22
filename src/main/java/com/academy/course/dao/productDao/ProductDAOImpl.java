@@ -1,5 +1,6 @@
-package com.academy.course.dao;
+package com.academy.course.dao.productDao;
 
+import com.academy.course.dao.DAOImpl;
 import com.academy.course.model.Product;
 
 import javax.persistence.Query;

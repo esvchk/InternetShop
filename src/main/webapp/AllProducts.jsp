@@ -45,7 +45,7 @@
     } else {
     %>
     <tr>
-        <td colspan="5">No users found</td>
+        <td colspan="5">No operators found</td>
     </tr>
     <%
         }

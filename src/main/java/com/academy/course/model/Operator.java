@@ -1,12 +1,12 @@
 package com.academy.course.model;
 
-import lombok.*;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -17,32 +17,24 @@ import java.util.Set;
 @AllArgsConstructor
 @Entity
 @Table
-public class Product extends DataEntity implements Serializable {
+public class Operator extends DataEntity implements Serializable {
 
     @Column
-    private String name;
-
+    private String login;
     @Column
-    private Double price;
-
+    private String passWord;
     @Column
-    private String info;
+    private String accessLevel;
 
-    @Column
-    private String manufacturer;
-
-    @Column
-    private LocalDate bestBefore;
-
-    @ManyToMany(mappedBy = "products")
+    @OneToMany(mappedBy = "operator")
     private Set<Order> orders = new HashSet<>();
 
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
-        Product product = (Product) o;
-        return Objects.equals(getId(),product.getId());
+        Operator operator = (Operator) o;
+        return Objects.equals(getId(), operator.getId());
     }
 
     @Override

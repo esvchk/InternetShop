@@ -9,32 +9,32 @@
 
     <servlet>
         <servlet-name>ShowProducts</servlet-name>
-        <servlet-class>com.academy.course.controller.ShowProducts</servlet-class>
+        <servlet-class>com.academy.course.controller.productServlets.ShowProducts</servlet-class>
     </servlet>
 
     <servlet>
         <servlet-name>AddProduct</servlet-name>
-        <servlet-class>com.academy.course.controller.AddProduct</servlet-class>
+        <servlet-class>com.academy.course.controller.productServlets.AddProduct</servlet-class>
     </servlet>
 
     <servlet>
     <servlet-name>FindProductById</servlet-name>
-    <servlet-class>com.academy.course.controller.FindProductById</servlet-class>
+    <servlet-class>com.academy.course.controller.productServlets.FindProductById</servlet-class>
 </servlet>
 
     <servlet>
         <servlet-name>FindProductByName</servlet-name>
-        <servlet-class>com.academy.course.controller.FindProductByName</servlet-class>
+        <servlet-class>com.academy.course.controller.productServlets.FindProductByName</servlet-class>
     </servlet>
 
     <servlet>
         <servlet-name>UpdateProduct</servlet-name>
-        <servlet-class>com.academy.course.controller.UpdateProduct</servlet-class>
+        <servlet-class>com.academy.course.controller.productServlets.UpdateProduct</servlet-class>
     </servlet>
 
     <servlet>
         <servlet-name>DeleteProduct</servlet-name>
-        <servlet-class>com.academy.course.controller.DeleteProduct</servlet-class>
+        <servlet-class>com.academy.course.controller.productServlets.DeleteProduct</servlet-class>
     </servlet>
 
     <servlet-mapping>

@@ -1,27 +1,36 @@
-package com.academy.course.controller;
+package com.academy.course.controller.productServlets;
 
 import com.academy.course.dto.ProductDTO;
 import com.academy.course.service.ProductService;
 import com.academy.course.service.ProductServiceImpl;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.List;
 
-public class AddProduct extends HttpServlet {
+public class UpdateProduct extends HttpServlet {
 
     private final ProductService productService = new ProductServiceImpl();
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Integer id = Integer.parseInt(request.getParameter("id"));
+        try {
+            ProductDTO productDTO = productService.findProductById(id) ;
+                request.setAttribute("product", productDTO);
+                request.getRequestDispatcher("/UpdateProduct.jsp")
+                        .forward(request, response);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
+    }
+
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Integer id = Integer.parseInt(request.getParameter("id"));
         String name = request.getParameter("name");
         Double price = Double.valueOf(request.getParameter("price"));
         String info = request.getParameter("info");
@@ -29,7 +38,9 @@ public class AddProduct extends HttpServlet {
         LocalDate bestBefore = LocalDate.parse(request.getParameter("bestBefore"));
 
         String context = request.getContextPath();
+
         ProductDTO productDTO = ProductDTO.builder()
+                .id(id)
                 .name(name)
                 .price(price)
                 .info(info)
@@ -37,12 +48,10 @@ public class AddProduct extends HttpServlet {
                 .bestBefore(bestBefore)
                 .build();
         try {
-            productService.addProduct(productDTO);
+            productService.updateProduct(productDTO);
             response.sendRedirect(context + "/ShowProducts");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
-
     }
 }

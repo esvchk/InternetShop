@@ -1,4 +1,4 @@
-package com.academy.course.controller;
+package com.academy.course.controller.productServlets;
 
 import com.academy.course.service.ProductService;
 import com.academy.course.service.ProductServiceImpl;
