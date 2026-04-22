@@ -11,7 +11,7 @@
     <title>Add Product</title>
     <form action = "AddProduct" method = "post">
         Name: <input name = "name" type = "text"/><br/>
-        Price: <input name = "price" type = "number"/><br/>
+        Price: <input name = "price" step="0.01" type = "number"/><br/>
         Info: <input name = "info" type = "text"/><br/>
         Manufacturer: <input name = "manufacturer" type = "text"/><br/>
         Best Before: <input name = "bestBefore" type = "date"/><br/>

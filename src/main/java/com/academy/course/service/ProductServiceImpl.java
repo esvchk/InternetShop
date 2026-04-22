@@ -16,7 +16,10 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void updateProduct(ProductDTO productDTO) throws SQLException {
-        Product product = mapToProduct(productDTO);
+        Product product = productDAO.get(productDTO.getId());
+        product.setName(productDTO.getName());
+        product.setPrice(productDTO.getPrice());
+        product.setInfo(productDTO.getInfo());
         productDAO.update(product);
     }
 
@@ -27,16 +30,20 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public void deleteProduct(Serializable id) throws SQLException {
+        productDAO.delete(id);
+    }
+
+    @Override
     public ProductDTO findProductById(Serializable id) throws SQLException {
         return mapToProductDTO(productDAO.get(id));
     }
 
     @Override
     public List<ProductDTO> findProductsByName(String name) {
-        return productDAO.getAllProducts().stream()
-                .map(this::mapToProductDTO)
-                .filter(productDTO -> productDTO.getName().equalsIgnoreCase(name))
-                .collect(Collectors.toList());
+       return productDAO.getByName(name).stream()
+               .map(this::mapToProductDTO)
+               .collect(Collectors.toList());
     }
 
     @Override
@@ -52,6 +59,8 @@ public class ProductServiceImpl implements ProductService {
                 .name(productDTO.getName())
                 .price(productDTO.getPrice())
                 .info(productDTO.getInfo())
+                .manufacturer(productDTO.getManufacturer())
+                .bestBefore(productDTO.getBestBefore())
                 .build();
     }
 
@@ -62,6 +71,8 @@ public class ProductServiceImpl implements ProductService {
                 .name(product.getName())
                 .price(product.getPrice())
                 .info(product.getInfo())
+                .manufacturer(product.getManufacturer())
+                .bestBefore(product.getBestBefore())
                 .build();
     }
 }

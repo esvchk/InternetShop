@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface ProductDAO extends DAO<Product>{
     List<Product> getAllProducts();
+    List<Product> getByName(String name);
 }

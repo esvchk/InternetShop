@@ -11,6 +11,7 @@ import java.util.List;
 public interface ProductService {
     void updateProduct(ProductDTO productDTO) throws SQLException;
     void addProduct(ProductDTO productDTO) throws SQLException;
+    void deleteProduct(Serializable id) throws SQLException;
     ProductDTO findProductById(Serializable id) throws SQLException;
     List<ProductDTO> findProductsByName(String name);
     List<ProductDTO> findAllProducts();

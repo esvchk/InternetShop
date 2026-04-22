@@ -27,6 +27,8 @@ public class AddProduct extends HttpServlet {
         String info = request.getParameter("info");
         String manufacturer = request.getParameter("manufacturer");
         LocalDate bestBefore = LocalDate.parse(request.getParameter("bestBefore"));
+
+        String context = request.getContextPath();
         ProductDTO productDTO = ProductDTO.builder()
                 .name(name)
                 .price(price)
@@ -36,11 +38,11 @@ public class AddProduct extends HttpServlet {
                 .build();
         try {
             productService.addProduct(productDTO);
+            response.sendRedirect(context + "/ShowProducts");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/AddProduct.jsp");
-        dispatcher.forward(request, response);
+
 
     }
 }

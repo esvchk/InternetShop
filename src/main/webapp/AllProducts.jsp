@@ -6,8 +6,9 @@
     <title>Products</title>
     <h1>Product List</h1>
 <body>
-<h2>User List</h2>
-<a href="AddProduct">Add New Product</a>
+<a href="AddProduct.jsp">Add New Product</a>
+<a href="FindById.jsp">Search by Id</a>
+<a href="FindByName.jsp">Search by Name</a>
 <br/><br/>
 <table border="1">
     <thead>
@@ -36,7 +37,7 @@
         <td>
             <a href="UpdateProduct?id=<%= product.getId() %>">Edit</a>
             &nbsp;&nbsp;&nbsp;
-            <a href="?action=delete&id=<%= product.getId() %>">Delete</a>
+            <a href="DeleteProduct?id=<%= product.getId() %>">Delete</a>
         </td>
     </tr>
     <%

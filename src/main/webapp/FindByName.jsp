@@ -9,23 +9,55 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Find By Name</title>
 
     <form action="FindProductByName" method="post">
         Name: <input name="name" type="text"/><br/>
         <input type="submit">
     </form>
 
-    <ul>
+    <table border="1">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Info</th>
+            <th>Manufacturer</th>
+            <th>Best Before</th>
+        </tr>
+        </thead>
+        <tbody>
         <%
             List<ProductDTO> products = (List<ProductDTO>) request.getAttribute("products");
-            if (products != null) {
-                for (ProductDTO product : products) { %>
-        <li><%= product %>
-        </li>
-            <%}%>
-        <%}%>
-    </ul>
+            if (products != null && !products.isEmpty()) {
+                for (ProductDTO product : products) {
+        %>
+        <tr>
+            <td><%= product.getId() %></td>
+            <td><%= product.getName() %></td>
+            <td><%= product.getPrice() %></td>
+            <td><%= product.getInfo() %></td>
+            <td><%= product.getManufacturer() %></td>
+            <td><%= product.getBestBefore() %></td>
+            <td>
+                <a href="UpdateProduct?id=<%= product.getId() %>">Edit</a>
+                &nbsp;&nbsp;&nbsp;
+                <a href="DeleteProduct?id=<%= product.getId() %>">Delete</a>
+            </td>
+        </tr>
+        <%
+            }
+        } else {
+        %>
+        <tr>
+            <td colspan="5">No users found</td>
+        </tr>
+        <%
+            }
+        %>
+        </tbody>
+    </table>
 </head>
 <body>
 

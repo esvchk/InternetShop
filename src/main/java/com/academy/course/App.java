@@ -7,6 +7,7 @@ import com.academy.course.service.ProductService;
 import com.academy.course.service.ProductServiceImpl;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 public class App
 {
@@ -14,7 +15,9 @@ public class App
         Product product = Product.builder()
                 .name("Cheese")
                 .price(4.44)
-                .info("Brest-Litovsk%")
+                .info("Cheder")
+                .manufacturer("Brest-Litovsk")
+                .bestBefore(LocalDate.of(2026,4,23))
                 .build();
 
         DAO<Product> dao = new DAOImpl<>(Product.class);

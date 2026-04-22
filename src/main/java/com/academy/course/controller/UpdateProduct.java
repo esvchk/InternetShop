@@ -21,24 +21,28 @@ public class UpdateProduct extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Integer id = Integer.parseInt(request.getParameter("id"));
         try {
-            ProductDTO productDTO = productService.findProductById(id);
-            request.setAttribute("product",productDTO);
-            request.getRequestDispatcher("UpdateProduct.jsp");
+            ProductDTO productDTO = productService.findProductById(id) ;
+                request.setAttribute("product", productDTO);
+                request.getRequestDispatcher("/UpdateProduct.jsp")
+                        .forward(request, response);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
     }
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Integer id = Integer.parseInt(request.getParameter("id"));
         String name = request.getParameter("name");
         Double price = Double.valueOf(request.getParameter("price"));
         String info = request.getParameter("info");
         String manufacturer = request.getParameter("manufacturer");
         LocalDate bestBefore = LocalDate.parse(request.getParameter("bestBefore"));
 
+        String context = request.getContextPath();
+
         ProductDTO productDTO = ProductDTO.builder()
+                .id(id)
                 .name(name)
                 .price(price)
                 .info(info)
@@ -47,7 +51,7 @@ public class UpdateProduct extends HttpServlet {
                 .build();
         try {
             productService.updateProduct(productDTO);
-            response.sendRedirect("/AllProducts.jsp");
+            response.sendRedirect(context + "/ShowProducts");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

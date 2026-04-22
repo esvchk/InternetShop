@@ -32,6 +32,16 @@
         <servlet-class>com.academy.course.controller.UpdateProduct</servlet-class>
     </servlet>
 
+    <servlet>
+        <servlet-name>DeleteProduct</servlet-name>
+        <servlet-class>com.academy.course.controller.DeleteProduct</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>DeleteProduct</servlet-name>
+        <url-pattern>/DeleteProduct</url-pattern>
+    </servlet-mapping>
+
     <servlet-mapping>
         <servlet-name>UpdateProduct</servlet-name>
         <url-pattern>/UpdateProduct</url-pattern>

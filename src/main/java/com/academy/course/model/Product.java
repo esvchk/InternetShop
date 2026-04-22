@@ -6,6 +6,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Builder
@@ -23,6 +24,12 @@ public class Product extends DataEntity {
 
     @Column
     private String info;
+
+    @Column
+    private String manufacturer;
+
+    @Column
+    private LocalDate bestBefore;
 
     @CreationTimestamp
     private LocalDateTime createDateTime;

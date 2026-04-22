@@ -21,7 +21,7 @@
         <input type="hidden" name="id" value="<%= productDTO.getId() %>">
         Name: <input type="text" name="name"
                      value="<%= productDTO.getName() %>" required><br><br>
-        Price: <input type="number" name="price"
+        Price: <input type="number" step="0.01" name="price"
                       value="<%= productDTO.getPrice() %>" required><br><br>
         Info: <input type="text" name="info"
                       value="<%= productDTO.getInfo() %>" required><br><br>
