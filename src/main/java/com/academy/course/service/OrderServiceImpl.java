@@ -27,9 +27,4 @@ public class OrderServiceImpl implements OrderService {
                 .build();
     }
 
-    @Override
-    public void addProduct(OrderDTO orderDTO) throws SQLException {
-        Order order = mapToOrder(orderDTO);
-        orderDAO.save(order);
-    }
 }

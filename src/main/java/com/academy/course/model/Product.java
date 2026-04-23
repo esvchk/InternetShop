@@ -46,4 +46,15 @@ public class Product extends DataEntity implements Serializable {
     public int hashCode() {
         return Objects.hash(getId());
     }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "name='" + name + '\'' +
+                ", price=" + price +
+                ", info='" + info + '\'' +
+                ", manufacturer='" + manufacturer + '\'' +
+                ", bestBefore=" + bestBefore +
+                '}';
+    }
 }

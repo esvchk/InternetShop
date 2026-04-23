@@ -2,11 +2,19 @@ package com.academy.course;
 
 import com.academy.course.dao.DAO;
 import com.academy.course.dao.DAOImpl;
+import com.academy.course.dao.customerDao.CustomerDAO;
+import com.academy.course.dao.customerDao.CustomerDAOImpl;
+import com.academy.course.dao.orderDao.OrderDAO;
+import com.academy.course.dao.orderDao.OrderDAOImpl;
+import com.academy.course.dao.orderItemDao.OrderItemDAO;
+import com.academy.course.dao.orderItemDao.OrderItemDAOImpl;
 import com.academy.course.model.*;
+import com.academy.course.service.ProductServiceImpl;
 import com.academy.course.utils.HibernateUtil;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -15,16 +23,13 @@ public class App
     public static void main( String[] args ) throws SQLException {
 
         Set<Order> orders = new HashSet<>();
-        Set<Product> products = new HashSet<>();
-        Set<Customer> customers = new HashSet<>();
         Set<OrderItem> orderItems = new HashSet<>();
 
-
         Product product = Product.builder()
-                .name("Cheese")
+                .name("Milks")
                 .price(4.44)
-                .info("Cheder")
-                .manufacturer("Brest-Litovsk")
+                .info("3.2%")
+                .manufacturer("Savushkin")
                 .bestBefore(LocalDate.of(2026,4,23))
                 .build();
 
@@ -50,29 +55,33 @@ public class App
                 .operator(operator)
                 .build();
 
+
         OrderItem orderItem = OrderItem.builder()
                 .product(product)
                 .order(order)
                 .quantity(4)
                 .build();
 
+
         orders.add(order);
-        products.add(product);
-        customers.add(customer);
         orderItems.add(orderItem);
 
 
-
-
         DAO<Product> dao = new DAOImpl<>(Product.class);
-        DAO<Order> dao1 = new DAOImpl<>(Order.class);
-        DAO<Customer> dao2 = new DAOImpl<>(Customer.class);
+        OrderDAO orderDAO = new OrderDAOImpl();
+        CustomerDAO customerDAO = new CustomerDAOImpl();
         DAO<Operator> dao3 = new DAOImpl<>(Operator.class);
-        DAO<OrderItem> dao4 = new DAOImpl<>(OrderItem.class);
-//        ProductServiceImpl productService = new ProductServiceImpl();
+        OrderItemDAO orderItemDAO = new OrderItemDAOImpl();
+        ProductServiceImpl productService = new ProductServiceImpl();
 
-        dao.save(product);
-        dao2.save(customer);
+        DAO<Customer> dao1 = new DAOImpl<>(Customer.class);
+
+        orderItemDAO.deleteProductOfOrder(1,4);
+
+//        customerDAO.createOrder(customer,order);
+
+
+
 
 
 //        System.out.println(productService.findAllProducts());

@@ -19,14 +19,14 @@ import java.util.Set;
 @Table(name = "orders")
 public class Order extends DataEntity implements Serializable {
 
-    @OneToMany(mappedBy = "order",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "order",cascade = CascadeType.ALL,orphanRemoval = true)
     private Set<OrderItem> orderItems = new HashSet<>();
 
     @ManyToOne
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "operator_id")
     private Operator operator;
 
@@ -43,4 +43,11 @@ public class Order extends DataEntity implements Serializable {
         return Objects.hash(getId());
     }
 
+    @Override
+    public String toString() {
+        return "Order{" +
+                ", customer=" + customer +
+                ", operator=" + operator +
+                '}';
+    }
 }

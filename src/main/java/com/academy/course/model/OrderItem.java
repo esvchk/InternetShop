@@ -39,4 +39,12 @@ public class OrderItem extends DataEntity{
     public int hashCode() {
         return Objects.hash(getId());
     }
+
+    @Override
+    public String toString() {
+        return "OrderItem{" +
+                "product=" + product +
+                ", quantity=" + quantity +
+                '}';
+    }
 }

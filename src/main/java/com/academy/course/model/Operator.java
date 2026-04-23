@@ -41,4 +41,13 @@ public class Operator extends DataEntity implements Serializable {
     public int hashCode() {
         return Objects.hash(getId());
     }
+
+    @Override
+    public String toString() {
+        return "Operator{" +
+                "login='" + login + '\'' +
+                ", passWord='" + passWord + '\'' +
+                ", accessLevel='" + accessLevel + '\'' +
+                '}';
+    }
 }
