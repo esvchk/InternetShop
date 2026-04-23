@@ -5,7 +5,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-5.0.xsd"
         objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
-    <changeSet id="1776881706477-1" author="esvchk">
+    <changeSet id="1776929367582-1" author="esvchk">
         <createTable tableName="Customer">
             <column name="id" type="INT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_customer"/>
@@ -18,7 +18,7 @@
             <column name="payment" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
-    <changeSet id="1776881706477-2" author="esvchk">
+    <changeSet id="1776929367582-2" author="esvchk">
         <createTable tableName="Operator">
             <column name="id" type="INT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_operator"/>
@@ -30,7 +30,19 @@
             <column name="accessLevel" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
-    <changeSet id="1776881706477-3" author="esvchk">
+    <changeSet id="1776929367582-3" author="esvchk">
+        <createTable tableName="OrderItem">
+            <column name="id" type="INT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_orderitem"/>
+            </column>
+            <column name="createDateTime" type="DATETIME"/>
+            <column name="updateDateTime" type="DATETIME"/>
+            <column name="product_id" type="INT"/>
+            <column name="order_id" type="INT"/>
+            <column name="quantity" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1776929367582-4" author="esvchk">
         <createTable tableName="Product">
             <column name="id" type="INT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_product"/>
@@ -44,60 +56,36 @@
             <column name="bestBefore" type="DATE"/>
         </createTable>
     </changeSet>
-    <changeSet id="1776881706477-4" author="esvchk">
-        <createTable tableName="customer_orders">
-            <column name="customer_id" type="INT">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_customer_orders"/>
-            </column>
-            <column name="order_id" type="INT">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_customer_orders"/>
-            </column>
-        </createTable>
-    </changeSet>
-    <changeSet id="1776881706477-5" author="esvchk">
+    <changeSet id="1776929367582-5" author="esvchk">
         <createTable tableName="orders">
             <column name="id" type="INT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_orders"/>
             </column>
             <column name="createDateTime" type="DATETIME"/>
             <column name="updateDateTime" type="DATETIME"/>
+            <column name="customer_id" type="INT"/>
             <column name="operator_id" type="INT"/>
         </createTable>
     </changeSet>
-    <changeSet id="1776881706477-6" author="esvchk">
-        <createTable tableName="product_orders">
-            <column name="order_id" type="INT">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_product_orders"/>
-            </column>
-            <column name="product_id" type="INT">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_product_orders"/>
-            </column>
-        </createTable>
+    <changeSet id="1776929367582-6" author="esvchk">
+        <addForeignKeyConstraint baseColumnNames="order_id" baseTableName="OrderItem"
+                                 constraintName="FK_ORDERITEM_ON_ORDER" referencedColumnNames="id"
+                                 referencedTableName="orders"/>
     </changeSet>
-    <changeSet id="1776881706477-7" author="esvchk">
+    <changeSet id="1776929367582-7" author="esvchk">
+        <addForeignKeyConstraint baseColumnNames="product_id" baseTableName="OrderItem"
+                                 constraintName="FK_ORDERITEM_ON_PRODUCT" referencedColumnNames="id"
+                                 referencedTableName="Product"/>
+    </changeSet>
+    <changeSet id="1776929367582-8" author="esvchk">
+        <addForeignKeyConstraint baseColumnNames="customer_id" baseTableName="orders"
+                                 constraintName="FK_ORDERS_ON_CUSTOMER" referencedColumnNames="id"
+                                 referencedTableName="Customer"/>
+    </changeSet>
+    <changeSet id="1776929367582-9" author="esvchk">
         <addForeignKeyConstraint baseColumnNames="operator_id" baseTableName="orders"
                                  constraintName="FK_ORDERS_ON_OPERATOR" referencedColumnNames="id"
                                  referencedTableName="Operator"/>
-    </changeSet>
-    <changeSet id="1776881706477-8" author="esvchk">
-        <addForeignKeyConstraint baseColumnNames="customer_id" baseTableName="customer_orders"
-                                 constraintName="fk_cusord_on_customer" referencedColumnNames="id"
-                                 referencedTableName="Customer"/>
-    </changeSet>
-    <changeSet id="1776881706477-9" author="esvchk">
-        <addForeignKeyConstraint baseColumnNames="order_id" baseTableName="customer_orders"
-                                 constraintName="fk_cusord_on_order" referencedColumnNames="id"
-                                 referencedTableName="orders"/>
-    </changeSet>
-    <changeSet id="1776881706477-10" author="esvchk">
-        <addForeignKeyConstraint baseColumnNames="order_id" baseTableName="product_orders"
-                                 constraintName="fk_proord_on_order" referencedColumnNames="id"
-                                 referencedTableName="orders"/>
-    </changeSet>
-    <changeSet id="1776881706477-11" author="esvchk">
-        <addForeignKeyConstraint baseColumnNames="product_id" baseTableName="product_orders"
-                                 constraintName="fk_proord_on_product" referencedColumnNames="id"
-                                 referencedTableName="Product"/>
     </changeSet>
 
 </databaseChangeLog>

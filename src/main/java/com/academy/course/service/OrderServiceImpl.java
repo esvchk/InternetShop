@@ -15,8 +15,6 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Order mapToOrder(OrderDTO orderDTO) {
         return Order.builder()
-                .products(orderDTO.getProducts())
-                .customers(new HashSet<>())
                 .operator(orderDTO.getOperator())
                 .build();
     }
@@ -26,7 +24,6 @@ public class OrderServiceImpl implements OrderService {
         return OrderDTO.builder()
                 .id(order.getId())
                 .operator(order.getOperator())
-                .products(order.getProducts())
                 .build();
     }
 

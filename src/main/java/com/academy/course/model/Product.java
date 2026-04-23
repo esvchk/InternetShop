@@ -34,9 +34,6 @@ public class Product extends DataEntity implements Serializable {
     @Column
     private LocalDate bestBefore;
 
-    @ManyToMany(mappedBy = "products")
-    private Set<Order> orders = new HashSet<>();
-
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;

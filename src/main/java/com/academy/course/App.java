@@ -2,10 +2,7 @@ package com.academy.course;
 
 import com.academy.course.dao.DAO;
 import com.academy.course.dao.DAOImpl;
-import com.academy.course.model.Customer;
-import com.academy.course.model.Operator;
-import com.academy.course.model.Order;
-import com.academy.course.model.Product;
+import com.academy.course.model.*;
 import com.academy.course.utils.HibernateUtil;
 
 import java.sql.SQLException;
@@ -20,6 +17,7 @@ public class App
         Set<Order> orders = new HashSet<>();
         Set<Product> products = new HashSet<>();
         Set<Customer> customers = new HashSet<>();
+        Set<OrderItem> orderItems = new HashSet<>();
 
 
         Product product = Product.builder()
@@ -47,14 +45,22 @@ public class App
 
 
         Order order = Order.builder()
-                .products(products)
-                .customers(customers)
+                .orderItems(orderItems)
+                .customer(customer)
                 .operator(operator)
+                .build();
+
+        OrderItem orderItem = OrderItem.builder()
+                .product(product)
+                .order(order)
+                .quantity(4)
                 .build();
 
         orders.add(order);
         products.add(product);
         customers.add(customer);
+        orderItems.add(orderItem);
+
 
 
 
@@ -62,11 +68,11 @@ public class App
         DAO<Order> dao1 = new DAOImpl<>(Order.class);
         DAO<Customer> dao2 = new DAOImpl<>(Customer.class);
         DAO<Operator> dao3 = new DAOImpl<>(Operator.class);
+        DAO<OrderItem> dao4 = new DAOImpl<>(OrderItem.class);
 //        ProductServiceImpl productService = new ProductServiceImpl();
+
         dao.save(product);
-        dao3.save(operator);
         dao2.save(customer);
-        dao1.save(order);
 
 
 //        System.out.println(productService.findAllProducts());

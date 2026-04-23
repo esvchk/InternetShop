@@ -6,10 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.io.Serializable;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
 @Builder
 @Data
@@ -17,30 +14,25 @@ import java.util.Set;
 @AllArgsConstructor
 @Entity
 @Table
-public class Customer extends DataEntity implements Serializable {
+public class OrderItem extends DataEntity{
+
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private Product product;
+
+    @ManyToOne
+    @JoinColumn(name = "order_id")
+    private Order order;
 
     @Column
-    private String login;
-
-    @Column
-    private String passWord;
-
-    @Column
-    private String email;
-
-    @Column
-    private String payment;
-
-
-    @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL)
-    private Set<Order> orders = new HashSet<>();
+    private Integer quantity;
 
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
-        Customer customer = (Customer) o;
-        return Objects.equals(getId(),customer.getId());
+        OrderItem orderItem = (OrderItem) o;
+        return Objects.equals(getId(),orderItem.getId());
     }
 
     @Override
@@ -48,4 +40,3 @@ public class Customer extends DataEntity implements Serializable {
         return Objects.hash(getId());
     }
 }
-
