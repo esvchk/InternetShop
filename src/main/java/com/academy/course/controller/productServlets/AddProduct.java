@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
-@WebServlet(name = "/")
+
 public class AddProduct extends HttpServlet {
 
     private final ProductService productService = new ProductServiceImpl();

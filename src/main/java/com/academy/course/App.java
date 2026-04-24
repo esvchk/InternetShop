@@ -26,10 +26,10 @@ public class App
         Set<OrderItem> orderItems = new HashSet<>();
 
         Product product = Product.builder()
-                .name("Milks")
-                .price(4.44)
-                .info("3.2%")
-                .manufacturer("Savushkin")
+                .name("bread")
+                .price(1.99)
+                .info("Buckwheat")
+                .manufacturer("hlebzavod")
                 .bestBefore(LocalDate.of(2026,4,23))
                 .build();
 
@@ -58,7 +58,7 @@ public class App
 
         OrderItem orderItem = OrderItem.builder()
                 .product(product)
-                .order(order)
+                .order(null)
                 .quantity(4)
                 .build();
 
@@ -76,7 +76,8 @@ public class App
 
         DAO<Customer> dao1 = new DAOImpl<>(Customer.class);
 
-        orderItemDAO.deleteProductOfOrder(1,4);
+        dao.save(product);
+       orderDAO.updateOrderItemOfOrder(orderItem,orderItemDAO.get(5),orderDAO.get(4));
 
 //        customerDAO.createOrder(customer,order);
 

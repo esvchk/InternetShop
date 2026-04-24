@@ -1,5 +1,6 @@
 package com.academy.course.service;
 
+import com.academy.course.dao.productDao.ProductDAO;
 import com.academy.course.dao.productDao.ProductDAOImpl;
 import com.academy.course.dto.ProductDTO;
 import com.academy.course.model.Product;
@@ -29,8 +30,9 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void deleteProduct(Serializable id) throws SQLException {
-        productDAO.delete(id);
+    public void deleteProduct(ProductDTO productDTO) throws SQLException {
+        Product product = productDAO.get(productDTO.getId());
+        productDAO.delete(product);
     }
 
     @Override
@@ -65,7 +67,8 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductDTO mapToProductDTO(Product product) {
-        return ProductDTO.builder()
+        ProductDTO productDto;
+        return  productDto = ProductDTO.builder()
                 .id(product.getId())
                 .name(product.getName())
                 .price(product.getPrice())
@@ -73,5 +76,7 @@ public class ProductServiceImpl implements ProductService {
                 .manufacturer(product.getManufacturer())
                 .bestBefore(product.getBestBefore())
                 .build();
+
+
     }
 }

@@ -14,7 +14,7 @@ import java.util.Set;
 public interface OrderDAO extends DAO<Order> {
 
     List<Order> getAllOrders();
-    void addProductsToOrder(Product product, Order order, Integer quantity) throws SQLException;
-    void updateProductsOfOrder(Product product,Order order);
-    void deleteProductFromOrder(Product product,Order order) throws SQLException;
+    void addOrderItemToOrder(OrderItem orderItem, Order order, Integer quantity) throws SQLException;
+    void updateOrderItemOfOrder(OrderItem newValue,OrderItem orderItemToUpdate,Order order) throws SQLException;
+    void deleteOrderItemFromOrder(OrderItem orderItem,Order order) throws SQLException;
 }

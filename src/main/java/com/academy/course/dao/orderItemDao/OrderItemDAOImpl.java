@@ -24,16 +24,5 @@ public class OrderItemDAOImpl extends DAOImpl<OrderItem> implements OrderItemDAO
     }
 
 
-    @Override
-    public void deleteProductOfOrder(Integer productId,Integer orderId) throws SQLException {
-        OrderItem orderItem = getEm().createQuery(
-                        "SELECT oi FROM OrderItem oi " +
-                                "WHERE oi.order.id = :orderId AND oi.product.id = :productId", OrderItem.class)
-                .setParameter("orderId", orderId)
-                .setParameter("productId", productId)
-                        .getSingleResult();
 
-
-        getEm().remove(orderItem);
-    }
 }

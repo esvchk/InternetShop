@@ -17,7 +17,7 @@ public class DeleteProduct extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Integer id = Integer.parseInt(request.getParameter("id"));
         try {
-            productService.deleteProduct(id);
+            productService.deleteProduct(productService.findProductById(id));
             request.getServletContext().getRequestDispatcher("/ShowProducts")
                     .include(request,response);
         } catch (SQLException e) {

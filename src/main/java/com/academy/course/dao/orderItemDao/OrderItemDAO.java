@@ -10,5 +10,4 @@ import java.util.Set;
 
 public interface OrderItemDAO extends DAO<OrderItem> {
     Set<OrderItem> getProductsOfOrder(Order order);
-    void deleteProductOfOrder(Integer productId,Integer orderId) throws SQLException;
 }

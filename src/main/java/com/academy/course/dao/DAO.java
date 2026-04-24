@@ -10,7 +10,7 @@ public interface DAO <T>{
 
     void update(T entity) throws SQLException;
 
-    void delete(Serializable id) throws SQLException;
+    void delete(T entity) throws SQLException;
 
     void begin();
 

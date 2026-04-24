@@ -39,8 +39,7 @@ public class DAOImpl<T> implements DAO<T>{
     }
 
     @Override
-    public void delete(Serializable id) throws SQLException {
-        T t = this.get(id);
+    public void delete(T t) throws SQLException {
         begin();
         getEm().remove(t);
         commit();
