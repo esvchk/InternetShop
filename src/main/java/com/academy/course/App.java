@@ -76,8 +76,8 @@ public class App
 
         DAO<Customer> dao1 = new DAOImpl<>(Customer.class);
 
-        dao.save(product);
-       orderDAO.updateOrderItemOfOrder(orderItem,orderItemDAO.get(5),orderDAO.get(4));
+
+       orderDAO.deleteOrderItemFromOrder(orderItemDAO.get(30),orderDAO.get(4));
 
 //        customerDAO.createOrder(customer,order);
 

@@ -34,11 +34,11 @@ public class OrderDAOImpl extends DAOImpl<Order> implements OrderDAO {
 
 
     @Override
-    public void updateOrderItemOfOrder(OrderItem newValue,OrderItem orderItemToRemove, Order order) throws SQLException {
+    public void updateOrderItemOfOrder(OrderItem newOrderItem, OrderItem orderItemToRemove, Order order) throws SQLException {
         boolean isExist = order.getOrderItems().contains(orderItemToRemove);
         if (isExist) {
             order.getOrderItems().remove(orderItemToRemove);
-            order.getOrderItems().add(newValue);
+            order.getOrderItems().add(newOrderItem);
             update(order);
         } else
             throw new RuntimeException();
@@ -49,8 +49,8 @@ public class OrderDAOImpl extends DAOImpl<Order> implements OrderDAO {
     public void deleteOrderItemFromOrder(OrderItem orderItem, Order order) throws SQLException {
 
         order.getOrderItems().remove(orderItem);
-
         update(order);
+
     }
 }
 
