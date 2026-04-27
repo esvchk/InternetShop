@@ -1,10 +1,10 @@
 package com.academy.course.dao.customerDao;
 
-import com.academy.course.dao.DAO;
+
 import com.academy.course.dao.DAOImpl;
 import com.academy.course.model.Customer;
 import com.academy.course.model.Order;
-import com.academy.course.model.OrderItem;
+
 
 import java.sql.SQLException;
 
@@ -21,6 +21,8 @@ public class CustomerDAOImpl extends DAOImpl<Customer> implements CustomerDAO {
 
         update(customer);
     }
+
+
 
 
 

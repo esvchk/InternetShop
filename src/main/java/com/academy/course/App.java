@@ -64,20 +64,7 @@ public class App
         OrderItemDAO orderItemDAO = new OrderItemDAOImpl();
         ProductServiceImpl productService = new ProductServiceImpl();
 
-//        dao.save(product);
-
-        orderDAO.updateProductOfOrder(dao.get(10),dao.get(4),orderDAO.get(2),2);
-
-//        orderItemDAO.delete(orderItemDAO.get(5));
-//        orderDAO.addOrderItemToOrder(orderItemDAO.get(10),orderDAO.get(5),2);
-
-
-
-
-
-
-
-//        System.out.println(productService.findAllProducts());
+        System.out.println(orderDAO.getAllProductsFromOrder(orderDAO.get(2)));
 
 
     }

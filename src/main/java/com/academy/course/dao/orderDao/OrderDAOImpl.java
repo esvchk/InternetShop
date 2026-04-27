@@ -22,6 +22,11 @@ public class OrderDAOImpl extends DAOImpl<Order> implements OrderDAO {
     }
 
     @Override
+    public Set<OrderItem> getAllProductsFromOrder(Order order) {
+        return order.getOrderItems();
+    }
+
+    @Override
     public void addProductToOrder(Product product, Order order, Integer quantity) throws SQLException {
         OrderItem orderItem = OrderItem.builder()
                 .product(product)
@@ -44,7 +49,6 @@ public class OrderDAOImpl extends DAOImpl<Order> implements OrderDAO {
         orderItem.setProduct(newValue);
         orderItem.setQuantity(quantity);
         update(order);
-
     }
 
 
