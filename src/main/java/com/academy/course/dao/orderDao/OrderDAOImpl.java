@@ -1,21 +1,16 @@
 package com.academy.course.dao.orderDao;
 
 import com.academy.course.dao.DAOImpl;
-import com.academy.course.dao.productDao.ProductDAO;
-import com.academy.course.dao.productDao.ProductDAOImpl;
-import com.academy.course.model.Customer;
+
 import com.academy.course.model.Order;
 import com.academy.course.model.OrderItem;
 import com.academy.course.model.Product;
 
-import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.*;
 
 public class OrderDAOImpl extends DAOImpl<Order> implements OrderDAO {
 
-
-    private final ProductDAO productDAO = new ProductDAOImpl();
 
     public OrderDAOImpl() {
         super(Order.class);
@@ -27,30 +22,41 @@ public class OrderDAOImpl extends DAOImpl<Order> implements OrderDAO {
     }
 
     @Override
-    public void addOrderItemToOrder(OrderItem orderItem, Order order, Integer quantity) throws SQLException {
+    public void addProductToOrder(Product product, Order order, Integer quantity) throws SQLException {
+        OrderItem orderItem = OrderItem.builder()
+                .product(product)
+                .order(order)
+                .quantity(quantity)
+                .build();
         order.getOrderItems().add(orderItem);
         update(order);
     }
 
 
     @Override
-    public void updateOrderItemOfOrder(OrderItem newOrderItem, OrderItem orderItemToRemove, Order order) throws SQLException {
-        boolean isExist = order.getOrderItems().contains(orderItemToRemove);
-        if (isExist) {
-            order.getOrderItems().remove(orderItemToRemove);
-            order.getOrderItems().add(newOrderItem);
-            update(order);
-        } else
-            throw new RuntimeException();
+    public void updateProductOfOrder(Product oldValue, Product newValue, Order order,Integer quantity) throws SQLException {
+
+        OrderItem orderItem = order.getOrderItems().stream()
+                        .filter(orderItem1 -> orderItem1.getProduct().equals(oldValue))
+                                .findFirst().orElse(null);
+
+        orderItem.setOrder(order);
+        orderItem.setProduct(newValue);
+        orderItem.setQuantity(quantity);
+        update(order);
+
     }
 
 
     @Override
-    public void deleteOrderItemFromOrder(OrderItem orderItem, Order order) throws SQLException {
-
-        order.getOrderItems().remove(orderItem);
+    public void deleteProductFromOrder(Product product, Order order) throws SQLException {
+        OrderItem orderItem1 = order.getOrderItems().stream()
+                .filter(orderItem -> orderItem.getProduct().equals(product))
+                .findFirst().orElse(null);
+        order.getOrderItems().remove(orderItem1);
         update(order);
-
     }
+
+
 }
 

@@ -1,6 +1,7 @@
 package com.academy.course.dao.productDao;
 
 import com.academy.course.dao.DAOImpl;
+import com.academy.course.model.OrderItem;
 import com.academy.course.model.Product;
 
 import javax.persistence.Query;
@@ -23,4 +24,7 @@ public class ProductDAOImpl extends DAOImpl<Product> implements ProductDAO{
         query.setParameter("name",name);
         return query.getResultList();
     }
+
+
+
 }

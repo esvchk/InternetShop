@@ -8,7 +8,5 @@ import java.sql.SQLException;
 
 public interface OrderService {
 
-    Order mapToOrder(OrderDTO orderDTO);
-    OrderDTO mapToOrderDTO(Order order);
 
 }

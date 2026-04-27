@@ -19,16 +19,13 @@ import java.util.Set;
 @Table(name = "orders")
 public class Order extends DataEntity implements Serializable {
 
-    @OneToMany(mappedBy = "order",cascade = CascadeType.ALL,orphanRemoval = true)
+    @OneToMany(mappedBy = "order",cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.EAGER)
     private Set<OrderItem> orderItems = new HashSet<>();
 
     @ManyToOne
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "operator_id")
-    private Operator operator;
 
     @Override
     public boolean equals(Object o) {
@@ -47,7 +44,6 @@ public class Order extends DataEntity implements Serializable {
     public String toString() {
         return "Order{" +
                 ", customer=" + customer +
-                ", operator=" + operator +
                 '}';
     }
 }
