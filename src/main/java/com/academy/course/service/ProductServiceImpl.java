@@ -42,9 +42,9 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<ProductDTO> findProductsByName(String name) {
-       return productDAO.getByName(name).stream()
-               .map(this::mapToProductDTO)
-               .collect(Collectors.toList());
+        return productDAO.getByName(name).stream()
+                .map(this::mapToProductDTO)
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -67,8 +67,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductDTO mapToProductDTO(Product product) {
-        ProductDTO productDto;
-        return  productDto = ProductDTO.builder()
+        return ProductDTO.builder()
                 .id(product.getId())
                 .name(product.getName())
                 .price(product.getPrice())

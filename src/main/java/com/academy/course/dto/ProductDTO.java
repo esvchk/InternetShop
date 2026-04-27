@@ -39,11 +39,5 @@ public class ProductDTO {
                 '}';
     }
 
-    public ProductDTO(String name, Double price, String info, String manufacturer, LocalDate bestBefore) {
-        this.name = name;
-        this.price = price;
-        this.info = info;
-        this.manufacturer = manufacturer;
-        this.bestBefore = bestBefore;
-    }
+
 }

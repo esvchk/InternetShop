@@ -6,8 +6,7 @@ import com.academy.course.dao.customerDao.CustomerDAO;
 import com.academy.course.dao.customerDao.CustomerDAOImpl;
 import com.academy.course.dao.orderDao.OrderDAO;
 import com.academy.course.dao.orderDao.OrderDAOImpl;
-import com.academy.course.dao.orderItemDao.OrderItemDAO;
-import com.academy.course.dao.orderItemDao.OrderItemDAOImpl;
+
 import com.academy.course.model.*;
 import com.academy.course.service.ProductServiceImpl;
 
@@ -61,11 +60,10 @@ public class App
         OrderDAO orderDAO = new OrderDAOImpl();
         CustomerDAO customerDAO = new CustomerDAOImpl();
 
-        OrderItemDAO orderItemDAO = new OrderItemDAOImpl();
         ProductServiceImpl productService = new ProductServiceImpl();
-
-        System.out.println(orderDAO.getAllProductsFromOrder(orderDAO.get(2)));
-
+//        customerDAO.deleteOrder(customerDAO.get(1),orderDAO.get(15));
+//        customerDAO.createOrder(customerDAO.get(1),order);
+        orderDAO.deleteProductFromOrder(dao.get(7),orderDAO.get(2));
 
     }
 }

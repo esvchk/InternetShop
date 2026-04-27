@@ -10,5 +10,5 @@ import java.sql.SQLException;
 
 public interface CustomerDAO extends DAO<Customer> {
     void createOrder(Customer customer, Order order) throws SQLException;
-
+    void deleteOrder(Customer customer, Order order) throws SQLException;
 }

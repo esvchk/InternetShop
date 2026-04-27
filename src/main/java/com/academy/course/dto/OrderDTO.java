@@ -1,5 +1,6 @@
 package com.academy.course.dto;
 
+import com.academy.course.model.Customer;
 import com.academy.course.model.DataEntity;
 import com.academy.course.model.Product;
 import lombok.AllArgsConstructor;
@@ -15,17 +16,15 @@ import java.util.Set;
 @AllArgsConstructor
 public class OrderDTO extends DataEntity {
 
-
-
     private Integer id;
-    private Set<Product> products;
+    private Customer customer;
+
 
     @Override
     public String toString() {
         return "OrderDTO{" +
                 "id=" + id +
-
-                ", products=" + products +
+                ", customer=" + customer +
                 '}';
     }
 }

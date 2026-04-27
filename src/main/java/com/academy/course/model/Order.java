@@ -19,7 +19,7 @@ import java.util.Set;
 @Table(name = "orders")
 public class Order extends DataEntity implements Serializable {
 
-    @OneToMany(mappedBy = "order",cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "order",cascade = CascadeType.ALL)
     private Set<OrderItem> orderItems = new HashSet<>();
 
     @ManyToOne

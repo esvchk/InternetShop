@@ -32,7 +32,7 @@ public class Customer extends DataEntity implements Serializable {
     private String payment;
 
 
-    @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL,orphanRemoval = true)
     private Set<Order> orders = new HashSet<>();
 
     @Override

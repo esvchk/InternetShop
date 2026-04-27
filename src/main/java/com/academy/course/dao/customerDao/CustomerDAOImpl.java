@@ -19,11 +19,16 @@ public class CustomerDAOImpl extends DAOImpl<Customer> implements CustomerDAO {
 
         customer.getOrders().add(order);
 
-        update(customer);
+        save(customer);
     }
 
+    @Override
+    public void deleteOrder(Customer customer, Order order) throws SQLException {
 
+        customer.getOrders().removeIf(order1 -> order1.getId().equals(order.getId()));
 
+        update(customer);
+    }
 
 
 }
