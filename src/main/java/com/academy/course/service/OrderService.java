@@ -17,10 +17,10 @@ public interface OrderService {
     Order mapToOrder(OrderDTO orderDTO);
     OrderDTO findOrderById(Integer orderId) throws SQLException;
     List<OrderDTO> getAllOrders();
-    Set<OrderItemDTO> getAllProductsFromOrder(Order order);
-    void addProductToOrder(Product product, Order order, Integer quantity) throws SQLException;
-    void updateProductOfOrder(Product oldValue,Product newValue,Order order,Integer quantity) throws SQLException;
-    void deleteProductFromOrder(Product product,Order order) throws SQLException;
+    Set<OrderItemDTO> getAllProductsFromOrder(OrderDTO order);
+    void addProductToOrder(ProductDTO productDTO, OrderDTO orderDTO, Integer quantity) throws SQLException;
+    void updateProductOfOrder(ProductDTO oldValue,ProductDTO newValue,OrderDTO order,Integer quantity) throws SQLException;
+    void deleteProductFromOrder(ProductDTO productDTO,OrderDTO orderDTO) throws SQLException;
 
 
 }

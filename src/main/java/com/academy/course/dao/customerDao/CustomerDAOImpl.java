@@ -7,6 +7,7 @@ import com.academy.course.model.Order;
 
 
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 
@@ -17,7 +18,10 @@ public class CustomerDAOImpl extends DAOImpl<Customer> implements CustomerDAO {
 
     @Override
     public void createOrder(Customer customer,Order order) throws SQLException {
+
         order.setCustomer(customer);
+
+        order.setCreateDateTime(LocalDateTime.now());
 
         customer.getOrders().add(order);
 

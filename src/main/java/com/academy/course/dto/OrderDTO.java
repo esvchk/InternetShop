@@ -7,7 +7,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Builder
@@ -17,7 +20,16 @@ import java.util.Set;
 public class OrderDTO extends DataEntity {
 
     private Integer id;
+
     private Customer customer;
+
+    private boolean isBought;
+
+    @CreationTimestamp
+    private LocalDateTime dateTimeOfCreation;
+
+    @UpdateTimestamp
+    private LocalDateTime dateTimeOfPurchasing;
 
 
     @Override
@@ -25,6 +37,9 @@ public class OrderDTO extends DataEntity {
         return "OrderDTO{" +
                 "id=" + id +
                 ", customer=" + customer +
+                ", isBought=" + isBought +
+                ", dateTimeOfCreation=" + dateTimeOfCreation +
+                ", dateTimeOfPurchasing=" + dateTimeOfPurchasing +
                 '}';
     }
 }

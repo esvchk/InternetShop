@@ -8,9 +8,7 @@ import com.academy.course.dao.orderDao.OrderDAO;
 import com.academy.course.dao.orderDao.OrderDAOImpl;
 
 import com.academy.course.model.*;
-import com.academy.course.service.OrderService;
-import com.academy.course.service.OrderServiceImpl;
-import com.academy.course.service.ProductServiceImpl;
+import com.academy.course.service.*;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -62,9 +60,11 @@ public class App {
         CustomerDAO customerDAO = new CustomerDAOImpl();
         OrderService orderService = new OrderServiceImpl();
         ProductServiceImpl productService = new ProductServiceImpl();
+        CustomerService customerService = new CustomerServiceImpl();
+        System.out.println(customerService.getAllCustomers());
 //        customerDAO.createOrder(customerDAO.get(1),orderDAO.get(2));
 //        orderDAO.addProductToOrder(dao.get(4),orderDAO.get(2),1);
-        System.out.println(customerDAO.getAllOrdersOfCustomer(customerDAO.get(1)));
+
 
     }
 }
