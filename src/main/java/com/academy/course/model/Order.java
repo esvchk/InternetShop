@@ -42,8 +42,8 @@ public class Order extends DataEntity implements Serializable {
 
     @Override
     public String toString() {
-        return "Order{" +
-                ", customer=" + customer +
+        return "Order{"+ "OrderId=" + this.getId() + "," +
+                " customer=" + customer +
                 '}';
     }
 }

@@ -7,6 +7,8 @@ import com.academy.course.model.Order;
 
 
 import java.sql.SQLException;
+import java.util.List;
+import java.util.Set;
 
 public class CustomerDAOImpl extends DAOImpl<Customer> implements CustomerDAO {
     public CustomerDAOImpl() {
@@ -28,6 +30,16 @@ public class CustomerDAOImpl extends DAOImpl<Customer> implements CustomerDAO {
         customer.getOrders().removeIf(order1 -> order1.getId().equals(order.getId()));
 
         update(customer);
+    }
+
+    @Override
+    public List<Customer> getAllCustomers() {
+        return getEm().createQuery("from Customer customer", Customer.class).getResultList();
+    }
+
+    @Override
+    public Set<Order> getAllOrdersOfCustomer(Customer customer) {
+        return customer.getOrders();
     }
 
 

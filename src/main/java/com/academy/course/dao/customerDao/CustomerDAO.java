@@ -7,8 +7,12 @@ import com.academy.course.model.OrderItem;
 import com.thoughtworks.qdox.model.expression.Or;
 
 import java.sql.SQLException;
+import java.util.List;
+import java.util.Set;
 
 public interface CustomerDAO extends DAO<Customer> {
     void createOrder(Customer customer, Order order) throws SQLException;
     void deleteOrder(Customer customer, Order order) throws SQLException;
+    List<Customer> getAllCustomers();
+    Set<Order> getAllOrdersOfCustomer(Customer customer);
 }
