@@ -27,27 +27,6 @@ public class CustomerServiceImpl implements CustomerService {
         customerDAO.deleteOrder(this.mapToCustomer(customerDTO),orderService.mapToOrder(orderDTO));
     }
 
-    @Override
-    public Customer mapToCustomer(CustomerDTO customerDTO) {
-        Customer customer = new Customer();
-        return Customer.builder()
-                .login(customerDTO.getLogin())
-                .passWord(customer.getPassWord())
-                .email(customerDTO.getEmail())
-                .payment(customerDTO.getPayment())
-                .orders(customer.getOrders())
-                .build();
-    }
-
-    @Override
-    public CustomerDTO mapToCustomerDTO(Customer customer) {
-        return CustomerDTO.builder()
-                .id(customer.getId())
-                .login(customer.getLogin())
-                .email(customer.getLogin())
-                .payment(customer.getPayment())
-                .build();
-    }
 
     @Override
     public List<CustomerDTO> getAllCustomers() {
@@ -72,6 +51,28 @@ public class CustomerServiceImpl implements CustomerService {
             orderDTO.setBought(true);
         } else
             orderDTO.setBought(false);
+    }
+
+    @Override
+    public Customer mapToCustomer(CustomerDTO customerDTO) {
+        Customer customer = new Customer();
+        return Customer.builder()
+                .login(customerDTO.getLogin())
+                .passWord(customer.getPassWord())
+                .email(customerDTO.getEmail())
+                .payment(customerDTO.getPayment())
+                .orders(customer.getOrders())
+                .build();
+    }
+
+    @Override
+    public CustomerDTO mapToCustomerDTO(Customer customer) {
+        return CustomerDTO.builder()
+                .id(customer.getId())
+                .login(customer.getLogin())
+                .email(customer.getLogin())
+                .payment(customer.getPayment())
+                .build();
     }
 
 

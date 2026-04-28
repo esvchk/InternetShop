@@ -1,6 +1,7 @@
 package com.academy.course.service;
 
 
+import com.academy.course.dao.orderDao.OrderDAO;
 import com.academy.course.dao.orderDao.OrderDAOImpl;
 
 import com.academy.course.dto.OrderDTO;
@@ -18,27 +19,10 @@ import java.util.stream.Collectors;
 
 public class OrderServiceImpl implements OrderService {
 
-    private final OrderDAOImpl orderDAO = new OrderDAOImpl();
+    private final OrderDAO orderDAO = new OrderDAOImpl();
     private final OrderItemService orderItemService = new OrderItemServiceImpl();
     private final ProductService productService = new ProductServiceImpl();
 
-
-    @Override
-    public OrderDTO mapToOrderDTO(Order order) {
-        return OrderDTO.builder()
-                .id(order.getId())
-                .customer(order.getCustomer())
-                .dateTimeOfCreation(LocalDateTime.now())
-                .isBought(false)
-                .build();
-    }
-
-    @Override
-    public Order mapToOrder(OrderDTO orderDTO) {
-        return Order.builder()
-                .customer(orderDTO.getCustomer())
-                .build();
-    }
 
     @Override
     public OrderDTO findOrderById(Integer orderId) throws SQLException {
@@ -73,5 +57,22 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public void deleteProductFromOrder(ProductDTO productDTO, OrderDTO orderDTO) throws SQLException {
         orderDAO.deleteProductFromOrder(productService.mapToProduct(productDTO),this.mapToOrder(orderDTO));
+    }
+
+    @Override
+    public OrderDTO mapToOrderDTO(Order order) {
+        return OrderDTO.builder()
+                .id(order.getId())
+                .customer(order.getCustomer())
+                .dateTimeOfCreation(LocalDateTime.now())
+                .isBought(false)
+                .build();
+    }
+
+    @Override
+    public Order mapToOrder(OrderDTO orderDTO) {
+        return Order.builder()
+                .customer(orderDTO.getCustomer())
+                .build();
     }
 }

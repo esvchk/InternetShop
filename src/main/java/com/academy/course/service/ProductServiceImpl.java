@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 public class ProductServiceImpl implements ProductService {
 
-    private final ProductDAOImpl productDAO = new ProductDAOImpl();
+    private final ProductDAO productDAO = new ProductDAOImpl();
 
     @Override
     public void updateProduct(ProductDTO productDTO) throws SQLException {
