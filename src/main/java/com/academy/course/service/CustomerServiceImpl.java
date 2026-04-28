@@ -54,6 +54,16 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
+    public CustomerDTO findCustomerById(Integer id) throws SQLException {
+        return mapToCustomerDTO(customerDAO.get(id));
+    }
+
+    @Override
+    public CustomerDTO findCustomerByLogin(String login) {
+        return mapToCustomerDTO(customerDAO.getCustomerByLogin(login));
+    }
+
+    @Override
     public Customer mapToCustomer(CustomerDTO customerDTO) {
         Customer customer = new Customer();
         return Customer.builder()

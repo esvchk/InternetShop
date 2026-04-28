@@ -13,6 +13,8 @@ import java.util.Set;
 public interface CustomerDAO extends DAO<Customer> {
     void createOrder(Customer customer, Order order) throws SQLException;
     void deleteOrder(Customer customer, Order order) throws SQLException;
+    Customer getCustomerByLogin(String login);
+    String getPassByLogin(String login);
     List<Customer> getAllCustomers();
     Set<Order> getAllOrdersOfCustomer(Customer customer);
 }

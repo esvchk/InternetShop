@@ -61,9 +61,11 @@ public class App {
         OrderService orderService = new OrderServiceImpl();
         ProductServiceImpl productService = new ProductServiceImpl();
         CustomerService customerService = new CustomerServiceImpl();
-        System.out.println(customerService.getAllCustomers());
+//        System.out.println(customerService.getAllCustomers());
 //        customerDAO.createOrder(customerDAO.get(1),orderDAO.get(2));
 //        orderDAO.addProductToOrder(dao.get(4),orderDAO.get(2),1);
+
+        String hashedPass = PasswordHasher.hashPass("12345");
 
 
     }

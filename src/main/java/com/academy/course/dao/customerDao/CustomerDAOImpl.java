@@ -4,8 +4,10 @@ package com.academy.course.dao.customerDao;
 import com.academy.course.dao.DAOImpl;
 import com.academy.course.model.Customer;
 import com.academy.course.model.Order;
+import com.academy.course.model.Product;
 
 
+import javax.persistence.Query;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -17,7 +19,7 @@ public class CustomerDAOImpl extends DAOImpl<Customer> implements CustomerDAO {
     }
 
     @Override
-    public void createOrder(Customer customer,Order order) throws SQLException {
+    public void createOrder(Customer customer, Order order) throws SQLException {
 
         order.setCustomer(customer);
 
@@ -37,9 +39,24 @@ public class CustomerDAOImpl extends DAOImpl<Customer> implements CustomerDAO {
     }
 
     @Override
+    public Customer getCustomerByLogin(String login) {
+        Query query = getEm().createQuery("from Customer customer where customer.login=: login", Customer.class);
+        query.setParameter("login", login);
+        return (Customer) query.getSingleResult();
+    }
+
+    @Override
+    public String getPassByLogin(String login) {
+        Query query = getEm().createQuery("SELECT passWord from Customer customer where customer.login=: login");
+        query.setParameter("login", login);
+        return query.getSingleResult().toString();
+    }
+
+    @Override
     public List<Customer> getAllCustomers() {
         return getEm().createQuery("from Customer customer", Customer.class).getResultList();
     }
+
 
     @Override
     public Set<Order> getAllOrdersOfCustomer(Customer customer) {

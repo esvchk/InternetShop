@@ -17,4 +17,6 @@ public interface CustomerService {
     List<CustomerDTO> getAllCustomers();
     Set<OrderDTO> getAllOrdersOfCustomer(CustomerDTO customerDTO);
     void buyOrder(CustomerDTO customerDTO,OrderDTO orderDTO);
+    CustomerDTO findCustomerById(Integer id) throws SQLException;
+    CustomerDTO findCustomerByLogin(String login);
 }
