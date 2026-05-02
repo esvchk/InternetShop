@@ -18,6 +18,8 @@
 
     <a href="FindByName.jsp">Find Product By Name</a>
 
+    <a href="CustomerPage.jsp">Authorization</a>
+
 
 </head>
 <body>

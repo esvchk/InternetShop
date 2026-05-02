@@ -64,6 +64,38 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
+    public String getPassOfCustomerByLogin(String login) {
+        return customerDAO.getPassByLogin(login);
+    }
+
+    @Override
+    public void createCustomer(CustomerDTO customerDTO) throws SQLException {
+        customerDAO.save(mapToCustomer(customerDTO));
+    }
+
+    @Override
+    public CustomerDTO getCustomer(Integer id) throws SQLException {
+        return mapToCustomerDTO(customerDAO.get(id));
+    }
+
+    @Override
+    public void updateCustomer(CustomerDTO customerDTO,String newPassword) throws SQLException {
+        CustomerDTO customer = this.getCustomer(customerDTO.getId());
+        customer.setPayment(customerDTO.getPayment());
+        customer.setLogin(customerDTO.getLogin());
+        customer.setEmail(customerDTO.getEmail());
+        customer.setDateTimeOfRegistration(customerDTO.getDateTimeOfRegistration());
+        Customer customer1 = mapToCustomer(customer);
+        customerDAO.update(customer1);
+
+    }
+
+    @Override
+    public void deleteCustomer(CustomerDTO customerDTO) throws SQLException {
+        customerDAO.delete(this.mapToCustomer(customerDTO));
+    }
+
+    @Override
     public Customer mapToCustomer(CustomerDTO customerDTO) {
         Customer customer = new Customer();
         return Customer.builder()

@@ -2,7 +2,9 @@ package com.academy.course.service;
 
 import com.academy.course.dao.productDao.ProductDAO;
 import com.academy.course.dao.productDao.ProductDAOImpl;
+import com.academy.course.dto.CustomerDTO;
 import com.academy.course.dto.ProductDTO;
+import com.academy.course.model.Customer;
 import com.academy.course.model.Product;
 
 import java.io.Serializable;
@@ -16,11 +18,13 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void updateProduct(ProductDTO productDTO) throws SQLException {
-        Product product = productDAO.get(productDTO.getId());
-        product.setName(productDTO.getName());
-        product.setPrice(productDTO.getPrice());
-        product.setInfo(productDTO.getInfo());
-        productDAO.update(product);
+        ProductDTO newProductDTO = this.findProductById(productDTO.getId());
+        newProductDTO.setInfo(productDTO.getInfo());
+        newProductDTO.setName(productDTO.getName());
+        newProductDTO.setPrice(productDTO.getPrice());
+        newProductDTO.setManufacturer(productDTO.getManufacturer());
+        newProductDTO.setBestBefore(productDTO.getBestBefore());
+        productDAO.update(mapToProduct(newProductDTO));
     }
 
     @Override

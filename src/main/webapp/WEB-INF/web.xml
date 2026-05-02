@@ -37,6 +37,26 @@
         <servlet-class>com.academy.course.controller.productServlets.DeleteProduct</servlet-class>
     </servlet>
 
+    <servlet>
+        <servlet-name>LoginCustomer</servlet-name>
+        <servlet-class>com.academy.course.controller.LoginCustomer</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>RegisterCustomer</servlet-name>
+        <servlet-class>com.academy.course.controller.Registration</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>RegisterCustomer</servlet-name>
+        <url-pattern>/RegisterCustomer</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>LoginCustomer</servlet-name>
+        <url-pattern>/LoginCustomer</url-pattern>
+    </servlet-mapping>
+
     <servlet-mapping>
         <servlet-name>DeleteProduct</servlet-name>
         <url-pattern>/DeleteProduct</url-pattern>

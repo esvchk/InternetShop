@@ -5,17 +5,13 @@ import com.academy.course.model.Customer;
 
 import java.sql.SQLException;
 
-public class Registration {
+public class RegistrationService {
 
     private final CustomerService customerService = new CustomerServiceImpl();
 
-
     public boolean register(CustomerDTO customerDTO) throws SQLException {
-        Customer customer = customerService.mapToCustomer(customerDTO);
-        if (customer == null) {
-            return true;
-        } else
-            return false;
+        customerService.createCustomer(customerDTO);
+        return true;
     }
 
     public boolean tryToLogin(String login) {
