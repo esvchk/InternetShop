@@ -4,8 +4,6 @@ package com.academy.course.dao.customerDao;
 import com.academy.course.dao.DAOImpl;
 import com.academy.course.model.Customer;
 import com.academy.course.model.Order;
-import com.academy.course.model.Product;
-
 
 import javax.persistence.Query;
 import java.sql.SQLException;

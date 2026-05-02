@@ -6,13 +6,14 @@ import com.academy.course.dto.CustomerDTO;
 import com.academy.course.dto.ProductDTO;
 import com.academy.course.model.Customer;
 import com.academy.course.model.Product;
+import com.academy.course.utils.ObjectMapper;
 
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ProductServiceImpl implements ProductService {
+public class ProductServiceImpl implements ProductService, ObjectMapper<Product,ProductDTO> {
 
     private final ProductDAO productDAO = new ProductDAOImpl();
 
@@ -24,12 +25,12 @@ public class ProductServiceImpl implements ProductService {
         newProductDTO.setPrice(productDTO.getPrice());
         newProductDTO.setManufacturer(productDTO.getManufacturer());
         newProductDTO.setBestBefore(productDTO.getBestBefore());
-        productDAO.update(mapToProduct(newProductDTO));
+        productDAO.update(mapToEntity(newProductDTO));
     }
 
     @Override
     public void addProduct(ProductDTO productDTO) throws SQLException {
-        Product product = mapToProduct(productDTO);
+        Product product = mapToEntity(productDTO);
         productDAO.save(product);
     }
 
@@ -41,36 +42,26 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductDTO findProductById(Serializable id) throws SQLException {
-        return mapToProductDTO(productDAO.get(id));
+        return mapToDTO(productDAO.get(id));
     }
 
     @Override
     public List<ProductDTO> findProductsByName(String name) {
         return productDAO.getByName(name).stream()
-                .map(this::mapToProductDTO)
+                .map(this::mapToDTO)
                 .collect(Collectors.toList());
     }
 
     @Override
     public List<ProductDTO> findAllProducts() {
         return productDAO.getAllProducts().stream()
-                .map(this::mapToProductDTO)
+                .map(this::mapToDTO)
                 .collect(Collectors.toList());
     }
 
-    @Override
-    public Product mapToProduct(ProductDTO productDTO) {
-        return Product.builder()
-                .name(productDTO.getName())
-                .price(productDTO.getPrice())
-                .info(productDTO.getInfo())
-                .manufacturer(productDTO.getManufacturer())
-                .bestBefore(productDTO.getBestBefore())
-                .build();
-    }
 
     @Override
-    public ProductDTO mapToProductDTO(Product product) {
+    public ProductDTO mapToDTO(Product product) {
         return ProductDTO.builder()
                 .id(product.getId())
                 .name(product.getName())
@@ -79,7 +70,16 @@ public class ProductServiceImpl implements ProductService {
                 .manufacturer(product.getManufacturer())
                 .bestBefore(product.getBestBefore())
                 .build();
+    }
 
-
+    @Override
+    public Product mapToEntity(ProductDTO productDTO) {
+        return Product.builder()
+                .name(productDTO.getName())
+                .price(productDTO.getPrice())
+                .info(productDTO.getInfo())
+                .manufacturer(productDTO.getManufacturer())
+                .bestBefore(productDTO.getBestBefore())
+                .build();
     }
 }

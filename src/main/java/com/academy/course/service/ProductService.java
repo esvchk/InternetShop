@@ -15,6 +15,4 @@ public interface ProductService {
     ProductDTO findProductById(Serializable id) throws SQLException;
     List<ProductDTO> findProductsByName(String name);
     List<ProductDTO> findAllProducts();
-    Product mapToProduct(ProductDTO productDTO);
-    ProductDTO mapToProductDTO (Product product);
 }

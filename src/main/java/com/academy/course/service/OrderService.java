@@ -13,8 +13,6 @@ import java.util.Set;
 
 public interface OrderService {
 
-    OrderDTO mapToOrderDTO(Order order);
-    Order mapToOrder(OrderDTO orderDTO);
     OrderDTO findOrderById(Integer orderId) throws SQLException;
     List<OrderDTO> getAllOrders();
     Set<OrderItemDTO> getAllProductsFromOrder(OrderDTO order);

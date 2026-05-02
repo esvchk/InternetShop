@@ -12,8 +12,6 @@ import java.util.Set;
 public interface CustomerService {
     void createOrder(CustomerDTO customerDTO, OrderDTO orderDTO) throws SQLException;
     void deleteOrder(CustomerDTO customerDTO, OrderDTO orderDTO) throws SQLException;
-    Customer mapToCustomer(CustomerDTO customerDTO);
-    CustomerDTO mapToCustomerDTO(Customer customer);
     List<CustomerDTO> getAllCustomers();
     Set<OrderDTO> getAllOrdersOfCustomer(CustomerDTO customerDTO);
     void buyOrder(CustomerDTO customerDTO,OrderDTO orderDTO);

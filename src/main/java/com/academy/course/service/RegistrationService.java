@@ -1,7 +1,6 @@
 package com.academy.course.service;
 
 import com.academy.course.dto.CustomerDTO;
-import com.academy.course.model.Customer;
 
 import java.sql.SQLException;
 
