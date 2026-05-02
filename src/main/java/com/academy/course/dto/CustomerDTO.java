@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Builder
@@ -20,9 +21,10 @@ public class CustomerDTO {
 
     private String email;
 
-    private String payment;
+    private String address;
 
-    @CreationTimestamp
+    private LocalDate birthday;
+
     private LocalDateTime dateTimeOfRegistration;
 
     @Override
@@ -31,8 +33,9 @@ public class CustomerDTO {
                 "id=" + id +
                 ", login='" + login + '\'' +
                 ", email='" + email + '\'' +
-                ", payment='" + payment + '\'' +
-                ", dateTimeOfOrder=" + dateTimeOfRegistration +
+                ", address='" + address + '\'' +
+                ", birthday=" + birthday +
+                ", dateTimeOfRegistration=" + dateTimeOfRegistration +
                 '}';
     }
 }

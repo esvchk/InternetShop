@@ -1,6 +1,5 @@
 package com.academy.course.dto;
 
-import com.academy.course.model.DataEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

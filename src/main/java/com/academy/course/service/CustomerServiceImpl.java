@@ -22,6 +22,7 @@ public class CustomerServiceImpl implements CustomerService, ObjectMapper<Custom
     @Override
     public void createOrder(CustomerDTO customerDTO, OrderDTO orderDTO) throws SQLException {
         customerDAO.createOrder(this.mapToEntity(customerDTO), orderService.mapToEntity(orderDTO));
+
     }
 
     @Override
@@ -51,6 +52,7 @@ public class CustomerServiceImpl implements CustomerService, ObjectMapper<Custom
                 .findFirst().orElse(null);
         if (orderToPurchase != null) {
             orderDTO.setBought(true);
+            orderToPurchase.setDateTimeOfPurchasing(LocalDateTime.now());
         } else
             orderDTO.setBought(false);
     }
@@ -79,7 +81,6 @@ public class CustomerServiceImpl implements CustomerService, ObjectMapper<Custom
     @Override
     public void updateCustomer(CustomerDTO customerDTO, String newPassword) throws SQLException {
         Customer customer = customerDAO.get(customerDTO.getId());
-        customer.setPayment(customerDTO.getPayment());
         customer.setLogin(customerDTO.getLogin());
         customer.setEmail(customerDTO.getEmail());
         customerDAO.update(customer);
@@ -93,7 +94,6 @@ public class CustomerServiceImpl implements CustomerService, ObjectMapper<Custom
 
     @Override
     public void register(String login, String passWord) throws SQLException {
-
             Customer customer = Customer.builder()
                     .login(login)
                     .passWord(PasswordHasher.hashPass(passWord))
@@ -121,7 +121,6 @@ public class CustomerServiceImpl implements CustomerService, ObjectMapper<Custom
                 .id(customer.getId())
                 .login(customer.getLogin())
                 .email(customer.getEmail())
-                .payment(customer.getPayment())
                 .build();
     }
 
@@ -131,7 +130,6 @@ public class CustomerServiceImpl implements CustomerService, ObjectMapper<Custom
                 .login(customerDTO.getLogin())
                 .passWord(customerDTO.getLogin())
                 .email(customerDTO.getEmail())
-                .payment(customerDTO.getPayment())
                 .build();
     }
 }

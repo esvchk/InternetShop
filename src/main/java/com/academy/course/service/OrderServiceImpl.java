@@ -8,6 +8,7 @@ import com.academy.course.dto.OrderDTO;
 import com.academy.course.dto.OrderItemDTO;
 import com.academy.course.dto.ProductDTO;
 import com.academy.course.model.Order;
+import com.academy.course.model.OrderItem;
 import com.academy.course.utils.ObjectMapper;
 
 import java.sql.SQLException;

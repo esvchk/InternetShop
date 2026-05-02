@@ -17,11 +17,14 @@ public class OrderItemDTO {
 
     private Product product;
 
+    private Integer quantity;
+
     @Override
     public String toString() {
         return "OrderItemDTO{" +
                 "id=" + id +
                 ", product=" + product +
+                ", quantity=" + quantity +
                 '}';
     }
 }

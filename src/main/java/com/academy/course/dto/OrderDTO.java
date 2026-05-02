@@ -25,12 +25,9 @@ public class OrderDTO extends DataEntity {
 
     private boolean isBought;
 
-    @CreationTimestamp
     private LocalDateTime dateTimeOfCreation;
 
-    @UpdateTimestamp
     private LocalDateTime dateTimeOfPurchasing;
-
 
     @Override
     public String toString() {

@@ -17,11 +17,8 @@ public class OrderItemServiceImpl implements ObjectMapper<OrderItem,OrderItemDTO
 
     @Override
     public OrderItem mapToEntity(OrderItemDTO orderItemDTO) {
-        OrderItem orderItem = new OrderItem();
         return OrderItem.builder()
                 .product(orderItemDTO.getProduct())
-                .order(orderItem.getOrder())
-                .quantity(orderItem.getQuantity())
                 .build();
     }
 }

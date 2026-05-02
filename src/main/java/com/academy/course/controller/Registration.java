@@ -1,6 +1,5 @@
 package com.academy.course.controller;
 
-import com.academy.course.dto.CustomerDTO;
 import com.academy.course.service.CustomerService;
 import com.academy.course.service.CustomerServiceImpl;
 import com.academy.course.utils.ParameterConverter;

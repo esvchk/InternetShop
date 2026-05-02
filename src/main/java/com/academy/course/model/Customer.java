@@ -28,9 +28,6 @@ public class Customer extends DataEntity implements Serializable {
     @Column
     private String email;
 
-    @Column
-    private String payment;
-
 
     @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL,orphanRemoval = true)
     private Set<Order> orders = new HashSet<>();
@@ -43,15 +40,7 @@ public class Customer extends DataEntity implements Serializable {
         return Objects.equals(getId(),customer.getId());
     }
 
-    @Override
-    public String toString() {
-        return "Customer{" +
-                "login='" + login + '\'' +
-                ", passWord='" + passWord + '\'' +
-                ", email='" + email + '\'' +
-                ", payment='" + payment + '\'' +
-                '}';
-    }
+
 
     @Override
     public int hashCode() {
