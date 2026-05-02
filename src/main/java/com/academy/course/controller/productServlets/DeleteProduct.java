@@ -2,6 +2,7 @@ package com.academy.course.controller.productServlets;
 
 import com.academy.course.service.ProductService;
 import com.academy.course.service.ProductServiceImpl;
+import com.academy.course.utils.ParameterConverter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -15,7 +16,7 @@ public class DeleteProduct extends HttpServlet {
     private final ProductService productService = new ProductServiceImpl();
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Integer id = Integer.parseInt(request.getParameter("id"));
+        Integer id = ParameterConverter.getIntegerParameter(request,"id");
         try {
             productService.deleteProduct(productService.findProductById(id));
             request.getServletContext().getRequestDispatcher("/ShowProducts")

@@ -3,6 +3,7 @@ package com.academy.course.controller.productServlets;
 import com.academy.course.dto.ProductDTO;
 import com.academy.course.service.ProductService;
 import com.academy.course.service.ProductServiceImpl;
+import com.academy.course.utils.ParameterConverter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -17,7 +18,7 @@ public class UpdateProduct extends HttpServlet {
     private final ProductService productService = new ProductServiceImpl();
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Integer id = Integer.parseInt(request.getParameter("id"));
+        Integer id = ParameterConverter.getIntegerParameter(request,"id");
         try {
             ProductDTO productDTO = productService.findProductById(id) ;
                 request.setAttribute("product", productDTO);
@@ -30,12 +31,12 @@ public class UpdateProduct extends HttpServlet {
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Integer id = Integer.parseInt(request.getParameter("id"));
-        String name = request.getParameter("name");
-        Double price = Double.valueOf(request.getParameter("price"));
-        String info = request.getParameter("info");
+        Integer id = ParameterConverter.getIntegerParameter(request,"id");
+        String name = ParameterConverter.getStringParameter(request,"name");
+        Double price = ParameterConverter.getDoubleParameter(request,"price");
+        String info = ParameterConverter.getStringParameter(request,"info");
         String manufacturer = request.getParameter("manufacturer");
-        LocalDate bestBefore = LocalDate.parse(request.getParameter("bestBefore"));
+        LocalDate bestBefore = ParameterConverter.getDateParameter(request,"bestBefore");
 
         String context = request.getContextPath();
 

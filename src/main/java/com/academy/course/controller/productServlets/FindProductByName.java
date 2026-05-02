@@ -2,6 +2,7 @@ package com.academy.course.controller.productServlets;
 
 import com.academy.course.service.ProductService;
 import com.academy.course.service.ProductServiceImpl;
+import com.academy.course.utils.ParameterConverter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -14,7 +15,7 @@ public class FindProductByName extends HttpServlet {
     private final ProductService productService = new ProductServiceImpl();
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-       String name = request.getParameter("name");
+       String name = ParameterConverter.getStringParameter(request,"name");
        request.setAttribute("products",productService.findProductsByName(name));
        request.getRequestDispatcher("/FindByName.jsp")
                .forward(request,response);

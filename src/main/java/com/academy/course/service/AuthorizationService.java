@@ -9,7 +9,7 @@ public class AuthorizationService {
 
     public boolean login(String login, String pass) throws NoSuchFieldException {
         CustomerDTO customerDTO = customerService.findCustomerByLogin(login);
-
+//один метод
         if (PasswordHasher.checkPass(pass, customerService.getPassOfCustomerByLogin(login))) {
             if (customerDTO != null) {
                 return false;

@@ -23,6 +23,7 @@ public class Registration extends HttpServlet {
         String passWord = request.getParameter("passWord");
         String email = request.getParameter("email");
         String payment = request.getParameter("payment");
+        //конвертер для параметров
 
         String context = request.getContextPath();
 
@@ -32,8 +33,10 @@ public class Registration extends HttpServlet {
                     .email(email)
                     .payment(payment)
                     .build();
+            //слой сервиса
             try {
                 registrationService.register(customerDTO);
+                //передать доп поля
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }

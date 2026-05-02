@@ -19,7 +19,7 @@ public class OrderServiceImpl implements OrderService, ObjectMapper<Order, Order
 
     private final OrderDAO orderDAO = new OrderDAOImpl();
     private final OrderItemServiceImpl orderItemService = new OrderItemServiceImpl();
-    private final ProductService productService = new ProductServiceImpl();
+    private final ProductServiceImpl productService = new ProductServiceImpl();
 
 
     @Override
@@ -44,21 +44,21 @@ public class OrderServiceImpl implements OrderService, ObjectMapper<Order, Order
     @Override
     public void addProductToOrder(ProductDTO productDTO,
                                   OrderDTO orderDTO, Integer quantity) throws SQLException {
-        orderDAO.addProductToOrder(productService.mapToProduct(productDTO),
+        orderDAO.addProductToOrder(productService.mapToEntity(productDTO),
                 this.mapToEntity(orderDTO), quantity);
     }
 
     @Override
     public void updateProductOfOrder(ProductDTO oldValue, ProductDTO newValue,
                                      OrderDTO orderDTO, Integer quantity) throws SQLException {
-        orderDAO.updateProductOfOrder(productService.mapToProduct(oldValue),
-                productService.mapToProduct(newValue),
+        orderDAO.updateProductOfOrder(productService.mapToEntity(oldValue),
+                productService.mapToEntity(newValue),
                 this.mapToEntity(orderDTO), quantity);
     }
 
     @Override
     public void deleteProductFromOrder(ProductDTO productDTO, OrderDTO orderDTO) throws SQLException {
-        orderDAO.deleteProductFromOrder(productService.mapToProduct(productDTO),
+        orderDAO.deleteProductFromOrder(productService.mapToEntity(productDTO),
                 this.mapToEntity(orderDTO));
     }
 

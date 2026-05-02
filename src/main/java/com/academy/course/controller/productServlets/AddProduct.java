@@ -3,6 +3,7 @@ package com.academy.course.controller.productServlets;
 import com.academy.course.dto.ProductDTO;
 import com.academy.course.service.ProductService;
 import com.academy.course.service.ProductServiceImpl;
+import com.academy.course.utils.ParameterConverter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,11 +21,11 @@ public class AddProduct extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String name = request.getParameter("name");
-        Double price = Double.valueOf(request.getParameter("price"));
-        String info = request.getParameter("info");
-        String manufacturer = request.getParameter("manufacturer");
-        LocalDate bestBefore = LocalDate.parse(request.getParameter("bestBefore"));
+        String name = ParameterConverter.getStringParameter(request,"name");
+        Double price = ParameterConverter.getDoubleParameter(request,"price");
+        String info = ParameterConverter.getStringParameter(request,"info");
+        String manufacturer = ParameterConverter.getStringParameter(request,"manufacturer");
+        LocalDate bestBefore = ParameterConverter.getDateParameter(request,"bestBefore");
 
         String context = request.getContextPath();
         ProductDTO productDTO = ProductDTO.builder()
