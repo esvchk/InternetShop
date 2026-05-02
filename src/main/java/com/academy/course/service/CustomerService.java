@@ -17,9 +17,11 @@ public interface CustomerService {
     void buyOrder(CustomerDTO customerDTO,OrderDTO orderDTO);
     CustomerDTO findCustomerById(Integer id) throws SQLException;
     CustomerDTO findCustomerByLogin(String login);
-    String getPassOfCustomerByLogin(String login);
     void createCustomer(CustomerDTO customerDTO) throws SQLException;
     CustomerDTO getCustomer(Integer id) throws SQLException;
     void updateCustomer(CustomerDTO customerDTO,String newPassWord) throws SQLException;
     void deleteCustomer(CustomerDTO customerDTO) throws SQLException;
+    void register(String login,String passWord) throws SQLException;
+    void login(String login,String passWord) throws NoSuchFieldException, SQLException;
+
 }

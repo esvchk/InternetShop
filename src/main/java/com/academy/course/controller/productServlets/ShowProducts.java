@@ -13,7 +13,8 @@ public class ShowProducts extends HttpServlet {
 
     private final ProductService productService = new ProductServiceImpl();
 
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("products",productService.findAllProducts());
         request.getRequestDispatcher("/AllProducts.jsp")
                 .forward(request,response);

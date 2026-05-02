@@ -8,11 +8,12 @@ import com.academy.course.model.Customer;
 import com.academy.course.utils.ObjectMapper;
 
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class CustomerServiceImpl implements CustomerService, ObjectMapper<Customer,CustomerDTO> {
+public class CustomerServiceImpl implements CustomerService, ObjectMapper<Customer, CustomerDTO> {
 
     private final CustomerDAO customerDAO = new CustomerDAOImpl();
     private final OrderServiceImpl orderService = new OrderServiceImpl();
@@ -20,12 +21,12 @@ public class CustomerServiceImpl implements CustomerService, ObjectMapper<Custom
 
     @Override
     public void createOrder(CustomerDTO customerDTO, OrderDTO orderDTO) throws SQLException {
-        customerDAO.createOrder(this.mapToEntity(customerDTO),orderService.mapToEntity(orderDTO));
+        customerDAO.createOrder(this.mapToEntity(customerDTO), orderService.mapToEntity(orderDTO));
     }
 
     @Override
     public void deleteOrder(CustomerDTO customerDTO, OrderDTO orderDTO) throws SQLException {
-        customerDAO.deleteOrder(this.mapToEntity(customerDTO),orderService.mapToEntity(orderDTO));
+        customerDAO.deleteOrder(this.mapToEntity(customerDTO), orderService.mapToEntity(orderDTO));
     }
 
 
@@ -64,10 +65,6 @@ public class CustomerServiceImpl implements CustomerService, ObjectMapper<Custom
         return mapToDTO(customerDAO.getCustomerByLogin(login));
     }
 
-    @Override
-    public String getPassOfCustomerByLogin(String login) {
-        return customerDAO.getPassByLogin(login);
-    }
 
     @Override
     public void createCustomer(CustomerDTO customerDTO) throws SQLException {
@@ -80,20 +77,41 @@ public class CustomerServiceImpl implements CustomerService, ObjectMapper<Custom
     }
 
     @Override
-    public void updateCustomer(CustomerDTO customerDTO,String newPassword) throws SQLException {
-        CustomerDTO customer = this.getCustomer(customerDTO.getId());
+    public void updateCustomer(CustomerDTO customerDTO, String newPassword) throws SQLException {
+        Customer customer = customerDAO.get(customerDTO.getId());
         customer.setPayment(customerDTO.getPayment());
         customer.setLogin(customerDTO.getLogin());
         customer.setEmail(customerDTO.getEmail());
-        customer.setDateTimeOfRegistration(customerDTO.getDateTimeOfRegistration());
-        Customer customer1 = mapToEntity(customer);
-        customerDAO.update(customer1);
+        customerDAO.update(customer);
 
     }
 
     @Override
     public void deleteCustomer(CustomerDTO customerDTO) throws SQLException {
         customerDAO.delete(this.mapToEntity(customerDTO));
+    }
+
+    @Override
+    public void register(String login, String passWord) throws SQLException {
+
+            Customer customer = Customer.builder()
+                    .login(login)
+                    .passWord(PasswordHasher.hashPass(passWord))
+                    .build();
+            CustomerDTO customerDTO = mapToDTO(customer);
+            customerDTO.setDateTimeOfRegistration(LocalDateTime.now());
+            customerDAO.save(customer);
+
+
+    }
+
+    @Override
+    public void login(String login, String passWord) throws NoSuchFieldException, SQLException {
+        Customer customer = customerDAO.getCustomerByLogin(login);
+        String hashedPass = customer.getPassWord();
+        if (!PasswordHasher.checkPass(passWord,hashedPass)) {
+            System.out.println("success");
+        }
     }
 
 

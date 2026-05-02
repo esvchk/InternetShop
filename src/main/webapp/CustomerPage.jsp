@@ -15,7 +15,7 @@
         <input type = "submit">
     </form>
 
-    <a href="Registration">Registration</a>
+    <a href="Register.jsp">Registration</a>
 </head>
 <body>
 

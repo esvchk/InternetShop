@@ -19,13 +19,13 @@ public class ProductServiceImpl implements ProductService, ObjectMapper<Product,
 
     @Override
     public void updateProduct(ProductDTO productDTO) throws SQLException {
-        ProductDTO newProductDTO = this.findProductById(productDTO.getId());
-        newProductDTO.setInfo(productDTO.getInfo());
-        newProductDTO.setName(productDTO.getName());
-        newProductDTO.setPrice(productDTO.getPrice());
-        newProductDTO.setManufacturer(productDTO.getManufacturer());
-        newProductDTO.setBestBefore(productDTO.getBestBefore());
-        productDAO.update(mapToEntity(newProductDTO));
+        Product product = productDAO.get(productDTO.getId());
+        product.setInfo(productDTO.getInfo());
+        product.setName(productDTO.getName());
+        product.setPrice(productDTO.getPrice());
+        product.setManufacturer(productDTO.getManufacturer());
+        product.setBestBefore(productDTO.getBestBefore());
+        productDAO.update(product);
     }
 
     @Override

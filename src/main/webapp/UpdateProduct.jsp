@@ -15,7 +15,7 @@
         <title>Edit Product</title>
     </head>
     <body>
-    <h2>Edit User</h2>
+    <h2>Edit Product</h2>
     <% if (productDTO != null) { %>
     <form action="UpdateProduct" method="post">
         <input type="hidden" name="id" value="<%= productDTO.getId() %>">
@@ -32,10 +32,10 @@
         <input type="submit" value="Update Product">
     </form>
     <br>
-    <a href="ShowProducts">Back to User List</a>
+    <a href="ShowProducts">Back to Product List</a>
     <% } else { %>
-    <p>User not found!</p>
-    <a href="ShowProducts">Back to User List</a>
+    <p>Product not found!</p>
+    <a href="ShowProducts">Back to Product List</a>
     <% } %>
     </body>
 

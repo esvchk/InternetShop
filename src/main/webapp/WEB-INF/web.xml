@@ -47,6 +47,16 @@
         <servlet-class>com.academy.course.controller.Registration</servlet-class>
     </servlet>
 
+    <servlet>
+        <servlet-name>ShowCustomers</servlet-name>
+        <servlet-class>com.academy.course.controller.ShowCustomers</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ShowCustomers</servlet-name>
+        <url-pattern>/ShowCustomers</url-pattern>
+    </servlet-mapping>
+
     <servlet-mapping>
         <servlet-name>RegisterCustomer</servlet-name>
         <url-pattern>/RegisterCustomer</url-pattern>

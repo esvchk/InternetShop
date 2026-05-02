@@ -43,12 +43,6 @@ public class CustomerDAOImpl extends DAOImpl<Customer> implements CustomerDAO {
         return (Customer) query.getSingleResult();
     }
 
-    @Override
-    public String getPassByLogin(String login) {
-        Query query = getEm().createQuery("SELECT passWord from Customer customer where customer.login =: login");
-        query.setParameter("login", login);
-        return query.getSingleResult().toString();
-    }
 
     @Override
     public List<Customer> getAllCustomers() {

@@ -1,37 +1,34 @@
 package com.academy.course.controller;
 
-import com.academy.course.service.AuthorizationService;
 import com.academy.course.service.CustomerService;
 import com.academy.course.service.CustomerServiceImpl;
-import com.academy.course.service.PasswordHasher;
+import com.academy.course.utils.ParameterConverter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class LoginCustomer extends HttpServlet {
 
     private final CustomerService customerService = new CustomerServiceImpl();
-    private final AuthorizationService authorizationService = new AuthorizationService();
+
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String login = request.getParameter("login");
-        String passWord = request.getParameter("passWord");
+        String login = ParameterConverter.getStringParameter(request, "login");
+        String passWord = ParameterConverter.getStringParameter(request, "passWord");
 
         String context = request.getContextPath();
-
         try {
-            if (authorizationService.login(login,passWord)) {
-                response.sendRedirect(context + "/CustomerPage.jsp");
-            } else
-                request.getServletContext().getRequestDispatcher("/CustomerPage.jsp")
-                        .include(request,response);
+            customerService.login(login, passWord);
+            response.sendRedirect(context + "/ShowCustomers");
         } catch (NoSuchFieldException e) {
             throw new RuntimeException(e);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
-
-
     }
 }
