@@ -109,7 +109,7 @@ public class CustomerServiceImpl implements CustomerService, ObjectMapper<Custom
     public void login(String login, String passWord) throws NoSuchFieldException, SQLException {
         Customer customer = customerDAO.getCustomerByLogin(login);
         String hashedPass = customer.getPassWord();
-        if (!PasswordHasher.checkPass(passWord,hashedPass)) {
+        if (PasswordHasher.checkPass(passWord,hashedPass)) {
             System.out.println("success");
         }
     }

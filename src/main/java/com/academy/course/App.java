@@ -33,7 +33,6 @@ public class App {
                 .login("Sam")
                 .passWord("12345")
                 .email("@Sam.org")
-                .payment("cash")
                 .orders(orders)
                 .build();
 
@@ -64,6 +63,7 @@ public class App {
 //        System.out.println(customerService.getAllCustomers());
 //        customerDAO.createOrder(customerDAO.get(1),orderDAO.get(2));
 //        orderDAO.addProductToOrder(dao.get(4),orderDAO.get(2),1);
+        dao.save(product);
 
         String hashedPass = PasswordHasher.hashPass("12345");
 
