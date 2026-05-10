@@ -2,18 +2,16 @@ package com.academy.course.service;
 
 import com.academy.course.dao.productDao.ProductDAO;
 import com.academy.course.dao.productDao.ProductDAOImpl;
-import com.academy.course.dto.CustomerDTO;
 import com.academy.course.dto.ProductDTO;
-import com.academy.course.model.Customer;
 import com.academy.course.model.Product;
-import com.academy.course.utils.ObjectMapper;
+import com.academy.course.utils.Mapper;
 
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ProductServiceImpl implements ProductService, ObjectMapper<Product,ProductDTO> {
+public class ProductServiceImpl implements ProductService, Mapper<Product,ProductDTO> {
 
     private final ProductDAO productDAO = new ProductDAOImpl();
 

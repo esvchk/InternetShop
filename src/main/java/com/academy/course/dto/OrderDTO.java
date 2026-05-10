@@ -17,26 +17,19 @@ public class OrderDTO {
 
     private Integer id;
 
-    private CustomerDTO customerDTO;
-
     private List<ProductDTO> productDTO;
 
+    private CustomerDTO customerDTO;
+
     private Boolean isBought;
-
-    private LocalDateTime dateTimeOfCreation;
-
-    private LocalDateTime dateTimeOfPurchasing;
 
 
     @Override
     public String toString() {
         return "OrderDTO{" +
                 "id=" + id +
-                ", customerDTO=" + customerDTO +
                 ", productDTO=" + productDTO +
                 ", isBought=" + isBought +
-                ", dateTimeOfCreation=" + dateTimeOfCreation +
-                ", dateTimeOfPurchasing=" + dateTimeOfPurchasing +
                 '}';
     }
 }

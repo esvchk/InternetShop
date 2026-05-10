@@ -1,5 +1,6 @@
 package com.academy.course.dto;
 
+import com.academy.course.model.Customer;
 import com.academy.course.model.Order;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -26,11 +27,7 @@ public class CustomerDTO {
 
     private List<OrderDTO> ordersDTO;
 
-    private String address;
 
-    private LocalDate birthday;
-
-    private LocalDateTime dateTimeOfRegistration;
 
     @Override
     public String toString() {
@@ -39,9 +36,6 @@ public class CustomerDTO {
                 ", login='" + login + '\'' +
                 ", email='" + email + '\'' +
                 ", orders=" + ordersDTO +
-                ", address='" + address + '\'' +
-                ", birthday=" + birthday +
-                ", dateTimeOfRegistration=" + dateTimeOfRegistration +
                 '}';
     }
 }

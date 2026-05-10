@@ -4,22 +4,21 @@ package com.academy.course.service;
 import com.academy.course.dao.orderDao.OrderDAO;
 import com.academy.course.dao.orderDao.OrderDAOImpl;
 
+import com.academy.course.dto.ItemDTO;
 import com.academy.course.dto.OrderDTO;
-import com.academy.course.dto.OrderItemDTO;
 import com.academy.course.dto.ProductDTO;
 import com.academy.course.model.Order;
-import com.academy.course.model.Product;
-import com.academy.course.utils.ObjectMapper;
+import com.academy.course.utils.Mapper;
 
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
-public class OrderServiceImpl implements OrderService, ObjectMapper<Order, OrderDTO> {
+public class OrderServiceImpl implements OrderService, Mapper<Order,OrderDTO> {
 
     private final OrderDAO orderDAO = new OrderDAOImpl();
     private final ProductServiceImpl productService = new ProductServiceImpl();
+    private final ItemServiceImpl itemService = new ItemServiceImpl();
 
 
     @Override
@@ -35,9 +34,9 @@ public class OrderServiceImpl implements OrderService, ObjectMapper<Order, Order
     }
 
     @Override
-    public List<ProductDTO> getAllProductsFromOrder(OrderDTO orderDTO) {
-        return orderDAO.getAllProductsFromOrder(mapToEntity(orderDTO)).stream()
-                .map(productService::mapToDTO)
+    public List<ItemDTO> getAllProductsFromOrder(OrderDTO orderDTO) {
+        return orderDAO.getAllProductsFromOrder(this.mapToEntity(orderDTO)).stream()
+                .map(itemService::mapToDTO)
                 .collect(Collectors.toList());
     }
 
@@ -64,15 +63,20 @@ public class OrderServiceImpl implements OrderService, ObjectMapper<Order, Order
 
 
     @Override
-    public OrderDTO mapToDTO(Order order) {
+    public OrderDTO mapToDTO(Order entity) {
         return OrderDTO.builder()
-                .id(order.getId())
+                .id(entity.getId())
+                .productDTO(null)
+                .customerDTO(null)
+                .isBought(null)
                 .build();
     }
 
     @Override
-    public Order mapToEntity(OrderDTO orderDTO) {
+    public Order mapToEntity(OrderDTO dto) {
         return Order.builder()
+                .items(null)
+                .customer(null)
                 .build();
     }
 }

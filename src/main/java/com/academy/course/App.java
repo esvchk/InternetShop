@@ -22,13 +22,14 @@ public class App {
     public static void main(String[] args) throws SQLException, UserNotFound {
 
         List<Order> orders = new ArrayList<>();
-        List<Product> products = new ArrayList<>();
+        List<Item> items = new ArrayList<>();
 
 
         Product product = Product.builder()
-                .name("Eggs ")
-                .price(4.2)
-                .info("10pcs")
+                .name("Milk")
+                .price(3.5)
+                .info("3.2%")
+                .isAvailable(true)
                 .build();
 
         Customer customer = Customer.builder()
@@ -40,10 +41,15 @@ public class App {
 
 
         Order order = Order.builder()
-                .products(products)
+                .items(items)
                 .customer(customer)
                 .build();
 
+        Item item = Item.builder()
+                .productQuantity(2)
+                .product(product)
+                .order(order)
+                .build();
 
 
 
@@ -58,6 +64,9 @@ public class App {
         CustomerService customerService = new CustomerServiceImpl();
 
         customerDAO.save(customer);
+        dao.save(product);
+
+
 
 
     }

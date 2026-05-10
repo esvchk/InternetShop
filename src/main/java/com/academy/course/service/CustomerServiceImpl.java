@@ -6,16 +6,15 @@ import com.academy.course.dto.CustomerDTO;
 import com.academy.course.dto.OrderDTO;
 import com.academy.course.exception.UserNotFound;
 import com.academy.course.model.Customer;
-import com.academy.course.utils.ObjectMapper;
+import com.academy.course.utils.Mapper;
 
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
-public class CustomerServiceImpl implements CustomerService, ObjectMapper<Customer, CustomerDTO> {
+public class CustomerServiceImpl implements CustomerService, Mapper<Customer, CustomerDTO> {
 
     private final CustomerDAO customerDAO = new CustomerDAOImpl();
     private final OrderServiceImpl orderService = new OrderServiceImpl();
@@ -54,7 +53,6 @@ public class CustomerServiceImpl implements CustomerService, ObjectMapper<Custom
                 .findFirst().orElse(null);
         if (orderToPurchase != null) {
             orderDTO.setIsBought(true);
-            orderToPurchase.setDateTimeOfPurchasing(LocalDateTime.now());
         } else
             orderDTO.setIsBought(false);
     }
@@ -102,7 +100,6 @@ public class CustomerServiceImpl implements CustomerService, ObjectMapper<Custom
                         .passWord(PasswordHasher.hashPass(passWord))
                         .build();
                 CustomerDTO customerDTO = mapToDTO(customer);
-                customerDTO.setDateTimeOfRegistration(LocalDateTime.now());
                 customerDAO.save(customer);
             }
 
@@ -131,7 +128,7 @@ public class CustomerServiceImpl implements CustomerService, ObjectMapper<Custom
     public Customer mapToEntity(CustomerDTO customerDTO) {
         return Customer.builder()
                 .login(customerDTO.getLogin())
-                .passWord(customerDTO.getLogin())
+                .passWord(null)
                 .email(customerDTO.getEmail())
                 .build();
     }

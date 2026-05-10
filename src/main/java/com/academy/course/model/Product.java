@@ -5,10 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Builder
 @Data
@@ -28,14 +25,9 @@ public class Product extends DataEntity implements Serializable {
     private String info;
 
     @Column
-    private Integer quantity;
-
-    @Column
     private Boolean isAvailable;
 
-    @Column
-    @ManyToMany(mappedBy = "products")
-    private List<Order> orders;
+
 
     @Override
     public boolean equals(Object o) {

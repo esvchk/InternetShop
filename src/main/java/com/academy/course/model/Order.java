@@ -17,11 +17,8 @@ import java.util.*;
 @Table(name = "orders")
 public class Order extends DataEntity implements Serializable {
 
-    @ManyToMany
-    @JoinTable(name = "product_orders",
-            joinColumns = {@JoinColumn(name = "order_id")},
-            inverseJoinColumns = {@JoinColumn(name = "product_id")})
-    private List<Product> products = new ArrayList<>();
+    @OneToMany(mappedBy = "order",cascade = CascadeType.ALL)
+    private List<Item> items = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "customer_id")

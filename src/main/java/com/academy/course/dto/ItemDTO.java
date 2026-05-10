@@ -1,17 +1,15 @@
 package com.academy.course.dto;
 
-import com.academy.course.model.Product;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.criteria.CriteriaBuilder;
 @Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class OrderItemDTO {
+public class ItemDTO {
 
     private Integer id;
 

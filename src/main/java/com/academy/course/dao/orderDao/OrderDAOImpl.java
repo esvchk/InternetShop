@@ -2,6 +2,7 @@ package com.academy.course.dao.orderDao;
 
 import com.academy.course.dao.DAOImpl;
 
+import com.academy.course.model.Item;
 import com.academy.course.model.Order;
 import com.academy.course.model.Product;
 
@@ -21,27 +22,42 @@ public class OrderDAOImpl extends DAOImpl<Order> implements OrderDAO {
     }
 
     @Override
-    public List<Product> getAllProductsFromOrder(Order order) {
-        return order.getProducts();
+    public List<Item> getAllProductsFromOrder(Order order) {
+        return order.getItems();
     }
 
     @Override
     public void addProductToOrder(Product product, Order order, Integer quantity) throws SQLException {
-        order.getProducts().add(product);
+        Item item = Item.builder()
+                .product(product)
+                .productQuantity(quantity)
+                .order(order)
+                .build();
+
+        order.getItems().add(item);
         update(order);
     }
 
 
     @Override
-    public void updateProductOfOrder(Product oldValue, Product newValue, Order order,Integer quantity) throws SQLException {
-        order.getProducts().set(oldValue.getId(),newValue);
+    public void updateProductOfOrder(Product oldValue, Product newValue, Order order, Integer quantity) throws SQLException {
+        Item item = order.getItems().stream().filter(item1 -> item1.getProduct().equals(oldValue))
+                        .findFirst().orElse(null);
+
+        Item newItem = Item.builder()
+                .productQuantity(quantity)
+                .product(newValue)
+                .order(order)
+                .build();
+
+        order.getItems().set(item.getId(), newItem);
         update(order);
     }
 
 
     @Override
     public void deleteProductFromOrder(Product product, Order order) throws SQLException {
-        order.getProducts().remove(product);
+        order.getItems().removeIf(item -> item.getProduct().equals(product));
         update(order);
     }
 
