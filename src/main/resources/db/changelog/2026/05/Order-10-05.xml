@@ -5,7 +5,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-5.0.xsd"
         objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
-    <changeSet id="1778427551380-1" author="esvchk">
+    <changeSet id="1778428426433-1" author="esvchk">
         <createTable tableName="orders">
             <column autoIncrement="true" name="id" type="INT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_orders"/>
@@ -15,10 +15,30 @@
             <column name="customer_id" type="INT"/>
         </createTable>
     </changeSet>
-    <changeSet id="1778427551380-2" author="esvchk">
+    <changeSet id="1778428426433-2" author="esvchk">
+        <createTable tableName="product_orders">
+            <column name="order_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="product_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="1778428426433-3" author="esvchk">
         <addForeignKeyConstraint baseColumnNames="customer_id" baseTableName="orders"
                                  constraintName="FK_ORDERS_ON_CUSTOMER" referencedColumnNames="id"
                                  referencedTableName="Customer"/>
+    </changeSet>
+    <changeSet id="1778428426433-4" author="esvchk">
+        <addForeignKeyConstraint baseColumnNames="order_id" baseTableName="product_orders"
+                                 constraintName="fk_proord_on_order" referencedColumnNames="id"
+                                 referencedTableName="orders"/>
+    </changeSet>
+    <changeSet id="1778428426433-5" author="esvchk">
+        <addForeignKeyConstraint baseColumnNames="product_id" baseTableName="product_orders"
+                                 constraintName="fk_proord_on_product" referencedColumnNames="id"
+                                 referencedTableName="Product"/>
     </changeSet>
 
 </databaseChangeLog>

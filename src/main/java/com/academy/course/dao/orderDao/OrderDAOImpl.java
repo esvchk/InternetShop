@@ -3,7 +3,6 @@ package com.academy.course.dao.orderDao;
 import com.academy.course.dao.DAOImpl;
 
 import com.academy.course.model.Order;
-import com.academy.course.model.OrderItem;
 import com.academy.course.model.Product;
 
 import java.sql.SQLException;

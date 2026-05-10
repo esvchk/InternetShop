@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -33,8 +34,8 @@ public class Product extends DataEntity implements Serializable {
     private Boolean isAvailable;
 
     @Column
-    @ManyToOne
-    private Order order;
+    @ManyToMany(mappedBy = "products")
+    private List<Order> orders;
 
     @Override
     public boolean equals(Object o) {
