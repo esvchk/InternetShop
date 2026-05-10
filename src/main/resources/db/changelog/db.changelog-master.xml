@@ -6,8 +6,8 @@
 
 
     <include file="db/changelog/2026/05/hibernate-sequence.xml"/>
-    <include file="db/changelog/2026/05/03-01-Customer.xml"/>
-    <include file="db/changelog/2026/05/03-01-Product.xml"/>
-    <include file="db/changelog/2026/05/03-01-Order.xml"/>
-    <include file="db/changelog/2026/05/03-01-OrderItem.xml"/>
+    <include file="db/changelog/2026/05/Customer-10-05.xml"/>
+    <include file="db/changelog/2026/05/Order-10-05.xml"/>
+    <include file="/db/changelog/2026/05/Product-10-05.xml"/>
+
 </databaseChangeLog>

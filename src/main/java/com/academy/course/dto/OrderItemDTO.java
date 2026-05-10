@@ -15,7 +15,7 @@ public class OrderItemDTO {
 
     private Integer id;
 
-    private Product product;
+    private ProductDTO productDTO;
 
     private Integer quantity;
 
@@ -23,7 +23,7 @@ public class OrderItemDTO {
     public String toString() {
         return "OrderItemDTO{" +
                 "id=" + id +
-                ", product=" + product +
+                ", productDTO=" + productDTO +
                 ", quantity=" + quantity +
                 '}';
     }

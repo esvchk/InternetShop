@@ -5,6 +5,7 @@ import com.academy.course.model.OrderItem;
 import com.academy.course.model.Product;
 
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import java.util.List;
 
 public class ProductDAOImpl extends DAOImpl<Product> implements ProductDAO{
@@ -15,7 +16,8 @@ public class ProductDAOImpl extends DAOImpl<Product> implements ProductDAO{
 
     @Override
     public List<Product> getAllProducts() {
-        return getEm().createQuery("from Product product", Product.class).getResultList();
+        Query query = getEm().createQuery("from Product", Product.class);
+        return query.getResultList();
     }
 
     @Override

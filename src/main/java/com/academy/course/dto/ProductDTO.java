@@ -21,10 +21,6 @@ public class ProductDTO {
 
     private String info;
 
-    private String manufacturer;
-
-    private LocalDate bestBefore;
-
 
     @Override
     public String toString() {
@@ -33,8 +29,6 @@ public class ProductDTO {
                 ", name='" + name + '\'' +
                 ", price=" + price +
                 ", info='" + info + '\'' +
-                ", manufacturer='" + manufacturer + '\'' +
-                ", bestBefore=" + bestBefore +
                 '}';
     }
 

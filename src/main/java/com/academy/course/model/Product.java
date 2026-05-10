@@ -1,10 +1,8 @@
 package com.academy.course.model;
 
 import lombok.*;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -29,10 +27,14 @@ public class Product extends DataEntity implements Serializable {
     private String info;
 
     @Column
-    private String manufacturer;
+    private Integer quantity;
 
     @Column
-    private LocalDate bestBefore;
+    private Boolean isAvailable;
+
+    @Column
+    @ManyToOne
+    private Order order;
 
     @Override
     public boolean equals(Object o) {
@@ -53,8 +55,6 @@ public class Product extends DataEntity implements Serializable {
                 "name='" + name + '\'' +
                 ", price=" + price +
                 ", info='" + info + '\'' +
-                ", manufacturer='" + manufacturer + '\'' +
-                ", bestBefore=" + bestBefore +
                 '}';
     }
 }

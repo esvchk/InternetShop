@@ -7,8 +7,8 @@
     <h1>Product List</h1>
 <body>
 <a href="AddProduct.jsp">Add New Product</a>
-<a href="FindById.jsp">Search by Id</a>
-<a href="FindByName.jsp">Search by Name</a>
+<a href="FindProductById.jsp">Search by Id</a>
+<a href="FindProductByName.jsp">Search by Name</a>
 <br/><br/>
 <table border="1">
     <thead>
@@ -36,6 +36,8 @@
         <td><%= product.getBestBefore() %></td>
         <td>
             <a href="UpdateProduct?id=<%= product.getId() %>">Edit</a>
+
+            <a href="AddProductInOrder?id=<%= product.getId() %>">Add</a>
             &nbsp;&nbsp;&nbsp;
             <a href="DeleteProduct?id=<%= product.getId() %>">Delete</a>
         </td>

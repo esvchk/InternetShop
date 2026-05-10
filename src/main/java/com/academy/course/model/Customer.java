@@ -7,9 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Builder
 @Data
@@ -30,7 +28,7 @@ public class Customer extends DataEntity implements Serializable {
 
 
     @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL,orphanRemoval = true)
-    private Set<Order> orders = new HashSet<>();
+    private List<Order> orders = new ArrayList<>();
 
     @Override
     public boolean equals(Object o) {
@@ -40,13 +38,9 @@ public class Customer extends DataEntity implements Serializable {
         return Objects.equals(getId(),customer.getId());
     }
 
-
-
     @Override
     public int hashCode() {
         return Objects.hash(getId());
-
-
     }
 }
 

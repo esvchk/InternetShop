@@ -4,11 +4,13 @@ import com.academy.course.dao.customerDao.CustomerDAO;
 import com.academy.course.dao.customerDao.CustomerDAOImpl;
 import com.academy.course.dto.CustomerDTO;
 import com.academy.course.dto.OrderDTO;
+import com.academy.course.exception.UserNotFound;
 import com.academy.course.model.Customer;
 import com.academy.course.utils.ObjectMapper;
 
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -19,11 +21,6 @@ public class CustomerServiceImpl implements CustomerService, ObjectMapper<Custom
     private final OrderServiceImpl orderService = new OrderServiceImpl();
 
 
-    @Override
-    public void createOrder(CustomerDTO customerDTO, OrderDTO orderDTO) throws SQLException {
-        customerDAO.createOrder(this.mapToEntity(customerDTO), orderService.mapToEntity(orderDTO));
-
-    }
 
     @Override
     public void deleteOrder(CustomerDTO customerDTO, OrderDTO orderDTO) throws SQLException {
@@ -39,10 +36,15 @@ public class CustomerServiceImpl implements CustomerService, ObjectMapper<Custom
     }
 
     @Override
-    public Set<OrderDTO> getAllOrdersOfCustomer(CustomerDTO customerDTO) {
-        return customerDAO.getAllOrdersOfCustomer(this.mapToEntity(customerDTO)).stream()
-                .map(orderService::mapToDTO)
-                .collect(Collectors.toSet());
+    public List<OrderDTO> getAllOrdersOfCustomer(CustomerDTO customerDTO) {
+        if (customerDAO.getAllOrdersOfCustomer(this.mapToEntity(customerDTO)) == null) {
+            return Collections.emptyList();
+        } else {
+            return customerDAO.getAllOrdersOfCustomer(this.mapToEntity(customerDTO)).stream()
+                    .map(orderService::mapToDTO)
+                    .collect(Collectors.toList());
+        }
+
     }
 
     @Override
@@ -51,10 +53,10 @@ public class CustomerServiceImpl implements CustomerService, ObjectMapper<Custom
                 .filter(orderDTO1 -> orderDTO1.equals(orderDTO))
                 .findFirst().orElse(null);
         if (orderToPurchase != null) {
-            orderDTO.setBought(true);
+            orderDTO.setIsBought(true);
             orderToPurchase.setDateTimeOfPurchasing(LocalDateTime.now());
         } else
-            orderDTO.setBought(false);
+            orderDTO.setIsBought(false);
     }
 
     @Override
@@ -63,19 +65,16 @@ public class CustomerServiceImpl implements CustomerService, ObjectMapper<Custom
     }
 
     @Override
-    public CustomerDTO findCustomerByLogin(String login) {
-        return mapToDTO(customerDAO.getCustomerByLogin(login));
+    public CustomerDTO findCustomerByLogin(String login) throws UserNotFound {
+        if (customerDAO.getCustomerByLogin(login)!= null) {
+            return mapToDTO(customerDAO.getCustomerByLogin(login));
+        } else
+            return null;
     }
-
 
     @Override
     public void createCustomer(CustomerDTO customerDTO) throws SQLException {
         customerDAO.save(mapToEntity(customerDTO));
-    }
-
-    @Override
-    public CustomerDTO getCustomer(Integer id) throws SQLException {
-        return mapToDTO(customerDAO.get(id));
     }
 
     @Override
@@ -93,24 +92,28 @@ public class CustomerServiceImpl implements CustomerService, ObjectMapper<Custom
     }
 
     @Override
-    public void register(String login, String passWord) throws SQLException {
-            Customer customer = Customer.builder()
-                    .login(login)
-                    .passWord(PasswordHasher.hashPass(passWord))
-                    .build();
-            CustomerDTO customerDTO = mapToDTO(customer);
-            customerDTO.setDateTimeOfRegistration(LocalDateTime.now());
-            customerDAO.save(customer);
+    public void register(String login, String passWord) throws SQLException, UserNotFound {
+        CustomerDTO existingCustomer = findCustomerByLogin(login);
+            if (existingCustomer != null) {
 
+            } else {
+                Customer customer = Customer.builder()
+                        .login(login)
+                        .passWord(PasswordHasher.hashPass(passWord))
+                        .build();
+                CustomerDTO customerDTO = mapToDTO(customer);
+                customerDTO.setDateTimeOfRegistration(LocalDateTime.now());
+                customerDAO.save(customer);
+            }
 
     }
 
     @Override
-    public void login(String login, String passWord) throws NoSuchFieldException, SQLException {
+    public void login(String login, String passWord) throws NoSuchFieldException, SQLException, UserNotFound {
         Customer customer = customerDAO.getCustomerByLogin(login);
         String hashedPass = customer.getPassWord();
-        if (PasswordHasher.checkPass(passWord,hashedPass)) {
-            System.out.println("success");
+        if (!PasswordHasher.checkPass(passWord,hashedPass)) {
+            throw new RuntimeException("wrong pass");
         }
     }
 

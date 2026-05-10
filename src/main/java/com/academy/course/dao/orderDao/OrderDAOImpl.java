@@ -22,42 +22,27 @@ public class OrderDAOImpl extends DAOImpl<Order> implements OrderDAO {
     }
 
     @Override
-    public Set<OrderItem> getAllProductsFromOrder(Order order) {
-        return order.getOrderItems();
+    public List<Product> getAllProductsFromOrder(Order order) {
+        return order.getProducts();
     }
 
     @Override
     public void addProductToOrder(Product product, Order order, Integer quantity) throws SQLException {
-        OrderItem orderItem = OrderItem.builder()
-                .product(product)
-                .order(order)
-                .quantity(quantity)
-                .build();
-        order.getOrderItems().add(orderItem);
+        order.getProducts().add(product);
         update(order);
     }
 
 
     @Override
     public void updateProductOfOrder(Product oldValue, Product newValue, Order order,Integer quantity) throws SQLException {
-
-        OrderItem orderItem = order.getOrderItems().stream()
-                        .filter(orderItem1 -> orderItem1.getProduct().equals(oldValue))
-                                .findFirst().orElse(null);
-
-        orderItem.setOrder(order);
-        orderItem.setProduct(newValue);
-        orderItem.setQuantity(quantity);
+        order.getProducts().set(oldValue.getId(),newValue);
         update(order);
     }
 
 
     @Override
     public void deleteProductFromOrder(Product product, Order order) throws SQLException {
-        OrderItem orderItem1 = order.getOrderItems().stream()
-                .filter(orderItem -> orderItem.getProduct().equals(product))
-                .findFirst().orElse(null);
-        order.getOrderItems().remove(orderItem1);
+        order.getProducts().remove(product);
         update(order);
     }
 

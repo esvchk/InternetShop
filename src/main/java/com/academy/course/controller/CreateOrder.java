@@ -9,16 +9,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-
-@WebServlet("/ShowCustomers")
-public class ShowCustomers extends HttpServlet {
+import java.sql.SQLException;
+@WebServlet("/CreateOrder")
+public class CreateOrder extends HttpServlet {
 
     private final CustomerService customerService = new CustomerServiceImpl();
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("customers",customerService.getAllCustomers());
-        request.getRequestDispatcher("/AllCustomers.jsp")
-                .forward(request,response);
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        
     }
 }

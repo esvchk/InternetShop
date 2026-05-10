@@ -14,9 +14,9 @@
 
     <a href="AddProduct.jsp">Add Product</a>
 
-    <a href="FindById.jsp">Find Product By Id</a>
+    <a href="FindProductById.jsp">Find Product By Id</a>
 
-    <a href="FindByName.jsp">Find Product By Name</a>
+    <a href="FindProductByName.jsp">Find Product By Name</a>
 
     <a href="CustomerPage.jsp">Authorization</a>
 

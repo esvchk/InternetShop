@@ -7,8 +7,8 @@
     <h1>Customer List</h1>
 <body>
 <a href="AddProduct.jsp">Add New Product</a>
-<a href="FindById.jsp">Search by Id</a>
-<a href="FindByName.jsp">Search by Name</a>
+<a href="FindProductById.jsp">Search by Id</a>
+<a href="FindProductByName.jsp">Search by Name</a>
 <br/><br/>
 <table border="1">
     <thead>

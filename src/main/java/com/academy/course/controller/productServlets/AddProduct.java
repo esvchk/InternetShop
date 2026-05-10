@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
-
+@WebServlet("/AddProduct")
 public class AddProduct extends HttpServlet {
 
     private final ProductService productService = new ProductServiceImpl();
@@ -32,8 +32,6 @@ public class AddProduct extends HttpServlet {
                 .name(name)
                 .price(price)
                 .info(info)
-                .manufacturer(manufacturer)
-                .bestBefore(bestBefore)
                 .build();
         try {
             productService.addProduct(productDTO);

@@ -23,8 +23,6 @@ public class ProductServiceImpl implements ProductService, ObjectMapper<Product,
         product.setInfo(productDTO.getInfo());
         product.setName(productDTO.getName());
         product.setPrice(productDTO.getPrice());
-        product.setManufacturer(productDTO.getManufacturer());
-        product.setBestBefore(productDTO.getBestBefore());
         productDAO.update(product);
     }
 
@@ -67,8 +65,6 @@ public class ProductServiceImpl implements ProductService, ObjectMapper<Product,
                 .name(product.getName())
                 .price(product.getPrice())
                 .info(product.getInfo())
-                .manufacturer(product.getManufacturer())
-                .bestBefore(product.getBestBefore())
                 .build();
     }
 
@@ -78,8 +74,6 @@ public class ProductServiceImpl implements ProductService, ObjectMapper<Product,
                 .name(productDTO.getName())
                 .price(productDTO.getPrice())
                 .info(productDTO.getInfo())
-                .manufacturer(productDTO.getManufacturer())
-                .bestBefore(productDTO.getBestBefore())
                 .build();
     }
 }

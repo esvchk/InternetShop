@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 public class DAOImpl<T> implements DAO<T>{
 
-    private Class<T> tClass;
+    private final Class<T> tClass;
 
     public DAOImpl(Class<T> tClass) {
         this.tClass = tClass;

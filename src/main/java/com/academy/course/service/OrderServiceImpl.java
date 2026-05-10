@@ -8,7 +8,7 @@ import com.academy.course.dto.OrderDTO;
 import com.academy.course.dto.OrderItemDTO;
 import com.academy.course.dto.ProductDTO;
 import com.academy.course.model.Order;
-import com.academy.course.model.OrderItem;
+import com.academy.course.model.Product;
 import com.academy.course.utils.ObjectMapper;
 
 import java.sql.SQLException;
@@ -19,7 +19,6 @@ import java.util.stream.Collectors;
 public class OrderServiceImpl implements OrderService, ObjectMapper<Order, OrderDTO> {
 
     private final OrderDAO orderDAO = new OrderDAOImpl();
-    private final OrderItemServiceImpl orderItemService = new OrderItemServiceImpl();
     private final ProductServiceImpl productService = new ProductServiceImpl();
 
 
@@ -36,10 +35,10 @@ public class OrderServiceImpl implements OrderService, ObjectMapper<Order, Order
     }
 
     @Override
-    public Set<OrderItemDTO> getAllProductsFromOrder(OrderDTO orderDTO) {
+    public List<ProductDTO> getAllProductsFromOrder(OrderDTO orderDTO) {
         return orderDAO.getAllProductsFromOrder(mapToEntity(orderDTO)).stream()
-                .map(orderItemService::mapToDTO)
-                .collect(Collectors.toSet());
+                .map(productService::mapToDTO)
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -68,14 +67,12 @@ public class OrderServiceImpl implements OrderService, ObjectMapper<Order, Order
     public OrderDTO mapToDTO(Order order) {
         return OrderDTO.builder()
                 .id(order.getId())
-                .customer(order.getCustomer())
                 .build();
     }
 
     @Override
     public Order mapToEntity(OrderDTO orderDTO) {
         return Order.builder()
-                .customer(orderDTO.getCustomer())
                 .build();
     }
 }

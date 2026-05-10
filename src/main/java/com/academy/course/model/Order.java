@@ -7,9 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Builder
 @Data
@@ -19,8 +17,9 @@ import java.util.Set;
 @Table(name = "orders")
 public class Order extends DataEntity implements Serializable {
 
-    @OneToMany(mappedBy = "order",cascade = CascadeType.ALL)
-    private Set<OrderItem> orderItems = new HashSet<>();
+    @OneToMany(mappedBy = "order",cascade = CascadeType.REMOVE)
+    @JoinColumn("product_id")
+    private List<Product> products = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "customer_id")

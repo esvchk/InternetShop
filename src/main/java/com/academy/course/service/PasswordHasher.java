@@ -1,19 +1,17 @@
 package com.academy.course.service;
 
 
-import at.favre.lib.crypto.bcrypt.BCrypt;
+import org.mindrot.jbcrypt.BCrypt;
 
 public class PasswordHasher {
 
     public static String hashPass(String pass) {
         int logRounds = 12;
-        return BCrypt.withDefaults().hashToString(logRounds,pass.toCharArray());
+        String salt = org.mindrot.jbcrypt.BCrypt.gensalt(logRounds);
+        return BCrypt.hashpw(pass,salt);
     }
 
     public static boolean checkPass(String pass, String hash) throws NoSuchFieldException {
-        BCrypt.Result result = BCrypt.verifyer().verify(pass.toCharArray(),hash);
-        return result.verified;
-
-
+        return BCrypt.checkpw(pass,hash);
     }
 }

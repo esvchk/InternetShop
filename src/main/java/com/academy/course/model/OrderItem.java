@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Objects;
 
 @Builder
@@ -14,7 +15,7 @@ import java.util.Objects;
 @AllArgsConstructor
 @Entity
 @Table
-public class OrderItem extends DataEntity{
+public class OrderItem extends DataEntity implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "product_id")
@@ -24,8 +25,6 @@ public class OrderItem extends DataEntity{
     @JoinColumn(name = "order_id")
     private Order order;
 
-    @Column
-    private Integer quantity;
 
     @Override
     public boolean equals(Object o) {
@@ -44,7 +43,6 @@ public class OrderItem extends DataEntity{
     public String toString() {
         return "OrderItem{" +
                 "product=" + product +
-                ", quantity=" + quantity +
                 '}';
     }
 }

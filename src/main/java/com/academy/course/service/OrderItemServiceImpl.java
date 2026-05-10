@@ -11,14 +11,12 @@ public class OrderItemServiceImpl implements ObjectMapper<OrderItem,OrderItemDTO
     public OrderItemDTO mapToDTO(OrderItem orderItem) {
         return OrderItemDTO.builder()
                 .id(orderItem.getId())
-                .product(orderItem.getProduct())
                 .build();
     }
 
     @Override
     public OrderItem mapToEntity(OrderItemDTO orderItemDTO) {
         return OrderItem.builder()
-                .product(orderItemDTO.getProduct())
                 .build();
     }
 }

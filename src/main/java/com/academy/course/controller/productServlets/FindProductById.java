@@ -5,12 +5,13 @@ import com.academy.course.service.ProductServiceImpl;
 import com.academy.course.utils.ParameterConverter;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
-
+@WebServlet("/FindProductById")
 public class FindProductById extends HttpServlet {
     private final ProductService productService = new ProductServiceImpl();
 
@@ -18,7 +19,7 @@ public class FindProductById extends HttpServlet {
         Integer id = ParameterConverter.getIntegerParameter(request,"id");
         try {
             request.setAttribute("product", productService.findProductById(id));
-            request.getRequestDispatcher("/FindById.jsp")
+            request.getRequestDispatcher("/FindProductById.jsp")
                     .forward(request, response);
         } catch (SQLException e) {
             throw new RuntimeException(e);

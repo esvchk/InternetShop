@@ -1,5 +1,6 @@
 package com.academy.course.dto;
 
+import com.academy.course.model.Order;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -8,6 +9,8 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Set;
 
 @Builder
 @Data
@@ -21,6 +24,8 @@ public class CustomerDTO {
 
     private String email;
 
+    private List<OrderDTO> ordersDTO;
+
     private String address;
 
     private LocalDate birthday;
@@ -33,6 +38,7 @@ public class CustomerDTO {
                 "id=" + id +
                 ", login='" + login + '\'' +
                 ", email='" + email + '\'' +
+                ", orders=" + ordersDTO +
                 ", address='" + address + '\'' +
                 ", birthday=" + birthday +
                 ", dateTimeOfRegistration=" + dateTimeOfRegistration +

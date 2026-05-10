@@ -6,13 +6,14 @@ import com.academy.course.service.ProductServiceImpl;
 import com.academy.course.utils.ParameterConverter;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
-
+@WebServlet("/UpdateProduct")
 public class UpdateProduct extends HttpServlet {
 
     private final ProductService productService = new ProductServiceImpl();
@@ -45,8 +46,6 @@ public class UpdateProduct extends HttpServlet {
                 .name(name)
                 .price(price)
                 .info(info)
-                .manufacturer(manufacturer)
-                .bestBefore(bestBefore)
                 .build();
         try {
             productService.updateProduct(productDTO);

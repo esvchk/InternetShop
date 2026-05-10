@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @MappedSuperclass
 public class DataEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id",unique = true)
     private Integer id;
 

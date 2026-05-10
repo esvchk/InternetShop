@@ -15,7 +15,7 @@ public interface OrderService {
 
     OrderDTO findOrderById(Integer orderId) throws SQLException;
     List<OrderDTO> getAllOrders();
-    Set<OrderItemDTO> getAllProductsFromOrder(OrderDTO order);
+    List<ProductDTO> getAllProductsFromOrder(OrderDTO order);
     void addProductToOrder(ProductDTO productDTO, OrderDTO orderDTO, Integer quantity) throws SQLException;
     void updateProductOfOrder(ProductDTO oldValue,ProductDTO newValue,OrderDTO order,Integer quantity) throws SQLException;
     void deleteProductFromOrder(ProductDTO productDTO,OrderDTO orderDTO) throws SQLException;
