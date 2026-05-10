@@ -11,7 +11,7 @@ import java.util.Set;
 
 public interface CustomerDAO extends DAO<Customer> {
     void deleteOrder(Customer customer, Order order) throws SQLException;
-    Customer getCustomerByLogin(String login) throws UserNotFound;
+    Customer getCustomerByLogin(String login);
     List<Customer> getAllCustomers();
     List<Order> getAllOrdersOfCustomer(Customer customer);
 }

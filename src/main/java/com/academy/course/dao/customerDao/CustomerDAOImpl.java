@@ -5,6 +5,8 @@ import com.academy.course.dao.DAOImpl;
 import com.academy.course.exception.UserNotFound;
 import com.academy.course.model.Customer;
 import com.academy.course.model.Order;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
@@ -15,31 +17,30 @@ import java.util.List;
 import java.util.Set;
 
 public class CustomerDAOImpl extends DAOImpl<Customer> implements CustomerDAO {
+    private static final Logger logger = LogManager.getLogger(CustomerDAOImpl.class);
     public CustomerDAOImpl() {
         super(Customer.class);
     }
 
     @Override
-    public void deleteOrder(Customer customer, Order order) throws SQLException {
-
+    public void deleteOrder(Customer customer, Order order) {
         customer.getOrders().remove(order);
+        try {
+            update(customer);
+        } catch (SQLException e) {
 
-        update(customer);
+        }
+
     }
 
     @Override
-    public Customer getCustomerByLogin(String login) throws UserNotFound {
-        try {
-            Query query = getEm().createQuery("from Customer customer where customer.login=: login", Customer.class);
-            query.setParameter("login", login);
-            if (!query.getResultList().isEmpty()) {
-                return (Customer) query.getSingleResult();
-            } else
-                return null;
-        } catch (NoResultException e) {
-            throw new UserNotFound("login is not exist" + login);
-        }
-
+    public Customer getCustomerByLogin(String login) {
+        Query query = getEm().createQuery("from Customer customer where customer.login=: login", Customer.class);
+        query.setParameter("login", login);
+        if (!query.getResultList().isEmpty()) {
+            return (Customer) query.getSingleResult();
+        } else
+            return null;
     }
 
 
@@ -51,13 +52,9 @@ public class CustomerDAOImpl extends DAOImpl<Customer> implements CustomerDAO {
 
     @Override
     public List<Order> getAllOrdersOfCustomer(Customer customer) {
-        try {
             if (customer.getOrders().isEmpty()) {
                 return Collections.emptyList();
             }
-        } catch (NullPointerException e) {
-            e.printStackTrace();
-        }
         return customer.getOrders();
     }
 }

@@ -7,6 +7,8 @@ import com.academy.course.dto.OrderDTO;
 import com.academy.course.exception.UserNotFound;
 import com.academy.course.model.Customer;
 import com.academy.course.utils.Mapper;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.SQLException;
 import java.time.LocalDateTime;
@@ -16,9 +18,9 @@ import java.util.stream.Collectors;
 
 public class CustomerServiceImpl implements CustomerService, Mapper<Customer, CustomerDTO> {
 
+    private static final Logger logger = LogManager.getLogger(CustomerServiceImpl.class);
     private final CustomerDAO customerDAO = new CustomerDAOImpl();
     private final OrderServiceImpl orderService = new OrderServiceImpl();
-
 
 
     @Override
@@ -63,11 +65,12 @@ public class CustomerServiceImpl implements CustomerService, Mapper<Customer, Cu
     }
 
     @Override
-    public CustomerDTO findCustomerByLogin(String login) throws UserNotFound {
-        if (customerDAO.getCustomerByLogin(login)!= null) {
+    public CustomerDTO findCustomerByLogin(String login) {
+        if (customerDAO.getCustomerByLogin(login) != null) {
             return mapToDTO(customerDAO.getCustomerByLogin(login));
         } else
-            return null;
+            logger.warn("null");
+        return null;
     }
 
     @Override
@@ -92,16 +95,16 @@ public class CustomerServiceImpl implements CustomerService, Mapper<Customer, Cu
     @Override
     public void register(String login, String passWord) throws SQLException, UserNotFound {
         CustomerDTO existingCustomer = findCustomerByLogin(login);
-            if (existingCustomer != null) {
+        if (existingCustomer != null) {
 
-            } else {
-                Customer customer = Customer.builder()
-                        .login(login)
-                        .passWord(PasswordHasher.hashPass(passWord))
-                        .build();
-                CustomerDTO customerDTO = mapToDTO(customer);
-                customerDAO.save(customer);
-            }
+        } else {
+            Customer customer = Customer.builder()
+                    .login(login)
+                    .passWord(PasswordHasher.hashPass(passWord))
+                    .build();
+            CustomerDTO customerDTO = mapToDTO(customer);
+            customerDAO.save(customer);
+        }
 
     }
 
@@ -109,7 +112,7 @@ public class CustomerServiceImpl implements CustomerService, Mapper<Customer, Cu
     public void login(String login, String passWord) throws NoSuchFieldException, SQLException, UserNotFound {
         Customer customer = customerDAO.getCustomerByLogin(login);
         String hashedPass = customer.getPassWord();
-        if (!PasswordHasher.checkPass(passWord,hashedPass)) {
+        if (!PasswordHasher.checkPass(passWord, hashedPass)) {
             throw new RuntimeException("wrong pass");
         }
     }
