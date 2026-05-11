@@ -11,4 +11,7 @@ public interface Mapper<E, D> {
     List<E> mapToListEntities(List<D> dtoList);
 
     List<D> mapToListDTOS(List<E> entityList);
+
+
+
 }

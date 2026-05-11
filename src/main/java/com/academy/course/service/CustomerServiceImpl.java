@@ -2,32 +2,42 @@ package com.academy.course.service;
 
 import com.academy.course.dao.customerDao.CustomerDAO;
 import com.academy.course.dao.customerDao.CustomerDAOImpl;
+import com.academy.course.dao.orderDao.OrderDAO;
+import com.academy.course.dao.orderDao.OrderDAOImpl;
 import com.academy.course.dto.CustomerDTO;
 import com.academy.course.dto.OrderDTO;
 import com.academy.course.exception.UserNotFound;
 import com.academy.course.mapper.*;
 import com.academy.course.model.Customer;
+import com.academy.course.model.Order;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.sql.SQLException;
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class CustomerServiceImpl implements CustomerService {
 
     private static final Logger logger = LogManager.getLogger(CustomerServiceImpl.class);
     private final CustomerDAO customerDAO = new CustomerDAOImpl();
-    private final OrderMapper orderMapper = new OrderMapper();
-
-    private final CustomerMapper customerMapper = new CustomerMapper();
+    private final OrderDAO orderDAO = new OrderDAOImpl();
+    private final OrderMapper orderMapper = MapperFactory.getOrderMapper();
+    private final CustomerMapper customerMapper = MapperFactory.getCustomerMapper();
+    private final CustomerWithOrdersMapper customerWithOrdersMapper = MapperFactory.getCustomerWithOrdersMapper();
 
 
 
     @Override
     public void deleteOrder(CustomerDTO customerDTO, OrderDTO orderDTO) throws SQLException {
-        customerDAO.deleteOrder(customerMapper.mapToEntity(customerDTO), orderMapper.mapToEntity(orderDTO));
+        customerDAO.deleteOrder(customerMapper.mapToEntity(customerDTO),
+                orderMapper.mapToEntity(orderDTO));
+    }
+
+    @Override
+    public void createOrder(CustomerDTO customerDTO, OrderDTO orderDTO) throws SQLException {
+        customerDAO.createOrder(customerMapper.mapToEntity(customerDTO),
+                orderMapper.mapToEntity(orderDTO));
     }
 
 
@@ -37,26 +47,20 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public List<OrderDTO> getAllOrdersOfCustomer(CustomerDTO customerDTO) {
-        List<OrderDTO> orderDTOS =
-                orderMapper.mapToListDTOS(customerDAO.getAllOrdersOfCustomer(customerMapper.mapToEntity(customerDTO)));
-        if (orderDTOS == null) {
-            return Collections.emptyList();
-        } else {
-            return orderDTOS;
-        }
-
+    public List<OrderDTO> getAllOrdersOfCustomer(CustomerDTO customerDTO) throws SQLException {
+        Customer customer = customerDAO.get(customerDTO.getId());
+        List<Order> orders = customer.getOrders();
+        return orderMapper.mapToListDTOS(orders);
     }
 
     @Override
-    public void buyOrder(CustomerDTO customerDTO, OrderDTO orderDTO) {
-        OrderDTO orderToPurchase = customerMapper.mapToEntity(customerDTO).getOrders().stream().map(orderMapper::mapToDTO)
-                .filter(orderDTO1 -> orderDTO1.equals(orderDTO))
-                .findFirst().orElse(null);
-        if (orderToPurchase != null) {
-            orderDTO.setIsBought(true);
+    public void buyOrder(CustomerDTO customerDTO,OrderDTO orderDTO) throws SQLException {
+        Order order = orderDAO.get(orderDTO.getId());
+        if (order != null) {
+            order.setIsBought(true);
         } else
-            orderDTO.setIsBought(false);
+            throw new NullPointerException();
+        orderDAO.save(order);
     }
 
     @Override
@@ -90,7 +94,8 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public void deleteCustomer(CustomerDTO customerDTO) throws SQLException {
-        customerDAO.delete(customerMapper.mapToEntity(customerDTO));
+        Customer customer = customerDAO.get(customerDTO.getId());
+        customerDAO.delete(customer);
     }
 
     @Override

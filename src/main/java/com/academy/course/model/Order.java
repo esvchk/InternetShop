@@ -24,6 +24,9 @@ public class Order extends DataEntity implements Serializable {
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
+    @Column
+    private Boolean isBought;
+
 
     @Override
     public boolean equals(Object o) {

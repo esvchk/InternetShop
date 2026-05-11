@@ -8,6 +8,10 @@ import com.academy.course.dao.orderDao.OrderDAO;
 import com.academy.course.dao.orderDao.OrderDAOImpl;
 
 import com.academy.course.exception.UserNotFound;
+import com.academy.course.mapper.CustomerMapper;
+import com.academy.course.mapper.ItemMapper;
+import com.academy.course.mapper.OrderMapper;
+import com.academy.course.mapper.ProductMapper;
 import com.academy.course.model.*;
 import com.academy.course.service.*;
 
@@ -51,11 +55,14 @@ public class App {
                 .order(order)
                 .build();
 
-
-
+        items.add(item);
         orders.add(order);
 
 
+        CustomerMapper customerMapper = new CustomerMapper();
+        ProductMapper productMapper = new ProductMapper();
+        ItemMapper itemMapper = new ItemMapper(productMapper);
+        OrderMapper orderMapper = new OrderMapper(itemMapper, customerMapper);
         DAO<Product> dao = new DAOImpl<>(Product.class);
         OrderDAO orderDAO = new OrderDAOImpl();
         CustomerDAO customerDAO = new CustomerDAOImpl();
@@ -63,10 +70,11 @@ public class App {
         ProductServiceImpl productService = new ProductServiceImpl();
         CustomerService customerService = new CustomerServiceImpl();
 
-        System.out.println(productService.findAllProducts());
 
-//        customerDAO.save(customer);
 //        dao.save(product);
+//        customerDAO.save(customer);
+
+        customerService.buyOrder(customerMapper.mapToDTO(customerDAO.get(2)),orderMapper.mapToDTO(orderDAO.get(3)));
 
 
 

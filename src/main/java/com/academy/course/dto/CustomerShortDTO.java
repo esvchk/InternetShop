@@ -1,23 +1,15 @@
 package com.academy.course.dto;
 
-import com.academy.course.model.Customer;
-import com.academy.course.model.Order;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.CreationTimestamp;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Set;
 
 @Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CustomerDTO {
+public class CustomerShortDTO {
 
     private Integer id;
 
@@ -25,12 +17,9 @@ public class CustomerDTO {
 
     private String email;
 
-    private List<OrderShortDTO> orderShortDTOS;
-
-
     @Override
     public String toString() {
-        return "CustomerDTO{" +
+        return "CustomerShortDTO{" +
                 "id=" + id +
                 ", login='" + login + '\'' +
                 ", email='" + email + '\'' +

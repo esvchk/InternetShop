@@ -1,16 +1,22 @@
 package com.academy.course.mapper;
 
 import com.academy.course.dto.OrderDTO;
+import com.academy.course.dto.OrderShortDTO;
 import com.academy.course.model.Order;
 
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
-public class OrderMapper implements Mapper<Order, OrderDTO>{
-    private final ItemMapper itemMapper = new ItemMapper();
-    private final CustomerMapper customerMapper = new CustomerMapper();
+public class OrderMapper implements Mapper<Order, OrderDTO>,ShortMapper<OrderShortDTO,Order>{
 
+    private final ItemMapper itemMapper;
+    private final CustomerMapper customerMapper;
+
+    public OrderMapper(ItemMapper itemMapper, CustomerMapper customerMapper) {
+        this.itemMapper = itemMapper;
+        this.customerMapper = customerMapper;
+    }
 
 
     @Override
@@ -18,8 +24,8 @@ public class OrderMapper implements Mapper<Order, OrderDTO>{
         return OrderDTO.builder()
                 .id(entity.getId())
                 .itemsDTO(itemMapper.mapToListDTOS(entity.getItems()))
-                .customerDTO(customerMapper.mapToDTO(entity.getCustomer()))
-                .isBought(null)
+                .customerShortDTO(customerMapper.mapToShortDTO(entity.getCustomer()))
+                .isBought(entity.getIsBought())
                 .build();
     }
 
@@ -27,35 +33,26 @@ public class OrderMapper implements Mapper<Order, OrderDTO>{
     public Order mapToEntity(OrderDTO dto) {
         return Order.builder()
                 .items(itemMapper.mapToListEntities(dto.getItemsDTO()))
-                .customer(customerMapper.mapToEntity(dto.getCustomerDTO()))
+                .isBought(dto.getIsBought())
                 .build();
     }
 
     @Override
     public List<Order> mapToListEntities(List<OrderDTO> dtoList) {
-        List<Order> orders = new ArrayList<>();
-        for (OrderDTO orderDTO : dtoList){
-            Order order = Order.builder()
-                    .items(itemMapper.mapToListEntities(orderDTO.getItemsDTO()))
-                    .customer(customerMapper.mapToEntity(orderDTO.getCustomerDTO()))
-                    .build();
-            orders.add(order);
-        }
-        return orders;
+        return dtoList.stream().map(this::mapToEntity).collect(Collectors.toList());
     }
 
     @Override
     public List<OrderDTO> mapToListDTOS(List<Order> entityList) {
-        List<OrderDTO> orderDTOS = new ArrayList<>();
-        for (Order order : entityList){
-            OrderDTO orderDTO = OrderDTO.builder()
-                    .id(order.getId())
-                    .itemsDTO(itemMapper.mapToListDTOS(order.getItems()))
-                    .customerDTO(customerMapper.mapToDTO(order.getCustomer()))
-                    .isBought(null)
-                    .build();
-            orderDTOS.add(orderDTO);
-        }
-        return orderDTOS;
+        return entityList.stream().map(this::mapToDTO).collect(Collectors.toList());
+    }
+
+
+    @Override
+    public OrderShortDTO mapToShortDTO(Order order) {
+        return OrderShortDTO.builder()
+                .id(order.getId())
+                .isBought(order.getIsBought())
+                .build();
     }
 }

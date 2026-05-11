@@ -5,26 +5,22 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
 @Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ItemDTO {
+public class OrderShortDTO {
 
     private Integer id;
 
-    private ProductDTO productDTO;
-
-    private OrderDTO orderDTO;
-
-    private Integer quantity;
+    private Boolean isBought;
 
     @Override
     public String toString() {
-        return "OrderItemDTO{" +
+        return "OrderShortDTO{" +
                 "id=" + id +
-                ", productDTO=" + productDTO +
-                ", quantity=" + quantity +
+                ", isBought=" + isBought +
                 '}';
     }
 }

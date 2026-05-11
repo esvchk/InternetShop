@@ -1,14 +1,13 @@
 package com.academy.course.mapper;
 
 import com.academy.course.dto.CustomerDTO;
+import com.academy.course.dto.CustomerShortDTO;
 import com.academy.course.model.Customer;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomerMapper implements Mapper<Customer, CustomerDTO>{
-
-
+public class CustomerMapper implements Mapper<Customer,CustomerDTO>,ShortMapper<CustomerShortDTO,Customer>{
 
     @Override
     public CustomerDTO mapToDTO(Customer entity) {
@@ -16,7 +15,6 @@ public class CustomerMapper implements Mapper<Customer, CustomerDTO>{
                 .id(entity.getId())
                 .login(entity.getLogin())
                 .email(entity.getEmail())
-                .ordersDTO(null)
                 .build();
     }
 
@@ -26,7 +24,6 @@ public class CustomerMapper implements Mapper<Customer, CustomerDTO>{
                 .login(dto.getLogin())
                 .passWord(null)
                 .email(dto.getEmail())
-                .orders(null)
                 .build();
     }
 
@@ -37,7 +34,6 @@ public class CustomerMapper implements Mapper<Customer, CustomerDTO>{
             Customer customer = Customer.builder()
                     .login(customerDTO.getLogin())
                     .email(customerDTO.getEmail())
-                    .orders(null)
                     .build();
             list.add(customer);
         }
@@ -49,12 +45,21 @@ public class CustomerMapper implements Mapper<Customer, CustomerDTO>{
         List<CustomerDTO> list = new ArrayList<>();
         for (Customer customer : entityList){
             CustomerDTO customerDTO = CustomerDTO.builder()
+                    .id(customer.getId())
                     .login(customer.getLogin())
                     .email(customer.getEmail())
-                    .ordersDTO(null)
                     .build();
             list.add(customerDTO);
         }
         return list;
+    }
+
+    @Override
+    public CustomerShortDTO mapToShortDTO(Customer dto) {
+        return CustomerShortDTO.builder()
+                .id(dto.getId())
+                .login(dto.getLogin())
+                .email(dto.getEmail())
+                .build();
     }
 }

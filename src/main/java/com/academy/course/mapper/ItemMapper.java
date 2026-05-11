@@ -8,7 +8,11 @@ import java.util.List;
 
 public class ItemMapper implements Mapper<Item, ItemDTO> {
 
-    private final ProductMapper productMapper = new ProductMapper();
+    private final ProductMapper productMapper;
+
+    public ItemMapper(ProductMapper productMapper) {
+        this.productMapper = productMapper;
+    }
 
 
     @Override
@@ -25,7 +29,6 @@ public class ItemMapper implements Mapper<Item, ItemDTO> {
         return Item.builder()
                 .productQuantity(dto.getQuantity())
                 .product(productMapper.mapToEntity(dto.getProductDTO()))
-                .order(null)
                 .build();
     }
 
@@ -36,7 +39,6 @@ public class ItemMapper implements Mapper<Item, ItemDTO> {
             Item item = Item.builder()
                     .productQuantity(itemDTO.getQuantity())
                     .product(productMapper.mapToEntity(itemDTO.getProductDTO()))
-                    .order(null)
                     .build();
             items.add(item);
         }
@@ -56,4 +58,6 @@ public class ItemMapper implements Mapper<Item, ItemDTO> {
         }
         return itemDTOS;
     }
+    
+
 }

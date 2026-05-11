@@ -20,7 +20,7 @@ public class Item extends DataEntity implements Serializable {
     @Column
     private Integer productQuantity;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "product_id")
     private Product product;
 
@@ -40,5 +40,14 @@ public class Item extends DataEntity implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(getId());
+    }
+
+    @Override
+    public String toString() {
+        return "Item{" +
+                "productQuantity=" + productQuantity +
+                ", product=" + product +
+                ", order=" + order +
+                '}';
     }
 }

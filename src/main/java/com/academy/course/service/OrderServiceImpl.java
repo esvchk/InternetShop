@@ -7,11 +7,8 @@ import com.academy.course.dao.orderDao.OrderDAOImpl;
 import com.academy.course.dto.ItemDTO;
 import com.academy.course.dto.OrderDTO;
 import com.academy.course.dto.ProductDTO;
-import com.academy.course.mapper.ItemMapper;
-import com.academy.course.mapper.OrderMapper;
-import com.academy.course.mapper.ProductMapper;
+import com.academy.course.mapper.*;
 import com.academy.course.model.Order;
-import com.academy.course.mapper.Mapper;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -21,8 +18,9 @@ public class OrderServiceImpl implements OrderService {
 
     private final OrderDAO orderDAO = new OrderDAOImpl();
     private final ProductMapper productMapper = new ProductMapper();
-    private final ItemMapper itemMapper = new ItemMapper();
-    private final OrderMapper orderMapper = new OrderMapper();
+    private final ItemMapper itemMapper = new ItemMapper(productMapper);
+    private final CustomerMapper customerMapper = new CustomerMapper();
+    private final OrderMapper orderMapper = new OrderMapper(itemMapper,customerMapper);
 
 
     @Override

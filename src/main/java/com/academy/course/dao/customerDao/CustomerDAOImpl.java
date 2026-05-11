@@ -23,6 +23,13 @@ public class CustomerDAOImpl extends DAOImpl<Customer> implements CustomerDAO {
     }
 
     @Override
+    public void createOrder(Customer customer, Order order) throws SQLException {
+        order.setCustomer(customer);
+        customer.getOrders().add(order);
+        update(customer);
+    }
+
+    @Override
     public void deleteOrder(Customer customer, Order order) {
         customer.getOrders().remove(order);
         try {
@@ -52,7 +59,7 @@ public class CustomerDAOImpl extends DAOImpl<Customer> implements CustomerDAO {
 
     @Override
     public List<Order> getAllOrdersOfCustomer(Customer customer) {
-            if (customer.getOrders().isEmpty()) {
+            if (customer.getOrders() == null) {
                 return Collections.emptyList();
             }
         return customer.getOrders();

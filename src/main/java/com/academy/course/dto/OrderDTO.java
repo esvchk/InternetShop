@@ -19,7 +19,7 @@ public class OrderDTO {
 
     private List<ItemDTO> itemsDTO;
 
-    private CustomerDTO customerDTO;
+    private CustomerShortDTO customerShortDTO;
 
     private Boolean isBought;
 
@@ -27,7 +27,7 @@ public class OrderDTO {
     public String toString() {
         return "OrderDTO{" +
                 "id=" + id +
-                ", customerDTO=" + customerDTO +
+                ", customerDTO=" + customerShortDTO +
                 ", isBought=" + isBought +
                 '}';
     }
