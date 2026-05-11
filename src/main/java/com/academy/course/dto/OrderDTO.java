@@ -17,18 +17,18 @@ public class OrderDTO {
 
     private Integer id;
 
-    private List<ProductDTO> productDTO;
+    private List<ItemDTO> itemsDTO;
 
     private CustomerDTO customerDTO;
 
     private Boolean isBought;
 
-
     @Override
     public String toString() {
         return "OrderDTO{" +
                 "id=" + id +
-                ", productDTO=" + productDTO +
+                ", itemDTO=" + itemsDTO +
+                ", customerDTO=" + customerDTO +
                 ", isBought=" + isBought +
                 '}';
     }

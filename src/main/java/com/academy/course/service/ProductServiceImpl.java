@@ -3,17 +3,17 @@ package com.academy.course.service;
 import com.academy.course.dao.productDao.ProductDAO;
 import com.academy.course.dao.productDao.ProductDAOImpl;
 import com.academy.course.dto.ProductDTO;
+import com.academy.course.mapper.ProductMapper;
 import com.academy.course.model.Product;
-import com.academy.course.utils.Mapper;
 
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.stream.Collectors;
 
-public class ProductServiceImpl implements ProductService, Mapper<Product,ProductDTO> {
+public class ProductServiceImpl implements ProductService {
 
     private final ProductDAO productDAO = new ProductDAOImpl();
+    private final ProductMapper productMapper = new ProductMapper();
 
     @Override
     public void updateProduct(ProductDTO productDTO) throws SQLException {
@@ -26,7 +26,7 @@ public class ProductServiceImpl implements ProductService, Mapper<Product,Produc
 
     @Override
     public void addProduct(ProductDTO productDTO) throws SQLException {
-        Product product = mapToEntity(productDTO);
+        Product product = productMapper.mapToEntity(productDTO);
         productDAO.save(product);
     }
 
@@ -38,40 +38,18 @@ public class ProductServiceImpl implements ProductService, Mapper<Product,Produc
 
     @Override
     public ProductDTO findProductById(Serializable id) throws SQLException {
-        return mapToDTO(productDAO.get(id));
+        return productMapper.mapToDTO(productDAO.get(id));
     }
 
     @Override
     public List<ProductDTO> findProductsByName(String name) {
-        return productDAO.getByName(name).stream()
-                .map(this::mapToDTO)
-                .collect(Collectors.toList());
+        return productMapper.mapToListDTOS(productDAO.getByName(name));
     }
 
     @Override
     public List<ProductDTO> findAllProducts() {
-        return productDAO.getAllProducts().stream()
-                .map(this::mapToDTO)
-                .collect(Collectors.toList());
+        return productMapper.mapToListDTOS(productDAO.getAllProducts());
     }
 
 
-    @Override
-    public ProductDTO mapToDTO(Product product) {
-        return ProductDTO.builder()
-                .id(product.getId())
-                .name(product.getName())
-                .price(product.getPrice())
-                .info(product.getInfo())
-                .build();
-    }
-
-    @Override
-    public Product mapToEntity(ProductDTO productDTO) {
-        return Product.builder()
-                .name(productDTO.getName())
-                .price(productDTO.getPrice())
-                .info(productDTO.getInfo())
-                .build();
-    }
 }

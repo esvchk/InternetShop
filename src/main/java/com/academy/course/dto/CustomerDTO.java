@@ -28,7 +28,6 @@ public class CustomerDTO {
     private List<OrderDTO> ordersDTO;
 
 
-
     @Override
     public String toString() {
         return "CustomerDTO{" +
