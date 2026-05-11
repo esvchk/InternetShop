@@ -5,10 +5,8 @@ import com.academy.course.dao.customerDao.CustomerDAOImpl;
 import com.academy.course.dto.CustomerDTO;
 import com.academy.course.dto.OrderDTO;
 import com.academy.course.exception.UserNotFound;
-import com.academy.course.mapper.CustomerMapper;
-import com.academy.course.mapper.OrderMapper;
+import com.academy.course.mapper.*;
 import com.academy.course.model.Customer;
-import com.academy.course.mapper.Mapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -22,7 +20,9 @@ public class CustomerServiceImpl implements CustomerService {
     private static final Logger logger = LogManager.getLogger(CustomerServiceImpl.class);
     private final CustomerDAO customerDAO = new CustomerDAOImpl();
     private final OrderMapper orderMapper = new OrderMapper();
+
     private final CustomerMapper customerMapper = new CustomerMapper();
+
 
 
     @Override

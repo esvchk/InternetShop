@@ -10,6 +10,7 @@ public class ItemMapper implements Mapper<Item, ItemDTO> {
 
     private final ProductMapper productMapper = new ProductMapper();
 
+
     @Override
     public ItemDTO mapToDTO(Item entity) {
         return ItemDTO.builder()

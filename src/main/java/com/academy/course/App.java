@@ -63,10 +63,11 @@ public class App {
         ProductServiceImpl productService = new ProductServiceImpl();
         CustomerService customerService = new CustomerServiceImpl();
 
+        System.out.println(productService.findAllProducts());
+
 //        customerDAO.save(customer);
 //        dao.save(product);
 
-        System.out.println(customerService.findCustomerByLogin("mx"));
 
 
     }

@@ -27,7 +27,6 @@ public class OrderDTO {
     public String toString() {
         return "OrderDTO{" +
                 "id=" + id +
-                ", itemDTO=" + itemsDTO +
                 ", customerDTO=" + customerDTO +
                 ", isBought=" + isBought +
                 '}';

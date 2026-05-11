@@ -8,7 +8,7 @@ import java.util.List;
 
 public class CustomerMapper implements Mapper<Customer, CustomerDTO>{
 
-    private final OrderMapper orderMapper = new OrderMapper();
+
 
     @Override
     public CustomerDTO mapToDTO(Customer entity) {
@@ -16,7 +16,7 @@ public class CustomerMapper implements Mapper<Customer, CustomerDTO>{
                 .id(entity.getId())
                 .login(entity.getLogin())
                 .email(entity.getEmail())
-                .ordersDTO(orderMapper.mapToListDTOS(entity.getOrders()))
+                .ordersDTO(null)
                 .build();
     }
 
@@ -26,7 +26,7 @@ public class CustomerMapper implements Mapper<Customer, CustomerDTO>{
                 .login(dto.getLogin())
                 .passWord(null)
                 .email(dto.getEmail())
-                .orders(orderMapper.mapToListEntities(dto.getOrdersDTO()))
+                .orders(null)
                 .build();
     }
 
@@ -37,7 +37,7 @@ public class CustomerMapper implements Mapper<Customer, CustomerDTO>{
             Customer customer = Customer.builder()
                     .login(customerDTO.getLogin())
                     .email(customerDTO.getEmail())
-                    .orders(orderMapper.mapToListEntities(customerDTO.getOrdersDTO()))
+                    .orders(null)
                     .build();
             list.add(customer);
         }
@@ -51,7 +51,7 @@ public class CustomerMapper implements Mapper<Customer, CustomerDTO>{
             CustomerDTO customerDTO = CustomerDTO.builder()
                     .login(customer.getLogin())
                     .email(customer.getEmail())
-                    .ordersDTO(orderMapper.mapToListDTOS(customer.getOrders()))
+                    .ordersDTO(null)
                     .build();
             list.add(customerDTO);
         }

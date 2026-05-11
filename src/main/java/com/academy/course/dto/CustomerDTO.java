@@ -34,7 +34,6 @@ public class CustomerDTO {
                 "id=" + id +
                 ", login='" + login + '\'' +
                 ", email='" + email + '\'' +
-                ", orders=" + ordersDTO +
                 '}';
     }
 }
