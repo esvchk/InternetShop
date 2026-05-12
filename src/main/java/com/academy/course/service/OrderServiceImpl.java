@@ -10,6 +10,7 @@ import com.academy.course.dto.ProductDTO;
 import com.academy.course.mapper.*;
 import com.academy.course.model.Order;
 
+import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,7 +25,7 @@ public class OrderServiceImpl implements OrderService {
 
 
     @Override
-    public OrderDTO findOrderById(Integer orderId) throws SQLException {
+    public OrderDTO findOrderById(Serializable orderId) throws SQLException {
         return orderMapper.mapToDTO(orderDAO.get(orderId));
     }
 

@@ -19,16 +19,16 @@ public class LoginCustomer extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        HttpSession session = request.getSession();
-        String login = session.getAttribute("login").toString();
+        String login = ParameterConverter.getStringParameter(request,"login");
         String passWord = ParameterConverter.getStringParameter(request, "passWord");
 
         String context = request.getContextPath();
+
         try {
             customerService.login(login, passWord);
         } catch (NoSuchFieldException | SQLException | UserNotFound e) {
             throw new RuntimeException(e);
         }
-        response.sendRedirect(context + "/Cart.jsp");
+        response.sendRedirect(context + "/ShowProducts");
     }
 }

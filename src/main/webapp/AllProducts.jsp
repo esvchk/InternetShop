@@ -17,8 +17,7 @@
         <th>Name</th>
         <th>Price</th>
         <th>Info</th>
-        <th>Manufacturer</th>
-        <th>Best Before</th>
+        <th>IsAvailable</th>
     </tr>
     </thead>
     <tbody>
@@ -32,8 +31,8 @@
         <td><%= product.getName() %></td>
         <td><%= product.getPrice() %></td>
         <td><%= product.getInfo() %></td>
-        <td><%= product.getManufacturer() %></td>
-        <td><%= product.getBestBefore() %></td>
+        <td><%= product.getIsAvailable() %></td>
+
         <td>
             <a href="UpdateProduct?id=<%= product.getId() %>">Edit</a>
 
@@ -47,7 +46,7 @@
     } else {
     %>
     <tr>
-        <td colspan="5">No operators found</td>
+        <td colspan="5">No Products found</td>
     </tr>
     <%
         }

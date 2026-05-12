@@ -20,7 +20,7 @@ public class Item extends DataEntity implements Serializable {
     @Column
     private Integer productQuantity;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
 

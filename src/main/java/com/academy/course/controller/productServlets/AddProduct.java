@@ -24,14 +24,14 @@ public class AddProduct extends HttpServlet {
         String name = ParameterConverter.getStringParameter(request,"name");
         Double price = ParameterConverter.getDoubleParameter(request,"price");
         String info = ParameterConverter.getStringParameter(request,"info");
-        String manufacturer = ParameterConverter.getStringParameter(request,"manufacturer");
-        LocalDate bestBefore = ParameterConverter.getDateParameter(request,"bestBefore");
+        Boolean isAvailable = ParameterConverter.getBooleanParameter(request,"isAvailable");
 
         String context = request.getContextPath();
         ProductDTO productDTO = ProductDTO.builder()
                 .name(name)
                 .price(price)
                 .info(info)
+                .isAvailable(isAvailable)
                 .build();
         try {
             productService.addProduct(productDTO);

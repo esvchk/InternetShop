@@ -29,7 +29,6 @@
         <td><%= customer.getId() %></td>
         <td><%= customer.getLogin() %></td>
         <td><%= customer.getEmail() %></td>
-        <td><%= customer.getDateTimeOfRegistration() %></td>
         <td>
             <a href="UpdateProduct?id=<%= customer.getId() %>">Edit</a>
             &nbsp;&nbsp;&nbsp;

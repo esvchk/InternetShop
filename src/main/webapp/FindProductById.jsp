@@ -37,8 +37,6 @@
             <td><%= product.getName() %></td>
             <td><%= product.getPrice() %></td>
             <td><%= product.getInfo() %></td>
-            <td><%= product.getManufacturer() %></td>
-            <td><%= product.getBestBefore() %></td>
             <td>
                 <a href="UpdateProduct?id=<%= product.getId() %>">Edit</a>
                 &nbsp;&nbsp;&nbsp;

@@ -18,10 +18,13 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void updateProduct(ProductDTO productDTO) throws SQLException {
         Product product = productDAO.get(productDTO.getId());
-        product.setInfo(productDTO.getInfo());
-        product.setName(productDTO.getName());
-        product.setPrice(productDTO.getPrice());
-        productDAO.update(product);
+        if (product != null) {
+            product.setInfo(productDTO.getInfo());
+            product.setName(productDTO.getName());
+            product.setPrice(productDTO.getPrice());
+            product.setIsAvailable(productDTO.getIsAvailable());
+            productDAO.save(product);
+        }
     }
 
     @Override

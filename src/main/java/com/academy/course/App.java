@@ -8,10 +8,7 @@ import com.academy.course.dao.orderDao.OrderDAO;
 import com.academy.course.dao.orderDao.OrderDAOImpl;
 
 import com.academy.course.exception.UserNotFound;
-import com.academy.course.mapper.CustomerMapper;
-import com.academy.course.mapper.ItemMapper;
-import com.academy.course.mapper.OrderMapper;
-import com.academy.course.mapper.ProductMapper;
+import com.academy.course.mapper.*;
 import com.academy.course.model.*;
 import com.academy.course.service.*;
 
@@ -30,27 +27,27 @@ public class App {
 
 
         Product product = Product.builder()
-                .name("Milk")
-                .price(3.5)
-                .info("3.2%")
+                .name("Cheese")
+                .price(2.45)
+                .info("45%")
                 .isAvailable(true)
                 .build();
 
         Customer customer = Customer.builder()
-                .login("Max")
+                .login("Sam")
                 .passWord("123")
-                .email("@Max.org")
-                .orders(orders)
+                .email("@Sam.org")
+                .orders(null)
                 .build();
 
 
         Order order = Order.builder()
-                .items(items)
+                .items(null)
                 .customer(customer)
                 .build();
 
         Item item = Item.builder()
-                .productQuantity(2)
+                .productQuantity(null)
                 .product(product)
                 .order(order)
                 .build();
@@ -69,13 +66,23 @@ public class App {
         OrderService orderService = new OrderServiceImpl();
         ProductServiceImpl productService = new ProductServiceImpl();
         CustomerService customerService = new CustomerServiceImpl();
+        CustomerWithOrdersMapper customerWithOrdersMapper = new CustomerWithOrdersMapper(customerMapper,orderMapper);
 
 
 //        dao.save(product);
+//        productService.deleteProduct(productMapper.mapToDTO(dao.get(9)));
+//        orderDAO.addProductToOrder(dao.get(1),orderDAO.get(3),1);
 //        customerDAO.save(customer);
+//        orderDAO.deleteProductFromOrder(dao.get(9),orderDAO.get(2));
+//        customerDAO.save(customer);
+//        orderDAO.createEmptyOrder(customerDAO.get(5));
 
-        customerService.buyOrder(customerMapper.mapToDTO(customerDAO.get(2)),orderMapper.mapToDTO(orderDAO.get(3)));
 
+//        orderDAO.save(order);
+//        customerDAO.createOrder(customerDAO.get(2),orderDAO.get(3));
+//        customerDAO.deleteOrder(customerDAO.get(1),orderDAO.get(12));
+//        customerService.buyOrder(customerMapper.mapToDTO(customerDAO.get(2)),orderMapper.mapToDTO(orderDAO.get(3)));
+//        customerDAO.delete(customerDAO.get(7));
 
 
     }

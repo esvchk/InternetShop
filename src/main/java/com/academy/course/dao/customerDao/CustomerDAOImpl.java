@@ -12,31 +12,28 @@ import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
 public class CustomerDAOImpl extends DAOImpl<Customer> implements CustomerDAO {
     private static final Logger logger = LogManager.getLogger(CustomerDAOImpl.class);
+
     public CustomerDAOImpl() {
         super(Customer.class);
     }
 
     @Override
-    public void createOrder(Customer customer, Order order) throws SQLException {
-        order.setCustomer(customer);
-        customer.getOrders().add(order);
-        update(customer);
+    public void createCustomer(Customer customer) throws SQLException {
+        save(customer);
     }
 
-    @Override
-    public void deleteOrder(Customer customer, Order order) {
-        customer.getOrders().remove(order);
-        try {
-            update(customer);
-        } catch (SQLException e) {
 
-        }
+    @Override
+    public void deleteOrder(Customer customer, Order order) throws SQLException {
+        customer.getOrders().removeIf(order1 -> order1.getId().equals(order.getId()));
+        update(customer);
 
     }
 
@@ -59,9 +56,9 @@ public class CustomerDAOImpl extends DAOImpl<Customer> implements CustomerDAO {
 
     @Override
     public List<Order> getAllOrdersOfCustomer(Customer customer) {
-            if (customer.getOrders() == null) {
-                return Collections.emptyList();
-            }
+        if (customer.getOrders() == null) {
+            return Collections.emptyList();
+        }
         return customer.getOrders();
     }
 }

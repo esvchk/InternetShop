@@ -6,7 +6,9 @@ import com.academy.course.dao.orderDao.OrderDAO;
 import com.academy.course.dao.orderDao.OrderDAOImpl;
 import com.academy.course.dto.CustomerDTO;
 import com.academy.course.dto.OrderDTO;
+import com.academy.course.exception.UserAlreadyExists;
 import com.academy.course.exception.UserNotFound;
+import com.academy.course.exception.WrongPassWord;
 import com.academy.course.mapper.*;
 import com.academy.course.model.Customer;
 import com.academy.course.model.Order;
@@ -14,7 +16,9 @@ import com.academy.course.model.Order;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import javax.persistence.NoResultException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CustomerServiceImpl implements CustomerService {
@@ -35,9 +39,10 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public void createOrder(CustomerDTO customerDTO, OrderDTO orderDTO) throws SQLException {
-        customerDAO.createOrder(customerMapper.mapToEntity(customerDTO),
-                orderMapper.mapToEntity(orderDTO));
+    public void createEmptyOrder(CustomerDTO customerDTO) throws SQLException {
+        orderDAO.createEmptyOrder
+                (customerMapper.mapToEntity(customerWithOrdersMapper.
+                        toDTOWithOrders(customerMapper.mapToEntity(customerDTO))));
     }
 
 
@@ -55,12 +60,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public void buyOrder(CustomerDTO customerDTO,OrderDTO orderDTO) throws SQLException {
-        Order order = orderDAO.get(orderDTO.getId());
-        if (order != null) {
-            order.setIsBought(true);
-        } else
-            throw new NullPointerException();
-        orderDAO.save(order);
+        orderDAO.buyOrder(customerMapper.mapToEntity(customerDTO),orderMapper.mapToEntity(orderDTO));
     }
 
     @Override
@@ -99,27 +99,44 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public void register(String login, String passWord) throws SQLException, UserNotFound {
-        CustomerDTO existingCustomer = findCustomerByLogin(login);
-        if (existingCustomer != null) {
-            logger.warn("Login {} already exist",login);
-        } else {
-            Customer customer = Customer.builder()
-                    .login(login)
-                    .passWord(PasswordHasher.hashPass(passWord))
-                    .build();
-            customerDAO.save(customer);
+    public boolean register(String login, String passWord) {
+        try {
+            if (customerDAO.getCustomerByLogin(login) != null) {
+                logger.warn("already exist with login {}", login);
+                throw new UserAlreadyExists("User already registered with this login");
+            } else {
+                Customer customer = Customer.builder()
+                        .login(login)
+                        .passWord(PasswordHasher.hashPass(passWord))
+                        .orders(new ArrayList<>())
+                        .email("")
+                        .build();
+                customerDAO.save(customer);
+            }
+        }catch (NoResultException | SQLException e){
+            e.printStackTrace();
         }
+        return true;
 
     }
 
     @Override
-    public void login(String login, String passWord) throws NoSuchFieldException, SQLException, UserNotFound {
-        Customer customer = customerDAO.getCustomerByLogin(login);
-        String hashedPass = customer.getPassWord();
-        if (!PasswordHasher.checkPass(passWord, hashedPass)) {
-            throw new RuntimeException("wrong pass");
+    public boolean login(String login, String passWord) throws NoSuchFieldException, SQLException, UserNotFound {
+        try {
+            Customer customer = customerDAO.getCustomerByLogin(login);
+            if (customer.getLogin().equals(login)) {
+                if (PasswordHasher.checkPass(passWord, customer.getPassWord())) {
+                    logger.info("successfully entered {}", customer);
+                    return true;
+                } else {
+                    logger.warn("Wrong passWord {} by login {}", passWord, login);
+                    throw new WrongPassWord("Wrong Password");
+                }
+            }
+        } catch (NoSuchFieldException e) {
+            throw new RuntimeException(e);
         }
+        return false;
     }
 
 }

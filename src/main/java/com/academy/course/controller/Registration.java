@@ -20,18 +20,15 @@ public class Registration extends HttpServlet {
 
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String login = ParameterConverter.getStringParameter(request,"login");
-        String passWord = ParameterConverter.getStringParameter(request,"passWord");
+        String login = request.getParameter("login");
+        String passWord = request.getParameter("passWord");
 
         String context = request.getContextPath();
-        HttpSession session = request.getSession(true);
-        session.setAttribute("login",login);
-            try {
-                customerService.register(login,passWord);
-                response.sendRedirect(context + "/CustomerPage.jsp");
-            } catch (SQLException | UserNotFound e) {
-                throw new RuntimeException(e);
+        try {
+            customerService.register(login, passWord);
+        } catch (SQLException | UserNotFound e) {
+            throw new RuntimeException(e);
         }
-
+        response.sendRedirect(context + "/ShowProducts");
     }
 }

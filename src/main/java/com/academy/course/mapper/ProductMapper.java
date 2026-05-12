@@ -23,7 +23,7 @@ public class ProductMapper implements Mapper<Product, ProductDTO>{
                 .name(dto.getName())
                 .price(dto.getPrice())
                 .info(dto.getInfo())
-                .isAvailable(null)
+                .isAvailable(dto.getIsAvailable())
                 .build();
     }
 

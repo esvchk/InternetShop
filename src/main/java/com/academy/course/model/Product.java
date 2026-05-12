@@ -28,7 +28,6 @@ public class Product extends DataEntity implements Serializable {
     private Boolean isAvailable;
 
 
-
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;

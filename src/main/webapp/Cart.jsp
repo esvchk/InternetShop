@@ -35,8 +35,6 @@
     %>
     <tr>
         <td><%= order.getId() %></td>
-        <td><%= order.getDateTimeOfCreation() %></td>
-        <td><%= order.getDateTimeOfPurchasing() %></td>
         <td>
             <a href="UpdateOrder?id=<%= order.getId() %>">Edit</a>
             &nbsp;&nbsp;&nbsp;

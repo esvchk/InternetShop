@@ -17,7 +17,7 @@ import java.util.*;
 @Table(name = "orders")
 public class Order extends DataEntity implements Serializable {
 
-    @OneToMany(mappedBy = "order",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "order",cascade = CascadeType.REMOVE,orphanRemoval = true)
     private List<Item> items = new ArrayList<>();
 
     @ManyToOne

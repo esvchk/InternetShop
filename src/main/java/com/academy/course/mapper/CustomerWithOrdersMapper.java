@@ -1,10 +1,8 @@
 package com.academy.course.mapper;
 
 import com.academy.course.dto.CustomerDTO;
-import com.academy.course.dto.OrderDTO;
 import com.academy.course.model.Customer;
 
-import java.util.List;
 import java.util.stream.Collectors;
 
 public class CustomerWithOrdersMapper {
@@ -24,4 +22,5 @@ public class CustomerWithOrdersMapper {
                 .collect(Collectors.toList()));
         return customerDTO;
     }
+
 }

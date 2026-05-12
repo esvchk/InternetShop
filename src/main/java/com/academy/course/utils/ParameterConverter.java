@@ -24,4 +24,8 @@ public class ParameterConverter {
         return request.getParameter(paramName);
     }
 
+    public static Boolean getBooleanParameter(HttpServletRequest request, String paramName){
+        return Boolean.parseBoolean(request.getParameter(paramName));
+    }
+
 }

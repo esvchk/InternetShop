@@ -20,8 +20,9 @@
 
     <a href="CustomerPage.jsp">Authorization</a>
 
-    <a href="ShowCustomers">Show Customers</a>
+    <a href="RegisterCustomer.jsp">Registration</a>
 
+    <a href="ShowCustomers">Show Customers</a>
 
 </head>
 <body>

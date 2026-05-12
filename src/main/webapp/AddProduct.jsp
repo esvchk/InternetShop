@@ -13,8 +13,9 @@
         Name: <input name = "name" type = "text"/><br/>
         Price: <input name = "price" step="0.01" type = "number"/><br/>
         Info: <input name = "info" type = "text"/><br/>
-        Manufacturer: <input name = "manufacturer" type = "text"/><br/>
-        Best Before: <input name = "bestBefore" type = "date"/><br/>
+        IsAvailable:
+        <input type="radio" name="isAvailable" value="true" checked> Yes
+        <input type="radio" name="isAvailable" value="false"> No<br/>
         <input type = "submit">
     </form>
 </head>

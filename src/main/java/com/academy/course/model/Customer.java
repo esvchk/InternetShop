@@ -27,7 +27,7 @@ public class Customer extends DataEntity implements Serializable {
     private String email;
 
 
-    @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "customer",cascade = CascadeType.PERSIST)
     private List<Order> orders = new ArrayList<>();
 
     @Override

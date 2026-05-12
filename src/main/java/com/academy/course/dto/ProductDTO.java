@@ -19,6 +19,8 @@ public class ProductDTO {
 
     private String info;
 
+    private Boolean isAvailable;
+
 
     @Override
     public String toString() {

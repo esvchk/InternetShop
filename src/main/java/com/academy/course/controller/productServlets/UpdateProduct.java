@@ -36,8 +36,6 @@ public class UpdateProduct extends HttpServlet {
         String name = ParameterConverter.getStringParameter(request,"name");
         Double price = ParameterConverter.getDoubleParameter(request,"price");
         String info = ParameterConverter.getStringParameter(request,"info");
-        String manufacturer = request.getParameter("manufacturer");
-        LocalDate bestBefore = ParameterConverter.getDateParameter(request,"bestBefore");
 
         String context = request.getContextPath();
 
