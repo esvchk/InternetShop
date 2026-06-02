@@ -5,7 +5,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-5.0.xsd"
         objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
-    <changeSet id="1778435044510-1" author="esvchk">
+    <changeSet id="1780409417049-1" author="esvchk">
         <createTable tableName="Product">
             <column name="id" type="INT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_product"/>
@@ -15,7 +15,7 @@
             <column name="name" type="VARCHAR(255)"/>
             <column name="price" type="DOUBLE"/>
             <column name="info" type="VARCHAR(255)"/>
-            <column name="isAvailable" type="bit"/>
+            <column name="isAvailable" type="BOOLEAN"/>
         </createTable>
     </changeSet>
 

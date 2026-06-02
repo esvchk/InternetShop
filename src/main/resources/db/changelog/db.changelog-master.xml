@@ -4,11 +4,12 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
 
-    <include file="db/changelog/2026/05/hibernate-sequence.xml"/>
-    <include file="db/changelog/2026/05/Customer-10-05.xml"/>
-    <include file="db/changelog/2026/05/10-05-Order.xml"/>
-    <include file="db/changelog/2026/05/Product-10-05.xml"/>
-    <include file="db/changelog/2026/05/Item-10-05.xml"/>
+    <include file="db/changelog/2026/06/hibernate-sequence.xml"/>
+    <include file="db/changelog/2026/06/Category-02-06.xml"/>
+    <include file="db/changelog/2026/06/Customer-02-06.xml"/>
+    <include file="db/changelog/2026/06/Item-02-06.xml"/>
+    <include file="db/changelog/2026/06/Order-02-06.xml"/>
+    <include file="db/changelog/2026/06/Product-02-06.xml"/>
 
 
 </databaseChangeLog>

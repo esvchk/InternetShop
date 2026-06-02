@@ -1,0 +1,12 @@
+<changeSet id="create-hibernate-sequence" author="your-name">
+    <preConditions>
+        <not>
+            <sequenceExists sequenceName="hibernate_sequence"/>
+        </not>
+    </preConditions>
+    <createSequence
+            sequenceName="hibernate_sequence"
+            startValue="1"
+            incrementBy="1"
+            minValue="1"/>
+</changeSet>

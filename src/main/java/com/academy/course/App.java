@@ -69,7 +69,7 @@ public class App {
         CustomerWithOrdersMapper customerWithOrdersMapper = new CustomerWithOrdersMapper(customerMapper,orderMapper);
 
 
-//        dao.save(product);
+        dao.save(product);
 //        productService.deleteProduct(productMapper.mapToDTO(dao.get(9)));
 //        orderDAO.addProductToOrder(dao.get(1),orderDAO.get(3),1);
 //        customerDAO.save(customer);
