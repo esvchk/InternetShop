@@ -35,8 +35,8 @@ public class CustomerServiceImpl implements CustomerService {
 
 
     @Override
-    public void deleteOrder(CustomerDTO customerDTO, OrderDTO orderDTO) throws SQLException {
-        customerDAO.deleteOrder(customerMapper.mapToEntity(customerDTO),
+    public void deleteOrderOfCustomer(CustomerDTO customerDTO, OrderDTO orderDTO) throws SQLException {
+        customerDAO.deleteOrderOfCustomer(customerMapper.mapToEntity(customerDTO),
                 orderMapper.mapToEntity(orderDTO));
     }
 

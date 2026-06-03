@@ -13,7 +13,7 @@
             <column name="createDateTime" type="DATETIME"/>
             <column name="updateDateTime" type="DATETIME"/>
             <column name="customer_id" type="INT"/>
-            <column name="isBought" type="BOOLEAN"/>
+            <column name="isBought" type="BIT"/>
         </createTable>
     </changeSet>
     <changeSet id="1780489140290-2" author="esvchk">

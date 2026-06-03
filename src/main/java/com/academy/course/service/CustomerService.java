@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Set;
 
 public interface CustomerService {
-    void deleteOrder(CustomerDTO customerDTO, OrderDTO orderDTO) throws SQLException;
+    void deleteOrderOfCustomer(CustomerDTO customerDTO, OrderDTO orderDTO) throws SQLException;
     void createEmptyOrder(CustomerDTO customerDTO) throws SQLException;
     Set<CustomerDTO> getAllCustomers();
     Set<OrderDTO> getAllOrdersOfCustomer(CustomerDTO customerDTO) throws SQLException;
