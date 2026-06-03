@@ -69,11 +69,13 @@ public class App {
 
 
 //        dao.save(product);
+//        System.out.println(productService.findAllProducts());
 //        productService.deleteProduct(productMapper.mapToDTO(dao.get(9)));
 //        orderDAO.addProductToOrder(dao.get(1),orderDAO.get(3),1);
-        customerDAO.save(customer);
+//        customerDAO.save(customer);
 //        orderDAO.deleteProductFromOrder(dao.get(9),orderDAO.get(2));
 //        customerDAO.save(customer);
+//        System.out.println(customerDAO.getAllCustomers());
 //        orderDAO.createEmptyOrder(customerDAO.get(5));
 
 

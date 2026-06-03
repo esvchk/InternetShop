@@ -1,29 +1,45 @@
 package com.academy.course.model;
 
+import com.thoughtworks.qdox.model.expression.Or;
 import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.*;
-@EqualsAndHashCode(callSuper = true)
+
 @Builder
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "orders")
-public class Order extends DataEntity implements Serializable {
+@ToString
+public class Order extends DataEntity {
 
     @ToString.Exclude
-    @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy = "order",cascade = CascadeType.REMOVE,orphanRemoval = true,fetch = FetchType.LAZY)
     private Set<Item> items = new HashSet<>();
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "customer_id")
-    @EqualsAndHashCode.Exclude
     private Customer customer;
     @Column
     private Boolean isBought;
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Order order = (Order) o;
+        return Objects.equals(getId(),order.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
+    }
+
+
 
 }

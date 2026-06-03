@@ -5,7 +5,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-5.0.xsd"
         objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
-    <changeSet id="1780489140290-1" author="esvchk">
+    <changeSet id="1780503295095-1" author="esvchk">
         <createTable tableName="orders">
             <column name="id" type="INT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_orders"/>
@@ -16,7 +16,7 @@
             <column name="isBought" type="BIT"/>
         </createTable>
     </changeSet>
-    <changeSet id="1780489140290-2" author="esvchk">
+    <changeSet id="1780503295095-2" author="esvchk">
         <addForeignKeyConstraint baseColumnNames="customer_id" baseTableName="orders"
                                  constraintName="FK_ORDERS_ON_CUSTOMER" referencedColumnNames="id"
                                  referencedTableName="Customer"/>

@@ -8,14 +8,15 @@ import java.time.LocalDate;
 import java.util.*;
 
 
-@EqualsAndHashCode(callSuper = true)
 @Builder
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table
-public class Product extends DataEntity implements Serializable {
+@ToString
+public class Product extends DataEntity {
 
     @Column
     private String name;
@@ -29,10 +30,22 @@ public class Product extends DataEntity implements Serializable {
     @Column
     private Boolean isAvailable;
 
-    @EqualsAndHashCode.Exclude
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id")
     private Category category;
 
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Product product = (Product) o;
+        return Objects.equals(getId(),product.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
+    }
 
 }

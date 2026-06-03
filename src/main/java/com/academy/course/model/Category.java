@@ -5,16 +5,18 @@ import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
-import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 @Builder
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table
-public class Category extends DataEntity implements Serializable {
+@ToString
+public class Category extends DataEntity{
 
     private String name;
 
@@ -23,4 +25,16 @@ public class Category extends DataEntity implements Serializable {
     private Set<Product> products = new HashSet<>();
 
 
+    @Override
+    public boolean equals(Object object) {
+        if (object == null || getClass() != object.getClass()) return false;
+        if (!super.equals(object)) return false;
+        Category category = (Category) object;
+        return Objects.equals(getId(),category.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
+    }
 }

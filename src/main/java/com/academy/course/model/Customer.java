@@ -7,12 +7,14 @@ import java.io.Serializable;
 import java.util.*;
 
 @Builder
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table
-public class Customer extends DataEntity implements Serializable {
+@ToString
+public class Customer extends DataEntity {
 
     @Column
     private String login;
@@ -24,10 +26,21 @@ public class Customer extends DataEntity implements Serializable {
     private String email;
 
     @ToString.Exclude
-    @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
     private Set<Order> orders = new HashSet<>();
 
 
+    @Override
+    public boolean equals(Object object) {
+        if (object == null || getClass() != object.getClass()) return false;
+        if (!super.equals(object)) return false;
+        Customer customer = (Customer) object;
+        return Objects.equals(customer.getId(),getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
+    }
 }
 

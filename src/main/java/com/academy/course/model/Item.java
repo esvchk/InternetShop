@@ -6,26 +6,37 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
-@EqualsAndHashCode(callSuper = true)
 @Builder
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table
-public class Item extends DataEntity implements Serializable {
+@ToString
+public class Item extends DataEntity {
     @Column
     private Integer productQuantity;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "product_id")
-    @EqualsAndHashCode.Exclude
     private Product product;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "order_id")
-    @EqualsAndHashCode.Exclude
     private Order order;
 
 
+    @Override
+    public boolean equals(Object object) {
+        if (object == null || getClass() != object.getClass()) return false;
+        if (!super.equals(object)) return false;
+        Item item = (Item) object;
+        return Objects.equals(getId(),item.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
+    }
 }
