@@ -8,13 +8,12 @@ import java.time.LocalDate;
 import java.util.*;
 
 
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = true)
 @Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@ToString
 @Table
 public class Product extends DataEntity implements Serializable {
 
@@ -30,6 +29,7 @@ public class Product extends DataEntity implements Serializable {
     @Column
     private Boolean isAvailable;
 
+    @EqualsAndHashCode.Exclude
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id")
     private Category category;

@@ -22,8 +22,8 @@ import java.util.Set;
 public class App {
     public static void main(String[] args) throws SQLException, UserNotFound {
 
-        List<Order> orders = new ArrayList<>();
-        List<Item> items = new ArrayList<>();
+        Set<Order> orders = new HashSet<>();
+        Set<Item> items = new HashSet<>();
 
 
         Product product = Product.builder()
@@ -37,17 +37,16 @@ public class App {
                 .login("Sam")
                 .passWord("123")
                 .email("@Sam.org")
-                .orders(null)
+                .orders(orders)
                 .build();
 
 
         Order order = Order.builder()
-                .items(null)
+                .items(items)
                 .customer(customer)
                 .build();
 
         Item item = Item.builder()
-                .productQuantity(null)
                 .product(product)
                 .order(order)
                 .build();
@@ -69,10 +68,10 @@ public class App {
         CustomerWithOrdersMapper customerWithOrdersMapper = new CustomerWithOrdersMapper(customerMapper,orderMapper);
 
 
-        dao.save(product);
+//        dao.save(product);
 //        productService.deleteProduct(productMapper.mapToDTO(dao.get(9)));
 //        orderDAO.addProductToOrder(dao.get(1),orderDAO.get(3),1);
-//        customerDAO.save(customer);
+        customerDAO.save(customer);
 //        orderDAO.deleteProductFromOrder(dao.get(9),orderDAO.get(2));
 //        customerDAO.save(customer);
 //        orderDAO.createEmptyOrder(customerDAO.get(5));

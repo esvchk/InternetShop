@@ -5,14 +5,13 @@ import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.*;
-@EqualsAndHashCode(callSuper = false)
+
 @Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table
-@ToString
 public class Customer extends DataEntity implements Serializable {
 
     @Column
@@ -25,7 +24,8 @@ public class Customer extends DataEntity implements Serializable {
     private String email;
 
     @ToString.Exclude
-    @OneToMany(mappedBy = "customer",cascade = CascadeType.PERSIST,orphanRemoval = true,fetch = FetchType.LAZY)
+    @EqualsAndHashCode.Exclude
+    @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
     private Set<Order> orders = new HashSet<>();
 
 
