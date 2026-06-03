@@ -30,5 +30,9 @@ public class Product extends DataEntity implements Serializable {
     @Column
     private Boolean isAvailable;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn("category_id")
+    private Category category;
+
 
 }

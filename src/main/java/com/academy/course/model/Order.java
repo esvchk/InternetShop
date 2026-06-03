@@ -16,8 +16,8 @@ import java.util.*;
 public class Order extends DataEntity implements Serializable {
 
     @ToString.Exclude
-    @OneToMany(mappedBy = "order",cascade = CascadeType.REMOVE,orphanRemoval = true)
-    private List<Item> items = new ArrayList<>();
+    @OneToMany(mappedBy = "order",cascade = CascadeType.REMOVE,orphanRemoval = true,fetch = FetchType.LAZY)
+    private Set<Item> items = new HashSet<>();
 
     @ManyToOne
     @JoinColumn(name = "customer_id")

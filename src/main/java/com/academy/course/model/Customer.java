@@ -25,8 +25,8 @@ public class Customer extends DataEntity implements Serializable {
     private String email;
 
     @ToString.Exclude
-    @OneToMany(mappedBy = "customer",cascade = CascadeType.PERSIST)
-    private List<Order> orders = new ArrayList<>();
+    @OneToMany(mappedBy = "customer",cascade = CascadeType.PERSIST,orphanRemoval = true,fetch = FetchType.LAZY)
+    private Set<Order> orders = new HashSet<>();
 
 
 }

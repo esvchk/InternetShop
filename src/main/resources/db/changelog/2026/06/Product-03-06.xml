@@ -5,7 +5,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-5.0.xsd"
         objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
-    <changeSet id="1780409417049-1" author="esvchk">
+    <changeSet id="1780489154593-1" author="esvchk">
         <createTable tableName="Product">
             <column name="id" type="INT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_product"/>
@@ -16,7 +16,13 @@
             <column name="price" type="DOUBLE"/>
             <column name="info" type="VARCHAR(255)"/>
             <column name="isAvailable" type="BOOLEAN"/>
+            <column name="category_id" type="INT"/>
         </createTable>
+    </changeSet>
+    <changeSet id="1780489154593-2" author="esvchk">
+        <addForeignKeyConstraint baseColumnNames="category_id" baseTableName="Product"
+                                 constraintName="FK_PRODUCT_ON_CATEGORY" referencedColumnNames="id"
+                                 referencedTableName="Category"/>
     </changeSet>
 
 </databaseChangeLog>
