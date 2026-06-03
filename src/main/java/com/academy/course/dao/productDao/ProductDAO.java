@@ -4,9 +4,10 @@ import com.academy.course.dao.DAO;
 import com.academy.course.model.Product;
 
 import java.util.List;
+import java.util.Set;
 
 public interface ProductDAO extends DAO<Product> {
-    List<Product> getAllProducts();
-    List<Product> getByName(String name);
+    Set<Product> getAllProducts();
+    Product getByName(String name);
 
 }

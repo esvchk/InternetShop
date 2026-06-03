@@ -18,12 +18,12 @@ public class OrderDAOImpl extends DAOImpl<Order> implements OrderDAO {
     }
 
     @Override
-    public List<Order> getAllOrders() {
-        return getEm().createQuery("from Order order", Order.class).getResultList();
+    public Set<Order> getAllOrders() {
+        return new HashSet<>(getEm().createQuery("from Order order", Order.class).getResultList());
     }
 
     @Override
-    public List<Item> getAllProductsFromOrder(Order order) {
+    public Set<Item> getAllProductsFromOrder(Order order) {
         return order.getItems();
     }
 
@@ -39,7 +39,7 @@ public class OrderDAOImpl extends DAOImpl<Order> implements OrderDAO {
     @Override
     public void createEmptyOrder(Customer customer) throws SQLException {
         Order order = Order.builder()
-                .items(new ArrayList<>())
+                .items(new HashSet<>())
                 .customer(customer)
                 .isBought(null)
                 .build();

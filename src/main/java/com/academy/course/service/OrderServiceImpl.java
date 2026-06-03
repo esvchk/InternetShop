@@ -13,6 +13,7 @@ import com.academy.course.model.Order;
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class OrderServiceImpl implements OrderService {
@@ -30,12 +31,12 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<OrderDTO> getAllOrders() {
+    public Set<OrderDTO> getAllOrders() {
         return orderMapper.mapToListDTOS(orderDAO.getAllOrders());
     }
 
     @Override
-    public List<ItemDTO> getAllProductsFromOrder(OrderDTO orderDTO) {
+    public Set<ItemDTO> getAllProductsFromOrder(OrderDTO orderDTO) {
         return itemMapper.mapToListDTOS(orderMapper.mapToEntity(orderDTO).getItems());
 
     }

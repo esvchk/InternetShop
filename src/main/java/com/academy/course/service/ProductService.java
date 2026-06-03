@@ -7,12 +7,13 @@ import java.io.Serializable;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 public interface ProductService {
     void updateProduct(ProductDTO productDTO) throws SQLException;
     void addProduct(ProductDTO productDTO) throws SQLException;
     void deleteProduct(ProductDTO productDTO) throws SQLException;
     ProductDTO findProductById(Serializable id) throws SQLException;
-    List<ProductDTO> findProductsByName(String name);
-    List<ProductDTO> findAllProducts();
+    ProductDTO findProductsByName(String name);
+    Set<ProductDTO> findAllProducts();
 }

@@ -4,7 +4,9 @@ import com.academy.course.dao.DAOImpl;
 import com.academy.course.model.Product;
 
 import javax.persistence.Query;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ProductDAOImpl extends DAOImpl<Product> implements ProductDAO{
 
@@ -13,16 +15,15 @@ public class ProductDAOImpl extends DAOImpl<Product> implements ProductDAO{
     }
 
     @Override
-    public List<Product> getAllProducts() {
-        Query query = getEm().createQuery("from Product", Product.class);
-        return query.getResultList();
+    public Set<Product> getAllProducts() {
+        return new HashSet<>(getEm().createQuery("from Product", Product.class).getResultList());
     }
 
     @Override
-    public List<Product> getByName(String name) {
+    public Product getByName(String name) {
         Query query = getEm().createQuery("from Product product where product.name=: name", Product.class);
         query.setParameter("name",name);
-        return query.getResultList();
+        return (Product) query.getSingleResult();
     }
 
 

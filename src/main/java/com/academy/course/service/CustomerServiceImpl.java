@@ -19,7 +19,9 @@ import org.apache.logging.log4j.Logger;
 import javax.persistence.NoResultException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class CustomerServiceImpl implements CustomerService {
 
@@ -47,14 +49,14 @@ public class CustomerServiceImpl implements CustomerService {
 
 
     @Override
-    public List<CustomerDTO> getAllCustomers() {
+    public Set<CustomerDTO> getAllCustomers() {
         return customerMapper.mapToListDTOS(customerDAO.getAllCustomers());
     }
 
     @Override
-    public List<OrderDTO> getAllOrdersOfCustomer(CustomerDTO customerDTO) throws SQLException {
+    public Set<OrderDTO> getAllOrdersOfCustomer(CustomerDTO customerDTO) throws SQLException {
         Customer customer = customerDAO.get(customerDTO.getId());
-        List<Order> orders = customer.getOrders();
+        Set<Order> orders = customer.getOrders();
         return orderMapper.mapToListDTOS(orders);
     }
 
@@ -108,7 +110,7 @@ public class CustomerServiceImpl implements CustomerService {
                 Customer customer = Customer.builder()
                         .login(login)
                         .passWord(PasswordHasher.hashPass(passWord))
-                        .orders(new ArrayList<>())
+                        .orders(new HashSet<>())
                         .email("")
                         .build();
                 customerDAO.save(customer);

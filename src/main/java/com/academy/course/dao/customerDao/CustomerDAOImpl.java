@@ -12,10 +12,7 @@ import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class CustomerDAOImpl extends DAOImpl<Customer> implements CustomerDAO {
     private static final Logger logger = LogManager.getLogger(CustomerDAOImpl.class);
@@ -24,14 +21,10 @@ public class CustomerDAOImpl extends DAOImpl<Customer> implements CustomerDAO {
         super(Customer.class);
     }
 
-    @Override
-    public void createCustomer(Customer customer) throws SQLException {
-        save(customer);
-    }
 
 
     @Override
-    public void deleteOrder(Customer customer, Order order) throws SQLException {
+    public void deleteOrderOfCustomer(Customer customer, Order order) throws SQLException {
         customer.getOrders().removeIf(order1 -> order1.getId().equals(order.getId()));
         update(customer);
 
@@ -49,15 +42,15 @@ public class CustomerDAOImpl extends DAOImpl<Customer> implements CustomerDAO {
 
 
     @Override
-    public List<Customer> getAllCustomers() {
-        return getEm().createQuery("from Customer customer", Customer.class).getResultList();
+    public Set<Customer> getAllCustomers() {
+        return new HashSet<>(getEm().createQuery("from Customer customer", Customer.class).getResultList());
     }
 
 
     @Override
-    public List<Order> getAllOrdersOfCustomer(Customer customer) {
+    public Set<Order> getAllOrdersOfCustomer(Customer customer) {
         if (customer.getOrders() == null) {
-            return Collections.emptyList();
+            return Collections.emptySet();
         }
         return customer.getOrders();
     }

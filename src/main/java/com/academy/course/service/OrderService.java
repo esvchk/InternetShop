@@ -8,12 +8,13 @@ import com.academy.course.model.Item;
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Set;
 
 public interface OrderService {
 
     OrderDTO findOrderById(Serializable orderId) throws SQLException;
-    List<OrderDTO> getAllOrders();
-    List<ItemDTO> getAllProductsFromOrder(OrderDTO order);
+    Set<OrderDTO> getAllOrders();
+    Set<ItemDTO> getAllProductsFromOrder(OrderDTO order);
     void addProductToOrder(ProductDTO productDTO, OrderDTO orderDTO, Integer quantity) throws SQLException;
     void updateProductOfOrder(ProductDTO oldValue,ProductDTO newValue,OrderDTO order,Integer quantity) throws SQLException;
     void deleteProductFromOrder(ProductDTO productDTO,OrderDTO orderDTO) throws SQLException;

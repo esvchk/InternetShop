@@ -4,7 +4,9 @@ import com.academy.course.dto.ProductDTO;
 import com.academy.course.model.Product;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ProductMapper implements Mapper<Product, ProductDTO>{
     @Override
@@ -28,14 +30,13 @@ public class ProductMapper implements Mapper<Product, ProductDTO>{
     }
 
     @Override
-    public List<Product> mapToListEntities(List<ProductDTO> dtoList) {
-        List<Product> list = new ArrayList<>();
-        for (ProductDTO productDTO: dtoList){
+    public Set<Product> mapToListEntities(Set<ProductDTO> dtoSet) {
+        Set<Product> list = new HashSet<>();
+        for (ProductDTO productDTO: dtoSet){
             Product product = Product.builder()
                     .name(productDTO.getName())
                     .price(productDTO.getPrice())
                     .info(productDTO.getInfo())
-                    .isAvailable(null)
                     .build();
             list.add(product);
         }
@@ -43,9 +44,9 @@ public class ProductMapper implements Mapper<Product, ProductDTO>{
     }
 
     @Override
-    public List<ProductDTO> mapToListDTOS(List<Product> entityList) {
-        List<ProductDTO> productDTOS = new ArrayList<>();
-        for (Product product : entityList){
+    public Set<ProductDTO> mapToListDTOS(Set<Product> entitySet) {
+        Set<ProductDTO> productDTOS = new HashSet<>();
+        for (Product product : entitySet){
             ProductDTO productDTO = ProductDTO.builder()
                     .id(product.getId())
                     .name(product.getName())

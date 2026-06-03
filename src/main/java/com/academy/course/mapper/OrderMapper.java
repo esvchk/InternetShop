@@ -6,6 +6,7 @@ import com.academy.course.model.Order;
 
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class OrderMapper implements Mapper<Order, OrderDTO>,ShortMapper<OrderShortDTO,Order>{
@@ -38,13 +39,13 @@ public class OrderMapper implements Mapper<Order, OrderDTO>,ShortMapper<OrderSho
     }
 
     @Override
-    public List<Order> mapToListEntities(List<OrderDTO> dtoList) {
-        return dtoList.stream().map(this::mapToEntity).collect(Collectors.toList());
+    public Set<Order> mapToListEntities(Set<OrderDTO> dtoSet) {
+        return dtoSet.stream().map(this::mapToEntity).collect(Collectors.toSet());
     }
 
     @Override
-    public List<OrderDTO> mapToListDTOS(List<Order> entityList) {
-        return entityList.stream().map(this::mapToDTO).collect(Collectors.toList());
+    public Set<OrderDTO> mapToListDTOS(Set<Order> entitySet) {
+        return entitySet.stream().map(this::mapToDTO).collect(Collectors.toSet());
     }
 
 

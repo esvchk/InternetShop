@@ -8,11 +8,12 @@ import com.academy.course.model.Product;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Set;
 
 public interface OrderDAO extends DAO<Order> {
 
-    List<Order> getAllOrders();
-    List<Item> getAllProductsFromOrder(Order order);
+    Set<Order> getAllOrders();
+    Set<Item> getAllProductsFromOrder(Order order);
     void buyOrder(Customer customer,Order order) throws SQLException;
     void createEmptyOrder(Customer customer) throws SQLException;
     void addProductToOrder(Product product,Order order,Integer quantity) throws SQLException;

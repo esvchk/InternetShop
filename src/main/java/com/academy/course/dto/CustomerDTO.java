@@ -25,7 +25,7 @@ public class CustomerDTO {
 
     private String email;
 
-    private List<OrderShortDTO> orderShortDTOS;
+    private Set<OrderShortDTO> orderShortDTOS;
 
 
     @Override

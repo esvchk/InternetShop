@@ -9,6 +9,7 @@ import com.academy.course.model.Product;
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Set;
 
 public class ProductServiceImpl implements ProductService {
 
@@ -45,12 +46,12 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductDTO> findProductsByName(String name) {
-        return productMapper.mapToListDTOS(productDAO.getByName(name));
+    public ProductDTO findProductsByName(String name) {
+        return productMapper.mapToDTO(productDAO.getByName(name));
     }
 
     @Override
-    public List<ProductDTO> findAllProducts() {
+    public Set<ProductDTO> findAllProducts() {
         return productMapper.mapToListDTOS(productDAO.getAllProducts());
     }
 

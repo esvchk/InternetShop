@@ -13,8 +13,8 @@ import java.util.Set;
 public interface CustomerService {
     void deleteOrder(CustomerDTO customerDTO, OrderDTO orderDTO) throws SQLException;
     void createEmptyOrder(CustomerDTO customerDTO) throws SQLException;
-    List<CustomerDTO> getAllCustomers();
-    List<OrderDTO> getAllOrdersOfCustomer(CustomerDTO customerDTO) throws SQLException;
+    Set<CustomerDTO> getAllCustomers();
+    Set<OrderDTO> getAllOrdersOfCustomer(CustomerDTO customerDTO) throws SQLException;
     void buyOrder(CustomerDTO customerDTO,OrderDTO orderDTO) throws SQLException;
     CustomerDTO findCustomerById(Integer id) throws SQLException;
     CustomerDTO findCustomerByLogin(String login);
