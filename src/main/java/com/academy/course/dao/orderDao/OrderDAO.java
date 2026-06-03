@@ -13,8 +13,7 @@ public interface OrderDAO extends DAO<Order> {
 
     Set<Order> getAllOrders();
     Set<Item> getAllProductsFromOrder(Order order);
-    void buyOrder(Customer customer,Order order) throws SQLException;
-    void createEmptyOrder(Customer customer) throws SQLException;
+    void buyOrder(Order order) throws SQLException;
     void addProductToOrder(Product product,Order order,Integer quantity) throws SQLException;
     void updateProductOfOrder(Product oldValue,Product newValue,Order order,Integer quantity) throws SQLException;
     void deleteProductFromOrder(Product product,Order order) throws SQLException;

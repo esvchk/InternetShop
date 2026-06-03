@@ -41,14 +41,6 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public void createEmptyOrder(CustomerDTO customerDTO) throws SQLException {
-        orderDAO.createEmptyOrder
-                (customerMapper.mapToEntity(customerWithOrdersMapper.
-                        toDTOWithOrders(customerMapper.mapToEntity(customerDTO))));
-    }
-
-
-    @Override
     public Set<CustomerDTO> getAllCustomers() {
         return customerMapper.mapToListDTOS(customerDAO.getAllCustomers());
     }
@@ -62,7 +54,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public void buyOrder(CustomerDTO customerDTO,OrderDTO orderDTO) throws SQLException {
-        orderDAO.buyOrder(customerMapper.mapToEntity(customerDTO),orderMapper.mapToEntity(orderDTO));
+        orderDAO.buyOrder(orderMapper.mapToEntity(orderDTO));
     }
 
     @Override

@@ -34,9 +34,9 @@ public class App {
                 .build();
 
         Customer customer = Customer.builder()
-                .login("Sam")
+                .login("Bob")
                 .passWord("123")
-                .email("@Sam.org")
+                .email("@Bob.org")
                 .orders(orders)
                 .build();
 
@@ -74,14 +74,15 @@ public class App {
 //        orderDAO.addProductToOrder(dao.get(1),orderDAO.get(3),1);
 //        customerDAO.save(customer);
 //        orderDAO.deleteProductFromOrder(dao.get(9),orderDAO.get(2));
-//        customerDAO.save(customer);
+        customerService.buyOrder(customerMapper.mapToDTO(customerDAO.get(2)),orderMapper.mapToDTO(orderDAO.get(3)));
 //        System.out.println(customerDAO.getAllCustomers());
-//        orderDAO.createEmptyOrder(customerDAO.get(5));
 
+//        System.out.println(customerDAO.getAllOrdersOfCustomer(customerDAO.get(2)));
 
+//        orderDAO.delete(orderDAO.get(8));
 //        orderDAO.save(order);
 //        customerDAO.createOrder(customerDAO.get(2),orderDAO.get(3));
-//        customerDAO.deleteOrder(customerDAO.get(1),orderDAO.get(12));
+//        customerDAO.deleteOrderOfCustomer(customerDAO.get(2),orderDAO.get(4));
 //        customerService.buyOrder(customerMapper.mapToDTO(customerDAO.get(2)),orderMapper.mapToDTO(orderDAO.get(3)));
 //        customerDAO.delete(customerDAO.get(7));
 

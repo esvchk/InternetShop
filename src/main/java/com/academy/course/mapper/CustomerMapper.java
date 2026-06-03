@@ -4,9 +4,7 @@ import com.academy.course.dto.CustomerDTO;
 import com.academy.course.dto.CustomerShortDTO;
 import com.academy.course.model.Customer;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class CustomerMapper implements Mapper<Customer,CustomerDTO>,ShortMapper<CustomerShortDTO,Customer>{
