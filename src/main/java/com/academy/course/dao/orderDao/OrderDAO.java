@@ -7,7 +7,6 @@ import com.academy.course.model.Order;
 import com.academy.course.model.Product;
 
 import java.sql.SQLException;
-import java.util.List;
 import java.util.Set;
 
 public interface OrderDAO extends DAO<Order> {

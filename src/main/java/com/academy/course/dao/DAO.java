@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.sql.SQLException;
 
 public interface DAO <T>{
+
     void save(T entity) throws SQLException;
 
     T get(Serializable id) throws SQLException;

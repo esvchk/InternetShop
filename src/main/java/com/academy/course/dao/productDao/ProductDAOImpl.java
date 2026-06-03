@@ -5,7 +5,6 @@ import com.academy.course.model.Product;
 
 import javax.persistence.Query;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class ProductDAOImpl extends DAOImpl<Product> implements ProductDAO{
