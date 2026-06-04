@@ -14,4 +14,7 @@ public interface CustomerDAO extends DAO<Customer> {
     Customer getCustomerByLogin(String login);
     Set<Customer> getAllCustomers();
     Set<Order> getAllOrdersOfCustomer(Customer customer);
+    void deleteCustomer(Integer id) throws SQLException;
+    void createCustomer(Customer customer) throws SQLException;
+    void updateCustomer(Integer oldValueId,Customer newValue) throws SQLException;
 }

@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class CustomerServiceImpl implements CustomerService {
 
@@ -31,7 +32,6 @@ public class CustomerServiceImpl implements CustomerService {
     private final OrderMapper orderMapper = MapperFactory.getOrderMapper();
     private final CustomerMapper customerMapper = MapperFactory.getCustomerMapper();
     private final CustomerWithOrdersMapper customerWithOrdersMapper = MapperFactory.getCustomerWithOrdersMapper();
-
 
 
     @Override
@@ -67,13 +67,24 @@ public class CustomerServiceImpl implements CustomerService {
         if (customerDAO.getCustomerByLogin(login) != null) {
             return customerMapper.mapToDTO(customerDAO.getCustomerByLogin(login));
         } else
-            logger.warn("Not found {}",login);
+            logger.warn("Not found {}", login);
         return null;
     }
 
     @Override
     public void createCustomer(CustomerDTO customerDTO) throws SQLException {
-        customerDAO.save(customerMapper.mapToEntity(customerDTO));
+        Customer customer = Customer.builder()
+                .login(customerDTO.getLogin())
+                .email(customerDTO.getEmail())
+                .build();
+        Set<Order> orders = customerDTO.getOrderDTOs().stream()
+                .map(orderDTO -> Order.builder()
+                        .customer(customer)
+                        .isBought(orderDTO.getIsBought())
+                        .build())
+                .collect(Collectors.toSet());
+        customer.setOrders(orders);
+        customerDAO.createCustomer(customer);
     }
 
     @Override
@@ -88,8 +99,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public void deleteCustomer(CustomerDTO customerDTO) throws SQLException {
-        Customer customer = customerDAO.get(customerDTO.getId());
-        customerDAO.delete(customer);
+        customerDAO.deleteCustomer(customerDTO.getId());
     }
 
     @Override
@@ -107,7 +117,7 @@ public class CustomerServiceImpl implements CustomerService {
                         .build();
                 customerDAO.save(customer);
             }
-        }catch (NoResultException | SQLException e){
+        } catch (NoResultException | SQLException e) {
             e.printStackTrace();
         }
         return true;

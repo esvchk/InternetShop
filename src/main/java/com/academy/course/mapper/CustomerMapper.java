@@ -19,6 +19,7 @@ public class CustomerMapper implements Mapper<Customer,CustomerDTO>,ShortMapper<
     @Override
     public CustomerDTO mapToDTO(Customer entity) {
         return CustomerDTO.builder()
+                .id(entity.getId())
                 .login(entity.getLogin())
                 .email(entity.getEmail())
                 .orderDTOs(orderMapper.mapToListDTOS(entity.getOrders()))

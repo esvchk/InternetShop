@@ -19,7 +19,7 @@ public class ItemDTO {
 
     @Override
     public String toString() {
-        return "OrderItemDTO{" +
+        return "ItemDTO{" +
                 "id=" + id +
                 ", productDTO=" + productDTO +
                 ", quantity=" + quantity +

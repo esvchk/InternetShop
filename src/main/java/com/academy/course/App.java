@@ -34,9 +34,9 @@ public class App {
                 .build();
 
         Customer customer = Customer.builder()
-                .login("Bob")
+                .login("Kirill")
                 .passWord("123")
-                .email("@Bob.org")
+                .email("@Kirill.org")
                 .orders(orders)
                 .build();
 
@@ -51,7 +51,6 @@ public class App {
                 .order(order)
                 .build();
 
-        items.add(item);
         orders.add(order);
 
 
@@ -68,25 +67,15 @@ public class App {
         CustomerService customerService = new CustomerServiceImpl();
         CustomerWithOrdersMapper customerWithOrdersMapper = new CustomerWithOrdersMapper(customerMapper,orderMapper);
 
+//        customerService.deleteCustomer(customerMapper.mapToDTO(customerDAO.get(32)));
 
-//        dao.save(product);
-//        System.out.println(productService.findAllProducts());
-//        productService.deleteProduct(productMapper.mapToDTO(dao.get(9)));
-//        orderDAO.addProductToOrder(dao.get(1),orderDAO.get(3),1);
-//        customerDAO.save(customer);
-//        orderDAO.deleteProductFromOrder(dao.get(9),orderDAO.get(2));
-        customerService.buyOrder(orderMapper.mapToDTO(orderDAO.get(3)));
-//        System.out.println(customerDAO.getAllCustomers());
-//        System.out.println(customerMapper.mapToDTO(customerDAO.get(2)));
+//        orderDAO.delete(orderDAO.get(33));
+//        customerService.createCustomer(customerMapper.mapToDTO(customer));
+//        customerService.updateCustomer(customerMapper.mapToDTO(customer),"2233");
+//        customerService.buyOrder(orderService.findOrderById(35));
+        customerDAO.updateCustomer(34,customer);
 
-//        System.out.println(customerService.getAllOrdersOfCustomer(customerMapper.mapToDTO(customerDAO.get(2))));
 
-//        orderDAO.delete(orderDAO.get(10));
-//        orderDAO.save(order);
-//        customerDAO.createOrder(customerDAO.get(2),orderDAO.get(3));
-//        customerDAO.deleteOrderOfCustomer(customerDAO.get(2),orderDAO.get(4));
-//        customerService.buyOrder(customerMapper.mapToDTO(customerDAO.get(2)),orderMapper.mapToDTO(orderDAO.get(3)));
-//        customerDAO.delete(customerDAO.get(7));
 
 
     }

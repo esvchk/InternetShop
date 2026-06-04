@@ -13,7 +13,6 @@ public class OrderMapper implements Mapper<Order, OrderDTO>, ShortMapper<OrderSh
 
     public OrderMapper(ItemMapper itemMapper) {
         this.itemMapper = itemMapper;
-
     }
 
 
