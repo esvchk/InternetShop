@@ -21,7 +21,7 @@ public class Order extends DataEntity {
     @OneToMany(mappedBy = "order",cascade = CascadeType.REMOVE,orphanRemoval = true,fetch = FetchType.LAZY)
     private Set<Item> items = new HashSet<>();
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "customer_id")
     private Customer customer;
     @Column

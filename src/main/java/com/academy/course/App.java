@@ -55,10 +55,11 @@ public class App {
         orders.add(order);
 
 
-        CustomerMapper customerMapper = new CustomerMapper();
+
         ProductMapper productMapper = new ProductMapper();
         ItemMapper itemMapper = new ItemMapper(productMapper);
-        OrderMapper orderMapper = new OrderMapper(itemMapper, customerMapper);
+        OrderMapper orderMapper = new OrderMapper(itemMapper);
+        CustomerMapper customerMapper = new CustomerMapper(orderMapper);
         DAO<Product> dao = new DAOImpl<>(Product.class);
         OrderDAO orderDAO = new OrderDAOImpl();
         CustomerDAO customerDAO = new CustomerDAOImpl();
@@ -76,10 +77,11 @@ public class App {
 //        orderDAO.deleteProductFromOrder(dao.get(9),orderDAO.get(2));
         customerService.buyOrder(customerMapper.mapToDTO(customerDAO.get(2)),orderMapper.mapToDTO(orderDAO.get(3)));
 //        System.out.println(customerDAO.getAllCustomers());
+//        System.out.println(customerMapper.mapToDTO(customerDAO.get(2)));
 
-//        System.out.println(customerDAO.getAllOrdersOfCustomer(customerDAO.get(2)));
+//        System.out.println(customerService.getAllOrdersOfCustomer(customerMapper.mapToDTO(customerDAO.get(2))));
 
-//        orderDAO.delete(orderDAO.get(8));
+//        orderDAO.delete(orderDAO.get(10));
 //        orderDAO.save(order);
 //        customerDAO.createOrder(customerDAO.get(2),orderDAO.get(3));
 //        customerDAO.deleteOrderOfCustomer(customerDAO.get(2),orderDAO.get(4));

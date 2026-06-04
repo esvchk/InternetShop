@@ -21,8 +21,8 @@ public class OrderServiceImpl implements OrderService {
     private final OrderDAO orderDAO = new OrderDAOImpl();
     private final ProductMapper productMapper = new ProductMapper();
     private final ItemMapper itemMapper = new ItemMapper(productMapper);
-    private final CustomerMapper customerMapper = new CustomerMapper();
-    private final OrderMapper orderMapper = new OrderMapper(itemMapper,customerMapper);
+    private final OrderMapper orderMapper = new OrderMapper(itemMapper);
+
 
 
     @Override

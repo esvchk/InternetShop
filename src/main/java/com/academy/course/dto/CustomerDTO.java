@@ -25,7 +25,7 @@ public class CustomerDTO {
 
     private String email;
 
-    private Set<OrderShortDTO> orderShortDTOS;
+    private Set<OrderDTO> orderDTOs;
 
 
     @Override
@@ -34,6 +34,7 @@ public class CustomerDTO {
                 "id=" + id +
                 ", login='" + login + '\'' +
                 ", email='" + email + '\'' +
+                ", orderDTOs=" + orderDTOs +
                 '}';
     }
 }

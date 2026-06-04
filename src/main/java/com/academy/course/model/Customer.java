@@ -26,7 +26,7 @@ public class Customer extends DataEntity {
     private String email;
 
     @ToString.Exclude
-    @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.EAGER)
     private Set<Order> orders = new HashSet<>();
 
 

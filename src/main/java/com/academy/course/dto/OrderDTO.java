@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 @Builder
@@ -20,16 +21,17 @@ public class OrderDTO {
 
     private Set<ItemDTO> itemsDTO;
 
-    private CustomerShortDTO customerShortDTO;
-
     private Boolean isBought;
+
+    private CustomerShortDTO customerShortDTO;
 
     @Override
     public String toString() {
         return "OrderDTO{" +
                 "id=" + id +
-                ", customerDTO=" + customerShortDTO +
+                ", itemsDTO=" + itemsDTO +
                 ", isBought=" + isBought +
+                ", customerDTO=" + customerShortDTO +
                 '}';
     }
 }

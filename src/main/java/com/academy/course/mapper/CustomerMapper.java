@@ -9,20 +9,27 @@ import java.util.Set;
 
 public class CustomerMapper implements Mapper<Customer,CustomerDTO>,ShortMapper<CustomerShortDTO,Customer>{
 
+    private final OrderMapper orderMapper;
+
+    public CustomerMapper(OrderMapper orderMapper) {
+        this.orderMapper = orderMapper;
+    }
+
+
     @Override
     public CustomerDTO mapToDTO(Customer entity) {
         return CustomerDTO.builder()
-                .id(entity.getId())
                 .login(entity.getLogin())
                 .email(entity.getEmail())
+                .orderDTOs(orderMapper.mapToListDTOS(entity.getOrders()))
                 .build();
     }
 
     @Override
     public Customer mapToEntity(CustomerDTO dto) {
         return Customer.builder()
+                .orders(orderMapper.mapToListEntities(dto.getOrderDTOs()))
                 .login(dto.getLogin())
-                .passWord(null)
                 .email(dto.getEmail())
                 .build();
     }

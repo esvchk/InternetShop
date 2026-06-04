@@ -4,19 +4,17 @@ import com.academy.course.dto.OrderDTO;
 import com.academy.course.dto.OrderShortDTO;
 import com.academy.course.model.Order;
 
-
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class OrderMapper implements Mapper<Order, OrderDTO>,ShortMapper<OrderShortDTO,Order>{
+public class OrderMapper implements Mapper<Order, OrderDTO>, ShortMapper<OrderShortDTO, Order> {
 
     private final ItemMapper itemMapper;
-    private final CustomerMapper customerMapper;
+    private final CustomerMapper customerMapper = new CustomerMapper(this);
 
-    public OrderMapper(ItemMapper itemMapper, CustomerMapper customerMapper) {
+    public OrderMapper(ItemMapper itemMapper) {
         this.itemMapper = itemMapper;
-        this.customerMapper = customerMapper;
+
     }
 
 
@@ -25,8 +23,8 @@ public class OrderMapper implements Mapper<Order, OrderDTO>,ShortMapper<OrderSho
         return OrderDTO.builder()
                 .id(entity.getId())
                 .itemsDTO(itemMapper.mapToListDTOS(entity.getItems()))
-                .customerShortDTO(customerMapper.mapToShortDTO(entity.getCustomer()))
                 .isBought(entity.getIsBought())
+                .customerShortDTO(customerMapper.mapToShortDTO(entity.getCustomer()))
                 .build();
     }
 

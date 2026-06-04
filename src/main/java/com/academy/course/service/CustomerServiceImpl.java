@@ -54,7 +54,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public void buyOrder(CustomerDTO customerDTO,OrderDTO orderDTO) throws SQLException {
-        orderDAO.buyOrder(orderMapper.mapToEntity(orderDTO));
+        orderDAO.buyOrder(orderDTO.getId(),customerMapper.mapToEntity(customerDTO));
     }
 
     @Override

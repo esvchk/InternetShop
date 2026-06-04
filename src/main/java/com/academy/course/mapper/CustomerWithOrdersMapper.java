@@ -17,8 +17,8 @@ public class CustomerWithOrdersMapper {
 
     public CustomerDTO toDTOWithOrders(Customer customer){
         CustomerDTO customerDTO = customerMapper.mapToDTO(customer);
-        customerDTO.setOrderShortDTOS(customer.getOrders().stream()
-                .map(orderMapper::mapToShortDTO)
+        customerDTO.setOrderDTOs(customer.getOrders().stream()
+                .map(orderMapper::mapToDTO)
                 .collect(Collectors.toSet()));
         return customerDTO;
     }
