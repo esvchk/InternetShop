@@ -27,7 +27,6 @@ public class CustomerDTO {
 
     private Set<OrderDTO> orderDTOs;
 
-
     @Override
     public String toString() {
         return "CustomerDTO{" +

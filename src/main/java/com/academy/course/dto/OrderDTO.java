@@ -23,7 +23,6 @@ public class OrderDTO {
 
     private Boolean isBought;
 
-    private CustomerShortDTO customerShortDTO;
 
     @Override
     public String toString() {
@@ -31,7 +30,6 @@ public class OrderDTO {
                 "id=" + id +
                 ", itemsDTO=" + itemsDTO +
                 ", isBought=" + isBought +
-                ", customerDTO=" + customerShortDTO +
                 '}';
     }
 }

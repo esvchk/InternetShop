@@ -75,7 +75,7 @@ public class App {
 //        orderDAO.addProductToOrder(dao.get(1),orderDAO.get(3),1);
 //        customerDAO.save(customer);
 //        orderDAO.deleteProductFromOrder(dao.get(9),orderDAO.get(2));
-        customerService.buyOrder(customerMapper.mapToDTO(customerDAO.get(2)),orderMapper.mapToDTO(orderDAO.get(3)));
+        customerService.buyOrder(orderMapper.mapToDTO(orderDAO.get(3)));
 //        System.out.println(customerDAO.getAllCustomers());
 //        System.out.println(customerMapper.mapToDTO(customerDAO.get(2)));
 

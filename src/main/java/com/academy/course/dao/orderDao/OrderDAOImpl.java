@@ -6,12 +6,16 @@ import com.academy.course.model.Customer;
 import com.academy.course.model.Item;
 import com.academy.course.model.Order;
 import com.academy.course.model.Product;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.SQLException;
 import java.util.*;
 
 public class OrderDAOImpl extends DAOImpl<Order> implements OrderDAO {
 
+
+    private static final Logger log = LogManager.getLogger(OrderDAOImpl.class);
 
     public OrderDAOImpl() {
         super(Order.class);
@@ -70,17 +74,17 @@ public class OrderDAOImpl extends DAOImpl<Order> implements OrderDAO {
     }
 
     @Override
-    public boolean buyOrder(Integer orderId, Customer customer) throws SQLException {
-        if (customer != null && customer.getOrders() != null) {
-            for (Order order : customer.getOrders()){
-                if (order.getId().equals(get(orderId))) {
-                } else
-                    throw new NullPointerException();
-            }
-            update(get(orderId));
-            return true;
-        } else
-            return false;
+    public boolean buyOrder(Integer orderId) throws SQLException {
+        if (orderId != null) {
+            Order order = get(orderId);
+            if (!order.getIsBought()) {
+                order.setIsBought(true);
+                update(order);
+                return true;
+            } else
+                log.warn("Order number {} already has been purchased", orderId);
+        }
+        return false;
     }
 }
 

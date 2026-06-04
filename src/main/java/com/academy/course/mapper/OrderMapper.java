@@ -10,7 +10,6 @@ import java.util.stream.Collectors;
 public class OrderMapper implements Mapper<Order, OrderDTO>, ShortMapper<OrderShortDTO, Order> {
 
     private final ItemMapper itemMapper;
-    private final CustomerMapper customerMapper = new CustomerMapper(this);
 
     public OrderMapper(ItemMapper itemMapper) {
         this.itemMapper = itemMapper;
@@ -24,7 +23,6 @@ public class OrderMapper implements Mapper<Order, OrderDTO>, ShortMapper<OrderSh
                 .id(entity.getId())
                 .itemsDTO(itemMapper.mapToListDTOS(entity.getItems()))
                 .isBought(entity.getIsBought())
-                .customerShortDTO(customerMapper.mapToShortDTO(entity.getCustomer()))
                 .build();
     }
 

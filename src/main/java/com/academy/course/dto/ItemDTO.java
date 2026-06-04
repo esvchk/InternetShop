@@ -15,8 +15,6 @@ public class ItemDTO {
 
     private ProductDTO productDTO;
 
-    private OrderDTO orderDTO;
-
     private Integer quantity;
 
     @Override

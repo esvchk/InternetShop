@@ -15,7 +15,7 @@ public interface CustomerService {
     void deleteOrderOfCustomer(CustomerDTO customerDTO, OrderDTO orderDTO) throws SQLException;
     Set<CustomerDTO> getAllCustomers();
     Set<OrderDTO> getAllOrdersOfCustomer(CustomerDTO customerDTO) throws SQLException;
-    void buyOrder(CustomerDTO customerDTO, OrderDTO orderDTO) throws SQLException;
+    void buyOrder(OrderDTO orderDTO) throws SQLException;
     CustomerDTO findCustomerById(Integer id) throws SQLException;
     CustomerDTO findCustomerByLogin(String login);
     void createCustomer(CustomerDTO customerDTO) throws SQLException;
