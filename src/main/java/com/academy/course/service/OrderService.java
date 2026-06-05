@@ -14,7 +14,8 @@ public interface OrderService {
 
     OrderDTO findOrderById(Serializable orderId) throws SQLException;
     Set<OrderDTO> getAllOrders();
-    Set<ItemDTO> getAllProductsFromOrder(OrderDTO order);
+    Set<ItemDTO> getAllProductsFromOrder(OrderDTO orderDTO);
+    void deleteOrder(OrderDTO orderDTO) throws SQLException;
     void addProductToOrder(ProductDTO productDTO, OrderDTO orderDTO, Integer quantity) throws SQLException;
     void updateProductOfOrder(ProductDTO oldValue,ProductDTO newValue,OrderDTO order,Integer quantity) throws SQLException;
     void deleteProductFromOrder(ProductDTO productDTO,OrderDTO orderDTO) throws SQLException;

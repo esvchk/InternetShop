@@ -73,18 +73,5 @@ public class OrderDAOImpl extends DAOImpl<Order> implements OrderDAO {
 
     }
 
-    @Override
-    public boolean buyOrder(Integer orderId) throws SQLException {
-        if (orderId != null) {
-            Order order = get(orderId);
-            if (order.getIsBought() == null || !order.getIsBought()) {
-                order.setIsBought(true);
-                update(order);
-                return true;
-            } else
-                log.warn("Order number {} already has been purchased", orderId);
-        }
-        return false;
-    }
 }
 

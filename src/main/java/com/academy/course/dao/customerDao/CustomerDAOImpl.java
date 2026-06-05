@@ -44,40 +44,4 @@ public class CustomerDAOImpl extends DAOImpl<Customer> implements CustomerDAO {
     public Set<Customer> getAllCustomers() {
         return new HashSet<>(getEm().createQuery("from Customer customer", Customer.class).getResultList());
     }
-
-
-    @Override
-    public Set<Order> getAllOrdersOfCustomer(Customer customer) {
-        if (customer.getOrders() == null) {
-            return Collections.emptySet();
-        }
-        return customer.getOrders();
-    }
-
-    @Override
-    public void deleteCustomer(Integer customerId) throws SQLException {
-        if (customerId != null) {
-            Customer customer = get(customerId);
-            delete(customer);
-        } else
-            logger.error("not found");
-    }
-
-    @Override
-    public void createCustomer(Customer customer) throws SQLException {
-        if (customer != null) {
-            save(customer);
-        }
-    }
-
-    @Override
-    public void updateCustomer(Integer oldValueId, Customer newValue) throws SQLException {
-        if (oldValueId != null && newValue != null) {
-            Customer oldValue = get(oldValueId);
-            oldValue.setLogin(newValue.getLogin());
-            oldValue.setEmail(newValue.getEmail());
-            oldValue.setPassWord(newValue.getPassWord());
-            update(oldValue);
-        }
-    }
 }

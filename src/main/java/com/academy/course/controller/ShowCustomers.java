@@ -17,7 +17,7 @@ public class ShowCustomers extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("customers",customerService.getAllCustomers());
+        request.setAttribute("customers",customerService.getAllCustomersWithOrdersAndItems());
         request.getRequestDispatcher("/AllCustomers.jsp")
                 .forward(request,response);
     }

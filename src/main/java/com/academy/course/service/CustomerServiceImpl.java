@@ -41,20 +41,32 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public Set<CustomerDTO> getAllCustomers() {
+    public Set<CustomerDTO> getAllCustomersWithOrdersAndItems() {
         return customerMapper.mapToListDTOS(customerDAO.getAllCustomers());
     }
 
     @Override
     public Set<OrderDTO> getAllOrdersOfCustomer(CustomerDTO customerDTO) throws SQLException {
-        Customer customer = customerDAO.get(customerDTO.getId());
-        Set<Order> orders = customer.getOrders();
-        return orderMapper.mapToListDTOS(orders);
+        if (customerDTO != null) {
+            Customer customer = customerDAO.get(customerDTO.getId());
+            Set<Order> orders = customer.getOrders();
+            return orderMapper.mapToListDTOS(orders);
+        } else
+            throw new NullPointerException();
     }
 
     @Override
     public void buyOrder(OrderDTO orderDTO) throws SQLException {
-        orderDAO.buyOrder(orderDTO.getId());
+        if (orderDTO.getId() != null) {
+            Order order = orderDAO.get(orderDTO.getId());
+            if (order.getIsBought() == null || !order.getIsBought()) {
+                order.setIsBought(true);
+                orderDAO.update(order);
+            } else
+                logger.warn("Order {} already has been purchased", orderDTO);
+        } else
+            throw new NullPointerException();
+
     }
 
     @Override
@@ -84,22 +96,24 @@ public class CustomerServiceImpl implements CustomerService {
                         .build())
                 .collect(Collectors.toSet());
         customer.setOrders(orders);
-        customerDAO.createCustomer(customer);
+        customerDAO.save(customer);
     }
 
     @Override
-    public void updateCustomer(CustomerDTO customerDTO, String newPassword) throws SQLException {
-        Customer customer = customerDAO.get(customerDTO.getId());
-        customer.setLogin(customerDTO.getLogin());
-        customer.setEmail(customerDTO.getEmail());
-        customer.setPassWord(newPassword);
+    public void updateCustomer(Integer oldValueId, CustomerDTO newValue) throws SQLException {
+        Customer customer = customerDAO.get(oldValueId);
+        customer.setLogin(newValue.getLogin());
+        customer.setEmail(newValue.getEmail());
         customerDAO.update(customer);
-
     }
 
     @Override
     public void deleteCustomer(CustomerDTO customerDTO) throws SQLException {
-        customerDAO.deleteCustomer(customerDTO.getId());
+        if (customerDTO.getId() != null) {
+            customerDAO.delete(customerDAO.get(customerDTO.getId()));
+        } else
+            throw new NullPointerException();
+
     }
 
     @Override

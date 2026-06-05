@@ -13,13 +13,13 @@ import java.util.Set;
 
 public interface CustomerService {
     void deleteOrderOfCustomer(CustomerDTO customerDTO, OrderDTO orderDTO) throws SQLException;
-    Set<CustomerDTO> getAllCustomers();
+    Set<CustomerDTO> getAllCustomersWithOrdersAndItems();
     Set<OrderDTO> getAllOrdersOfCustomer(CustomerDTO customerDTO) throws SQLException;
     void buyOrder(OrderDTO orderDTO) throws SQLException;
     CustomerDTO findCustomerById(Integer id) throws SQLException;
     CustomerDTO findCustomerByLogin(String login);
     void createCustomer(CustomerDTO customerDTO) throws SQLException;
-    void updateCustomer(CustomerDTO customerDTO,String newPassWord) throws SQLException;
+    void updateCustomer(Integer oldValueId,CustomerDTO newValue) throws SQLException;
     void deleteCustomer(CustomerDTO customerDTO) throws SQLException;
     boolean register(String login,String passWord) throws SQLException, UserNotFound;
     boolean login(String login,String passWord) throws NoSuchFieldException, SQLException, UserNotFound;

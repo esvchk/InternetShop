@@ -56,6 +56,7 @@ public class CustomerMapper implements Mapper<Customer,CustomerDTO>,ShortMapper<
                     .id(customer.getId())
                     .login(customer.getLogin())
                     .email(customer.getEmail())
+                    .orderDTOs(orderMapper.mapToListDTOS(customer.getOrders()))
                     .build();
             list.add(customerDTO);
         }
