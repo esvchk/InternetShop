@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Set;
 
 public interface CustomerDAO extends DAO<Customer> {
-    void deleteOrderOfCustomer(Customer customer, Order order) throws SQLException;
     Customer getCustomerByLogin(String login);
     Set<Customer> getAllCustomers();
 

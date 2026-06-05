@@ -11,17 +11,16 @@ import com.academy.course.exception.UserNotFound;
 import com.academy.course.exception.WrongPassWord;
 import com.academy.course.mapper.*;
 import com.academy.course.model.Customer;
+import com.academy.course.model.Item;
 import com.academy.course.model.Order;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.hibernate.Hibernate;
 
 import javax.persistence.NoResultException;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class CustomerServiceImpl implements CustomerService {
@@ -36,8 +35,10 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public void deleteOrderOfCustomer(CustomerDTO customerDTO, OrderDTO orderDTO) throws SQLException {
-        customerDAO.deleteOrderOfCustomer(customerMapper.mapToEntity(customerDTO),
-                orderMapper.mapToEntity(orderDTO));
+        Customer customer = customerDAO.get(customerDTO.getId());
+        Order order = orderDAO.get(orderDTO.getId());
+        customer.getOrders().removeIf(order1 -> order1.getId().equals(order.getId()));
+        orderDAO.delete(order);
     }
 
     @Override
@@ -59,11 +60,14 @@ public class CustomerServiceImpl implements CustomerService {
     public void buyOrder(OrderDTO orderDTO) throws SQLException {
         if (orderDTO.getId() != null) {
             Order order = orderDAO.get(orderDTO.getId());
-            if (order.getIsBought() == null || !order.getIsBought()) {
+            Optional<Item> items = order.getItems().stream().findAny();
+            if (!order.getIsBought()) {
                 order.setIsBought(true);
                 orderDAO.update(order);
             } else
+
                 logger.warn("Order {} already has been purchased", orderDTO);
+
         } else
             throw new NullPointerException();
 
@@ -84,15 +88,26 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public void createCustomer(CustomerDTO customerDTO) throws SQLException {
+    public void addNewOrderToCustomer(CustomerDTO customerDTO) throws SQLException {
+        Customer customer = customerDAO.get(customerDTO.getId());
+        Order order = Order.builder()
+                .customer(customer)
+                .isBought(false)
+                .build();
+        orderDAO.save(order);
+    }
+
+    @Override
+    public void createCustomer(CustomerDTO customerDTO, String pass) throws SQLException {
         Customer customer = Customer.builder()
                 .login(customerDTO.getLogin())
                 .email(customerDTO.getEmail())
+                .passWord(PasswordHasher.hashPass(pass))
                 .build();
         Set<Order> orders = customerDTO.getOrderDTOs().stream()
                 .map(orderDTO -> Order.builder()
                         .customer(customer)
-                        .isBought(orderDTO.getIsBought())
+                        .isBought(false)
                         .build())
                 .collect(Collectors.toSet());
         customer.setOrders(orders);
@@ -118,21 +133,28 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public boolean register(String login, String passWord) {
-        try {
-            if (customerDAO.getCustomerByLogin(login) != null) {
-                logger.warn("already exist with login {}", login);
-                throw new UserAlreadyExists("User already registered with this login");
-            } else {
+        if (customerDAO.getCustomerByLogin(login) != null) {
+            logger.warn("already exist with login {}", login);
+            throw new UserAlreadyExists("User already registered with this login");
+        } else {
+            try {
                 Customer customer = Customer.builder()
                         .login(login)
                         .passWord(PasswordHasher.hashPass(passWord))
-                        .orders(new HashSet<>())
-                        .email("")
                         .build();
+
+                Order order = Order.builder()
+                        .customer(customer)
+                        .isBought(false)
+                        .build();
+
+
+                customer.getOrders().add(order);
+
                 customerDAO.save(customer);
+            } catch (NoResultException | SQLException e) {
+                e.printStackTrace();
             }
-        } catch (NoResultException | SQLException e) {
-            e.printStackTrace();
         }
         return true;
 

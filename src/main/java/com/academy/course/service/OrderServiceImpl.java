@@ -6,22 +6,28 @@ import com.academy.course.dao.orderDao.OrderDAOImpl;
 
 import com.academy.course.dao.productDao.ProductDAO;
 import com.academy.course.dao.productDao.ProductDAOImpl;
+import com.academy.course.dto.CustomerDTO;
 import com.academy.course.dto.ItemDTO;
 import com.academy.course.dto.OrderDTO;
 import com.academy.course.dto.ProductDTO;
 import com.academy.course.mapper.*;
+import com.academy.course.model.Customer;
 import com.academy.course.model.Item;
 import com.academy.course.model.Order;
 import com.academy.course.model.Product;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 public class OrderServiceImpl implements OrderService {
 
+    private static final Logger log = LogManager.getLogger(OrderServiceImpl.class);
     private final OrderDAO orderDAO = new OrderDAOImpl();
     private final ProductDAO productDAO = new ProductDAOImpl();
     private final ProductMapper productMapper = new ProductMapper();
@@ -42,7 +48,6 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Set<ItemDTO> getAllProductsFromOrder(OrderDTO orderDTO) {
         return itemMapper.mapToListDTOS(orderMapper.mapToEntity(orderDTO).getItems());
-
     }
 
     @Override
@@ -56,18 +61,31 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public void addProductToOrder(ProductDTO productDTO,
                                   OrderDTO orderDTO, Integer quantity) throws SQLException {
-        if (productDTO.getId() != null && orderDTO.getId() != null) {
-            Product product = productDAO.get(productDTO.getId());
-            Order order = orderDAO.get(orderDTO.getId());
-            Item item = Item.builder()
-                    .productQuantity(quantity)
-                    .product(product)
-                    .order(order)
-                    .build();
-            order.getItems().add(item);
-            orderDAO.update(order);
-        } else
+        if (productDTO.getId() == null) {
             throw new NullPointerException();
+        } else if (orderDTO.getId() == null) {
+            throw new NullPointerException();
+        }
+        Order order = orderDAO.get(orderDTO.getId());
+        if (order.getIsBought() != null && !order.getIsBought()) {
+            Product product = productDAO.get(productDTO.getId());
+            Optional<Item> items = order.getItems().stream()
+                            .filter(item1 -> item1.getProduct().getId().equals(product.getId()))
+                                    .findFirst();
+            if (items.isPresent()) {
+                items.get().setProductQuantity(items.get().getProductQuantity() + quantity);
+            } else {
+                Item item = Item.builder()
+                        .productQuantity(quantity)
+                        .product(product)
+                        .order(order)
+                        .build();
+                order.getItems().add(item);
+            }
+            orderDAO.update(order);
+        } else {
+            log.warn("Order {} already bought", order.getId());
+        }
     }
 
     @Override

@@ -24,7 +24,7 @@ public class ProductServiceImpl implements ProductService {
             product.setName(productDTO.getName());
             product.setPrice(productDTO.getPrice());
             product.setIsAvailable(productDTO.getIsAvailable());
-            productDAO.save(product);
+            productDAO.update(product);
         }
     }
 

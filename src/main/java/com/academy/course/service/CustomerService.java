@@ -18,7 +18,8 @@ public interface CustomerService {
     void buyOrder(OrderDTO orderDTO) throws SQLException;
     CustomerDTO findCustomerById(Integer id) throws SQLException;
     CustomerDTO findCustomerByLogin(String login);
-    void createCustomer(CustomerDTO customerDTO) throws SQLException;
+    void addNewOrderToCustomer(CustomerDTO customerDTO) throws SQLException;
+    void createCustomer(CustomerDTO customerDTO,String pass) throws SQLException;
     void updateCustomer(Integer oldValueId,CustomerDTO newValue) throws SQLException;
     void deleteCustomer(CustomerDTO customerDTO) throws SQLException;
     boolean register(String login,String passWord) throws SQLException, UserNotFound;
