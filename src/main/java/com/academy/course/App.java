@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Set;
 
 public class App {
-    public static void main(String[] args) throws SQLException, UserNotFound {
+    public static void main(String[] args) throws SQLException, UserNotFound, NoSuchFieldException {
 
         Set<Order> orders = new HashSet<>();
         Set<Item> items = new HashSet<>();
@@ -71,7 +71,7 @@ public class App {
         ItemDAO itemDAO = new ItemDAOImpl();
         CustomerWithOrdersMapper customerWithOrdersMapper = new CustomerWithOrdersMapper(customerMapper, orderMapper);
 
-        customerService.register("Ilya","2211");
+        customerService.login("Sam","123");
 
     }
 }

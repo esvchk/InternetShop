@@ -141,6 +141,7 @@ public class CustomerServiceImpl implements CustomerService {
                 Customer customer = Customer.builder()
                         .login(login)
                         .passWord(PasswordHasher.hashPass(passWord))
+                        .orders(new HashSet<>())
                         .build();
 
                 Order order = Order.builder()
@@ -166,7 +167,7 @@ public class CustomerServiceImpl implements CustomerService {
             Customer customer = customerDAO.getCustomerByLogin(login);
             if (customer.getLogin().equals(login)) {
                 if (PasswordHasher.checkPass(passWord, customer.getPassWord())) {
-                    logger.info("successfully entered {}", customer);
+                    logger.info("successfully loged in{}", customer);
                     return true;
                 } else {
                     logger.warn("Wrong passWord {} by login {}", passWord, login);
