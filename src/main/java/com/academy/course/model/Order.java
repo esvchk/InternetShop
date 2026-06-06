@@ -19,6 +19,7 @@ public class Order extends DataEntity {
 
     @ToString.Exclude
     @OneToMany(mappedBy = "order",cascade = CascadeType.REMOVE,orphanRemoval = true,fetch = FetchType.LAZY)
+    @Builder.Default
     private Set<Item> items = new HashSet<>();
 
     @ManyToOne(fetch = FetchType.EAGER)

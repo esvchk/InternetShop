@@ -1,6 +1,8 @@
 package com.academy.course.service;
 
 
+import com.academy.course.dao.ItemDAO;
+import com.academy.course.dao.ItemDAOImpl;
 import com.academy.course.dao.orderDao.OrderDAO;
 import com.academy.course.dao.orderDao.OrderDAOImpl;
 
@@ -20,12 +22,14 @@ import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class OrderServiceImpl implements OrderService {
 
     private static final Logger log = LogManager.getLogger(OrderServiceImpl.class);
     private final OrderDAO orderDAO = new OrderDAOImpl();
     private final ProductDAO productDAO = new ProductDAOImpl();
+    private final ItemDAO itemDAO = new ItemDAOImpl();
     private final ProductMapper productMapper = new ProductMapper();
     private final ItemMapper itemMapper = new ItemMapper(productMapper);
     private final OrderMapper orderMapper = new OrderMapper(itemMapper);
@@ -42,8 +46,13 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Set<ItemDTO> getAllProductsFromOrder(OrderDTO orderDTO) {
-        return itemMapper.mapToSetDTOS(orderMapper.mapToEntity(orderDTO).getItems());
+    public Set<ItemDTO> getAllProductsFromOrder(Integer orderId) throws SQLException {
+        if (orderId != null) {
+            Order order = orderDAO.get(orderId);
+            Set<Item> items = order.getItems();
+            return itemMapper.mapToSetDTOS(items);
+        } else
+            throw new NullPointerException();
     }
 
     @Override
@@ -82,13 +91,6 @@ public class OrderServiceImpl implements OrderService {
         } else {
             log.warn("Order {} already bought", order.getId());
         }
-    }
-
-    @Override
-    public void updateProductOfOrder(ProductDTO oldValue, ProductDTO newValue,
-                                     OrderDTO orderDTO, Integer quantity) throws SQLException {
-        orderDAO.updateProductOfOrder(productMapper.mapToEntity(oldValue),
-                productMapper.mapToEntity(newValue), orderMapper.mapToEntity(orderDTO), quantity);
     }
 
     @Override

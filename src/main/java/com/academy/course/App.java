@@ -74,7 +74,7 @@ public class App {
 
 //        customerService.deleteCustomer(customerMapper.mapToDTO(customerDAO.get(86)));
 //        orderDAO.delete(orderDAO.get(83));
-        customerService.register(customerMapper.mapToDTO(customer),"2211");
+//        customerService.register(customerMapper.mapToDTO(customer),"2211");
 
 
     }

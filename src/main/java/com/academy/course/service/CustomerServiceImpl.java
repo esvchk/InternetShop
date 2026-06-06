@@ -58,7 +58,6 @@ public class CustomerServiceImpl implements CustomerService {
     public void buyOrder(OrderDTO orderDTO) throws SQLException {
         if (orderDTO.getId() != null) {
             Order order = orderDAO.get(orderDTO.getId());
-            Optional<Item> items = order.getItems().stream().findAny();
             if (!order.getIsBought()) {
                 order.setIsBought(true);
                 orderDAO.update(order);
