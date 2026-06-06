@@ -30,7 +30,7 @@ public class ProductMapper implements Mapper<Product, ProductDTO>{
     }
 
     @Override
-    public Set<Product> mapToListEntities(Set<ProductDTO> dtoSet) {
+    public Set<Product> mapToSetEntities(Set<ProductDTO> dtoSet) {
         Set<Product> list = new HashSet<>();
         for (ProductDTO productDTO: dtoSet){
             Product product = Product.builder()
@@ -44,7 +44,7 @@ public class ProductMapper implements Mapper<Product, ProductDTO>{
     }
 
     @Override
-    public Set<ProductDTO> mapToListDTOS(Set<Product> entitySet) {
+    public Set<ProductDTO> mapToSetDTOS(Set<Product> entitySet) {
         Set<ProductDTO> productDTOS = new HashSet<>();
         for (Product product : entitySet){
             ProductDTO productDTO = ProductDTO.builder()

@@ -4,6 +4,7 @@ import com.academy.course.dto.OrderDTO;
 import com.academy.course.dto.OrderShortDTO;
 import com.academy.course.model.Order;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -20,7 +21,7 @@ public class OrderMapper implements Mapper<Order, OrderDTO>, ShortMapper<OrderSh
     public OrderDTO mapToDTO(Order entity) {
         return OrderDTO.builder()
                 .id(entity.getId())
-                .itemsDTO(itemMapper.mapToListDTOS(entity.getItems()))
+                .itemsDTO(itemMapper.mapToSetDTOS(entity.getItems()))
                 .isBought(entity.getIsBought())
                 .build();
     }
@@ -28,19 +29,36 @@ public class OrderMapper implements Mapper<Order, OrderDTO>, ShortMapper<OrderSh
     @Override
     public Order mapToEntity(OrderDTO dto) {
         return Order.builder()
-                .items(itemMapper.mapToListEntities(dto.getItemsDTO()))
+                .items(itemMapper.mapToSetEntities(dto.getItemsDTO()))
                 .isBought(dto.getIsBought())
                 .build();
     }
 
     @Override
-    public Set<Order> mapToListEntities(Set<OrderDTO> dtoSet) {
-        return dtoSet.stream().map(this::mapToEntity).collect(Collectors.toSet());
+    public Set<Order> mapToSetEntities(Set<OrderDTO> dtoSet) {
+        Set<Order> set = new HashSet<>();
+        for (OrderDTO orderDTO : dtoSet) {
+            Order order = Order.builder()
+                    .items(itemMapper.mapToSetEntities(orderDTO.getItemsDTO()))
+                    .isBought(orderDTO.getIsBought())
+                    .build();
+            set.add(order);
+        }
+        return set;
     }
 
     @Override
-    public Set<OrderDTO> mapToListDTOS(Set<Order> entitySet) {
-        return entitySet.stream().map(this::mapToDTO).collect(Collectors.toSet());
+    public Set<OrderDTO> mapToSetDTOS(Set<Order> entitySet) {
+        Set<OrderDTO> set = new HashSet<>();
+        for (Order order : entitySet) {
+            OrderDTO orderDTO = OrderDTO.builder()
+                    .id(order.getId())
+                    .itemsDTO(itemMapper.mapToSetDTOS(order.getItems()))
+                    .isBought(order.getIsBought())
+                    .build();
+            set.add(orderDTO);
+        }
+        return set;
     }
 
 

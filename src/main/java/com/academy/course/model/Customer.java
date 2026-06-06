@@ -9,8 +9,8 @@ import java.util.*;
 @Builder
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table
 @ToString
@@ -26,7 +26,8 @@ public class Customer extends DataEntity {
     private String email;
 
     @ToString.Exclude
-    @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @Builder.Default
     private Set<Order> orders = new HashSet<>();
 
 
@@ -35,12 +36,13 @@ public class Customer extends DataEntity {
         if (object == null || getClass() != object.getClass()) return false;
         if (!super.equals(object)) return false;
         Customer customer = (Customer) object;
-        return Objects.equals(customer.getId(),getId());
+        return Objects.equals(customer.getId(), getId());
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(getId());
     }
+
 }
 

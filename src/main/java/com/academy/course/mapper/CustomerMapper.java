@@ -22,21 +22,21 @@ public class CustomerMapper implements Mapper<Customer,CustomerDTO>,ShortMapper<
                 .id(entity.getId())
                 .login(entity.getLogin())
                 .email(entity.getEmail())
-                .orderDTOs(orderMapper.mapToListDTOS(entity.getOrders()))
+                .orderDTOs(orderMapper.mapToSetDTOS(entity.getOrders()))
                 .build();
     }
 
     @Override
     public Customer mapToEntity(CustomerDTO dto) {
         return Customer.builder()
-                .orders(orderMapper.mapToListEntities(dto.getOrderDTOs()))
+                .orders(orderMapper.mapToSetEntities(dto.getOrderDTOs()))
                 .login(dto.getLogin())
                 .email(dto.getEmail())
                 .build();
     }
 
     @Override
-    public Set<Customer> mapToListEntities(Set<CustomerDTO> dtoSet) {
+    public Set<Customer> mapToSetEntities(Set<CustomerDTO> dtoSet) {
         Set<Customer> list = new HashSet<>();
         for (CustomerDTO customerDTO : dtoSet){
             Customer customer = Customer.builder()
@@ -49,18 +49,18 @@ public class CustomerMapper implements Mapper<Customer,CustomerDTO>,ShortMapper<
     }
 
     @Override
-    public Set<CustomerDTO> mapToListDTOS(Set<Customer> entitySet) {
-        Set<CustomerDTO> list = new HashSet<>();
+    public Set<CustomerDTO> mapToSetDTOS(Set<Customer> entitySet) {
+        Set<CustomerDTO> set = new HashSet<>();
         for (Customer customer : entitySet){
             CustomerDTO customerDTO = CustomerDTO.builder()
                     .id(customer.getId())
                     .login(customer.getLogin())
                     .email(customer.getEmail())
-                    .orderDTOs(orderMapper.mapToListDTOS(customer.getOrders()))
+                    .orderDTOs(orderMapper.mapToSetDTOS(customer.getOrders()))
                     .build();
-            list.add(customerDTO);
+            set.add(customerDTO);
         }
-        return list;
+        return set;
     }
 
     @Override

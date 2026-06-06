@@ -22,7 +22,7 @@ public interface CustomerService {
     void createCustomer(CustomerDTO customerDTO,String pass) throws SQLException;
     void updateCustomer(Integer oldValueId,CustomerDTO newValue) throws SQLException;
     void deleteCustomer(CustomerDTO customerDTO) throws SQLException;
-    boolean register(String login,String passWord) throws SQLException, UserNotFound;
+    boolean register(CustomerDTO customerDTO,String password) throws SQLException, UserNotFound;
     boolean login(String login,String passWord) throws NoSuchFieldException, SQLException, UserNotFound;
 
 }

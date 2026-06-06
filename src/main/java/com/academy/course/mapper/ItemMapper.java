@@ -35,7 +35,7 @@ public class ItemMapper implements Mapper<Item, ItemDTO> {
     }
 
     @Override
-    public Set<Item> mapToListEntities(Set<ItemDTO> dtoSet) {
+    public Set<Item> mapToSetEntities(Set<ItemDTO> dtoSet) {
         Set<Item> items = new HashSet<>();
         for (ItemDTO itemDTO : dtoSet){
             Item item = Item.builder()
@@ -48,7 +48,7 @@ public class ItemMapper implements Mapper<Item, ItemDTO> {
     }
 
     @Override
-    public Set<ItemDTO> mapToListDTOS(Set<Item> entitySet) {
+    public Set<ItemDTO> mapToSetDTOS(Set<Item> entitySet) {
         Set<ItemDTO> itemDTOS = new HashSet<>();
         for (Item item : entitySet){
             ItemDTO itemDTO = ItemDTO.builder()

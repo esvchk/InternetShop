@@ -6,12 +6,10 @@ import com.academy.course.dao.orderDao.OrderDAOImpl;
 
 import com.academy.course.dao.productDao.ProductDAO;
 import com.academy.course.dao.productDao.ProductDAOImpl;
-import com.academy.course.dto.CustomerDTO;
 import com.academy.course.dto.ItemDTO;
 import com.academy.course.dto.OrderDTO;
 import com.academy.course.dto.ProductDTO;
 import com.academy.course.mapper.*;
-import com.academy.course.model.Customer;
 import com.academy.course.model.Item;
 import com.academy.course.model.Order;
 import com.academy.course.model.Product;
@@ -20,10 +18,8 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.Serializable;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class OrderServiceImpl implements OrderService {
 
@@ -42,12 +38,12 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Set<OrderDTO> getAllOrders() {
-        return orderMapper.mapToListDTOS(orderDAO.getAllOrders());
+        return orderMapper.mapToSetDTOS(orderDAO.getAllOrders());
     }
 
     @Override
     public Set<ItemDTO> getAllProductsFromOrder(OrderDTO orderDTO) {
-        return itemMapper.mapToListDTOS(orderMapper.mapToEntity(orderDTO).getItems());
+        return itemMapper.mapToSetDTOS(orderMapper.mapToEntity(orderDTO).getItems());
     }
 
     @Override

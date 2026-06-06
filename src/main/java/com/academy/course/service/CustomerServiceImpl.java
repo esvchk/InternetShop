@@ -16,12 +16,10 @@ import com.academy.course.model.Order;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.hibernate.Hibernate;
 
 import javax.persistence.NoResultException;
 import java.sql.SQLException;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class CustomerServiceImpl implements CustomerService {
 
@@ -43,7 +41,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Set<CustomerDTO> getAllCustomersWithOrdersAndItems() {
-        return customerMapper.mapToListDTOS(customerDAO.getAllCustomers());
+        return customerMapper.mapToSetDTOS(customerDAO.getAllCustomers());
     }
 
     @Override
@@ -51,7 +49,7 @@ public class CustomerServiceImpl implements CustomerService {
         if (customerDTO != null) {
             Customer customer = customerDAO.get(customerDTO.getId());
             Set<Order> orders = customer.getOrders();
-            return orderMapper.mapToListDTOS(orders);
+            return orderMapper.mapToSetDTOS(orders);
         } else
             throw new NullPointerException();
     }
@@ -99,18 +97,19 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public void createCustomer(CustomerDTO customerDTO, String pass) throws SQLException {
+
         Customer customer = Customer.builder()
                 .login(customerDTO.getLogin())
                 .email(customerDTO.getEmail())
                 .passWord(PasswordHasher.hashPass(pass))
                 .build();
-        Set<Order> orders = customerDTO.getOrderDTOs().stream()
-                .map(orderDTO -> Order.builder()
-                        .customer(customer)
-                        .isBought(false)
-                        .build())
-                .collect(Collectors.toSet());
-        customer.setOrders(orders);
+
+        Order order = Order.builder()
+                .customer(customer)
+                .isBought(false)
+                .build();
+        customer.getOrders().add(order);
+
         customerDAO.save(customer);
     }
 
@@ -132,33 +131,19 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public boolean register(String login, String passWord) {
-        if (customerDAO.getCustomerByLogin(login) != null) {
-            logger.warn("already exist with login {}", login);
-            throw new UserAlreadyExists("User already registered with this login");
-        } else {
-            try {
-                Customer customer = Customer.builder()
-                        .login(login)
-                        .passWord(PasswordHasher.hashPass(passWord))
-                        .orders(new HashSet<>())
-                        .build();
-
-                Order order = Order.builder()
-                        .customer(customer)
-                        .isBought(false)
-                        .build();
-
-
-                customer.getOrders().add(order);
-
-                customerDAO.save(customer);
-            } catch (NoResultException | SQLException e) {
-                e.printStackTrace();
+    public boolean register(CustomerDTO customerDTO, String password) throws SQLException {
+        String login = customerDTO.getLogin();
+        try {
+            if (customerDAO.getCustomerByLogin(login) != null) {
+                logger.warn("already exist with login {}", login);
+                throw new UserAlreadyExists("User already registered with this login");
+            } else {
+                createCustomer(customerDTO,password);
             }
+        } catch (NoResultException | SQLException e) {
+            e.printStackTrace();
         }
         return true;
-
     }
 
     @Override

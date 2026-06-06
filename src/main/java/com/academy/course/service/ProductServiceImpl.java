@@ -8,7 +8,6 @@ import com.academy.course.model.Product;
 
 import java.io.Serializable;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.Set;
 
 public class ProductServiceImpl implements ProductService {
@@ -52,7 +51,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Set<ProductDTO> findAllProducts() {
-        return productMapper.mapToListDTOS(productDAO.getAllProducts());
+        return productMapper.mapToSetDTOS(productDAO.getAllProducts());
     }
 
 

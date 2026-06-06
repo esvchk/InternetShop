@@ -36,8 +36,9 @@ public class App {
                 .build();
 
         Customer customer = Customer.builder()
-                .login("Grigoriy")
-                .email("@Gosha.org")
+                .login("Nina")
+                .email("@Mihail.org")
+                .passWord("2211")
                 .orders(orders)
                 .build();
 
@@ -71,7 +72,10 @@ public class App {
         ItemDAO itemDAO = new ItemDAOImpl();
         CustomerWithOrdersMapper customerWithOrdersMapper = new CustomerWithOrdersMapper(customerMapper, orderMapper);
 
-        customerService.login("Sam","123");
+//        customerService.deleteCustomer(customerMapper.mapToDTO(customerDAO.get(86)));
+//        orderDAO.delete(orderDAO.get(83));
+        customerService.register(customerMapper.mapToDTO(customer),"2211");
+
 
     }
 }

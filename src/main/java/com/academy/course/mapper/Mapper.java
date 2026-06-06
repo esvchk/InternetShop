@@ -1,6 +1,5 @@
 package com.academy.course.mapper;
 
-import java.util.List;
 import java.util.Set;
 
 public interface Mapper<E, D> {
@@ -9,9 +8,9 @@ public interface Mapper<E, D> {
 
     E mapToEntity(D dto);
 
-    Set<E> mapToListEntities(Set<D> dtoSet);
+    Set<E> mapToSetEntities(Set<D> dtoSet);
 
-    Set<D> mapToListDTOS(Set<E> entitySet);
+    Set<D> mapToSetDTOS(Set<E> entitySet);
 
 
 

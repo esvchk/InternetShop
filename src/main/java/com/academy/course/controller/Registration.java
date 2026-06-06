@@ -18,17 +18,17 @@ public class Registration extends HttpServlet {
 
     private final CustomerService customerService = new CustomerServiceImpl();
 
-    @Override
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String login = request.getParameter("login");
-        String passWord = request.getParameter("passWord");
-
-        String context = request.getContextPath();
-        try {
-            customerService.register(login, passWord);
-        } catch (SQLException | UserNotFound e) {
-            throw new RuntimeException(e);
-        }
-        response.sendRedirect(context + "/ShowProducts");
-    }
+//    @Override
+//    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//        String login = request.getParameter("login");
+//        String passWord = request.getParameter("passWord");
+//
+//        String context = request.getContextPath();
+//        try {
+//            customerService.register(login, passWord);
+//        } catch (SQLException | UserNotFound e) {
+//            throw new RuntimeException(e);
+//        }
+//        response.sendRedirect(context + "/ShowProducts");
+//    }
 }
