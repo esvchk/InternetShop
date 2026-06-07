@@ -3,15 +3,19 @@ package com.academy.course.service;
 
 import com.academy.course.dao.ItemDAO;
 import com.academy.course.dao.ItemDAOImpl;
+import com.academy.course.dao.customerDao.CustomerDAO;
+import com.academy.course.dao.customerDao.CustomerDAOImpl;
 import com.academy.course.dao.orderDao.OrderDAO;
 import com.academy.course.dao.orderDao.OrderDAOImpl;
 
 import com.academy.course.dao.productDao.ProductDAO;
 import com.academy.course.dao.productDao.ProductDAOImpl;
+import com.academy.course.dto.CustomerDTO;
 import com.academy.course.dto.ItemDTO;
 import com.academy.course.dto.OrderDTO;
 import com.academy.course.dto.ProductDTO;
 import com.academy.course.mapper.*;
+import com.academy.course.model.Customer;
 import com.academy.course.model.Item;
 import com.academy.course.model.Order;
 import com.academy.course.model.Product;
@@ -29,6 +33,7 @@ public class OrderServiceImpl implements OrderService {
     private static final Logger log = LogManager.getLogger(OrderServiceImpl.class);
     private final OrderDAO orderDAO = new OrderDAOImpl();
     private final ProductDAO productDAO = new ProductDAOImpl();
+    private final CustomerDAO customerDAO = new CustomerDAOImpl();
     private final ItemDAO itemDAO = new ItemDAOImpl();
     private final ProductMapper productMapper = new ProductMapper();
     private final ItemMapper itemMapper = new ItemMapper(productMapper);
@@ -43,16 +48,6 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Set<OrderDTO> getAllOrders() {
         return orderMapper.mapToSetDTOS(orderDAO.getAllOrders());
-    }
-
-    @Override
-    public Set<ItemDTO> getAllProductsFromOrder(Integer orderId) throws SQLException {
-        if (orderId != null) {
-            Order order = orderDAO.get(orderId);
-            Set<Item> items = order.getItems();
-            return itemMapper.mapToSetDTOS(items);
-        } else
-            throw new NullPointerException();
     }
 
     @Override
@@ -75,8 +70,8 @@ public class OrderServiceImpl implements OrderService {
         if (order.getIsBought() != null && !order.getIsBought()) {
             Product product = productDAO.get(productDTO.getId());
             Optional<Item> items = order.getItems().stream()
-                            .filter(item1 -> item1.getProduct().getId().equals(product.getId()))
-                                    .findFirst();
+                    .filter(item1 -> item1.getProduct().getId().equals(product.getId()))
+                    .findFirst();
             if (items.isPresent()) {
                 items.get().setProductQuantity(items.get().getProductQuantity() + quantity);
             } else {
@@ -94,8 +89,40 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void deleteProductFromOrder(ProductDTO productDTO, OrderDTO orderDTO) throws SQLException {
-        orderDAO.deleteProductFromOrder(productMapper.mapToEntity(productDTO), orderMapper.mapToEntity(orderDTO));
+    public Set<OrderDTO> getAllOrdersOfCustomer(CustomerDTO customerDTO) throws SQLException {
+        if (customerDTO != null) {
+            Customer customer = customerDAO.get(customerDTO.getId());
+            Set<Order> orders = customer.getOrders();
+            return orderMapper.mapToSetDTOS(orders);
+        } else
+            throw new NullPointerException();
+    }
+
+    @Override
+    public void deleteItemFromOrder(ItemDTO itemDTO, Integer orderId,Integer quantity) throws SQLException {
+        Order order = orderDAO.get(orderId);
+        Item item = itemDAO.get(itemDTO.getId());
+        if (item.getProductQuantity().equals(quantity) || quantity > item.getProductQuantity()) {
+            itemDAO.delete(item);
+        } else {
+            item.setProductQuantity(item.getProductQuantity() - quantity);
+        }
+        orderDAO.update(order);
+    }
+
+    @Override
+    public void buyOrder(OrderDTO orderDTO) throws SQLException {
+        if (orderDTO.getId() != null) {
+            Order order = orderDAO.get(orderDTO.getId());
+            if (!order.getIsBought()) {
+                order.setIsBought(true);
+                orderDAO.update(order);
+            } else
+                log.warn("Order {} already has been purchased", orderDTO);
+
+        } else
+            throw new NullPointerException();
+
     }
 
 

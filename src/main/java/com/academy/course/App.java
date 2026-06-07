@@ -36,16 +36,16 @@ public class App {
                 .build();
 
         Customer customer = Customer.builder()
-                .login("Nina")
-                .email("@Mihail.org")
-                .passWord("2211")
-                .orders(orders)
+                .login("Valera")
+                .email("@Valera.org")
+//                .passWord("2211")
+//                .orders(orders)
                 .build();
 
 
         Order order = Order.builder()
-                .items(items)
-                .customer(customer)
+//                .items(items)
+//                .customer(customer)
                 .build();
 
         Item item = Item.builder()
@@ -70,11 +70,15 @@ public class App {
         ProductServiceImpl productService = new ProductServiceImpl();
         CustomerService customerService = new CustomerServiceImpl();
         ItemDAO itemDAO = new ItemDAOImpl();
-        CustomerWithOrdersMapper customerWithOrdersMapper = new CustomerWithOrdersMapper(customerMapper, orderMapper);
 
-//        customerService.deleteCustomer(customerMapper.mapToDTO(customerDAO.get(86)));
+
+//        customerService.deleteCustomer(customerMapper.mapToDTO(customerDAO.get(94)));
 //        orderDAO.delete(orderDAO.get(83));
 //        customerService.register(customerMapper.mapToDTO(customer),"2211");
+//        System.out.println(orderService.getAllOrdersOfCustomer(customerMapper.mapToDTO(customerDAO.get(60))));
+
+        orderService.deleteItemFromOrder(itemMapper.mapToDTO(itemDAO.get(50)),3,1);
+//        customerService.addNewOrderToCustomer(customerMapper.mapToDTO(customerDAO.get(60)));
 
 
     }

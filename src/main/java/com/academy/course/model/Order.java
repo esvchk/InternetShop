@@ -1,10 +1,8 @@
 package com.academy.course.model;
 
-import com.thoughtworks.qdox.model.expression.Or;
 import lombok.*;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.*;
 
 @Builder
@@ -39,6 +37,22 @@ public class Order extends DataEntity {
     @Override
     public int hashCode() {
         return Objects.hash(getId());
+    }
+
+    public void addItem(Item item){
+        if (this.getItems()==null){
+            this.setItems(new HashSet<>());
+        }
+        this.items.add(item);
+        item.setOrder(this);
+    }
+
+    public void removeItem(Item item){
+        if (this.getItems() == null) {
+            this.setItems(new HashSet<>());
+        }
+        this.items.remove(item);
+        item.setOrder(null);
     }
 
 

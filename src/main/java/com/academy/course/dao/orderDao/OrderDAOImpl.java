@@ -26,29 +26,7 @@ public class OrderDAOImpl extends DAOImpl<Order> implements OrderDAO {
         return new HashSet<>(getEm().createQuery("from Order order", Order.class).getResultList());
     }
 
-    @Override
-    public void addProductToOrder(Product product, Order order, Integer quantity) throws SQLException {
-        Item newItem = Item.builder()
-                .product(product)
-                .productQuantity(quantity)
-                .order(order)
-                .build();
-        order.getItems().add(newItem);
-        update(order);
-    }
 
-
-
-    @Override
-    public void deleteProductFromOrder(Product product, Order order) throws SQLException {
-        boolean isRemoved = order.getItems().removeIf(item -> item.getProduct() != null
-                && item.getProduct().getId() != null && item.getProduct().getId().equals(product.getId()));
-        if (isRemoved) {
-            update(order);
-        } else
-            throw new NullPointerException();
-
-    }
 
 }
 

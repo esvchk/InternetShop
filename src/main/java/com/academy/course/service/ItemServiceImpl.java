@@ -30,22 +30,28 @@ public class ItemServiceImpl implements ItemService{
 
 
     @Override
-    public void updateItem(Integer oldValue, ItemDTO newValue) {
-
-    }
-
-    @Override
     public ItemDTO getItem(Integer id) throws SQLException {
         return itemMapper.mapToDTO(itemDAO.get(id));
     }
 
     @Override
     public void deleteItem(ItemDTO itemDTO) throws SQLException {
-        itemDAO.get(itemDTO.getId());
+        Item item = itemDAO.get(itemDTO.getId());
+        itemDAO.delete(item);
     }
 
     @Override
     public Set<ItemDTO> getAllItems() {
         return Collections.emptySet();
+    }
+
+    @Override
+    public Set<ItemDTO> getAllItemsFromOrder(Integer orderId) throws SQLException {
+        if (orderId != null) {
+            Order order = orderDAO.get(orderId);
+            Set<Item> items = order.getItems();
+            return itemMapper.mapToSetDTOS(items);
+        } else
+            throw new NullPointerException();
     }
 }

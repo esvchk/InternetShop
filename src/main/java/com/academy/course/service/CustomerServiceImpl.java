@@ -45,32 +45,6 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public Set<OrderDTO> getAllOrdersOfCustomer(CustomerDTO customerDTO) throws SQLException {
-        if (customerDTO != null) {
-            Customer customer = customerDAO.get(customerDTO.getId());
-            Set<Order> orders = customer.getOrders();
-            return orderMapper.mapToSetDTOS(orders);
-        } else
-            throw new NullPointerException();
-    }
-
-    @Override
-    public void buyOrder(OrderDTO orderDTO) throws SQLException {
-        if (orderDTO.getId() != null) {
-            Order order = orderDAO.get(orderDTO.getId());
-            if (!order.getIsBought()) {
-                order.setIsBought(true);
-                orderDAO.update(order);
-            } else
-
-                logger.warn("Order {} already has been purchased", orderDTO);
-
-        } else
-            throw new NullPointerException();
-
-    }
-
-    @Override
     public CustomerDTO findCustomerById(Integer id) throws SQLException {
         return customerMapper.mapToDTO(customerDAO.get(id));
     }
@@ -91,7 +65,8 @@ public class CustomerServiceImpl implements CustomerService {
                 .customer(customer)
                 .isBought(false)
                 .build();
-        orderDAO.save(order);
+        customer.addOrder(order);
+        customerDAO.update(customer);
     }
 
     @Override
@@ -107,9 +82,11 @@ public class CustomerServiceImpl implements CustomerService {
                 .customer(customer)
                 .isBought(false)
                 .build();
-        customer.getOrders().add(order);
+
+        customer.addOrder(order);
 
         customerDAO.save(customer);
+
     }
 
     @Override

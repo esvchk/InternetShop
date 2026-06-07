@@ -44,5 +44,13 @@ public class Customer extends DataEntity {
         return Objects.hash(getId());
     }
 
+    public void addOrder(Order order){
+        if (this.orders == null) {
+            this.orders = new HashSet<>();
+        }
+        this.orders.add(order);
+        order.setCustomer(this);
+    }
+
 }
 
