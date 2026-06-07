@@ -77,9 +77,12 @@ public class App {
 //        customerService.register(customerMapper.mapToDTO(customer),"2211");
 //        System.out.println(orderService.getAllOrdersOfCustomer(customerMapper.mapToDTO(customerDAO.get(60))));
 
-        orderService.deleteItemFromOrder(itemMapper.mapToDTO(itemDAO.get(50)),3,1);
+//        orderService.deleteItemFromOrder(itemMapper.mapToDTO(itemDAO.get(50)),3,1);
 //        customerService.addNewOrderToCustomer(customerMapper.mapToDTO(customerDAO.get(60)));
+//        System.out.println(orderService.getAllOrdersOfCustomer(customerMapper.mapToDTO(customerDAO.get(60))));
 
+//        orderService.addProductToOrder(productMapper.mapToDTO(dao.get(1)),orderMapper.mapToDTO(orderDAO.get(106)),8);
 
+        orderService.deleteItemFromOrder(itemMapper.mapToDTO(itemDAO.get(107)),106,3);
     }
 }

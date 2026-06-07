@@ -12,7 +12,7 @@ import java.util.Set;
 public interface OrderService {
 
     OrderDTO findOrderById(Serializable orderId) throws SQLException;
-    Set<OrderDTO> getAllOrders();
+    Set<OrderDTO> getAllOrdersWithItems();
     Set<OrderDTO> getAllOrdersOfCustomer(CustomerDTO customerDTO) throws SQLException;
     void buyOrder(OrderDTO orderDTO) throws SQLException;
     void deleteOrder(OrderDTO orderDTO) throws SQLException;

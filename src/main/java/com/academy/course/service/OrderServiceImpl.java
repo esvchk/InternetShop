@@ -46,7 +46,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Set<OrderDTO> getAllOrders() {
+    public Set<OrderDTO> getAllOrdersWithItems() {
         return orderMapper.mapToSetDTOS(orderDAO.getAllOrders());
     }
 
@@ -80,7 +80,7 @@ public class OrderServiceImpl implements OrderService {
                         .product(product)
                         .order(order)
                         .build();
-                order.getItems().add(item);
+                order.addItem(item);
             }
             orderDAO.update(order);
         } else {
