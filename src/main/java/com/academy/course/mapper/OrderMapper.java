@@ -1,14 +1,12 @@
 package com.academy.course.mapper;
 
 import com.academy.course.dto.OrderDTO;
-import com.academy.course.dto.OrderShortDTO;
 import com.academy.course.model.Order;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
-public class OrderMapper implements Mapper<Order, OrderDTO>, ShortMapper<OrderShortDTO, Order> {
+public class OrderMapper implements Mapper<Order, OrderDTO>{
 
     private final ItemMapper itemMapper;
 
@@ -61,12 +59,4 @@ public class OrderMapper implements Mapper<Order, OrderDTO>, ShortMapper<OrderSh
         return set;
     }
 
-
-    @Override
-    public OrderShortDTO mapToShortDTO(Order order) {
-        return OrderShortDTO.builder()
-                .id(order.getId())
-                .isBought(order.getIsBought())
-                .build();
-    }
 }

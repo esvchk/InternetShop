@@ -5,24 +5,26 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Set;
+
 @Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CustomerShortDTO {
+public class CategoryDTO {
 
     private Integer id;
 
-    private String login;
+    private String name;
 
-    private String email;
+    private Set<ProductDTO> productsDTO;
 
     @Override
     public String toString() {
-        return "CustomerShortDTO{" +
+        return "CategoryDTO{" +
                 "id=" + id +
-                ", login='" + login + '\'' +
-                ", email='" + email + '\'' +
+                ", name='" + name + '\'' +
+                ", productsDTO=" + productsDTO +
                 '}';
     }
 }

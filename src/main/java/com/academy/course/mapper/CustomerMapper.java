@@ -1,13 +1,12 @@
 package com.academy.course.mapper;
 
 import com.academy.course.dto.CustomerDTO;
-import com.academy.course.dto.CustomerShortDTO;
 import com.academy.course.model.Customer;
 
 import java.util.HashSet;
 import java.util.Set;
 
-public class CustomerMapper implements Mapper<Customer,CustomerDTO>,ShortMapper<CustomerShortDTO,Customer>{
+public class CustomerMapper implements Mapper<Customer,CustomerDTO>{
 
     private final OrderMapper orderMapper;
 
@@ -63,12 +62,4 @@ public class CustomerMapper implements Mapper<Customer,CustomerDTO>,ShortMapper<
         return set;
     }
 
-    @Override
-    public CustomerShortDTO mapToShortDTO(Customer dto) {
-        return CustomerShortDTO.builder()
-                .id(dto.getId())
-                .login(dto.getLogin())
-                .email(dto.getEmail())
-                .build();
-    }
 }

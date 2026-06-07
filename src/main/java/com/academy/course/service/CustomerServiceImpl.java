@@ -26,9 +26,7 @@ public class CustomerServiceImpl implements CustomerService {
     private static final Logger logger = LogManager.getLogger(CustomerServiceImpl.class);
     private final CustomerDAO customerDAO = new CustomerDAOImpl();
     private final OrderDAO orderDAO = new OrderDAOImpl();
-    private final OrderMapper orderMapper = MapperFactory.getOrderMapper();
     private final CustomerMapper customerMapper = MapperFactory.getCustomerMapper();
-    private final CustomerWithOrdersMapper customerWithOrdersMapper = MapperFactory.getCustomerWithOrdersMapper();
 
 
     @Override
