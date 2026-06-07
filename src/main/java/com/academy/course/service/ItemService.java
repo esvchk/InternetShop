@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.Set;
 
 public interface ItemService {
-    ItemDTO getItem(Integer id) throws SQLException;
+    ItemDTO getItemById(Integer id) throws SQLException;
     void deleteItem(ItemDTO itemDTO) throws SQLException;
     Set<ItemDTO> getAllItems();
     Set<ItemDTO> getAllItemsFromOrder(Integer orderId) throws SQLException;

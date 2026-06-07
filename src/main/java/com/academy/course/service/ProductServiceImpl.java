@@ -16,13 +16,13 @@ public class ProductServiceImpl implements ProductService {
     private final ProductMapper productMapper = new ProductMapper();
 
     @Override
-    public void updateProduct(ProductDTO productDTO) throws SQLException {
-        Product product = productDAO.get(productDTO.getId());
+    public void updateProduct(Integer oldValueId,ProductDTO newValue) throws SQLException {
+        Product product = productDAO.get(oldValueId);
         if (product != null) {
-            product.setInfo(productDTO.getInfo());
-            product.setName(productDTO.getName());
-            product.setPrice(productDTO.getPrice());
-            product.setIsAvailable(productDTO.getIsAvailable());
+            product.setInfo(newValue.getInfo());
+            product.setName(newValue.getName());
+            product.setPrice(newValue.getPrice());
+            product.setIsAvailable(newValue.getIsAvailable());
             productDAO.update(product);
         }
     }
@@ -50,7 +50,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Set<ProductDTO> findAllProducts() {
+    public Set<ProductDTO> getAllProducts() {
         return productMapper.mapToSetDTOS(productDAO.getAllProducts());
     }
 

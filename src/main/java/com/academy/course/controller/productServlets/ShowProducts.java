@@ -16,7 +16,7 @@ public class ShowProducts extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("products",productService.findAllProducts());
+        request.setAttribute("products",productService.getAllProducts());
         request.getRequestDispatcher("/AllProducts.jsp")
                 .forward(request,response);
     }

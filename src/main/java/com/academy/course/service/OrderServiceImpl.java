@@ -1,8 +1,8 @@
 package com.academy.course.service;
 
 
-import com.academy.course.dao.ItemDAO;
-import com.academy.course.dao.ItemDAOImpl;
+import com.academy.course.dao.itemDao.ItemDAO;
+import com.academy.course.dao.itemDao.ItemDAOImpl;
 import com.academy.course.dao.customerDao.CustomerDAO;
 import com.academy.course.dao.customerDao.CustomerDAOImpl;
 import com.academy.course.dao.orderDao.OrderDAO;
@@ -26,7 +26,6 @@ import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class OrderServiceImpl implements OrderService {
 

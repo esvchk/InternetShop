@@ -46,7 +46,7 @@ public class UpdateProduct extends HttpServlet {
                 .info(info)
                 .build();
         try {
-            productService.updateProduct(productDTO);
+            productService.updateProduct(id,productDTO);
             response.sendRedirect(context + "/ShowProducts");
         } catch (SQLException e) {
             throw new RuntimeException(e);

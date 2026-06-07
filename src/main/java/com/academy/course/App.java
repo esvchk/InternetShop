@@ -2,8 +2,8 @@ package com.academy.course;
 
 import com.academy.course.dao.DAO;
 import com.academy.course.dao.DAOImpl;
-import com.academy.course.dao.ItemDAO;
-import com.academy.course.dao.ItemDAOImpl;
+import com.academy.course.dao.itemDao.ItemDAO;
+import com.academy.course.dao.itemDao.ItemDAOImpl;
 import com.academy.course.dao.customerDao.CustomerDAO;
 import com.academy.course.dao.customerDao.CustomerDAOImpl;
 import com.academy.course.dao.orderDao.OrderDAO;
@@ -15,10 +15,7 @@ import com.academy.course.model.*;
 import com.academy.course.service.*;
 
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class App {
@@ -29,9 +26,9 @@ public class App {
 
 
         Product product = Product.builder()
-                .name("Cheese")
-                .price(2.45)
-                .info("45%")
+                .name("eggs")
+                .price(4.00)
+                .info("10pcs")
                 .isAvailable(true)
                 .build();
 
@@ -72,17 +69,6 @@ public class App {
         ItemDAO itemDAO = new ItemDAOImpl();
 
 
-//        customerService.deleteCustomer(customerMapper.mapToDTO(customerDAO.get(94)));
-//        orderDAO.delete(orderDAO.get(83));
-//        customerService.register(customerMapper.mapToDTO(customer),"2211");
-//        System.out.println(orderService.getAllOrdersOfCustomer(customerMapper.mapToDTO(customerDAO.get(60))));
-
-//        orderService.deleteItemFromOrder(itemMapper.mapToDTO(itemDAO.get(50)),3,1);
-//        customerService.addNewOrderToCustomer(customerMapper.mapToDTO(customerDAO.get(60)));
-//        System.out.println(orderService.getAllOrdersOfCustomer(customerMapper.mapToDTO(customerDAO.get(60))));
-
-//        orderService.addProductToOrder(productMapper.mapToDTO(dao.get(1)),orderMapper.mapToDTO(orderDAO.get(106)),8);
-
-        orderService.deleteItemFromOrder(itemMapper.mapToDTO(itemDAO.get(107)),106,3);
+        System.out.println(productService.findProductsByName("Milk"));
     }
 }
