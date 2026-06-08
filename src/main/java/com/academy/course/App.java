@@ -25,12 +25,18 @@ public class App {
 
         Set<Order> orders = new HashSet<>();
         Set<Item> items = new HashSet<>();
+        Set<Product> products = new HashSet<>();
+
+        Category category = Category.builder()
+                .name("Coffee")
+                .build();
 
 
         Product product = Product.builder()
                 .name("Capucino")
                 .price(8.00)
                 .isAvailable(true)
+                .category(category)
                 .build();
 
         Customer customer = Customer.builder()
@@ -52,11 +58,11 @@ public class App {
                 .order(order)
                 .build();
 
-        Category category = Category.builder()
-                .name("Drinks")
-                .build();
+
+
         orders.add(order);
         items.add(item);
+        products.add(product);
 
 
         ProductMapper productMapper = new ProductMapper();
@@ -75,13 +81,9 @@ public class App {
         CategoryDAO categoryDAO = new CategoryDAOImpl();
         CategoryService categoryService = new CategoryServiceImpl();
 
-
 //        categoryService.createCategory(categoryMapper.mapToDTO(category));
-//        categoryService.addProductToCategory(4,productMapper.mapToDTO(dao.get(3)));
-//        productService.addProduct(productMapper.mapToDTO(product));
-//        customerService.createCustomer(customerMapper.mapToDTO(customer),"123");
-//        customerService.deleteCustomer(customerMapper.mapToDTO(customerDAO.get(9)));
-        categoryService.deleteCategory(categoryMapper.mapToDTO(categoryDAO.get(4)));
+
+        categoryService.updateCategory(11,categoryMapper.mapToDTO(category));
 
 
     }

@@ -9,7 +9,7 @@ import java.sql.SQLException;
 public interface CategoryService {
     void createCategory(CategoryDTO categoryDTO) throws SQLException;
     void addProductToCategory(Integer categoryId, ProductDTO productDTO) throws SQLException;
-    void updateCategory(Integer oldValueId,CategoryDTO newValue);
+    void updateCategory(Integer oldValueId,CategoryDTO newValue) throws SQLException;
     void deleteCategory(CategoryDTO categoryDTO) throws SQLException;
-    CategoryDTO getCategory(Integer id);
+    CategoryDTO getCategory(Integer id) throws SQLException;
 }

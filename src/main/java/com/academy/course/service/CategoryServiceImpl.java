@@ -40,8 +40,11 @@ public class CategoryServiceImpl implements CategoryService{
     }
 
     @Override
-    public void updateCategory(Integer oldValueId, CategoryDTO newValue) {
-
+    public void updateCategory(Integer oldValueId, CategoryDTO newValue) throws SQLException {
+        Category category = categoryDAO.get(oldValueId);
+        category.setProducts(category.getProducts());
+        category.setName(newValue.getName());
+        categoryDAO.update(category);
     }
 
     @Override
@@ -55,7 +58,8 @@ public class CategoryServiceImpl implements CategoryService{
     }
 
     @Override
-    public CategoryDTO getCategory(Integer id) {
-        return null;
+    public CategoryDTO getCategory(Integer id) throws SQLException {
+        Category category = categoryDAO.get(id);
+        return categoryMapper.mapToDTO(category);
     }
 }
