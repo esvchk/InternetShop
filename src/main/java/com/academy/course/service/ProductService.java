@@ -16,4 +16,5 @@ public interface ProductService {
     ProductDTO findProductById(Serializable id) throws SQLException;
     ProductDTO findProductsByName(String name);
     Set<ProductDTO> getAllProducts();
+    Set<ProductDTO> getAllProductsFromCategory(Integer categoryId) throws SQLException;
 }

@@ -1,9 +1,14 @@
 package com.academy.course.service;
 
+import com.academy.course.dao.categoryDao.CategoryDAO;
+import com.academy.course.dao.categoryDao.CategoryDAOImpl;
 import com.academy.course.dao.productDao.ProductDAO;
 import com.academy.course.dao.productDao.ProductDAOImpl;
 import com.academy.course.dto.ProductDTO;
+import com.academy.course.mapper.CategoryMapper;
+import com.academy.course.mapper.MapperFactory;
 import com.academy.course.mapper.ProductMapper;
+import com.academy.course.model.Category;
 import com.academy.course.model.Product;
 
 import java.io.Serializable;
@@ -14,6 +19,7 @@ public class ProductServiceImpl implements ProductService {
 
     private final ProductDAO productDAO = new ProductDAOImpl();
     private final ProductMapper productMapper = new ProductMapper();
+    private final CategoryDAO categoryDAO = new CategoryDAOImpl();
 
     @Override
     public void updateProduct(Integer oldValueId,ProductDTO newValue) throws SQLException {
@@ -52,6 +58,12 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Set<ProductDTO> getAllProducts() {
         return productMapper.mapToSetDTOS(productDAO.getAllProducts());
+    }
+
+    @Override
+    public Set<ProductDTO> getAllProductsFromCategory(Integer categoryId) throws SQLException {
+        Category category = categoryDAO.get(categoryId);
+        return productMapper.mapToSetDTOS(category.getProducts());
     }
 
 

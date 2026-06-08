@@ -81,9 +81,9 @@ public class App {
         CategoryDAO categoryDAO = new CategoryDAOImpl();
         CategoryService categoryService = new CategoryServiceImpl();
 
-//        categoryService.createCategory(categoryMapper.mapToDTO(category));
 
-        categoryService.updateCategory(11,categoryMapper.mapToDTO(category));
+//        categoryService.addProductToCategory(11,productMapper.mapToDTO(dao.get(3)));
+        System.out.println(productService.getAllProductsFromCategory(11));
 
 
     }

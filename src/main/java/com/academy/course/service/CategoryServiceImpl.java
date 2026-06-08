@@ -17,7 +17,6 @@ import java.sql.SQLException;
 public class CategoryServiceImpl implements CategoryService{
     private final CategoryDAO categoryDAO = new CategoryDAOImpl();
     private final ProductDAO productDAO = new ProductDAOImpl();
-    private final ProductMapper productMapper = MapperFactory.getProductMapper();
     private final CategoryMapper categoryMapper = MapperFactory.getCategoryMapper();
 
     @Override
