@@ -16,6 +16,7 @@ public class ProductMapper implements Mapper<Product, ProductDTO>{
                 .name(entity.getName())
                 .price(entity.getPrice())
                 .info(entity.getInfo())
+                .productLimit(entity.getProductLimit())
                 .isAvailable(entity.getIsAvailable())
                 .build();
     }
@@ -26,6 +27,7 @@ public class ProductMapper implements Mapper<Product, ProductDTO>{
                 .name(dto.getName())
                 .price(dto.getPrice())
                 .info(dto.getInfo())
+                .productLimit(dto.getProductLimit())
                 .isAvailable(dto.getIsAvailable())
                 .build();
     }
@@ -38,6 +40,7 @@ public class ProductMapper implements Mapper<Product, ProductDTO>{
                     .name(productDTO.getName())
                     .price(productDTO.getPrice())
                     .info(productDTO.getInfo())
+                    .productLimit(productDTO.getProductLimit())
                     .isAvailable(productDTO.getIsAvailable())
                     .build();
             list.add(product);
@@ -54,6 +57,7 @@ public class ProductMapper implements Mapper<Product, ProductDTO>{
                     .name(product.getName())
                     .price(product.getPrice())
                     .info(product.getInfo())
+                    .productLimit(product.getProductLimit())
                     .isAvailable(product.getIsAvailable())
                     .build();
             productDTOS.add(productDTO);

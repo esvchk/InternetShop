@@ -23,9 +23,6 @@ public class Employee extends DataEntity {
     private String passWord;
 
     @Column
-    private String paymentData;
-
-    @Column
     @Enumerated(EnumType.STRING)
     private Role role;
 

@@ -18,8 +18,6 @@ public class EmployeeDTO {
 
     private String login;
 
-    private String paymentData;
-
     private Role role;
 
     private Set<OrderDTO> orderDTOs;
@@ -29,7 +27,6 @@ public class EmployeeDTO {
         return "EmployeeDTO{" +
                 "id=" + id +
                 ", login='" + login + '\'' +
-                ", email='" + paymentData + '\'' +
                 ", orderDTOs=" + orderDTOs +
                 '}';
     }

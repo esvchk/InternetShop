@@ -13,7 +13,7 @@ public interface OrderService {
 
     OrderDTO findOrderById(Serializable orderId) throws SQLException;
     Set<OrderDTO> getAllOrdersWithItems();
-    Set<OrderDTO> getAllOrdersOfCustomer(EmployeeDTO employeeDTO) throws SQLException;
+    Set<OrderDTO> getAllOrdersOfEmployee(EmployeeDTO employeeDTO) throws SQLException;
     void buyOrder(OrderDTO orderDTO) throws SQLException;
     void deleteOrder(OrderDTO orderDTO) throws SQLException;
     void addProductToOrder(ProductDTO productDTO, OrderDTO orderDTO, Integer quantity) throws SQLException;

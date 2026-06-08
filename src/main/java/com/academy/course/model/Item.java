@@ -20,7 +20,7 @@ public class Item extends DataEntity {
     private Integer productQuantity;
 
     @Column
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.ORDINAL)
     private Discount discount;
 
     @ManyToOne(fetch = FetchType.EAGER)

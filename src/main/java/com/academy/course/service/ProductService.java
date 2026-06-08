@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Set;
 
 public interface ProductService {
+    void setProductLimit(Integer productId,Integer limit) throws SQLException;
     void updateProduct(Integer oldValueId,ProductDTO newValue) throws SQLException;
     void addProduct(ProductDTO productDTO) throws SQLException;
     void deleteProduct(ProductDTO productDTO) throws SQLException;

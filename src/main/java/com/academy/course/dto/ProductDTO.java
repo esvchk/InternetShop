@@ -19,6 +19,8 @@ public class ProductDTO {
 
     private String info;
 
+    private Integer productLimit;
+
     private Boolean isAvailable;
 
 

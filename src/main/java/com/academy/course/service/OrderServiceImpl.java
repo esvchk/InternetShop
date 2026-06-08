@@ -88,7 +88,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Set<OrderDTO> getAllOrdersOfCustomer(EmployeeDTO employeeDTO) throws SQLException {
+    public Set<OrderDTO> getAllOrdersOfEmployee(EmployeeDTO employeeDTO) throws SQLException {
         if (employeeDTO != null) {
             Employee employee = employeeDAO.get(employeeDTO.getId());
             Set<Order> orders = employee.getOrders();

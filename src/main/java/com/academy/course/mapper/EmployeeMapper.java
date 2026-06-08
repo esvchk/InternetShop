@@ -21,7 +21,7 @@ public class EmployeeMapper implements Mapper<Employee, EmployeeDTO>{
                 .id(entity.getId())
                 .role(entity.getRole())
                 .login(entity.getLogin())
-                .paymentData(entity.getPaymentData())
+
                 .orderDTOs(orderMapper.mapToSetDTOS(entity.getOrders()))
                 .build();
     }
@@ -32,7 +32,6 @@ public class EmployeeMapper implements Mapper<Employee, EmployeeDTO>{
                 .orders(orderMapper.mapToSetEntities(dto.getOrderDTOs()))
                 .role(dto.getRole())
                 .login(dto.getLogin())
-                .paymentData(dto.getPaymentData())
                 .build();
     }
 
@@ -43,7 +42,6 @@ public class EmployeeMapper implements Mapper<Employee, EmployeeDTO>{
             Employee employee = Employee.builder()
                     .role(employeeDTO.getRole())
                     .login(employeeDTO.getLogin())
-                    .paymentData(employeeDTO.getPaymentData())
                     .build();
             list.add(employee);
         }
@@ -58,7 +56,6 @@ public class EmployeeMapper implements Mapper<Employee, EmployeeDTO>{
                     .id(employee.getId())
                     .role(employee.getRole())
                     .login(employee.getLogin())
-                    .paymentData(employee.getPaymentData())
                     .orderDTOs(orderMapper.mapToSetDTOS(employee.getOrders()))
                     .build();
             set.add(employeeDTO);

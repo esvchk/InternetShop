@@ -72,7 +72,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         Employee employee = Employee.builder()
                 .login(employeeDTO.getLogin())
-                .paymentData(employeeDTO.getPaymentData())
                 .role(role)
                 .passWord(PasswordHasher.hashPass(pass))
                 .build();
@@ -92,7 +91,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     public void updateEmployee(Integer oldValueId, EmployeeDTO newValue) throws SQLException {
         Employee employee = employeeDAO.get(oldValueId);
         employee.setLogin(newValue.getLogin());
-        employee.setPaymentData(newValue.getPaymentData());
         employeeDAO.update(employee);
     }
 
@@ -106,7 +104,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public boolean register(EmployeeDTO employeeDTO, String password, Role role) throws SQLException {
+    public boolean register(EmployeeDTO employeeDTO, String password, Role role) {
         String login = employeeDTO.getLogin();
         try {
             if (employeeDAO.getEmployeeByLogin(login) != null) {

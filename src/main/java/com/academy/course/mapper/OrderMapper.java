@@ -21,6 +21,8 @@ public class OrderMapper implements Mapper<Order, OrderDTO>{
                 .id(entity.getId())
                 .itemsDTO(itemMapper.mapToSetDTOS(entity.getItems()))
                 .isBought(entity.getIsBought())
+                .paymentData(entity.getPaymentData())
+                .totalCost(entity.getTotalCost())
                 .build();
     }
 
@@ -29,6 +31,7 @@ public class OrderMapper implements Mapper<Order, OrderDTO>{
         return Order.builder()
                 .items(itemMapper.mapToSetEntities(dto.getItemsDTO()))
                 .isBought(dto.getIsBought())
+                .totalCost(dto.getTotalCost())
                 .build();
     }
 
@@ -37,6 +40,8 @@ public class OrderMapper implements Mapper<Order, OrderDTO>{
         Set<Order> set = new HashSet<>();
         for (OrderDTO orderDTO : dtoSet) {
             Order order = Order.builder()
+                    .totalCost(orderDTO.getTotalCost())
+                    .paymentData(orderDTO.getPaymentData())
                     .items(itemMapper.mapToSetEntities(orderDTO.getItemsDTO()))
                     .isBought(orderDTO.getIsBought())
                     .build();
@@ -51,6 +56,8 @@ public class OrderMapper implements Mapper<Order, OrderDTO>{
         for (Order order : entitySet) {
             OrderDTO orderDTO = OrderDTO.builder()
                     .id(order.getId())
+                    .totalCost(order.getTotalCost())
+                    .paymentData(order.getPaymentData())
                     .itemsDTO(itemMapper.mapToSetDTOS(order.getItems()))
                     .isBought(order.getIsBought())
                     .build();

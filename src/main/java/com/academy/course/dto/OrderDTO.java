@@ -1,14 +1,10 @@
 package com.academy.course.dto;
 
-import com.academy.course.model.Product;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 
 @Builder
@@ -21,6 +17,10 @@ public class OrderDTO {
 
     private Set<ItemDTO> itemsDTO;
 
+    private String paymentData;
+
+    private Double totalCost;
+
     private Boolean isBought;
 
 
@@ -29,6 +29,7 @@ public class OrderDTO {
         return "OrderDTO{" +
                 "id=" + id +
                 ", itemsDTO=" + itemsDTO +
+                ", paymentData=" + paymentData +
                 ", isBought=" + isBought +
                 '}';
     }

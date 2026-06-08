@@ -23,6 +23,9 @@ public class Order extends DataEntity {
     @Column
     private String paymentData;
 
+    @Column
+    private Double totalCost;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "employee_id")
     private Employee employee;
@@ -57,7 +60,5 @@ public class Order extends DataEntity {
         this.items.remove(item);
         item.setOrder(null);
     }
-
-
 
 }

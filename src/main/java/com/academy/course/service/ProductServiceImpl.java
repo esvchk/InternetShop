@@ -22,6 +22,17 @@ public class ProductServiceImpl implements ProductService {
     private final CategoryDAO categoryDAO = new CategoryDAOImpl();
 
     @Override
+    public void setProductLimit(Integer productId, Integer limit) throws SQLException {
+        Product product = productDAO.get(productId);
+        if (limit > 0 && !(limit < 0)) {
+            product.setProductLimit(limit);
+            product.setIsAvailable(false);
+            productDAO.update(product);
+        } else
+            throw new NullPointerException();
+    }
+
+    @Override
     public void updateProduct(Integer oldValueId,ProductDTO newValue) throws SQLException {
         Product product = productDAO.get(oldValueId);
         if (product != null) {
