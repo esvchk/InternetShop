@@ -37,4 +37,12 @@ public class Category extends DataEntity{
     public int hashCode() {
         return Objects.hash(getId());
     }
+
+    public void addProduct(Product product){
+        if (this.getProducts() == null) {
+            this.setProducts(new HashSet<>());
+        }
+        this.products.add(product);
+        product.setCategory(this);
+    }
 }

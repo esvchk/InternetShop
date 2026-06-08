@@ -2,6 +2,7 @@ package com.academy.course;
 
 import com.academy.course.dao.DAO;
 import com.academy.course.dao.DAOImpl;
+import com.academy.course.dao.categoryDao.CategoryDAO;
 import com.academy.course.dao.itemDao.ItemDAO;
 import com.academy.course.dao.itemDao.ItemDAOImpl;
 import com.academy.course.dao.customerDao.CustomerDAO;
@@ -67,8 +68,7 @@ public class App {
         ProductServiceImpl productService = new ProductServiceImpl();
         CustomerService customerService = new CustomerServiceImpl();
         ItemDAO itemDAO = new ItemDAOImpl();
+        CategoryService categoryService = new CategoryServiceImpl();
 
-
-        System.out.println(productService.findProductsByName("Milk"));
     }
 }
