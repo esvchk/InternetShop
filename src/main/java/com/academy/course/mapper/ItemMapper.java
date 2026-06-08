@@ -21,6 +21,7 @@ public class ItemMapper implements Mapper<Item, ItemDTO> {
     public ItemDTO mapToDTO(Item entity) {
         return ItemDTO.builder()
                 .id(entity.getId())
+                .discount(entity.getDiscount())
                 .productDTO(productMapper.mapToDTO(entity.getProduct()))
                 .quantity(entity.getProductQuantity())
                 .build();
@@ -29,6 +30,7 @@ public class ItemMapper implements Mapper<Item, ItemDTO> {
     @Override
     public Item mapToEntity(ItemDTO dto) {
         return Item.builder()
+                .discount(dto.getDiscount())
                 .productQuantity(dto.getQuantity())
                 .product(productMapper.mapToEntity(dto.getProductDTO()))
                 .build();
@@ -39,6 +41,7 @@ public class ItemMapper implements Mapper<Item, ItemDTO> {
         Set<Item> items = new HashSet<>();
         for (ItemDTO itemDTO : dtoSet){
             Item item = Item.builder()
+                    .discount(itemDTO.getDiscount())
                     .productQuantity(itemDTO.getQuantity())
                     .product(productMapper.mapToEntity(itemDTO.getProductDTO()))
                     .build();
@@ -53,6 +56,7 @@ public class ItemMapper implements Mapper<Item, ItemDTO> {
         for (Item item : entitySet){
             ItemDTO itemDTO = ItemDTO.builder()
                     .id(item.getId())
+                    .discount(item.getDiscount())
                     .productDTO(productMapper.mapToDTO(item.getProduct()))
                     .quantity(item.getProductQuantity())
                     .build();

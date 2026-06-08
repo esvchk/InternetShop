@@ -1,9 +1,9 @@
 package com.academy.course.model;
 
+import com.academy.course.utils.Role;
 import lombok.*;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.*;
 
 @Builder
@@ -14,7 +14,7 @@ import java.util.*;
 @Entity
 @Table
 @ToString
-public class Customer extends DataEntity {
+public class Employee extends DataEntity {
 
     @Column
     private String login;
@@ -23,10 +23,14 @@ public class Customer extends DataEntity {
     private String passWord;
 
     @Column
-    private String email;
+    private String paymentData;
+
+    @Column
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     @ToString.Exclude
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @Builder.Default
     private Set<Order> orders = new HashSet<>();
 
@@ -35,8 +39,8 @@ public class Customer extends DataEntity {
     public boolean equals(Object object) {
         if (object == null || getClass() != object.getClass()) return false;
         if (!super.equals(object)) return false;
-        Customer customer = (Customer) object;
-        return Objects.equals(customer.getId(), getId());
+        Employee employee = (Employee) object;
+        return Objects.equals(employee.getId(), getId());
     }
 
     @Override
@@ -49,7 +53,7 @@ public class Customer extends DataEntity {
             this.orders = new HashSet<>();
         }
         this.orders.add(order);
-        order.setCustomer(this);
+        order.setEmployee(this);
     }
 
 }

@@ -1,6 +1,6 @@
 <%@ page import="com.academy.course.dto.OrderDTO" %>
 <%@ page import="java.util.List" %>
-<%@ page import="com.academy.course.dto.CustomerDTO" %>
+<%@ page import="com.academy.course.dto.EmployeeDTO" %>
 <%@ page import="java.util.Set" %>
 <%@ page import="jdk.jshell.spi.ExecutionControl" %><%--
   Created by IntelliJ IDEA.

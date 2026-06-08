@@ -1,22 +1,15 @@
 package com.academy.course.controller;
 
-import com.academy.course.exception.UserNotFound;
-import com.academy.course.service.CustomerService;
-import com.academy.course.service.CustomerServiceImpl;
-import com.academy.course.utils.ParameterConverter;
+import com.academy.course.service.EmployeeService;
+import com.academy.course.service.EmployeeServiceImpl;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.io.IOException;
-import java.sql.SQLException;
+
 @WebServlet("/RegisterCustomer")
 public class Registration extends HttpServlet {
 
-    private final CustomerService customerService = new CustomerServiceImpl();
+    private final EmployeeService employeeService = new EmployeeServiceImpl();
 
 //    @Override
 //    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

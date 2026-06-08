@@ -1,4 +1,4 @@
-<%@ page import="com.academy.course.dto.CustomerDTO" %>
+<%@ page import="com.academy.course.dto.EmployeeDTO" %>
 <%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -21,18 +21,18 @@
     </thead>
     <tbody>
     <%
-        List<CustomerDTO> customers = (List<CustomerDTO>) request.getAttribute("customers");
+        List<EmployeeDTO> customers = (List<EmployeeDTO>) request.getAttribute("customers");
         if (customers != null && !customers.isEmpty()) {
-            for (CustomerDTO customer : customers) {
+            for (EmployeeDTO employee : customers) {
     %>
     <tr>
-        <td><%= customer.getId() %></td>
-        <td><%= customer.getLogin() %></td>
-        <td><%= customer.getEmail() %></td>
+        <td><%= employee.getId() %></td>
+        <td><%= employee.getLogin() %></td>
+        <td><%= employee.getPaymentData() %></td>
         <td>
-            <a href="UpdateProduct?id=<%= customer.getId() %>">Edit</a>
+            <a href="UpdateProduct?id=<%= employee.getId() %>">Edit</a>
             &nbsp;&nbsp;&nbsp;
-            <a href="DeleteProduct?id=<%= customer.getId() %>">Delete</a>
+            <a href="DeleteProduct?id=<%= employee.getId() %>">Delete</a>
         </td>
     </tr>
     <%

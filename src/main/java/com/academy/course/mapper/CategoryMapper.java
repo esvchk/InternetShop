@@ -50,6 +50,7 @@ public class CategoryMapper implements Mapper<Category,CategoryDTO>{
         Set<CategoryDTO> list = new HashSet<>();
         for (Category category : entitySet){
             CategoryDTO categoryDTO = CategoryDTO.builder()
+                    .id(category.getId())
                     .name(category.getName())
                     .productsDTO(productMapper.mapToSetDTOS(category.getProducts()))
                     .build();

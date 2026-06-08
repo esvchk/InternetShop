@@ -18,6 +18,9 @@ public class Item extends DataEntity {
     @Column
     private Integer productQuantity;
 
+    @Column
+    private Double discount;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "product_id")
     private Product product;

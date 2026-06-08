@@ -1,21 +1,21 @@
 package com.academy.course.service;
 
 
+import com.academy.course.dao.employeeDao.EmployeeDAOImpl;
 import com.academy.course.dao.itemDao.ItemDAO;
 import com.academy.course.dao.itemDao.ItemDAOImpl;
-import com.academy.course.dao.customerDao.CustomerDAO;
-import com.academy.course.dao.customerDao.CustomerDAOImpl;
+import com.academy.course.dao.employeeDao.EmployeeDAO;
 import com.academy.course.dao.orderDao.OrderDAO;
 import com.academy.course.dao.orderDao.OrderDAOImpl;
 
 import com.academy.course.dao.productDao.ProductDAO;
 import com.academy.course.dao.productDao.ProductDAOImpl;
-import com.academy.course.dto.CustomerDTO;
+import com.academy.course.dto.EmployeeDTO;
 import com.academy.course.dto.ItemDTO;
 import com.academy.course.dto.OrderDTO;
 import com.academy.course.dto.ProductDTO;
 import com.academy.course.mapper.*;
-import com.academy.course.model.Customer;
+import com.academy.course.model.Employee;
 import com.academy.course.model.Item;
 import com.academy.course.model.Order;
 import com.academy.course.model.Product;
@@ -32,7 +32,7 @@ public class OrderServiceImpl implements OrderService {
     private static final Logger log = LogManager.getLogger(OrderServiceImpl.class);
     private final OrderDAO orderDAO = new OrderDAOImpl();
     private final ProductDAO productDAO = new ProductDAOImpl();
-    private final CustomerDAO customerDAO = new CustomerDAOImpl();
+    private final EmployeeDAO employeeDAO = new EmployeeDAOImpl();
     private final ItemDAO itemDAO = new ItemDAOImpl();
     private final ProductMapper productMapper = new ProductMapper();
     private final ItemMapper itemMapper = new ItemMapper(productMapper);
@@ -88,10 +88,10 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Set<OrderDTO> getAllOrdersOfCustomer(CustomerDTO customerDTO) throws SQLException {
-        if (customerDTO != null) {
-            Customer customer = customerDAO.get(customerDTO.getId());
-            Set<Order> orders = customer.getOrders();
+    public Set<OrderDTO> getAllOrdersOfCustomer(EmployeeDTO employeeDTO) throws SQLException {
+        if (employeeDTO != null) {
+            Employee employee = employeeDAO.get(employeeDTO.getId());
+            Set<Order> orders = employee.getOrders();
             return orderMapper.mapToSetDTOS(orders);
         } else
             throw new NullPointerException();

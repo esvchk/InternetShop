@@ -16,7 +16,6 @@ public class DataEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id",unique = true)
-    @NonNull
     private Integer id;
 
     @CreationTimestamp
@@ -25,4 +24,5 @@ public class DataEntity {
     @UpdateTimestamp
     @Column(insertable = false)
     private LocalDateTime updateDateTime;
+
 }

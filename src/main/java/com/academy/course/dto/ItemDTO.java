@@ -17,6 +17,8 @@ public class ItemDTO {
 
     private Integer quantity;
 
+    private Double discount;
+
     @Override
     public String toString() {
         return "ItemDTO{" +

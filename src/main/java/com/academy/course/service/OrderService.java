@@ -1,6 +1,6 @@
 package com.academy.course.service;
 
-import com.academy.course.dto.CustomerDTO;
+import com.academy.course.dto.EmployeeDTO;
 import com.academy.course.dto.ItemDTO;
 import com.academy.course.dto.OrderDTO;
 import com.academy.course.dto.ProductDTO;
@@ -13,7 +13,7 @@ public interface OrderService {
 
     OrderDTO findOrderById(Serializable orderId) throws SQLException;
     Set<OrderDTO> getAllOrdersWithItems();
-    Set<OrderDTO> getAllOrdersOfCustomer(CustomerDTO customerDTO) throws SQLException;
+    Set<OrderDTO> getAllOrdersOfCustomer(EmployeeDTO employeeDTO) throws SQLException;
     void buyOrder(OrderDTO orderDTO) throws SQLException;
     void deleteOrder(OrderDTO orderDTO) throws SQLException;
     void addProductToOrder(ProductDTO productDTO, OrderDTO orderDTO, Integer quantity) throws SQLException;

@@ -12,7 +12,7 @@
             </column>
             <column name="createDateTime" type="DATETIME"/>
             <column name="updateDateTime" type="DATETIME"/>
-            <column name="customer_id" type="INT"/>
+            <column name="employee_id" type="INT"/>
             <column name="isBought" type="BIT"/>
         </createTable>
     </changeSet>

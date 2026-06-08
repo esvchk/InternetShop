@@ -4,10 +4,10 @@ import com.academy.course.dao.DAO;
 import com.academy.course.dao.DAOImpl;
 import com.academy.course.dao.categoryDao.CategoryDAO;
 import com.academy.course.dao.categoryDao.CategoryDAOImpl;
+import com.academy.course.dao.employeeDao.EmployeeDAO;
+import com.academy.course.dao.employeeDao.EmployeeDAOImpl;
 import com.academy.course.dao.itemDao.ItemDAO;
 import com.academy.course.dao.itemDao.ItemDAOImpl;
-import com.academy.course.dao.customerDao.CustomerDAO;
-import com.academy.course.dao.customerDao.CustomerDAOImpl;
 import com.academy.course.dao.orderDao.OrderDAO;
 import com.academy.course.dao.orderDao.OrderDAOImpl;
 
@@ -15,6 +15,7 @@ import com.academy.course.exception.UserNotFound;
 import com.academy.course.mapper.*;
 import com.academy.course.model.*;
 import com.academy.course.service.*;
+import com.academy.course.utils.Discount;
 
 import java.sql.SQLException;
 import java.util.HashSet;
@@ -39,9 +40,9 @@ public class App {
                 .category(category)
                 .build();
 
-        Customer customer = Customer.builder()
+        Employee employee = Employee.builder()
                 .login("Valera")
-                .email("@Valera.org")
+                .paymentData("visa")
 //                .passWord("2211")
 //                .orders(orders)
                 .build();
@@ -69,21 +70,23 @@ public class App {
         CategoryMapper categoryMapper = new CategoryMapper(productMapper);
         ItemMapper itemMapper = new ItemMapper(productMapper);
         OrderMapper orderMapper = new OrderMapper(itemMapper);
-        CustomerMapper customerMapper = new CustomerMapper(orderMapper);
+        EmployeeMapper employeeMapper = new EmployeeMapper(orderMapper);
         DAO<Product> dao = new DAOImpl<>(Product.class);
         ItemService itemService = new ItemServiceImpl();
         OrderDAO orderDAO = new OrderDAOImpl();
-        CustomerDAO customerDAO = new CustomerDAOImpl();
+        EmployeeDAO employeeDAO = new EmployeeDAOImpl();
         OrderService orderService = new OrderServiceImpl();
         ProductServiceImpl productService = new ProductServiceImpl();
-        CustomerService customerService = new CustomerServiceImpl();
+        EmployeeService employeeService = new EmployeeServiceImpl();
         ItemDAO itemDAO = new ItemDAOImpl();
         CategoryDAO categoryDAO = new CategoryDAOImpl();
         CategoryService categoryService = new CategoryServiceImpl();
 
 
 //        categoryService.addProductToCategory(11,productMapper.mapToDTO(dao.get(3)));
-        System.out.println(productService.getAllProductsFromCategory(11));
+//        System.out.println(categoryService.getAllCategories());
+
+        System.out.println(Discount.PERMANENT_CUSTOMER.countCostWithDiscount(100.0));
 
 
     }

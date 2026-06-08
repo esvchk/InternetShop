@@ -13,6 +13,7 @@
             <column name="createDateTime" type="DATETIME"/>
             <column name="updateDateTime" type="DATETIME"/>
             <column name="productQuantity" type="INT"/>
+            <column name="discount" type="DOUBLE"/>
             <column name="product_id" type="INT"/>
             <column name="order_id" type="INT"/>
         </createTable>

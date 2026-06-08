@@ -1,12 +1,8 @@
 package com.academy.course.dao.orderDao;
 
 import com.academy.course.dao.DAO;
-import com.academy.course.model.Customer;
-import com.academy.course.model.Item;
 import com.academy.course.model.Order;
-import com.academy.course.model.Product;
 
-import java.sql.SQLException;
 import java.util.Set;
 
 public interface OrderDAO extends DAO<Order> {

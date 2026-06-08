@@ -1,7 +1,7 @@
 package com.academy.course.controller;
 
-import com.academy.course.service.CustomerService;
-import com.academy.course.service.CustomerServiceImpl;
+import com.academy.course.service.EmployeeService;
+import com.academy.course.service.EmployeeServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,11 +13,11 @@ import java.io.IOException;
 @WebServlet("/ShowCustomers")
 public class ShowCustomers extends HttpServlet {
 
-    private final CustomerService customerService = new CustomerServiceImpl();
+    private final EmployeeService employeeService = new EmployeeServiceImpl();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("customers",customerService.getAllCustomersWithOrdersAndItems());
+        request.setAttribute("customers", employeeService.getAllEmployeesWithOrdersAndItems());
         request.getRequestDispatcher("/AllCustomers.jsp")
                 .forward(request,response);
     }

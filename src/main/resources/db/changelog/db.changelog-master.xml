@@ -5,10 +5,11 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
 
     <include file="db/changelog/2026/06/hibernate-sequence.xml"/>
-    <include file="db/changelog/2026/06/Customer-03-06.xml"/>
+    <include file="db/changelog/2026/06/Employee-08-06.xml"/>
     <include file="db/changelog/2026/06/Order-03-06.xml"/>
     <include file="db/changelog/2026/06/Category-08-06.xml"/>
     <include file="db/changelog/2026/06/Product-03-06.xml"/>
     <include file="db/changelog/2026/06/Item-03-06.xml"/>
+
 
 </databaseChangeLog>

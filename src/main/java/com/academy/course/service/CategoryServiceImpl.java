@@ -8,13 +8,14 @@ import com.academy.course.dto.CategoryDTO;
 import com.academy.course.dto.ProductDTO;
 import com.academy.course.mapper.CategoryMapper;
 import com.academy.course.mapper.MapperFactory;
-import com.academy.course.mapper.ProductMapper;
 import com.academy.course.model.Category;
 import com.academy.course.model.Product;
 
 import java.sql.SQLException;
+import java.util.Set;
 
 public class CategoryServiceImpl implements CategoryService{
+
     private final CategoryDAO categoryDAO = new CategoryDAOImpl();
     private final ProductDAO productDAO = new ProductDAOImpl();
     private final CategoryMapper categoryMapper = MapperFactory.getCategoryMapper();
@@ -60,5 +61,10 @@ public class CategoryServiceImpl implements CategoryService{
     public CategoryDTO getCategory(Integer id) throws SQLException {
         Category category = categoryDAO.get(id);
         return categoryMapper.mapToDTO(category);
+    }
+
+    @Override
+    public Set<CategoryDTO> getAllCategories() {
+        return categoryMapper.mapToSetDTOS(categoryDAO.getAllCategories());
     }
 }

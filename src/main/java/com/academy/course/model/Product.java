@@ -30,6 +30,9 @@ public class Product extends DataEntity {
     @Column
     private Boolean isAvailable;
 
+    @Column
+    private Integer productLimit;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id")
     private Category category;

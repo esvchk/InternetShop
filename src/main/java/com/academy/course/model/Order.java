@@ -20,9 +20,12 @@ public class Order extends DataEntity {
     @Builder.Default
     private Set<Item> items = new HashSet<>();
 
+    @Column
+    private String paymentData;
+
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "customer_id")
-    private Customer customer;
+    @JoinColumn(name = "employee_id")
+    private Employee employee;
     @Column
     private Boolean isBought;
 
