@@ -1,5 +1,6 @@
 package com.academy.course.dto;
 
+import com.academy.course.utils.Discount;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,7 +18,7 @@ public class ItemDTO {
 
     private Integer quantity;
 
-    private Double discount;
+    private Discount discount;
 
     @Override
     public String toString() {

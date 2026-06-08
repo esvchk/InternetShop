@@ -1,6 +1,8 @@
 package com.academy.course.utils;
 
+import lombok.Getter;
 
+@Getter
 public enum Discount {
     PERMANENT_CUSTOMER(0.15),
     CASHIER(0.3),
@@ -17,5 +19,6 @@ public enum Discount {
         Double discountAmount = price * percentOfDiscount ;
         return price - discountAmount;
     }
+
 
 }

@@ -86,7 +86,6 @@ public class App {
 //        categoryService.addProductToCategory(11,productMapper.mapToDTO(dao.get(3)));
 //        System.out.println(categoryService.getAllCategories());
 
-        System.out.println(Discount.PERMANENT_CUSTOMER.countCostWithDiscount(100.0));
 
 
     }

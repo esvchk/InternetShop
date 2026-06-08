@@ -1,5 +1,6 @@
 package com.academy.course.model;
 
+import com.academy.course.utils.Discount;
 import lombok.*;
 
 import javax.persistence.*;
@@ -19,7 +20,8 @@ public class Item extends DataEntity {
     private Integer productQuantity;
 
     @Column
-    private Double discount;
+    @Enumerated(EnumType.STRING)
+    private Discount discount;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "product_id")
