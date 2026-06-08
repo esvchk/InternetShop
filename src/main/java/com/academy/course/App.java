@@ -3,6 +3,7 @@ package com.academy.course;
 import com.academy.course.dao.DAO;
 import com.academy.course.dao.DAOImpl;
 import com.academy.course.dao.categoryDao.CategoryDAO;
+import com.academy.course.dao.categoryDao.CategoryDAOImpl;
 import com.academy.course.dao.itemDao.ItemDAO;
 import com.academy.course.dao.itemDao.ItemDAOImpl;
 import com.academy.course.dao.customerDao.CustomerDAO;
@@ -27,9 +28,8 @@ public class App {
 
 
         Product product = Product.builder()
-                .name("eggs")
-                .price(4.00)
-                .info("10pcs")
+                .name("Capucino")
+                .price(8.00)
                 .isAvailable(true)
                 .build();
 
@@ -52,11 +52,15 @@ public class App {
                 .order(order)
                 .build();
 
+        Category category = Category.builder()
+                .name("Drinks")
+                .build();
         orders.add(order);
         items.add(item);
 
 
         ProductMapper productMapper = new ProductMapper();
+        CategoryMapper categoryMapper = new CategoryMapper(productMapper);
         ItemMapper itemMapper = new ItemMapper(productMapper);
         OrderMapper orderMapper = new OrderMapper(itemMapper);
         CustomerMapper customerMapper = new CustomerMapper(orderMapper);
@@ -68,7 +72,17 @@ public class App {
         ProductServiceImpl productService = new ProductServiceImpl();
         CustomerService customerService = new CustomerServiceImpl();
         ItemDAO itemDAO = new ItemDAOImpl();
+        CategoryDAO categoryDAO = new CategoryDAOImpl();
         CategoryService categoryService = new CategoryServiceImpl();
+
+
+//        categoryService.createCategory(categoryMapper.mapToDTO(category));
+//        categoryService.addProductToCategory(4,productMapper.mapToDTO(dao.get(3)));
+//        productService.addProduct(productMapper.mapToDTO(product));
+//        customerService.createCustomer(customerMapper.mapToDTO(customer),"123");
+//        customerService.deleteCustomer(customerMapper.mapToDTO(customerDAO.get(9)));
+        categoryService.deleteCategory(categoryMapper.mapToDTO(categoryDAO.get(4)));
+
 
     }
 }

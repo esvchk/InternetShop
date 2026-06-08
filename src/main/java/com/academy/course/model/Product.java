@@ -48,4 +48,5 @@ public class Product extends DataEntity {
         return Objects.hash(getId());
     }
 
+
 }

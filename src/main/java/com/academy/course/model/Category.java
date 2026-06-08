@@ -21,7 +21,8 @@ public class Category extends DataEntity{
     private String name;
 
     @ToString.Exclude
-    @OneToMany(mappedBy = "category",fetch = FetchType.LAZY,orphanRemoval = true)
+    @OneToMany(mappedBy = "category",fetch = FetchType.LAZY)
+    @Builder.Default
     private Set<Product> products = new HashSet<>();
 
 
@@ -45,4 +46,12 @@ public class Category extends DataEntity{
         this.products.add(product);
         product.setCategory(this);
     }
+    public void removeProduct(Product product){
+        if (this.getProducts() == null) {
+            this.setProducts(new HashSet<>());
+        }
+        this.products.remove(product);
+        product.setCategory(null);
+    }
+
 }

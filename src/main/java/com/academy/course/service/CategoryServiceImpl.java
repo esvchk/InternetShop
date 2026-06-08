@@ -2,7 +2,11 @@ package com.academy.course.service;
 
 import com.academy.course.dao.categoryDao.CategoryDAO;
 import com.academy.course.dao.categoryDao.CategoryDAOImpl;
+import com.academy.course.dao.productDao.ProductDAO;
+import com.academy.course.dao.productDao.ProductDAOImpl;
 import com.academy.course.dto.CategoryDTO;
+import com.academy.course.dto.ProductDTO;
+import com.academy.course.mapper.CategoryMapper;
 import com.academy.course.mapper.MapperFactory;
 import com.academy.course.mapper.ProductMapper;
 import com.academy.course.model.Category;
@@ -12,19 +16,27 @@ import java.sql.SQLException;
 
 public class CategoryServiceImpl implements CategoryService{
     private final CategoryDAO categoryDAO = new CategoryDAOImpl();
+    private final ProductDAO productDAO = new ProductDAOImpl();
     private final ProductMapper productMapper = MapperFactory.getProductMapper();
+    private final CategoryMapper categoryMapper = MapperFactory.getCategoryMapper();
 
     @Override
-    public void addCategory(CategoryDTO categoryDTO) throws SQLException {
+    public void createCategory(CategoryDTO categoryDTO) throws SQLException {
         Category category = Category.builder()
                 .name(categoryDTO.getName())
                 .build();
-        Product product = Product.builder()
-                .category(category)
-                .build();
+        categoryDAO.save(category);
+    }
+
+    @Override
+    public void addProductToCategory(Integer categoryId, ProductDTO productDTO) throws SQLException {
+        Category category = categoryDAO.get(categoryId);
+        Product product = productDAO.get(productDTO.getId());
 
         category.addProduct(product);
-        categoryDAO.save(category);
+
+        categoryDAO.update(category);
+
     }
 
     @Override
@@ -33,7 +45,12 @@ public class CategoryServiceImpl implements CategoryService{
     }
 
     @Override
-    public void deleteCategory(CategoryDTO categoryDTO) {
+    public void deleteCategory(CategoryDTO categoryDTO) throws SQLException {
+        Category category = categoryDAO.get(categoryDTO.getId());
+        for (Product product : category.getProducts()){
+            category.removeProduct(product);
+        }
+        categoryDAO.delete(category);
 
     }
 
