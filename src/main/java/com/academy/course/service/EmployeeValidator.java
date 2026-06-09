@@ -9,5 +9,6 @@ import java.sql.SQLException;
 public interface EmployeeValidator {
     void employeeCreationValidator(EmployeeDTO employeeDTO, Role role) ;
     void passwordValidator(String password);
+    void loginValidator(String login);
 
 }

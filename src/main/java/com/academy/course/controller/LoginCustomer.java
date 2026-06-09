@@ -1,6 +1,5 @@
 package com.academy.course.controller;
 
-import com.academy.course.exception.UserNotFound;
 import com.academy.course.service.EmployeeService;
 import com.academy.course.service.EmployeeServiceImpl;
 import com.academy.course.utils.ParameterConverter;
@@ -25,7 +24,7 @@ public class LoginCustomer extends HttpServlet {
 
         try {
             employeeService.login(login, passWord);
-        } catch (NoSuchFieldException | SQLException | UserNotFound e) {
+        } catch (NoSuchFieldException | SQLException e) {
             throw new RuntimeException(e);
         }
         response.sendRedirect(context + "/ShowProducts");

@@ -13,7 +13,6 @@ public enum MapperFactory {
     public static EmployeeMapper getEmployeeMapper() {
         return EMPLOYEE_MAPPER;
     }
-
     public static CategoryMapper getCategoryMapper() {
         return CATEGORY_MAPPER;
     }

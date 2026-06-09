@@ -11,19 +11,17 @@ import com.academy.course.dao.itemDao.ItemDAOImpl;
 import com.academy.course.dao.orderDao.OrderDAO;
 import com.academy.course.dao.orderDao.OrderDAOImpl;
 
-import com.academy.course.exception.UserNotFound;
+
 import com.academy.course.mapper.*;
 import com.academy.course.model.*;
 import com.academy.course.service.*;
-import com.academy.course.utils.Discount;
-import com.academy.course.utils.Role;
 
 import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Set;
 
 public class App {
-    public static void main(String[] args) throws SQLException, UserNotFound, NoSuchFieldException {
+    public static void main(String[] args) throws SQLException, NoSuchFieldException {
 
         Set<Order> orders = new HashSet<>();
         Set<Item> items = new HashSet<>();
@@ -82,14 +80,23 @@ public class App {
         CategoryService categoryService = new CategoryServiceImpl();
 
         EmployeeValidator employeeValidator = new EmployeeBuisnessValidator();
+        IdValidatorFactory idValidatorFactory  = new IdValidatorFactory();
+        idValidatorFactory.setEmployeeDAO(employeeDAO);
+        idValidatorFactory.setCategoryDAO(categoryDAO);
+        idValidatorFactory.setOrderDAO(orderDAO);
+        idValidatorFactory.setItemDAO(itemDAO);
+        idValidatorFactory.setCategoryDAO(categoryDAO);
+
+
+        System.out.println(employeeService.findEmployeeById(99));
+
 
 
 //        categoryService.addProductToCategory(11,productMapper.mapToDTO(dao.get(3)));
 //        System.out.println(categoryService.getAllCategories());
 
-//        employeeService.createEmployee(employeeMapper.mapToDTO(employee), null, Role.ADMINISTRATOR)
+//        )
 
-        employeeValidator.passwordValidator("orange12345F");
 
 
 

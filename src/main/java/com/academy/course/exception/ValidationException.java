@@ -1,11 +1,8 @@
 package com.academy.course.exception;
 
-public abstract class ValidationException extends RuntimeException {
+public abstract class ValidationException extends BusinessException {
     public ValidationException(String message) {
         super(message);
     }
 
-    public ValidationException(String message, Throwable cause) {
-        super(message, cause);
-    }
 }
