@@ -74,13 +74,15 @@ public class App {
         EmployeeDAO employeeDAO = new EmployeeDAOImpl();
         OrderService orderService = new OrderServiceImpl();
         ProductServiceImpl productService = new ProductServiceImpl();
-        EmployeeService employeeService = new EmployeeServiceImpl();
+
         ItemDAO itemDAO = new ItemDAOImpl();
         CategoryDAO categoryDAO = new CategoryDAOImpl();
         CategoryService categoryService = new CategoryServiceImpl();
 
         EmployeeValidator employeeValidator = new EmployeeBuisnessValidator();
+
         IdValidatorFactory idValidatorFactory  = new IdValidatorFactory();
+        EmployeeService employeeService = new EmployeeServiceImpl(idValidatorFactory);
         idValidatorFactory.setEmployeeDAO(employeeDAO);
         idValidatorFactory.setCategoryDAO(categoryDAO);
         idValidatorFactory.setOrderDAO(orderDAO);
@@ -88,7 +90,7 @@ public class App {
         idValidatorFactory.setCategoryDAO(categoryDAO);
 
 
-        System.out.println(employeeService.findEmployeeById(99));
+        employeeService.deleteEmployee(3);
 
 
 

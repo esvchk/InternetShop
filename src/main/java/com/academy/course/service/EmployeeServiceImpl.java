@@ -27,8 +27,11 @@ public class EmployeeServiceImpl implements EmployeeService {
     private final OrderDAO orderDAO = new OrderDAOImpl();
     private final EmployeeMapper employeeMapper = MapperFactory.getEmployeeMapper();
     private final EmployeeValidator employeeValidator = new EmployeeBuisnessValidator();
-    private IdValidatorFactory factory = new IdValidatorFactory();
+    private IdValidatorFactory factory ;
 
+    public EmployeeServiceImpl(IdValidatorFactory factory) {
+        this.factory = factory;
+    }
 
     @Override
     public void deleteOrderOfEmployee(EmployeeDTO employeeDTO, OrderDTO orderDTO) throws SQLException {
@@ -73,7 +76,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public void createEmployee(EmployeeDTO employeeDTO, String pass, Role role) throws SQLException {
 
-        employeeValidator.employeeCreationValidator(employeeDTO,role);
+        employeeValidator.employeeCreationValidator(employeeDTO, role);
         employeeValidator.passwordValidator(pass);
         employeeValidator.loginValidator(employeeDTO.getLogin());
 
@@ -96,29 +99,29 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public void updateEmployee(Integer oldValueId, EmployeeDTO newValue) throws SQLException {
+        factory.getEmployeeValidator().validate(oldValueId);
         Employee employee = employeeDAO.get(oldValueId);
+        employeeValidator.employeeCreationValidator(newValue,newValue.getRole());
         employee.setLogin(newValue.getLogin());
+        employee.setRole(newValue.getRole());
         employeeDAO.update(employee);
     }
 
     @Override
-    public void deleteEmployee(EmployeeDTO employeeDTO) throws SQLException {
-        if (employeeDTO.getId() != null) {
-            employeeDAO.delete(employeeDAO.get(employeeDTO.getId()));
-        } else
-            throw new NullPointerException();
-
+    public void deleteEmployee(Integer employeeId) throws SQLException {
+        factory.getEmployeeValidator().validate(employeeId);
+        employeeDAO.delete(employeeDAO.get(employeeId));
     }
 
     @Override
     public boolean register(EmployeeDTO employeeDTO, String password, Role role) {
         String login = employeeDTO.getLogin();
         try {
-            if (employeeDAO.getEmployeeByLogin(login) != null) {
+            if (employeeDAO.getEmployeeByLogin(employeeDTO.getLogin()) != null) {
                 logger.warn("already exist with login {}", login);
                 throw new EmployeeAlreadyExists("User already registered with this login");
             } else {
-                createEmployee(employeeDTO,password, role);
+                createEmployee(employeeDTO, password, role);
             }
         } catch (NoResultException | SQLException e) {
             e.printStackTrace();

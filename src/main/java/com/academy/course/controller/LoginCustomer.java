@@ -2,6 +2,7 @@ package com.academy.course.controller;
 
 import com.academy.course.service.EmployeeService;
 import com.academy.course.service.EmployeeServiceImpl;
+import com.academy.course.service.IdValidatorFactory;
 import com.academy.course.utils.ParameterConverter;
 
 import javax.servlet.annotation.WebServlet;
@@ -13,7 +14,8 @@ import java.sql.SQLException;
 @WebServlet("/LoginCustomer")
 public class LoginCustomer extends HttpServlet {
 
-    private final EmployeeService employeeService = new EmployeeServiceImpl();
+    IdValidatorFactory idValidatorFactory = new IdValidatorFactory();
+    private final EmployeeService employeeService = new EmployeeServiceImpl(idValidatorFactory);
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {

@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 @WebServlet("/RegisterCustomer")
 public class Registration extends HttpServlet {
 
-    private final EmployeeService employeeService = new EmployeeServiceImpl();
+//    private final EmployeeService employeeService = new EmployeeServiceImpl();
 
 //    @Override
 //    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

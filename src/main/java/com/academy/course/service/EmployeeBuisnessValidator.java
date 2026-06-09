@@ -16,13 +16,7 @@ import java.util.List;
 public class EmployeeBuisnessValidator implements EmployeeValidator {
 
     private static final Logger logger = LogManager.getLogger(EmployeeBuisnessValidator.class);
-    private final EmployeeDAO employeeDAO = new EmployeeDAOImpl();
-    private final IdValidatorFactory validatorFactory;
 
-    public EmployeeBuisnessValidator() {
-        this.validatorFactory = new IdValidatorFactory();
-        this.validatorFactory.setEmployeeDAO(employeeDAO);
-    }
 
     @Override
     public void employeeCreationValidator(EmployeeDTO employeeDTO, Role role) {
