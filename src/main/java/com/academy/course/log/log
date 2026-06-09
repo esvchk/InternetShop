@@ -7485,3 +7485,198 @@
 2026-06-08 15:48:07 [main] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
 2026-06-08 15:48:08 [main] INFO  org.hibernate.orm.connections.access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@739265f1] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
 2026-06-08 15:48:08 [main] INFO  org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2026-06-09 10:21:10 [main] INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: academy]
+2026-06-09 10:21:10 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.15.Final
+2026-06-09 10:21:11 [main] INFO  org.hibernate.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2026-06-09 10:21:11 [main] WARN  org.hibernate.orm.connections.pooling - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2026-06-09 10:21:11 [main] INFO  org.hibernate.orm.connections.pooling - HHH10001005: using driver [com.mysql.cj.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/internet_shop?createDatabaseIfNotExist=true]
+2026-06-09 10:21:11 [main] INFO  org.hibernate.orm.connections.pooling - HHH10001001: Connection properties: {password=****, user=root}
+2026-06-09 10:21:11 [main] INFO  org.hibernate.orm.connections.pooling - HHH10001003: Autocommit mode: false
+2026-06-09 10:21:11 [main] INFO  org.hibernate.orm.connections.pooling - HHH10001007: JDBC isolation level: READ_COMMITTED
+2026-06-09 10:21:11 [main] INFO  org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl - HHH000115: Hibernate connection pool size: 10 (min=1)
+2026-06-09 10:21:11 [main] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2026-06-09 10:21:12 [main] INFO  org.hibernate.orm.connections.access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@787e4357] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2026-06-09 10:21:12 [main] INFO  org.hibernate.orm.connections.pooling - HHH10001008: Cleaning up connection pool [jdbc:mysql://localhost:3306/internet_shop?createDatabaseIfNotExist=true]
+2026-06-09 10:22:07 [main] INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: academy]
+2026-06-09 10:22:07 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.15.Final
+2026-06-09 10:22:07 [main] INFO  org.hibernate.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2026-06-09 10:22:07 [main] WARN  org.hibernate.orm.connections.pooling - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2026-06-09 10:22:07 [main] INFO  org.hibernate.orm.connections.pooling - HHH10001005: using driver [com.mysql.cj.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/internet_shop?createDatabaseIfNotExist=true]
+2026-06-09 10:22:07 [main] INFO  org.hibernate.orm.connections.pooling - HHH10001001: Connection properties: {password=****, user=root}
+2026-06-09 10:22:07 [main] INFO  org.hibernate.orm.connections.pooling - HHH10001003: Autocommit mode: false
+2026-06-09 10:22:07 [main] INFO  org.hibernate.orm.connections.pooling - HHH10001007: JDBC isolation level: READ_COMMITTED
+2026-06-09 10:22:07 [main] INFO  org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl - HHH000115: Hibernate connection pool size: 10 (min=1)
+2026-06-09 10:22:07 [main] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2026-06-09 10:22:08 [main] INFO  org.hibernate.orm.connections.access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@28e8888d] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2026-06-09 10:22:08 [main] INFO  org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2026-06-09 10:23:36 [main] INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: academy]
+2026-06-09 10:23:36 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.15.Final
+2026-06-09 10:23:36 [main] INFO  org.hibernate.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2026-06-09 10:23:36 [main] WARN  org.hibernate.orm.connections.pooling - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2026-06-09 10:23:36 [main] INFO  org.hibernate.orm.connections.pooling - HHH10001005: using driver [com.mysql.cj.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/internet_shop?createDatabaseIfNotExist=true]
+2026-06-09 10:23:36 [main] INFO  org.hibernate.orm.connections.pooling - HHH10001001: Connection properties: {password=****, user=root}
+2026-06-09 10:23:36 [main] INFO  org.hibernate.orm.connections.pooling - HHH10001003: Autocommit mode: false
+2026-06-09 10:23:36 [main] INFO  org.hibernate.orm.connections.pooling - HHH10001007: JDBC isolation level: READ_COMMITTED
+2026-06-09 10:23:36 [main] INFO  org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl - HHH000115: Hibernate connection pool size: 10 (min=1)
+2026-06-09 10:23:37 [main] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2026-06-09 10:23:37 [main] INFO  org.hibernate.orm.connections.access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@413d2cd1] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2026-06-09 10:23:37 [main] INFO  org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2026-06-09 10:24:02 [main] INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: academy]
+2026-06-09 10:24:02 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.15.Final
+2026-06-09 10:24:03 [main] INFO  org.hibernate.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2026-06-09 10:24:03 [main] WARN  org.hibernate.orm.connections.pooling - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2026-06-09 10:24:04 [main] INFO  org.hibernate.orm.connections.pooling - HHH10001005: using driver [com.mysql.cj.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/internet_shop?createDatabaseIfNotExist=true]
+2026-06-09 10:24:04 [main] INFO  org.hibernate.orm.connections.pooling - HHH10001001: Connection properties: {password=****, user=root}
+2026-06-09 10:24:04 [main] INFO  org.hibernate.orm.connections.pooling - HHH10001003: Autocommit mode: false
+2026-06-09 10:24:04 [main] INFO  org.hibernate.orm.connections.pooling - HHH10001007: JDBC isolation level: READ_COMMITTED
+2026-06-09 10:24:04 [main] INFO  org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl - HHH000115: Hibernate connection pool size: 10 (min=1)
+2026-06-09 10:24:05 [main] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2026-06-09 10:24:07 [main] INFO  org.hibernate.orm.connections.access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@28b523a] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2026-06-09 10:24:07 [main] INFO  org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2026-06-09 10:27:29 [main] WARN  com.academy.course.service.EmployeeBuisnessValidator - empty field null
+2026-06-09 10:27:29 [main] INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: academy]
+2026-06-09 10:27:29 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.15.Final
+2026-06-09 10:27:29 [main] INFO  org.hibernate.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2026-06-09 10:27:30 [main] WARN  org.hibernate.orm.connections.pooling - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2026-06-09 10:27:30 [main] INFO  org.hibernate.orm.connections.pooling - HHH10001005: using driver [com.mysql.cj.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/internet_shop?createDatabaseIfNotExist=true]
+2026-06-09 10:27:30 [main] INFO  org.hibernate.orm.connections.pooling - HHH10001001: Connection properties: {password=****, user=root}
+2026-06-09 10:27:30 [main] INFO  org.hibernate.orm.connections.pooling - HHH10001003: Autocommit mode: false
+2026-06-09 10:27:30 [main] INFO  org.hibernate.orm.connections.pooling - HHH10001007: JDBC isolation level: READ_COMMITTED
+2026-06-09 10:27:30 [main] INFO  org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl - HHH000115: Hibernate connection pool size: 10 (min=1)
+2026-06-09 10:27:30 [main] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2026-06-09 10:27:30 [main] INFO  org.hibernate.orm.connections.access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@b5b9333] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2026-06-09 10:27:30 [main] INFO  org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2026-06-09 10:37:51 [main] WARN  com.academy.course.service.EmployeeBuisnessValidator - empty field null
+2026-06-09 10:37:52 [main] INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: academy]
+2026-06-09 10:37:52 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.15.Final
+2026-06-09 10:37:52 [main] INFO  org.hibernate.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2026-06-09 10:37:52 [main] WARN  org.hibernate.orm.connections.pooling - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2026-06-09 10:37:52 [main] INFO  org.hibernate.orm.connections.pooling - HHH10001005: using driver [com.mysql.cj.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/internet_shop?createDatabaseIfNotExist=true]
+2026-06-09 10:37:52 [main] INFO  org.hibernate.orm.connections.pooling - HHH10001001: Connection properties: {password=****, user=root}
+2026-06-09 10:37:52 [main] INFO  org.hibernate.orm.connections.pooling - HHH10001003: Autocommit mode: false
+2026-06-09 10:37:52 [main] INFO  org.hibernate.orm.connections.pooling - HHH10001007: JDBC isolation level: READ_COMMITTED
+2026-06-09 10:37:52 [main] INFO  org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl - HHH000115: Hibernate connection pool size: 10 (min=1)
+2026-06-09 10:37:52 [main] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2026-06-09 10:37:53 [main] INFO  org.hibernate.orm.connections.access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@79627d27] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2026-06-09 10:37:53 [main] INFO  org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2026-06-09 10:38:12 [main] WARN  com.academy.course.service.EmployeeBuisnessValidator - emploee must have a role
+2026-06-09 10:38:13 [main] INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: academy]
+2026-06-09 10:38:13 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.15.Final
+2026-06-09 10:38:13 [main] INFO  org.hibernate.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2026-06-09 10:38:13 [main] WARN  org.hibernate.orm.connections.pooling - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2026-06-09 10:38:13 [main] INFO  org.hibernate.orm.connections.pooling - HHH10001005: using driver [com.mysql.cj.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/internet_shop?createDatabaseIfNotExist=true]
+2026-06-09 10:38:13 [main] INFO  org.hibernate.orm.connections.pooling - HHH10001001: Connection properties: {password=****, user=root}
+2026-06-09 10:38:13 [main] INFO  org.hibernate.orm.connections.pooling - HHH10001003: Autocommit mode: false
+2026-06-09 10:38:13 [main] INFO  org.hibernate.orm.connections.pooling - HHH10001007: JDBC isolation level: READ_COMMITTED
+2026-06-09 10:38:13 [main] INFO  org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl - HHH000115: Hibernate connection pool size: 10 (min=1)
+2026-06-09 10:38:13 [main] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2026-06-09 10:38:14 [main] INFO  org.hibernate.orm.connections.access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@35eee641] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2026-06-09 10:38:14 [main] INFO  org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2026-06-09 10:38:49 [main] WARN  com.academy.course.service.EmployeeBuisnessValidator - emploee must have a role
+2026-06-09 10:38:49 [main] INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: academy]
+2026-06-09 10:38:49 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.15.Final
+2026-06-09 10:38:49 [main] INFO  org.hibernate.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2026-06-09 10:38:50 [main] WARN  org.hibernate.orm.connections.pooling - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2026-06-09 10:38:50 [main] INFO  org.hibernate.orm.connections.pooling - HHH10001005: using driver [com.mysql.cj.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/internet_shop?createDatabaseIfNotExist=true]
+2026-06-09 10:38:50 [main] INFO  org.hibernate.orm.connections.pooling - HHH10001001: Connection properties: {password=****, user=root}
+2026-06-09 10:38:50 [main] INFO  org.hibernate.orm.connections.pooling - HHH10001003: Autocommit mode: false
+2026-06-09 10:38:50 [main] INFO  org.hibernate.orm.connections.pooling - HHH10001007: JDBC isolation level: READ_COMMITTED
+2026-06-09 10:38:50 [main] INFO  org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl - HHH000115: Hibernate connection pool size: 10 (min=1)
+2026-06-09 10:38:50 [main] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2026-06-09 10:38:50 [main] INFO  org.hibernate.orm.connections.access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@10f477e2] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2026-06-09 10:38:50 [main] INFO  org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2026-06-09 10:39:35 [main] WARN  com.academy.course.service.EmployeeBuisnessValidator - emploee must have a role
+2026-06-09 10:39:36 [main] INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: academy]
+2026-06-09 10:39:36 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.15.Final
+2026-06-09 10:39:36 [main] INFO  org.hibernate.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2026-06-09 10:39:36 [main] WARN  org.hibernate.orm.connections.pooling - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2026-06-09 10:39:36 [main] INFO  org.hibernate.orm.connections.pooling - HHH10001005: using driver [com.mysql.cj.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/internet_shop?createDatabaseIfNotExist=true]
+2026-06-09 10:39:36 [main] INFO  org.hibernate.orm.connections.pooling - HHH10001001: Connection properties: {password=****, user=root}
+2026-06-09 10:39:36 [main] INFO  org.hibernate.orm.connections.pooling - HHH10001003: Autocommit mode: false
+2026-06-09 10:39:36 [main] INFO  org.hibernate.orm.connections.pooling - HHH10001007: JDBC isolation level: READ_COMMITTED
+2026-06-09 10:39:36 [main] INFO  org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl - HHH000115: Hibernate connection pool size: 10 (min=1)
+2026-06-09 10:39:36 [main] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2026-06-09 10:39:37 [main] INFO  org.hibernate.orm.connections.access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@36478bce] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2026-06-09 10:39:37 [main] INFO  org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2026-06-09 10:39:58 [main] WARN  com.academy.course.service.EmployeeBuisnessValidator - emploee must have a role
+2026-06-09 10:41:04 [main] INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: academy]
+2026-06-09 10:41:04 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.15.Final
+2026-06-09 10:41:04 [main] INFO  org.hibernate.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2026-06-09 10:41:05 [main] WARN  org.hibernate.orm.connections.pooling - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2026-06-09 10:41:05 [main] INFO  org.hibernate.orm.connections.pooling - HHH10001005: using driver [com.mysql.cj.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/internet_shop?createDatabaseIfNotExist=true]
+2026-06-09 10:41:05 [main] INFO  org.hibernate.orm.connections.pooling - HHH10001001: Connection properties: {password=****, user=root}
+2026-06-09 10:41:05 [main] INFO  org.hibernate.orm.connections.pooling - HHH10001003: Autocommit mode: false
+2026-06-09 10:41:05 [main] INFO  org.hibernate.orm.connections.pooling - HHH10001007: JDBC isolation level: READ_COMMITTED
+2026-06-09 10:41:05 [main] INFO  org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl - HHH000115: Hibernate connection pool size: 10 (min=1)
+2026-06-09 10:41:05 [main] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2026-06-09 10:41:05 [main] INFO  org.hibernate.orm.connections.access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@30bbcf91] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2026-06-09 10:41:05 [main] INFO  org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2026-06-09 10:42:04 [main] WARN  com.academy.course.service.EmployeeBuisnessValidator - empty field null
+2026-06-09 10:42:05 [main] INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: academy]
+2026-06-09 10:42:05 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.15.Final
+2026-06-09 10:42:05 [main] INFO  org.hibernate.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2026-06-09 10:42:05 [main] WARN  org.hibernate.orm.connections.pooling - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2026-06-09 10:42:05 [main] INFO  org.hibernate.orm.connections.pooling - HHH10001005: using driver [com.mysql.cj.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/internet_shop?createDatabaseIfNotExist=true]
+2026-06-09 10:42:05 [main] INFO  org.hibernate.orm.connections.pooling - HHH10001001: Connection properties: {password=****, user=root}
+2026-06-09 10:42:05 [main] INFO  org.hibernate.orm.connections.pooling - HHH10001003: Autocommit mode: false
+2026-06-09 10:42:05 [main] INFO  org.hibernate.orm.connections.pooling - HHH10001007: JDBC isolation level: READ_COMMITTED
+2026-06-09 10:42:05 [main] INFO  org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl - HHH000115: Hibernate connection pool size: 10 (min=1)
+2026-06-09 10:42:05 [main] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2026-06-09 10:42:05 [main] INFO  org.hibernate.orm.connections.access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@79627d27] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2026-06-09 10:42:06 [main] INFO  org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2026-06-09 10:42:25 [main] WARN  com.academy.course.service.EmployeeBuisnessValidator - emploee must have a role
+2026-06-09 10:42:25 [main] INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: academy]
+2026-06-09 10:42:25 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.15.Final
+2026-06-09 10:42:25 [main] INFO  org.hibernate.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2026-06-09 10:42:25 [main] WARN  org.hibernate.orm.connections.pooling - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2026-06-09 10:42:25 [main] INFO  org.hibernate.orm.connections.pooling - HHH10001005: using driver [com.mysql.cj.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/internet_shop?createDatabaseIfNotExist=true]
+2026-06-09 10:42:25 [main] INFO  org.hibernate.orm.connections.pooling - HHH10001001: Connection properties: {password=****, user=root}
+2026-06-09 10:42:25 [main] INFO  org.hibernate.orm.connections.pooling - HHH10001003: Autocommit mode: false
+2026-06-09 10:42:25 [main] INFO  org.hibernate.orm.connections.pooling - HHH10001007: JDBC isolation level: READ_COMMITTED
+2026-06-09 10:42:25 [main] INFO  org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl - HHH000115: Hibernate connection pool size: 10 (min=1)
+2026-06-09 10:42:26 [main] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2026-06-09 10:42:26 [main] INFO  org.hibernate.orm.connections.access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@10f477e2] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2026-06-09 10:42:26 [main] INFO  org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2026-06-09 10:46:36 [main] WARN  com.academy.course.service.EmployeeBuisnessValidator - emploee must have a role
+2026-06-09 10:46:36 [main] INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: academy]
+2026-06-09 10:46:36 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.15.Final
+2026-06-09 10:46:36 [main] INFO  org.hibernate.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2026-06-09 10:46:36 [main] WARN  org.hibernate.orm.connections.pooling - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2026-06-09 10:46:36 [main] INFO  org.hibernate.orm.connections.pooling - HHH10001005: using driver [com.mysql.cj.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/internet_shop?createDatabaseIfNotExist=true]
+2026-06-09 10:46:36 [main] INFO  org.hibernate.orm.connections.pooling - HHH10001001: Connection properties: {password=****, user=root}
+2026-06-09 10:46:36 [main] INFO  org.hibernate.orm.connections.pooling - HHH10001003: Autocommit mode: false
+2026-06-09 10:46:36 [main] INFO  org.hibernate.orm.connections.pooling - HHH10001007: JDBC isolation level: READ_COMMITTED
+2026-06-09 10:46:36 [main] INFO  org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl - HHH000115: Hibernate connection pool size: 10 (min=1)
+2026-06-09 10:46:37 [main] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2026-06-09 10:46:37 [main] INFO  org.hibernate.orm.connections.access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@35eee641] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2026-06-09 10:46:37 [main] INFO  org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2026-06-09 10:46:46 [main] INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: academy]
+2026-06-09 10:46:46 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.15.Final
+2026-06-09 10:46:46 [main] INFO  org.hibernate.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2026-06-09 10:46:46 [main] WARN  org.hibernate.orm.connections.pooling - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2026-06-09 10:46:46 [main] INFO  org.hibernate.orm.connections.pooling - HHH10001005: using driver [com.mysql.cj.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/internet_shop?createDatabaseIfNotExist=true]
+2026-06-09 10:46:46 [main] INFO  org.hibernate.orm.connections.pooling - HHH10001001: Connection properties: {password=****, user=root}
+2026-06-09 10:46:46 [main] INFO  org.hibernate.orm.connections.pooling - HHH10001003: Autocommit mode: false
+2026-06-09 10:46:46 [main] INFO  org.hibernate.orm.connections.pooling - HHH10001007: JDBC isolation level: READ_COMMITTED
+2026-06-09 10:46:46 [main] INFO  org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl - HHH000115: Hibernate connection pool size: 10 (min=1)
+2026-06-09 10:46:46 [main] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2026-06-09 10:46:47 [main] INFO  org.hibernate.orm.connections.access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@30bbcf91] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2026-06-09 10:46:47 [main] INFO  org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2026-06-09 10:47:39 [main] WARN  com.academy.course.service.EmployeeBuisnessValidator - employee must have a password
+2026-06-09 10:47:39 [main] INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: academy]
+2026-06-09 10:47:39 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.15.Final
+2026-06-09 10:47:39 [main] INFO  org.hibernate.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2026-06-09 10:47:40 [main] WARN  org.hibernate.orm.connections.pooling - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2026-06-09 10:47:40 [main] INFO  org.hibernate.orm.connections.pooling - HHH10001005: using driver [com.mysql.cj.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/internet_shop?createDatabaseIfNotExist=true]
+2026-06-09 10:47:40 [main] INFO  org.hibernate.orm.connections.pooling - HHH10001001: Connection properties: {password=****, user=root}
+2026-06-09 10:47:40 [main] INFO  org.hibernate.orm.connections.pooling - HHH10001003: Autocommit mode: false
+2026-06-09 10:47:40 [main] INFO  org.hibernate.orm.connections.pooling - HHH10001007: JDBC isolation level: READ_COMMITTED
+2026-06-09 10:47:40 [main] INFO  org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl - HHH000115: Hibernate connection pool size: 10 (min=1)
+2026-06-09 10:47:40 [main] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2026-06-09 10:47:40 [main] INFO  org.hibernate.orm.connections.access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@35eee641] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2026-06-09 10:47:40 [main] INFO  org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2026-06-09 11:54:24 [main] WARN  com.academy.course.service.EmployeeBuisnessValidator - wrong length3
+2026-06-09 11:54:32 [main] WARN  com.academy.course.service.EmployeeBuisnessValidator - input without upperCase symbols
+2026-06-09 11:55:19 [main] WARN  com.academy.course.service.EmployeeBuisnessValidator - input without upperCase symbols
+2026-06-09 11:55:28 [main] WARN  com.academy.course.service.EmployeeBuisnessValidator - wrong length26
+2026-06-09 11:55:42 [main] WARN  com.academy.course.service.EmployeeBuisnessValidator - input without upperCase symbols

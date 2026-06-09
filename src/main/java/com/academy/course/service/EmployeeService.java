@@ -10,7 +10,7 @@ import java.util.Set;
 
 public interface EmployeeService {
 
-    void deleteOrderOfCustomer(EmployeeDTO employeeDTO, OrderDTO orderDTO) throws SQLException;
+    void deleteOrderOfEmployee(EmployeeDTO employeeDTO, OrderDTO orderDTO) throws SQLException;
     Set<EmployeeDTO> getAllEmployeesWithOrdersAndItems();
     EmployeeDTO findEmployeeById(Integer id) throws SQLException;
     EmployeeDTO findEmployeeByLogin(String login);

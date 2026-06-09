@@ -27,10 +27,11 @@ public class EmployeeServiceImpl implements EmployeeService {
     private final EmployeeDAO employeeDAO = new EmployeeDAOImpl();
     private final OrderDAO orderDAO = new OrderDAOImpl();
     private final EmployeeMapper employeeMapper = MapperFactory.getEmployeeMapper();
+    private final EmployeeValidator employeeValidator = new EmployeeBuisnessValidator();
 
 
     @Override
-    public void deleteOrderOfCustomer(EmployeeDTO employeeDTO, OrderDTO orderDTO) throws SQLException {
+    public void deleteOrderOfEmployee(EmployeeDTO employeeDTO, OrderDTO orderDTO) throws SQLException {
         Employee employee = employeeDAO.get(employeeDTO.getId());
         Order order = orderDAO.get(orderDTO.getId());
         employee.getOrders().removeIf(order1 -> order1.getId().equals(order.getId()));
@@ -69,6 +70,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public void createEmployee(EmployeeDTO employeeDTO, String pass, Role role) throws SQLException {
+
+        employeeValidator.employeeCreationValidator(employeeDTO,role);
 
         Employee employee = Employee.builder()
                 .login(employeeDTO.getLogin())

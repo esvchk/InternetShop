@@ -1,11 +1,9 @@
 package com.academy.course.exception;
 
-public class UserNotFound extends Exception {
+public class UserNotFound extends BuisnessException {
     public UserNotFound(String message, Throwable cause) {
         super(message);
     }
 
-    public UserNotFound(String message) {
-        super(message);
-    }
+
 }

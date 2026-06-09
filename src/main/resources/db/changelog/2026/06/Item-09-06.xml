@@ -5,7 +5,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-5.0.xsd"
         objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
-    <changeSet id="1780503313358-1" author="esvchk">
+    <changeSet id="1780989254121-1" author="esvchk">
         <createTable tableName="Item">
             <column name="id" type="INT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_item"/>
@@ -13,16 +13,16 @@
             <column name="createDateTime" type="DATETIME"/>
             <column name="updateDateTime" type="DATETIME"/>
             <column name="productQuantity" type="INT"/>
-            <column name="discount" type="DOUBLE"/>
+            <column name="discount" type="INT"/>
             <column name="product_id" type="INT"/>
             <column name="order_id" type="INT"/>
         </createTable>
     </changeSet>
-    <changeSet id="1780503313358-2" author="esvchk">
+    <changeSet id="1780989254121-2" author="esvchk">
         <addForeignKeyConstraint baseColumnNames="order_id" baseTableName="Item" constraintName="FK_ITEM_ON_ORDER"
                                  referencedColumnNames="id" referencedTableName="orders"/>
     </changeSet>
-    <changeSet id="1780503313358-3" author="esvchk">
+    <changeSet id="1780989254121-3" author="esvchk">
         <addForeignKeyConstraint baseColumnNames="product_id" baseTableName="Item" constraintName="FK_ITEM_ON_PRODUCT"
                                  referencedColumnNames="id" referencedTableName="Product"/>
     </changeSet>

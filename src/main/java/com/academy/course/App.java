@@ -16,6 +16,7 @@ import com.academy.course.mapper.*;
 import com.academy.course.model.*;
 import com.academy.course.service.*;
 import com.academy.course.utils.Discount;
+import com.academy.course.utils.Role;
 
 import java.sql.SQLException;
 import java.util.HashSet;
@@ -42,7 +43,6 @@ public class App {
 
         Employee employee = Employee.builder()
                 .login("Valera")
-                .paymentData("visa")
 //                .passWord("2211")
 //                .orders(orders)
                 .build();
@@ -58,7 +58,6 @@ public class App {
                 .product(product)
                 .order(order)
                 .build();
-
 
 
         orders.add(order);
@@ -82,9 +81,15 @@ public class App {
         CategoryDAO categoryDAO = new CategoryDAOImpl();
         CategoryService categoryService = new CategoryServiceImpl();
 
+        EmployeeValidator employeeValidator = new EmployeeBuisnessValidator();
+
 
 //        categoryService.addProductToCategory(11,productMapper.mapToDTO(dao.get(3)));
 //        System.out.println(categoryService.getAllCategories());
+
+//        employeeService.createEmployee(employeeMapper.mapToDTO(employee), null, Role.ADMINISTRATOR)
+
+        employeeValidator.passwordValidator("orange12345F");
 
 
 
