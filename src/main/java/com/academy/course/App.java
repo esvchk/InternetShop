@@ -80,7 +80,6 @@ public class App {
         CategoryDAO categoryDAO = new CategoryDAOImpl();
         CategoryService categoryService = new CategoryServiceImpl();
 
-        EmployeeValidator employeeValidator = new EmployeeBuisnessValidator();
 
         IdValidatorFactory idValidatorFactory  = new IdValidatorFactory();
         EmployeeService employeeService = new EmployeeServiceImpl(idValidatorFactory);
@@ -90,10 +89,10 @@ public class App {
         idValidatorFactory.setItemDAO(itemDAO);
         idValidatorFactory.setCategoryDAO(categoryDAO);
 
+        employeeService.deleteOrderOfEmployee(employeeMapper.mapToDTO(employeeDAO.get(1)),orderMapper.mapToDTO(orderDAO.get(48)));
 
 
-        employeeService.createEmployee(employeeMapper.mapToDTO(employee),"12345678Aa",Role.MANAGER);
-//        employeeService.login("ILYA","12345678Aa");
+
 
 
 
