@@ -8,6 +8,7 @@ import com.academy.course.utils.Role;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import javax.xml.bind.ValidationException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -24,7 +25,7 @@ public class BusinessEmployeeValidatorImpl implements BusinessEmployeeValidator,
     }
 
     @Override
-    public void employeeRegistrationValidator(EmployeeDTO employeeDTO, String password, Role role) {
+    public void registrationValidation(EmployeeDTO employeeDTO, String password, Role role) {
         baseEmployeeValidator.loginInputValidator(employeeDTO.getLogin());
         validateExistingLogin(employeeDTO.getLogin());
         baseEmployeeValidator.passwordInputValidator(password);
@@ -52,7 +53,7 @@ public class BusinessEmployeeValidatorImpl implements BusinessEmployeeValidator,
     }
 
     @Override
-    public void tryToLoginValidation(String login, String password) throws NoSuchFieldException {
+    public void authorizationValidation(String login, String password) throws NoSuchFieldException {
         validateField(login);
         if (employeeDAO.getEmployeeByLogin(login) == null) {
             logger.warn("Employee is not exists{}", login);
@@ -64,6 +65,14 @@ public class BusinessEmployeeValidatorImpl implements BusinessEmployeeValidator,
             throw new WrongPassWordException("Wrong password");
         }
 
+    }
+
+    @Override
+    public void getAllEmployeesValidation() throws ValidationException {
+        if (employeeDAO.getAllEmployees() == null || employeeDAO.getAllEmployees().isEmpty()) {
+            logger.warn("Receiving list Employees failed");
+            throw new ValidationException("Empty list of Employees");
+        }
     }
 
 

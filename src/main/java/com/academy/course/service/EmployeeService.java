@@ -5,13 +5,14 @@ import com.academy.course.dto.OrderDTO;
 
 import com.academy.course.utils.Role;
 
+import javax.xml.bind.ValidationException;
 import java.sql.SQLException;
 import java.util.Set;
 
 public interface EmployeeService {
 
     void deleteOrderOfEmployee(EmployeeDTO employeeDTO, OrderDTO orderDTO) throws SQLException;
-    Set<EmployeeDTO> getAllEmployeesWithOrdersAndItems();
+    Set<EmployeeDTO> getAllEmployeesWithOrdersAndItems() throws ValidationException;
     EmployeeDTO findEmployeeById(Integer id) throws SQLException;
     EmployeeDTO findEmployeeByLogin(String login);
     void addNewOrderToEmployee(EmployeeDTO employeeDTO) throws SQLException;

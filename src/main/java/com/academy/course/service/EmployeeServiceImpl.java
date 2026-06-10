@@ -14,6 +14,7 @@ import com.academy.course.utils.Role;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import javax.xml.bind.ValidationException;
 import java.sql.SQLException;
 import java.util.*;
 
@@ -38,11 +39,13 @@ public class EmployeeServiceImpl implements EmployeeService {
         Employee employee = employeeDAO.get(employeeDTO.getId());
         employee.getOrders().removeIf(order1 -> order1.getId().equals(orderDTO.getId()));
         employeeDAO.update(employee);
+        logger.info("Order with id {} successfully deleted from Employee with login{}"
+                ,orderDTO.getId(),employeeDTO.getLogin());
     }
 
-
     @Override
-    public Set<EmployeeDTO> getAllEmployeesWithOrdersAndItems() {
+    public Set<EmployeeDTO> getAllEmployeesWithOrdersAndItems() throws ValidationException {
+        businessEmployeeValidator.getAllEmployeesValidation();
         return employeeMapper.mapToSetDTOS(employeeDAO.getAllEmployees());
     }
 
@@ -77,7 +80,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public boolean registerEmployee(EmployeeDTO employeeDTO, String pass, Role role) throws SQLException {
 
-        businessEmployeeValidator.employeeRegistrationValidator(employeeDTO, pass, role);
+        businessEmployeeValidator.registrationValidation(employeeDTO, pass, role);
 
         Employee employee = Employee.builder()
                 .login(employeeDTO.getLogin())
@@ -120,7 +123,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public boolean login(String login, String passWord) throws NoSuchFieldException, SQLException {
-        businessEmployeeValidator.tryToLoginValidation(login,passWord);
+        businessEmployeeValidator.authorizationValidation(login,passWord);
         logger.info("Login {} successfully authorized",login);
         return true;
     }
