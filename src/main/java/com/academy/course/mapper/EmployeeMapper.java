@@ -21,7 +21,6 @@ public class EmployeeMapper implements Mapper<Employee, EmployeeDTO>{
                 .id(entity.getId())
                 .role(entity.getRole())
                 .login(entity.getLogin())
-
                 .orderDTOs(orderMapper.mapToSetDTOS(entity.getOrders()))
                 .build();
     }

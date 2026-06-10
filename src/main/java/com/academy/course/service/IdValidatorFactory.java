@@ -18,23 +18,24 @@ public class IdValidatorFactory {
     private CategoryDAO categoryDAO;
     private ItemDAO itemDAO ;
 
-    public IdValidator getEmployeeValidator() {
-        return new IdValidationService(entityId -> employeeDAO.get(entityId) != null, "Employee");
+    public Validator getEmployeeValidator() {
+        return new ValidationService(entityId -> employeeDAO.get(entityId) != null, "Employee");
     }
 
-    public IdValidator getProductValidator() {
-        return new IdValidationService(entityId -> productDAO.get(entityId) != null, "Product");
+    public Validator getProductValidator() {
+        return new ValidationService(entityId -> productDAO.get(entityId) != null, "Product");
     }
 
-    public IdValidator getOrderValidator() {
-        return new IdValidationService(entityId -> orderDAO.get(entityId) != null, "Order");
+    public Validator getOrderValidator() {
+        return new ValidationService(entityId -> orderDAO.get(entityId) != null, "Order");
     }
 
-    public IdValidator getCategoryValidator() {
-        return new IdValidationService(entityId -> categoryDAO.get(entityId) != null, "Category");
+    public Validator getCategoryValidator() {
+        return new ValidationService(entityId -> categoryDAO.get(entityId) != null, "Category");
     }
 
-    public IdValidator getItemValidator() {
-        return new IdValidationService(entityId -> itemDAO.get(entityId) != null, "Item");
+    public Validator getItemValidator() {
+        return new ValidationService(entityId -> itemDAO.get(entityId) != null, "Item");
     }
+
 }

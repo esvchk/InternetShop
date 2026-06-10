@@ -6,8 +6,7 @@ import com.academy.course.dao.orderDao.OrderDAO;
 import com.academy.course.dao.orderDao.OrderDAOImpl;
 import com.academy.course.dto.EmployeeDTO;
 import com.academy.course.dto.OrderDTO;
-import com.academy.course.exception.EmployeeAlreadyExists;
-import com.academy.course.exception.WrongPassWord;
+import com.academy.course.exception.WrongPassWordException;
 import com.academy.course.mapper.*;
 import com.academy.course.model.Employee;
 import com.academy.course.model.Order;
@@ -26,8 +25,9 @@ public class EmployeeServiceImpl implements EmployeeService {
     private final EmployeeDAO employeeDAO = new EmployeeDAOImpl();
     private final OrderDAO orderDAO = new OrderDAOImpl();
     private final EmployeeMapper employeeMapper = MapperFactory.getEmployeeMapper();
+    private final OrderMapper orderMapper = MapperFactory.getOrderMapper();
     private final EmployeeValidator employeeValidator = new EmployeeBuisnessValidator();
-    private IdValidatorFactory factory ;
+    private IdValidatorFactory factory;
 
     public EmployeeServiceImpl(IdValidatorFactory factory) {
         this.factory = factory;
@@ -49,7 +49,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public EmployeeDTO findEmployeeById(Integer id) throws SQLException {
-        factory.getEmployeeValidator().validate(id);
+        factory.getEmployeeValidator().validateId(id);
         return employeeMapper.mapToDTO(employeeDAO.get(id));
     }
 
@@ -64,10 +64,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public void addNewOrderToEmployee(EmployeeDTO employeeDTO) throws SQLException {
+        factory.getEmployeeValidator().validateId(employeeDTO.getId());
         Employee employee = employeeDAO.get(employeeDTO.getId());
+        employeeValidator.addNewOrderValidator(employeeDTO);
         Order order = Order.builder()
-                .employee(employee)
                 .isBought(false)
+                .employee(employee)
                 .build();
         employee.addOrder(order);
         employeeDAO.update(employee);
@@ -77,8 +79,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     public void createEmployee(EmployeeDTO employeeDTO, String pass, Role role) throws SQLException {
 
         employeeValidator.employeeCreationValidator(employeeDTO, role);
-        employeeValidator.passwordValidator(pass);
-        employeeValidator.loginValidator(employeeDTO.getLogin());
+        employeeValidator.passwordInputValidator(pass);
 
         Employee employee = Employee.builder()
                 .login(employeeDTO.getLogin())
@@ -99,9 +100,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public void updateEmployee(Integer oldValueId, EmployeeDTO newValue) throws SQLException {
-        factory.getEmployeeValidator().validate(oldValueId);
+        factory.getEmployeeValidator().validateId(oldValueId);
         Employee employee = employeeDAO.get(oldValueId);
-        employeeValidator.employeeCreationValidator(newValue,newValue.getRole());
+        employeeValidator.employeeCreationValidator(newValue, newValue.getRole());
         employee.setLogin(newValue.getLogin());
         employee.setRole(newValue.getRole());
         employeeDAO.update(employee);
@@ -109,7 +110,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public void deleteEmployee(Integer employeeId) throws SQLException {
-        factory.getEmployeeValidator().validate(employeeId);
+        factory.getEmployeeValidator().validateId(employeeId);
         employeeDAO.delete(employeeDAO.get(employeeId));
     }
 
@@ -117,12 +118,10 @@ public class EmployeeServiceImpl implements EmployeeService {
     public boolean register(EmployeeDTO employeeDTO, String password, Role role) {
         String login = employeeDTO.getLogin();
         try {
-            if (employeeDAO.getEmployeeByLogin(employeeDTO.getLogin()) != null) {
-                logger.warn("already exist with login {}", login);
-                throw new EmployeeAlreadyExists("User already registered with this login");
-            } else {
-                createEmployee(employeeDTO, password, role);
-            }
+            employeeValidator.registerValidation(login, password);
+
+            createEmployee(employeeDTO, password, role);
+
         } catch (NoResultException | SQLException e) {
             e.printStackTrace();
         }
@@ -131,21 +130,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public boolean login(String login, String passWord) throws NoSuchFieldException, SQLException {
-        try {
-            Employee employee = employeeDAO.getEmployeeByLogin(login);
-            if (employee.getLogin().equals(login)) {
-                if (PasswordHasher.checkPass(passWord, employee.getPassWord())) {
-                    logger.info("successfully loged in{}", employee);
-                    return true;
-                } else {
-                    logger.warn("Wrong passWord {} by login {}", passWord, login);
-                    throw new WrongPassWord("Wrong Password");
-                }
-            }
-        } catch (NoSuchFieldException e) {
-            throw new RuntimeException(e);
-        }
-        return false;
+        employeeValidator.tryToLoginValidation(login,passWord);
+        return true;
     }
 
 }

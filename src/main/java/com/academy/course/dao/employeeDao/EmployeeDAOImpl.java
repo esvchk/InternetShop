@@ -18,7 +18,7 @@ public class EmployeeDAOImpl extends DAOImpl<Employee> implements EmployeeDAO {
 
     @Override
     public Employee getEmployeeByLogin(String login) {
-        Query query = getEm().createQuery("from Employee employee where employee.login=: login", Employee.class);
+        Query query = getEm().createQuery("from Employee employee where employee.login=: login ", Employee.class);
         query.setParameter("login", login);
         if (!query.getResultList().isEmpty()) {
             return (Employee) query.getSingleResult();

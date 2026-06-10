@@ -15,6 +15,7 @@ import com.academy.course.dao.orderDao.OrderDAOImpl;
 import com.academy.course.mapper.*;
 import com.academy.course.model.*;
 import com.academy.course.service.*;
+import com.academy.course.utils.Role;
 
 import java.sql.SQLException;
 import java.util.HashSet;
@@ -40,7 +41,7 @@ public class App {
                 .build();
 
         Employee employee = Employee.builder()
-                .login("Valera")
+                .login("IlYa")
 //                .passWord("2211")
 //                .orders(orders)
                 .build();
@@ -90,15 +91,9 @@ public class App {
         idValidatorFactory.setCategoryDAO(categoryDAO);
 
 
-        employeeService.deleteEmployee(3);
 
-
-
-//        categoryService.addProductToCategory(11,productMapper.mapToDTO(dao.get(3)));
-//        System.out.println(categoryService.getAllCategories());
-
-//        )
-
+        employeeService.createEmployee(employeeMapper.mapToDTO(employee),"12345678Aa",Role.MANAGER);
+//        employeeService.login("ILYA","12345678Aa");
 
 
 
