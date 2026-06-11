@@ -2,6 +2,7 @@ package com.academy.course.service;
 
 import com.academy.course.exception.EntityNotFoundByIdException;
 import com.academy.course.exception.EmptyFieldException;
+import com.academy.course.exception.InvalidInputException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -21,6 +22,10 @@ public class ValidationService implements Validator {
 
     @Override
     public void validateId(Integer entityId) {
+        if (entityId <= 0) {
+            logger.warn("Wrong input id {}",entityId);
+            throw new InvalidInputException(String.valueOf(entityId));
+        }
         if (entityId == null) {
             logger.warn("Empty entity with id {}",entityName);
             throw new EmptyFieldException("entityId");

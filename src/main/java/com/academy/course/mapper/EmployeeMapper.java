@@ -1,12 +1,16 @@
 package com.academy.course.mapper;
 
 import com.academy.course.dto.EmployeeDTO;
+import com.academy.course.exception.EmptyEntityException;
+import com.academy.course.exception.EmptyFieldException;
 import com.academy.course.model.Employee;
+import com.academy.course.service.EmptyFieldValidator;
+import com.academy.course.service.Validator;
 
 import java.util.HashSet;
 import java.util.Set;
 
-public class EmployeeMapper implements Mapper<Employee, EmployeeDTO>{
+public class EmployeeMapper implements Mapper<Employee, EmployeeDTO>, EmptyFieldValidator<Object> {
 
     private final OrderMapper orderMapper;
 
@@ -17,6 +21,7 @@ public class EmployeeMapper implements Mapper<Employee, EmployeeDTO>{
 
     @Override
     public EmployeeDTO mapToDTO(Employee entity) {
+        validateField(entity);
         return EmployeeDTO.builder()
                 .id(entity.getId())
                 .role(entity.getRole())
@@ -27,6 +32,7 @@ public class EmployeeMapper implements Mapper<Employee, EmployeeDTO>{
 
     @Override
     public Employee mapToEntity(EmployeeDTO dto) {
+        validateField(dto);
         return Employee.builder()
                 .orders(orderMapper.mapToSetEntities(dto.getOrderDTOs()))
                 .role(dto.getRole())
@@ -62,4 +68,12 @@ public class EmployeeMapper implements Mapper<Employee, EmployeeDTO>{
         return set;
     }
 
+
+
+    @Override
+    public void validateField(Object object) {
+        if (object == null) {
+            throw new EmptyEntityException(object);
+        }
+    }
 }

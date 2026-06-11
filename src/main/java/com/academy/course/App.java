@@ -17,12 +17,13 @@ import com.academy.course.model.*;
 import com.academy.course.service.*;
 import com.academy.course.utils.Role;
 
+import javax.xml.bind.ValidationException;
 import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Set;
 
 public class App {
-    public static void main(String[] args) throws SQLException, NoSuchFieldException {
+    public static void main(String[] args) throws SQLException, NoSuchFieldException, ValidationException {
 
         Set<Order> orders = new HashSet<>();
         Set<Item> items = new HashSet<>();
@@ -41,9 +42,10 @@ public class App {
                 .build();
 
         Employee employee = Employee.builder()
-                .login("IlYa")
+                .login("jo")
 //                .passWord("2211")
 //                .orders(orders)
+                .role(Role.MANAGER)
                 .build();
 
 
@@ -89,7 +91,13 @@ public class App {
         idValidatorFactory.setItemDAO(itemDAO);
         idValidatorFactory.setCategoryDAO(categoryDAO);
 
-        employeeService.deleteOrderOfEmployee(employeeMapper.mapToDTO(employeeDAO.get(1)),orderMapper.mapToDTO(orderDAO.get(48)));
+        BaseEmployeeValidator baseEmployeeValidator = new BaseEmployeeValidatorImpl();
+        BusinessEmployeeValidator businessEmployeeValidator = new BusinessEmployeeValidatorImpl(baseEmployeeValidator,employeeDAO);
+
+
+//        employeeService.registerEmployee(employeeMapper.mapToDTO(employee),"12345678Aa",Role.ADMINISTRATOR);
+
+      employeeService.updateEmployee(76,employeeMapper.mapToDTO(null));
 
 
 

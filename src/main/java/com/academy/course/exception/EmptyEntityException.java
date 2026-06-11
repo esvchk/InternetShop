@@ -6,7 +6,7 @@ import lombok.Getter;
 public class EmptyEntityException extends ValidationException {
 
     public EmptyEntityException(Object entity) {
-        super("Entity " + entity + "cannot be empty");
+        super("Entity " + entity + " cannot be null or empty");
         this.entity = entity;
     }
 

@@ -35,7 +35,7 @@ public class BusinessEmployeeValidatorImpl implements BusinessEmployeeValidator,
 
     @Override
     public void validateExistingLogin(String login) {
-        validateField(login);
+        baseEmployeeValidator.loginInputValidator(login);
         if (employeeDAO.getEmployeeByLogin(login) != null) {
             logger.warn("Employee already has been registered with login {}", login);
             throw new EmployeeAlreadyExists(login);
@@ -44,7 +44,7 @@ public class BusinessEmployeeValidatorImpl implements BusinessEmployeeValidator,
 
     @Override
     public void findByLoginValidation(String login) {
-        validateField(login);
+       baseEmployeeValidator.loginInputValidator(login);
         if (employeeDAO.getEmployeeByLogin(login) == null) {
             logger.warn("Search employee by login{} failed", login);
             throw new EntityNotFoundByLoginException(login);
@@ -64,7 +64,6 @@ public class BusinessEmployeeValidatorImpl implements BusinessEmployeeValidator,
             logger.warn("Wrong PassWord by login{}", login);
             throw new WrongPassWordException("Wrong password");
         }
-
     }
 
     @Override

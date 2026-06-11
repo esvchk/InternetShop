@@ -1,12 +1,14 @@
 package com.academy.course.mapper;
 
 import com.academy.course.dto.OrderDTO;
+import com.academy.course.exception.EmptyEntityException;
 import com.academy.course.model.Order;
+import com.academy.course.service.EmptyFieldValidator;
 
 import java.util.HashSet;
 import java.util.Set;
 
-public class OrderMapper implements Mapper<Order, OrderDTO>{
+public class OrderMapper implements Mapper<Order, OrderDTO>, EmptyFieldValidator<Object> {
 
     private final ItemMapper itemMapper;
 
@@ -17,6 +19,7 @@ public class OrderMapper implements Mapper<Order, OrderDTO>{
 
     @Override
     public OrderDTO mapToDTO(Order entity) {
+        validateField(entity);
         return OrderDTO.builder()
                 .id(entity.getId())
                 .itemsDTO(itemMapper.mapToSetDTOS(entity.getItems()))
@@ -28,6 +31,7 @@ public class OrderMapper implements Mapper<Order, OrderDTO>{
 
     @Override
     public Order mapToEntity(OrderDTO dto) {
+        validateField(dto);
         return Order.builder()
                 .items(itemMapper.mapToSetEntities(dto.getItemsDTO()))
                 .isBought(dto.getIsBought())
@@ -66,4 +70,10 @@ public class OrderMapper implements Mapper<Order, OrderDTO>{
         return set;
     }
 
+    @Override
+    public void validateField(Object object) {
+        if (object == null) {
+            throw new EmptyEntityException(object);
+        }
+    }
 }

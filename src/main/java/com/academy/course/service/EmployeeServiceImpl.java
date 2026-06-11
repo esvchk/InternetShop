@@ -22,10 +22,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     private static final Logger logger = LogManager.getLogger(EmployeeServiceImpl.class);
     private final EmployeeDAO employeeDAO = new EmployeeDAOImpl();
-    private final OrderDAO orderDAO = new OrderDAOImpl();
     private final BaseEmployeeValidator baseEmployeeValidator = new BaseEmployeeValidatorImpl();
     private final EmployeeMapper employeeMapper = MapperFactory.getEmployeeMapper();
-    private final OrderMapper orderMapper = MapperFactory.getOrderMapper();
     private final BusinessEmployeeValidator businessEmployeeValidator = new BusinessEmployeeValidatorImpl(baseEmployeeValidator,employeeDAO);
     private final IdValidatorFactory factory;
 

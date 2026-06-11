@@ -1,14 +1,16 @@
 package com.academy.course.mapper;
 
 import com.academy.course.dto.ItemDTO;
+import com.academy.course.exception.EmptyEntityException;
 import com.academy.course.model.Item;
+import com.academy.course.service.EmptyFieldValidator;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class ItemMapper implements Mapper<Item, ItemDTO> {
+public class ItemMapper implements Mapper<Item, ItemDTO>, EmptyFieldValidator<Object> {
 
     private final ProductMapper productMapper;
 
@@ -19,6 +21,7 @@ public class ItemMapper implements Mapper<Item, ItemDTO> {
 
     @Override
     public ItemDTO mapToDTO(Item entity) {
+        validateField(entity);
         return ItemDTO.builder()
                 .id(entity.getId())
                 .discount(entity.getDiscount())
@@ -29,6 +32,7 @@ public class ItemMapper implements Mapper<Item, ItemDTO> {
 
     @Override
     public Item mapToEntity(ItemDTO dto) {
+        validateField(dto);
         return Item.builder()
                 .discount(dto.getDiscount())
                 .productQuantity(dto.getQuantity())
@@ -64,6 +68,12 @@ public class ItemMapper implements Mapper<Item, ItemDTO> {
         }
         return itemDTOS;
     }
-    
 
+
+    @Override
+    public void validateField(Object object) {
+        if (object == null) {
+            throw new EmptyEntityException(object);
+        }
+    }
 }
