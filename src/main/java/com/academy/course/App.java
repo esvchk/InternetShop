@@ -97,7 +97,7 @@ public class App {
 
 //        employeeService.registerEmployee(employeeMapper.mapToDTO(employee),"12345678Aa",Role.ADMINISTRATOR);
 
-      employeeService.updateEmployee(76,employeeMapper.mapToDTO(null));
+      employeeService.addNewOrderToEmployee(employeeMapper.mapToDTO(employeeDAO.get(7)));
 
 
 
