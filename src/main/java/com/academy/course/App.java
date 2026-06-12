@@ -107,23 +107,6 @@ public class App {
 //        System.out.println(employeeService.findEmployeeByLogin("oleg"));
 //        System.out.println(orderService.getAllOrdersWithItems());
 
-        orderService.deleteOrder(orderMapper.mapToDTO(orderDAO.get(26)));
-        orderService.deleteOrder(orderMapper.mapToDTO(orderDAO.get(28)));
-        orderService.deleteOrder(orderMapper.mapToDTO(orderDAO.get(30)));
-        orderService.deleteOrder(orderMapper.mapToDTO(orderDAO.get(32)));
-        orderService.deleteOrder(orderMapper.mapToDTO(orderDAO.get(35)));
-        orderService.deleteOrder(orderMapper.mapToDTO(orderDAO.get(37)));
-        orderService.deleteOrder(orderMapper.mapToDTO(orderDAO.get(39)));
-        orderService.deleteOrder(orderMapper.mapToDTO(orderDAO.get(41)));
-        orderService.deleteOrder(orderMapper.mapToDTO(orderDAO.get(43)));
-        orderService.deleteOrder(orderMapper.mapToDTO(orderDAO.get(45)));
-        orderService.deleteOrder(orderMapper.mapToDTO(orderDAO.get(47)));
-        orderService.deleteOrder(orderMapper.mapToDTO(orderDAO.get(50)));
-        orderService.deleteOrder(orderMapper.mapToDTO(orderDAO.get(52)));
-        orderService.deleteOrder(orderMapper.mapToDTO(orderDAO.get(54)));
-        orderService.deleteOrder(orderMapper.mapToDTO(orderDAO.get(58)));
-        orderService.deleteOrder(orderMapper.mapToDTO(orderDAO.get(62)));
-
 
     }
 }

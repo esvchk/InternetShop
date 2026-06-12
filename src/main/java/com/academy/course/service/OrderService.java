@@ -11,7 +11,7 @@ import java.util.Set;
 
 public interface OrderService {
 
-    OrderDTO findOrderById(Serializable orderId) throws SQLException;
+    OrderDTO findOrderById(Integer orderId) throws SQLException;
     Set<OrderDTO> getAllOrdersWithItems();
     void buyOrder(OrderDTO orderDTO) throws SQLException;
     void deleteOrder(OrderDTO orderDTO) throws SQLException;

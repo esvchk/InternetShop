@@ -18,14 +18,13 @@ import com.academy.course.model.Product;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.Optional;
 import java.util.Set;
 
 public class OrderServiceImpl implements OrderService {
 
-    private static final Logger log = LogManager.getLogger(OrderServiceImpl.class);
+    private static final Logger logger = LogManager.getLogger(OrderServiceImpl.class);
     private final OrderDAO orderDAO = new OrderDAOImpl();
     private final ProductDAO productDAO = new ProductDAOImpl();
     private final ItemDAO itemDAO = new ItemDAOImpl();
@@ -39,14 +38,17 @@ public class OrderServiceImpl implements OrderService {
         this.factory = factory;
     }
 
-
     @Override
-    public OrderDTO findOrderById(Serializable orderId) throws SQLException {
+    public OrderDTO findOrderById(Integer orderId) throws SQLException {
+        factory.getOrderValidator().validateId(orderId);
+        logger.info("Finding order by id {} successfully",orderId);
         return orderMapper.mapToDTO(orderDAO.get(orderId));
     }
 
     @Override
     public Set<OrderDTO> getAllOrdersWithItems() {
+        businessOrderValidator.validateGetAllOrders();
+        logger.info("Getting all Orders successfully");
         return orderMapper.mapToSetDTOS(orderDAO.getAllOrders());
     }
 
@@ -54,6 +56,7 @@ public class OrderServiceImpl implements OrderService {
     public void deleteOrder(OrderDTO orderDTO) throws SQLException {
         factory.getOrderValidator().validateId(orderDTO.getId());
         orderDAO.delete(orderDAO.get(orderDTO.getId()));
+        logger.info("Deleting order with id{} successfully",orderDTO.getId());
     }
 
     @Override
@@ -78,7 +81,8 @@ public class OrderServiceImpl implements OrderService {
             order.addItem(item);
         }
         orderDAO.update(order);
-        log.warn("Order {} already bought", order.getId());
+        logger.info("Product {} has been successfully added to order {}" +
+                "with quantity {}",productDTO,orderDTO,quantity);
     }
 
     @Override
@@ -94,6 +98,7 @@ public class OrderServiceImpl implements OrderService {
             item.setProductQuantity(item.getProductQuantity() - quantity);
         }
         orderDAO.update(order);
+        logger.info("Item {} with quantity {} has been successfully removed from order with id {}",itemDTO,quantity,orderId);
     }
 
     @Override
@@ -103,7 +108,6 @@ public class OrderServiceImpl implements OrderService {
         businessOrderValidator.validateBuyOrder(orderDTO);
         order.setIsBought(true);
         orderDAO.update(order);
+        logger.info("Order {} has been successfully bought",orderDTO);
     }
-
-
 }
