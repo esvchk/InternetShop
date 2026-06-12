@@ -8,14 +8,14 @@ import org.apache.logging.log4j.Logger;
 
 import java.sql.SQLException;
 
-public class ValidationService implements Validator {
+public class IdValidationService implements IdValidator {
 
     private final EntityFetcher entityFetcher;
     private final String entityName;
-    private static final Logger logger = LogManager.getLogger(ValidationService.class);
+    private static final Logger logger = LogManager.getLogger(IdValidationService.class);
 
 
-    public ValidationService(EntityFetcher entityFetcher, String entityName) {
+    public IdValidationService(EntityFetcher entityFetcher, String entityName) {
         this.entityFetcher = entityFetcher;
         this.entityName = entityName;
     }

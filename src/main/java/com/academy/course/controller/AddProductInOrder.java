@@ -1,9 +1,6 @@
 package com.academy.course.controller;
 
-import com.academy.course.service.OrderService;
-import com.academy.course.service.OrderServiceImpl;
-import com.academy.course.service.ProductService;
-import com.academy.course.service.ProductServiceImpl;
+import com.academy.course.service.*;
 import com.academy.course.utils.ParameterConverter;
 
 import javax.servlet.ServletException;
@@ -16,7 +13,8 @@ import java.sql.SQLException;
 @WebServlet("/AddProductInOrder")
 public class AddProductInOrder extends HttpServlet {
 
-    private final OrderService orderService = new OrderServiceImpl();
+    private final IdValidatorFactory idValidatorFactory = new IdValidatorFactory();
+    private final OrderService orderService = new OrderServiceImpl(idValidatorFactory);
     private final ProductService productService = new ProductServiceImpl();
 
 

@@ -2,8 +2,6 @@ package com.academy.course.service;
 
 import com.academy.course.dao.employeeDao.EmployeeDAO;
 import com.academy.course.dao.employeeDao.EmployeeDAOImpl;
-import com.academy.course.dao.orderDao.OrderDAO;
-import com.academy.course.dao.orderDao.OrderDAOImpl;
 import com.academy.course.dto.EmployeeDTO;
 import com.academy.course.dto.OrderDTO;
 import com.academy.course.mapper.*;
@@ -34,6 +32,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public void deleteOrderOfEmployee(EmployeeDTO employeeDTO, OrderDTO orderDTO) throws SQLException {
         factory.getEmployeeValidator().validateId(employeeDTO.getId());
+        factory.getOrderValidator().validateId(orderDTO.getId());
         Employee employee = employeeDAO.get(employeeDTO.getId());
         employee.getOrders().removeIf(order1 -> order1.getId().equals(orderDTO.getId()));
         employeeDAO.update(employee);

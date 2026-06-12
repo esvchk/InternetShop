@@ -1,5 +1,6 @@
 package com.academy.course.controller;
 
+import com.academy.course.service.IdValidatorFactory;
 import com.academy.course.service.OrderService;
 import com.academy.course.service.OrderServiceImpl;
 import com.academy.course.utils.ParameterConverter;
@@ -14,7 +15,8 @@ import java.sql.SQLException;
 @WebServlet("/FindOrderById")
 public class FindOrderById extends HttpServlet {
 
-    private final OrderService orderService = new OrderServiceImpl();
+    IdValidatorFactory idValidatorFactory = new IdValidatorFactory();
+    private final OrderService orderService = new OrderServiceImpl(idValidatorFactory);
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

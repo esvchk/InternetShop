@@ -12,4 +12,9 @@ public class InvalidInputException extends ValidationException {
         super("Wrong input " + input);
         this.input = input;
     }
+
+    public InvalidInputException(String message, String input) {
+        super(message);
+        this.input = input;
+    }
 }

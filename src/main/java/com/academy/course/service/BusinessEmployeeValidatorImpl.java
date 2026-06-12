@@ -2,16 +2,12 @@ package com.academy.course.service;
 
 import com.academy.course.dao.employeeDao.EmployeeDAO;
 import com.academy.course.dto.EmployeeDTO;
-import com.academy.course.dto.OrderDTO;
 import com.academy.course.exception.*;
 import com.academy.course.utils.Role;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.xml.bind.ValidationException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 
 public class BusinessEmployeeValidatorImpl implements BusinessEmployeeValidator, EmptyFieldValidator<String> {
 
@@ -49,7 +45,6 @@ public class BusinessEmployeeValidatorImpl implements BusinessEmployeeValidator,
             logger.warn("Search employee by login{} failed", login);
             throw new EntityNotFoundByLoginException(login);
         }
-
     }
 
     @Override

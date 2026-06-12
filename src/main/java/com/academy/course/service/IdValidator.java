@@ -1,6 +1,6 @@
 package com.academy.course.service;
 
-public interface Validator {
+public interface IdValidator {
     void validateId(Integer entityId);
 
 }

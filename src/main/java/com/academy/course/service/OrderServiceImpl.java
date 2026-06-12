@@ -1,21 +1,17 @@
 package com.academy.course.service;
 
 
-import com.academy.course.dao.employeeDao.EmployeeDAOImpl;
 import com.academy.course.dao.itemDao.ItemDAO;
 import com.academy.course.dao.itemDao.ItemDAOImpl;
-import com.academy.course.dao.employeeDao.EmployeeDAO;
 import com.academy.course.dao.orderDao.OrderDAO;
 import com.academy.course.dao.orderDao.OrderDAOImpl;
 
 import com.academy.course.dao.productDao.ProductDAO;
 import com.academy.course.dao.productDao.ProductDAOImpl;
-import com.academy.course.dto.EmployeeDTO;
 import com.academy.course.dto.ItemDTO;
 import com.academy.course.dto.OrderDTO;
 import com.academy.course.dto.ProductDTO;
 import com.academy.course.mapper.*;
-import com.academy.course.model.Employee;
 import com.academy.course.model.Item;
 import com.academy.course.model.Order;
 import com.academy.course.model.Product;
@@ -32,11 +28,16 @@ public class OrderServiceImpl implements OrderService {
     private static final Logger log = LogManager.getLogger(OrderServiceImpl.class);
     private final OrderDAO orderDAO = new OrderDAOImpl();
     private final ProductDAO productDAO = new ProductDAOImpl();
-    private final EmployeeDAO employeeDAO = new EmployeeDAOImpl();
     private final ItemDAO itemDAO = new ItemDAOImpl();
     private final ProductMapper productMapper = new ProductMapper();
     private final ItemMapper itemMapper = new ItemMapper(productMapper);
     private final OrderMapper orderMapper = new OrderMapper(itemMapper);
+    private final IdValidatorFactory factory;
+    private final BusinessOrderValidator businessOrderValidator = new BusinessOrderValidatorImpl(orderDAO);
+
+    public OrderServiceImpl(IdValidatorFactory factory) {
+        this.factory = factory;
+    }
 
 
     @Override
@@ -51,57 +52,43 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public void deleteOrder(OrderDTO orderDTO) throws SQLException {
-        if (orderDTO.getId() != null) {
-            orderDAO.delete(orderDAO.get(orderDTO.getId()));
-        } else
-            throw new NullPointerException();
+        factory.getOrderValidator().validateId(orderDTO.getId());
+        orderDAO.delete(orderDAO.get(orderDTO.getId()));
     }
 
     @Override
     public void addProductToOrder(ProductDTO productDTO,
                                   OrderDTO orderDTO, Integer quantity) throws SQLException {
-        if (productDTO.getId() == null) {
-            throw new NullPointerException();
-        } else if (orderDTO.getId() == null) {
-            throw new NullPointerException();
-        }
+        factory.getProductValidator().validateId(productDTO.getId());
+        factory.getOrderValidator().validateId(orderDTO.getId());
+        businessOrderValidator.validateAddProductToOrder(productDTO, orderDTO, quantity);
         Order order = orderDAO.get(orderDTO.getId());
-        if (order.getIsBought() != null && !order.getIsBought()) {
-            Product product = productDAO.get(productDTO.getId());
-            Optional<Item> items = order.getItems().stream()
-                    .filter(item1 -> item1.getProduct().getId().equals(product.getId()))
-                    .findFirst();
-            if (items.isPresent()) {
-                items.get().setProductQuantity(items.get().getProductQuantity() + quantity);
-            } else {
-                Item item = Item.builder()
-                        .productQuantity(quantity)
-                        .product(product)
-                        .order(order)
-                        .build();
-                order.addItem(item);
-            }
-            orderDAO.update(order);
+        Product product = productDAO.get(productDTO.getId());
+        Optional<Item> items = order.getItems().stream()
+                .filter(item1 -> item1.getProduct().getId().equals(product.getId()))
+                .findFirst();
+        if (items.isPresent()) {
+            items.get().setProductQuantity(items.get().getProductQuantity() + quantity);
         } else {
-            log.warn("Order {} already bought", order.getId());
+            Item item = Item.builder()
+                    .productQuantity(quantity)
+                    .product(product)
+                    .order(order)
+                    .build();
+            order.addItem(item);
         }
+        orderDAO.update(order);
+        log.warn("Order {} already bought", order.getId());
     }
 
     @Override
-    public Set<OrderDTO> getAllOrdersOfEmployee(EmployeeDTO employeeDTO) throws SQLException {
-        if (employeeDTO != null) {
-            Employee employee = employeeDAO.get(employeeDTO.getId());
-            Set<Order> orders = employee.getOrders();
-            return orderMapper.mapToSetDTOS(orders);
-        } else
-            throw new NullPointerException();
-    }
-
-    @Override
-    public void deleteItemFromOrder(ItemDTO itemDTO, Integer orderId,Integer quantity) throws SQLException {
+    public void deleteItemFromOrder(ItemDTO itemDTO, Integer orderId, Integer quantity) throws SQLException {
+        factory.getOrderValidator().validateId(orderId);
+        factory.getItemValidator().validateId(itemDTO.getId());
         Order order = orderDAO.get(orderId);
         Item item = itemDAO.get(itemDTO.getId());
-        if (item.getProductQuantity().equals(quantity) || quantity > item.getProductQuantity()) {
+        businessOrderValidator.validateDeleteItemFromOrder(itemDTO, orderId, quantity);
+        if (item.getProductQuantity().equals(quantity)) {
             itemDAO.delete(item);
         } else {
             item.setProductQuantity(item.getProductQuantity() - quantity);
@@ -111,17 +98,11 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public void buyOrder(OrderDTO orderDTO) throws SQLException {
-        if (orderDTO.getId() != null) {
-            Order order = orderDAO.get(orderDTO.getId());
-            if (!order.getIsBought()) {
-                order.setIsBought(true);
-                orderDAO.update(order);
-            } else
-                log.warn("Order {} already has been purchased", orderDTO);
-
-        } else
-            throw new NullPointerException();
-
+        factory.getOrderValidator().validateId(orderDTO.getId());
+        Order order = orderDAO.get(orderDTO.getId());
+        businessOrderValidator.validateBuyOrder(orderDTO);
+        order.setIsBought(true);
+        orderDAO.update(order);
     }
 
 

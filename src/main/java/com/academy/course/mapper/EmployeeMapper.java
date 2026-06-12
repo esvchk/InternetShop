@@ -2,10 +2,8 @@ package com.academy.course.mapper;
 
 import com.academy.course.dto.EmployeeDTO;
 import com.academy.course.exception.EmptyEntityException;
-import com.academy.course.exception.EmptyFieldException;
 import com.academy.course.model.Employee;
 import com.academy.course.service.EmptyFieldValidator;
-import com.academy.course.service.Validator;
 
 import java.util.HashSet;
 import java.util.Set;

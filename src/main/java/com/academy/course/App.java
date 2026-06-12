@@ -12,6 +12,8 @@ import com.academy.course.dao.orderDao.OrderDAO;
 import com.academy.course.dao.orderDao.OrderDAOImpl;
 
 
+import com.academy.course.dao.productDao.ProductDAO;
+import com.academy.course.dao.productDao.ProductDAOImpl;
 import com.academy.course.mapper.*;
 import com.academy.course.model.*;
 import com.academy.course.service.*;
@@ -35,14 +37,14 @@ public class App {
 
 
         Product product = Product.builder()
-                .name("Capucino")
-                .price(8.00)
+                .name("Flat White")
+                .price(9.00)
                 .isAvailable(true)
                 .category(category)
                 .build();
 
         Employee employee = Employee.builder()
-                .login("jo")
+                .login("Alex")
 //                .passWord("2211")
 //                .orders(orders)
                 .role(Role.MANAGER)
@@ -50,8 +52,7 @@ public class App {
 
 
         Order order = Order.builder()
-//                .items(items)
-//                .customer(customer)
+                .items(items)
                 .build();
 
         Item item = Item.builder()
@@ -71,37 +72,57 @@ public class App {
         ItemMapper itemMapper = new ItemMapper(productMapper);
         OrderMapper orderMapper = new OrderMapper(itemMapper);
         EmployeeMapper employeeMapper = new EmployeeMapper(orderMapper);
-        DAO<Product> dao = new DAOImpl<>(Product.class);
+        ProductDAO dao = new ProductDAOImpl();
         ItemService itemService = new ItemServiceImpl();
         OrderDAO orderDAO = new OrderDAOImpl();
         EmployeeDAO employeeDAO = new EmployeeDAOImpl();
-        OrderService orderService = new OrderServiceImpl();
+
         ProductServiceImpl productService = new ProductServiceImpl();
 
         ItemDAO itemDAO = new ItemDAOImpl();
         CategoryDAO categoryDAO = new CategoryDAOImpl();
         CategoryService categoryService = new CategoryServiceImpl();
 
-
         IdValidatorFactory idValidatorFactory  = new IdValidatorFactory();
         EmployeeService employeeService = new EmployeeServiceImpl(idValidatorFactory);
+        OrderService orderService = new OrderServiceImpl(idValidatorFactory);
         idValidatorFactory.setEmployeeDAO(employeeDAO);
         idValidatorFactory.setCategoryDAO(categoryDAO);
         idValidatorFactory.setOrderDAO(orderDAO);
         idValidatorFactory.setItemDAO(itemDAO);
         idValidatorFactory.setCategoryDAO(categoryDAO);
+        idValidatorFactory.setProductDAO(dao);
 
         BaseEmployeeValidator baseEmployeeValidator = new BaseEmployeeValidatorImpl();
         BusinessEmployeeValidator businessEmployeeValidator = new BusinessEmployeeValidatorImpl(baseEmployeeValidator,employeeDAO);
 
 
-//        employeeService.registerEmployee(employeeMapper.mapToDTO(employee),"12345678Aa",Role.ADMINISTRATOR);
+//        productService.deleteProduct(productMapper.mapToDTO(dao.get(86)));
 
-      employeeService.addNewOrderToEmployee(employeeMapper.mapToDTO(employeeDAO.get(7)));
+//        orderService.addProductToOrder(productMapper.mapToDTO(dao.get(83)),orderMapper.mapToDTO(orderDAO.get(77)),1);
+
+//        orderService.deleteItemFromOrder(itemMapper.mapToDTO(itemDAO.get(85)),7,2);
 
 
+//        System.out.println(employeeService.findEmployeeByLogin("oleg"));
+//        System.out.println(orderService.getAllOrdersWithItems());
 
-
+        orderService.deleteOrder(orderMapper.mapToDTO(orderDAO.get(26)));
+        orderService.deleteOrder(orderMapper.mapToDTO(orderDAO.get(28)));
+        orderService.deleteOrder(orderMapper.mapToDTO(orderDAO.get(30)));
+        orderService.deleteOrder(orderMapper.mapToDTO(orderDAO.get(32)));
+        orderService.deleteOrder(orderMapper.mapToDTO(orderDAO.get(35)));
+        orderService.deleteOrder(orderMapper.mapToDTO(orderDAO.get(37)));
+        orderService.deleteOrder(orderMapper.mapToDTO(orderDAO.get(39)));
+        orderService.deleteOrder(orderMapper.mapToDTO(orderDAO.get(41)));
+        orderService.deleteOrder(orderMapper.mapToDTO(orderDAO.get(43)));
+        orderService.deleteOrder(orderMapper.mapToDTO(orderDAO.get(45)));
+        orderService.deleteOrder(orderMapper.mapToDTO(orderDAO.get(47)));
+        orderService.deleteOrder(orderMapper.mapToDTO(orderDAO.get(50)));
+        orderService.deleteOrder(orderMapper.mapToDTO(orderDAO.get(52)));
+        orderService.deleteOrder(orderMapper.mapToDTO(orderDAO.get(54)));
+        orderService.deleteOrder(orderMapper.mapToDTO(orderDAO.get(58)));
+        orderService.deleteOrder(orderMapper.mapToDTO(orderDAO.get(62)));
 
 
     }
