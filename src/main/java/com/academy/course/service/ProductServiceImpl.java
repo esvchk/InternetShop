@@ -4,6 +4,7 @@ import com.academy.course.dao.categoryDao.CategoryDAO;
 import com.academy.course.dao.categoryDao.CategoryDAOImpl;
 import com.academy.course.dao.productDao.ProductDAO;
 import com.academy.course.dao.productDao.ProductDAOImpl;
+import com.academy.course.dto.CategoryDTO;
 import com.academy.course.dto.ProductDTO;
 import com.academy.course.mapper.CategoryMapper;
 import com.academy.course.mapper.MapperFactory;
@@ -22,18 +23,16 @@ public class ProductServiceImpl implements ProductService {
     private final CategoryDAO categoryDAO = new CategoryDAOImpl();
 
     @Override
-    public void setProductLimit(Integer productId, Integer limit) throws SQLException {
-        Product product = productDAO.get(productId);
-        if (limit > 0 && !(limit < 0)) {
-            product.setProductLimit(limit);
-            product.setIsAvailable(false);
-            productDAO.update(product);
-        } else
-            throw new NullPointerException();
+    public void setProductLimit(ProductDTO productDTO, Integer limit) throws SQLException {
+        Product product = productDAO.get(productDTO.getId());
+        product.setProductLimit(limit);
+        product.setIsAvailable(false);
+        productDAO.update(product);
+
     }
 
     @Override
-    public void updateProduct(Integer oldValueId,ProductDTO newValue) throws SQLException {
+    public void updateProduct(Integer oldValueId, ProductDTO newValue) throws SQLException {
         Product product = productDAO.get(oldValueId);
         if (product != null) {
             product.setInfo(newValue.getInfo());
@@ -46,8 +45,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void addProduct(ProductDTO productDTO) throws SQLException {
-        Product product = productMapper.mapToEntity(productDTO);
-        productDAO.save(product);
+        productDAO.save(productMapper.mapToEntity(productDTO));
     }
 
     @Override
@@ -72,8 +70,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Set<ProductDTO> getAllProductsFromCategory(Integer categoryId) throws SQLException {
-        Category category = categoryDAO.get(categoryId);
+    public Set<ProductDTO> getAllProductsFromCategory(CategoryDTO categoryDTO) throws SQLException {
+        Category category = categoryDAO.get(categoryDTO.getId());
         return productMapper.mapToSetDTOS(category.getProducts());
     }
 

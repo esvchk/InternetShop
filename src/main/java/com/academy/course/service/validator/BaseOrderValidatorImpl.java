@@ -17,7 +17,7 @@ public class BaseOrderValidatorImpl implements BaseOrderValidator, EmptyFieldVal
     @Override
     public void validateBuyOrder(OrderDTO orderDTO) {
         if (orderDTO.getIsBought() == true) {
-            logger.warn("Attempt to buy order with id {} failed",orderDTO.getId());
+            logger.warn("Attempt to buy order with id {} failed", orderDTO.getId());
             throw new OrderPurchasingException(orderDTO.getId());
         }
     }
@@ -30,13 +30,18 @@ public class BaseOrderValidatorImpl implements BaseOrderValidator, EmptyFieldVal
             logger.warn("Try to change bought order");
             throw new ProductAddingException("Try to change bought order");
         }
+        if (productDTO.getIsAvailable() == false) {
+            logger.warn("Try to add product {} with limit {} failed",
+                    productDTO,productDTO.getProductLimit());
+            throw new ProductAddingException("Limit of this product is out of bounds");
+        }
     }
 
     @Override
     public void validateDeleteItemFromOrder(ItemDTO itemDTO, Integer orderId, Integer quantity) {
         validateField(String.valueOf(quantity));
-        if (itemDTO.getQuantity() < quantity ) {
-            logger.warn("Try to delete with bigger quantity {}",quantity);
+        if (itemDTO.getQuantity() < quantity) {
+            logger.warn("Try to delete with bigger quantity {}", quantity);
             throw new WrongValueException("Input " + quantity + " cannot be higher than remained products",
                     String.valueOf(itemDTO.getQuantity()));
         }
@@ -44,8 +49,8 @@ public class BaseOrderValidatorImpl implements BaseOrderValidator, EmptyFieldVal
 
     @Override
     public void validateField(String fieldName) {
-        if (fieldName == null||fieldName.trim().isEmpty()) {
-            logger.warn("Empty field{}",fieldName);
+        if (fieldName == null || fieldName.trim().isEmpty()) {
+            logger.warn("Empty field{}", fieldName);
             throw new EmptyFieldException(fieldName);
         }
     }
