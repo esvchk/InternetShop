@@ -3,11 +3,9 @@ package com.academy.course.mapper;
 import com.academy.course.dto.ItemDTO;
 import com.academy.course.exception.EmptyEntityException;
 import com.academy.course.model.Item;
-import com.academy.course.service.EmptyFieldValidator;
+import com.academy.course.service.validator.EmptyFieldValidator;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class ItemMapper implements Mapper<Item, ItemDTO>, EmptyFieldValidator<Object> {

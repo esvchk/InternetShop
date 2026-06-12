@@ -1,4 +1,4 @@
-package com.academy.course.service;
+package com.academy.course.service.validator;
 
 import java.sql.SQLException;
 

@@ -2,7 +2,7 @@ package com.academy.course.controller;
 
 import com.academy.course.service.EmployeeService;
 import com.academy.course.service.EmployeeServiceImpl;
-import com.academy.course.service.IdValidatorFactory;
+import com.academy.course.service.validator.IdValidatorFactory;
 import com.academy.course.utils.ParameterConverter;
 
 import javax.servlet.annotation.WebServlet;

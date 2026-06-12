@@ -15,6 +15,7 @@ import com.academy.course.mapper.*;
 import com.academy.course.model.Item;
 import com.academy.course.model.Order;
 import com.academy.course.model.Product;
+import com.academy.course.service.validator.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -32,6 +33,7 @@ public class OrderServiceImpl implements OrderService {
     private final ItemMapper itemMapper = new ItemMapper(productMapper);
     private final OrderMapper orderMapper = new OrderMapper(itemMapper);
     private final IdValidatorFactory factory;
+    private final BaseOrderValidator baseOrderValidator = new BaseOrderValidatorImpl();
     private final BusinessOrderValidator businessOrderValidator = new BusinessOrderValidatorImpl(orderDAO);
 
     public OrderServiceImpl(IdValidatorFactory factory) {
@@ -64,7 +66,7 @@ public class OrderServiceImpl implements OrderService {
                                   OrderDTO orderDTO, Integer quantity) throws SQLException {
         factory.getProductValidator().validateId(productDTO.getId());
         factory.getOrderValidator().validateId(orderDTO.getId());
-        businessOrderValidator.validateAddProductToOrder(productDTO, orderDTO, quantity);
+        baseOrderValidator.validateAddProductToOrder(productDTO, orderDTO, quantity);
         Order order = orderDAO.get(orderDTO.getId());
         Product product = productDAO.get(productDTO.getId());
         Optional<Item> items = order.getItems().stream()
@@ -91,7 +93,7 @@ public class OrderServiceImpl implements OrderService {
         factory.getItemValidator().validateId(itemDTO.getId());
         Order order = orderDAO.get(orderId);
         Item item = itemDAO.get(itemDTO.getId());
-        businessOrderValidator.validateDeleteItemFromOrder(itemDTO, orderId, quantity);
+        baseOrderValidator.validateDeleteItemFromOrder(itemDTO, orderId, quantity);
         if (item.getProductQuantity().equals(quantity)) {
             itemDAO.delete(item);
         } else {
@@ -105,7 +107,7 @@ public class OrderServiceImpl implements OrderService {
     public void buyOrder(OrderDTO orderDTO) throws SQLException {
         factory.getOrderValidator().validateId(orderDTO.getId());
         Order order = orderDAO.get(orderDTO.getId());
-        businessOrderValidator.validateBuyOrder(orderDTO);
+        baseOrderValidator.validateBuyOrder(orderDTO);
         order.setIsBought(true);
         orderDAO.update(order);
         logger.info("Order {} has been successfully bought",orderDTO);

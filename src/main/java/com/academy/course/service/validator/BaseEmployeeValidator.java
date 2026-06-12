@@ -1,7 +1,6 @@
-package com.academy.course.service;
+package com.academy.course.service.validator;
 
 import com.academy.course.dto.EmployeeDTO;
-import com.academy.course.utils.Role;
 
 public interface BaseEmployeeValidator {
     void passwordInputValidator(String password);

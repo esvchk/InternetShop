@@ -3,7 +3,7 @@ package com.academy.course.mapper;
 import com.academy.course.dto.CategoryDTO;
 import com.academy.course.exception.EmptyEntityException;
 import com.academy.course.model.Category;
-import com.academy.course.service.EmptyFieldValidator;
+import com.academy.course.service.validator.EmptyFieldValidator;
 
 import java.util.HashSet;
 import java.util.Set;

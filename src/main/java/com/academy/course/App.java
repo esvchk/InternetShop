@@ -1,7 +1,5 @@
 package com.academy.course;
 
-import com.academy.course.dao.DAO;
-import com.academy.course.dao.DAOImpl;
 import com.academy.course.dao.categoryDao.CategoryDAO;
 import com.academy.course.dao.categoryDao.CategoryDAOImpl;
 import com.academy.course.dao.employeeDao.EmployeeDAO;
@@ -17,6 +15,7 @@ import com.academy.course.dao.productDao.ProductDAOImpl;
 import com.academy.course.mapper.*;
 import com.academy.course.model.*;
 import com.academy.course.service.*;
+import com.academy.course.service.validator.*;
 import com.academy.course.utils.Role;
 
 import javax.xml.bind.ValidationException;

@@ -1,8 +1,9 @@
-package com.academy.course.service;
+package com.academy.course.service.validator;
 
 import com.academy.course.dao.employeeDao.EmployeeDAO;
 import com.academy.course.dto.EmployeeDTO;
 import com.academy.course.exception.*;
+import com.academy.course.service.PasswordHasher;
 import com.academy.course.utils.Role;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

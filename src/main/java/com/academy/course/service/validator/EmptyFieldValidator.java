@@ -1,6 +1,4 @@
-package com.academy.course.service;
-
-import java.lang.reflect.Field;
+package com.academy.course.service.validator;
 
 public interface EmptyFieldValidator<T> {
     void validateField(T t);

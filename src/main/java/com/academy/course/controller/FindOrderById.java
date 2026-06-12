@@ -1,6 +1,6 @@
 package com.academy.course.controller;
 
-import com.academy.course.service.IdValidatorFactory;
+import com.academy.course.service.validator.IdValidatorFactory;
 import com.academy.course.service.OrderService;
 import com.academy.course.service.OrderServiceImpl;
 import com.academy.course.utils.ParameterConverter;

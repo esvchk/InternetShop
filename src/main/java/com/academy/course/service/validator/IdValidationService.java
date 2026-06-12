@@ -1,4 +1,4 @@
-package com.academy.course.service;
+package com.academy.course.service.validator;
 
 import com.academy.course.exception.EntityNotFoundByIdException;
 import com.academy.course.exception.EmptyFieldException;

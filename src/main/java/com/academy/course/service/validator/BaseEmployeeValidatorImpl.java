@@ -1,4 +1,4 @@
-package com.academy.course.service;
+package com.academy.course.service.validator;
 
 import com.academy.course.dto.EmployeeDTO;
 import com.academy.course.dto.OrderDTO;
@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class BaseEmployeeValidatorImpl implements BaseEmployeeValidator,EmptyFieldValidator<String>{
+public class BaseEmployeeValidatorImpl implements BaseEmployeeValidator, EmptyFieldValidator<String> {
 
     private static final Logger logger = LogManager.getLogger(BaseEmployeeValidatorImpl.class);
 
