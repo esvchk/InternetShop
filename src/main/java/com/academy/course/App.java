@@ -36,8 +36,8 @@ public class App {
 
 
         Product product = Product.builder()
-                .name("Flat White")
-                .price(9.00)
+                .name("Cappuccino")
+                .price(8.00)
                 .isAvailable(true)
                 .category(category)
                 .build();
@@ -84,7 +84,7 @@ public class App {
 
         IdValidatorFactory idValidatorFactory  = new IdValidatorFactory();
         EmployeeService employeeService = new EmployeeServiceImpl(idValidatorFactory);
-        OrderService orderService = new OrderServiceImpl(idValidatorFactory);
+        OrderService orderService = new OrderServiceImpl(idValidatorFactory,productService);
         idValidatorFactory.setEmployeeDAO(employeeDAO);
         idValidatorFactory.setCategoryDAO(categoryDAO);
         idValidatorFactory.setOrderDAO(orderDAO);
@@ -98,13 +98,19 @@ public class App {
 
 //        productService.deleteProduct(productMapper.mapToDTO(dao.get(86)));
 
-//        orderService.addProductToOrder(productMapper.mapToDTO(dao.get(83)),orderMapper.mapToDTO(orderDAO.get(77)),1);
+        orderService.addProductToOrder(productMapper.mapToDTO(dao.get(1)),orderMapper.mapToDTO(orderDAO.get(5)),1);
 
 //        orderService.deleteItemFromOrder(itemMapper.mapToDTO(itemDAO.get(85)),7,2);
 
 
 //        System.out.println(employeeService.findEmployeeByLogin("oleg"));
 //        System.out.println(orderService.getAllOrdersWithItems());
+
+//        productService.setProductLimit(productMapper.mapToDTO(dao.get(1)),1);
+//        productService.addProduct(productMapper.mapToDTO(product));
+//        employeeService.registerEmployee(employeeMapper.mapToDTO(employee),"12345678Aa",employee.getRole());
+
+
 
 
     }

@@ -1,6 +1,7 @@
 package com.academy.course.model;
 
 import lombok.*;
+import org.sonatype.inject.Nullable;
 
 import javax.persistence.*;
 import java.io.Serializable;

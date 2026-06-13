@@ -6,8 +6,6 @@ import com.academy.course.dao.productDao.ProductDAO;
 import com.academy.course.dao.productDao.ProductDAOImpl;
 import com.academy.course.dto.CategoryDTO;
 import com.academy.course.dto.ProductDTO;
-import com.academy.course.mapper.CategoryMapper;
-import com.academy.course.mapper.MapperFactory;
 import com.academy.course.mapper.ProductMapper;
 import com.academy.course.model.Category;
 import com.academy.course.model.Product;
@@ -25,10 +23,13 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void setProductLimit(ProductDTO productDTO, Integer limit) throws SQLException {
         Product product = productDAO.get(productDTO.getId());
-        product.setProductLimit(limit);
-        product.setIsAvailable(false);
+        if (limit == null) {
+            product.setProductLimit(null);
+        } else {
+            product.setProductLimit(limit);
+            product.setIsAvailable(!product.getProductLimit().equals(0));
+        }
         productDAO.update(product);
-
     }
 
     @Override
@@ -55,7 +56,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductDTO findProductById(Serializable id) throws SQLException {
+    public ProductDTO getProductById(Serializable id) throws SQLException {
         return productMapper.mapToDTO(productDAO.get(id));
     }
 

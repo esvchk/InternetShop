@@ -15,8 +15,9 @@ import java.sql.SQLException;
 public class AddProductInOrder extends HttpServlet {
 
     private final IdValidatorFactory idValidatorFactory = new IdValidatorFactory();
-    private final OrderService orderService = new OrderServiceImpl(idValidatorFactory);
     private final ProductService productService = new ProductServiceImpl();
+    private final OrderService orderService = new OrderServiceImpl(idValidatorFactory,productService);
+
 
 
     @Override
@@ -25,7 +26,7 @@ public class AddProductInOrder extends HttpServlet {
         Integer orderId = ParameterConverter.getIntegerParameter(request,"id");
         Integer quantity = ParameterConverter.getIntegerParameter(request,"quantity");
         try {
-            orderService.addProductToOrder(productService.findProductById(productId),
+            orderService.addProductToOrder(productService.getProductById(productId),
                     orderService.findOrderById(orderId),quantity);
             request.getServletContext().getRequestDispatcher("/ShowProducts")
                     .include(request,response);

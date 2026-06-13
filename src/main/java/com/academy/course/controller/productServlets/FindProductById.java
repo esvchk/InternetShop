@@ -18,7 +18,7 @@ public class FindProductById extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Integer id = ParameterConverter.getIntegerParameter(request,"id");
         try {
-            request.setAttribute("product", productService.findProductById(id));
+            request.setAttribute("product", productService.getProductById(id));
             request.getRequestDispatcher("/FindProductById.jsp")
                     .forward(request, response);
         } catch (SQLException e) {

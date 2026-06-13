@@ -35,15 +35,17 @@ public class OrderServiceImpl implements OrderService {
     private final IdValidatorFactory factory;
     private final BaseOrderValidator baseOrderValidator = new BaseOrderValidatorImpl();
     private final BusinessOrderValidator businessOrderValidator = new BusinessOrderValidatorImpl(orderDAO);
+    private final ProductService productService;
 
-    public OrderServiceImpl(IdValidatorFactory factory) {
+    public OrderServiceImpl(IdValidatorFactory factory, ProductService productService) {
         this.factory = factory;
+        this.productService = productService;
     }
 
     @Override
     public OrderDTO findOrderById(Integer orderId) throws SQLException {
         factory.getOrderValidator().validateId(orderId);
-        logger.info("Finding order by id {} successfully",orderId);
+        logger.info("Finding order by id {} successfully", orderId);
         return orderMapper.mapToDTO(orderDAO.get(orderId));
     }
 
@@ -58,7 +60,7 @@ public class OrderServiceImpl implements OrderService {
     public void deleteOrder(OrderDTO orderDTO) throws SQLException {
         factory.getOrderValidator().validateId(orderDTO.getId());
         orderDAO.delete(orderDAO.get(orderDTO.getId()));
-        logger.info("Deleting order with id{} successfully",orderDTO.getId());
+        logger.info("Deleting order with id{} successfully", orderDTO.getId());
     }
 
     @Override
@@ -82,9 +84,12 @@ public class OrderServiceImpl implements OrderService {
                     .build();
             order.addItem(item);
         }
+        if (product.getProductLimit()!= null)
+            productService.setProductLimit(productMapper.mapToDTO(product),
+                    product.getProductLimit() - quantity);
         orderDAO.update(order);
         logger.info("Product {} has been successfully added to order {}" +
-                "with quantity {}",productDTO,orderDTO,quantity);
+                "with quantity {}", productDTO, orderDTO, quantity);
     }
 
     @Override
@@ -100,7 +105,7 @@ public class OrderServiceImpl implements OrderService {
             item.setProductQuantity(item.getProductQuantity() - quantity);
         }
         orderDAO.update(order);
-        logger.info("Item {} with quantity {} has been successfully removed from order with id {}",itemDTO,quantity,orderId);
+        logger.info("Item {} with quantity {} has been successfully removed from order with id {}", itemDTO, quantity, orderId);
     }
 
     @Override
@@ -110,6 +115,6 @@ public class OrderServiceImpl implements OrderService {
         baseOrderValidator.validateBuyOrder(orderDTO);
         order.setIsBought(true);
         orderDAO.update(order);
-        logger.info("Order {} has been successfully bought",orderDTO);
+        logger.info("Order {} has been successfully bought", orderDTO);
     }
 }

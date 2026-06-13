@@ -10,6 +10,9 @@ import com.academy.course.exception.WrongValueException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class BaseOrderValidatorImpl implements BaseOrderValidator, EmptyFieldValidator<String> {
 
     private final static Logger logger = LogManager.getLogger(BaseOrderValidator.class);
@@ -25,15 +28,22 @@ public class BaseOrderValidatorImpl implements BaseOrderValidator, EmptyFieldVal
     @Override
     public void validateAddProductToOrder(ProductDTO productDTO, OrderDTO orderDTO, Integer quantity) {
         validateField(String.valueOf(quantity));
-        validateField(String.valueOf(orderDTO.getIsBought()));
+        List<String> errors = new ArrayList<>();
         if (orderDTO.getIsBought() == true) {
             logger.warn("Try to change bought order");
-            throw new ProductAddingException("Try to change bought order");
+            errors.add("Try to change bought order");
         }
         if (productDTO.getIsAvailable() == false) {
-            logger.warn("Try to add product {} with limit {} failed",
-                    productDTO,productDTO.getProductLimit());
-            throw new ProductAddingException("Limit of this product is out of bounds");
+            logger.warn("Try to add product unavailable product{} to order{}", productDTO, orderDTO);
+            errors.add("This product has been baned" + productDTO);
+        }
+        if (productDTO.getProductLimit() != null && productDTO.getProductLimit() < quantity) {
+            logger.warn("Attempt to add quantity {} of products with a limit {}", quantity, productDTO.getProductLimit());
+            errors.add("Product limit " + productDTO.getProductLimit() + " out of quantity " + quantity);
+        }
+        if (!errors.isEmpty()) {
+            String message = String.join(",",errors);
+            throw new ProductAddingException(message);
         }
     }
 

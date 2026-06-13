@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.time.LocalDate;
+
 @WebServlet("/UpdateProduct")
 public class UpdateProduct extends HttpServlet {
 
@@ -21,7 +21,7 @@ public class UpdateProduct extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Integer id = ParameterConverter.getIntegerParameter(request,"id");
         try {
-            ProductDTO productDTO = productService.findProductById(id) ;
+            ProductDTO productDTO = productService.getProductById(id) ;
                 request.setAttribute("product", productDTO);
                 request.getRequestDispatcher("/UpdateProduct.jsp")
                         .forward(request, response);

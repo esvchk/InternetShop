@@ -20,7 +20,10 @@ public class EmployeeDAOImpl extends DAOImpl<Employee> implements EmployeeDAO {
     public Employee getEmployeeByLogin(String login) {
         Query query = getEm().createQuery("select employee from Employee employee where employee.login LIKE :login", Employee.class);
         query.setParameter("login",login);
+        if (!query.getResultList().isEmpty()) {
             return (Employee) query.getSingleResult();
+        }
+            return null;
     }
 
 
