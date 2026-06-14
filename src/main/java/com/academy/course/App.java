@@ -37,8 +37,8 @@ public class App {
 
 
         Product product = Product.builder()
-                .name("Cappuccino")
-                .price(-8.80)
+                .name("Long-black")
+                .price(7.50)
                 .isAvailable(true)
                 .category(category)
                 .build();
@@ -113,11 +113,15 @@ public class App {
 //        productService.setProductLimit(productMapper.mapToDTO(dao.get(1)),-1);
 //        productService.addProduct(productMapper.mapToDTO(product));
 //        employeeService.registerEmployee(employeeMapper.mapToDTO(employee),"12345678Aa",employee.getRole());
-        productService.updateProduct(1,productMapper.mapToDTO(product));
+//        productService.updateProduct(1,productMapper.mapToDTO(product));
 
+//        productService.addProduct(productMapper.mapToDTO(product));
 
+//        productService.deleteProduct(productMapper.mapToDTO(dao.get(1)));
+//        productService.deleteProduct(productMapper.mapToDTO(dao.get(1)));
+//        productService.addProduct(productMapper.mapToDTO(product));
 
-
+        productService.updateProduct(35,productMapper.mapToDTO(product));
 
 
 

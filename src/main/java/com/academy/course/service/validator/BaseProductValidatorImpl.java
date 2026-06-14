@@ -16,24 +16,21 @@ public class BaseProductValidatorImpl implements BaseProductValidator,EmptyField
 
     private static final Logger logger = LogManager.getLogger(BaseProductValidator.class);
 
-
-
     @Override
     public void nameInputValidation(String name) {
         validateField(name);
         List<String> errors = new ArrayList<>();
         String figures = "(.*[0-9].*)";
         if (name.matches(figures)) {
-            logger.warn("Try to input figure in product name {}",name);
             errors.add("Name of a product cannot contain figures");
         }
-        String upperCase = "(.*[A-Z{1}].*)";
-        if (name.matches(upperCase)) {
-            logger.warn("Naming without uppercase letter{}",name);
-            errors.add("Name of a product must contain uppercase letter");
+        String upperCase = "(^[A-Z])([a-z\\s,-]*)";
+        if (!name.matches(upperCase)) {
+            errors.add("Name must begin from upper case letter proceed with lower case");
         }
         if (!errors.isEmpty()) {
             String message = String.join(",",errors);
+            logger.warn("Naming product failed{}",errors);
             throw new InvalidInputException(message,name);
         }
     }
@@ -48,6 +45,7 @@ public class BaseProductValidatorImpl implements BaseProductValidator,EmptyField
 
     @Override
     public void validateNegativeNumber(Number number) {
+        validateField(String.valueOf(number));
         if (number instanceof Integer && number.intValue() < 0) {
             throw new InvalidInputException("Negative number", number.toString());
         } else if (number instanceof Double && number.doubleValue() < 0) {
@@ -65,6 +63,7 @@ public class BaseProductValidatorImpl implements BaseProductValidator,EmptyField
     public void validateUpdatingProduct(ProductDTO newValue) {
         validateField(newValue.getName());
         validateField(String.valueOf(newValue.getPrice()));
+        nameInputValidation(newValue.getName());
         validateNegativeNumber(newValue.getPrice());
     }
 
@@ -72,12 +71,13 @@ public class BaseProductValidatorImpl implements BaseProductValidator,EmptyField
     public void validateCreationProduct(ProductDTO productDTO) {
         validateField(productDTO.getName());
         validateField(String.valueOf(productDTO.getPrice()));
+        nameInputValidation(productDTO.getName());
         validateNegativeNumber(productDTO.getPrice());
     }
 
     @Override
     public void validateField(String fieldName) {
-        if (fieldName == null||fieldName.trim().isEmpty()) {
+        if (fieldName.equals("null") ||fieldName.trim().isEmpty()) {
             logger.warn("Try to input empty value in field{}",fieldName);
             throw new EmptyFieldException(fieldName);
         }

@@ -1,11 +1,9 @@
 package com.academy.course.model;
 
-import lombok.*;
-import org.sonatype.inject.Nullable;
 
+import lombok.*;
 import javax.persistence.*;
-import java.io.Serializable;
-import java.time.LocalDate;
+
 import java.util.*;
 
 
@@ -37,6 +35,9 @@ public class Product extends DataEntity {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id")
     private Category category;
+
+    @OneToMany(mappedBy = "product",cascade = CascadeType.REMOVE,orphanRemoval = true)
+    private Set<Item> items = new HashSet<>();
 
 
     @Override

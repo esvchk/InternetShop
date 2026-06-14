@@ -12,7 +12,7 @@ public interface ProductService {
     void updateProduct(Integer oldValueId,ProductDTO newValue) throws SQLException;
     void addProduct(ProductDTO productDTO) throws SQLException;
     void deleteProduct(ProductDTO productDTO) throws SQLException;
-    ProductDTO getProductById(Serializable id) throws SQLException;
+    ProductDTO getProductById(Integer id) throws SQLException;
     ProductDTO findProductsByName(String name);
     Set<ProductDTO> getAllProducts();
     Set<ProductDTO> getAllProductsFromCategory(CategoryDTO categoryDTO) throws SQLException;
