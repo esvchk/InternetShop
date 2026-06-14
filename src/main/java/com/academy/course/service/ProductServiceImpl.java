@@ -1,19 +1,17 @@
 package com.academy.course.service;
 
-import com.academy.course.dao.categoryDao.CategoryDAO;
-import com.academy.course.dao.categoryDao.CategoryDAOImpl;
+
 import com.academy.course.dao.productDao.ProductDAO;
 import com.academy.course.dao.productDao.ProductDAOImpl;
 import com.academy.course.dto.CategoryDTO;
 import com.academy.course.dto.ProductDTO;
 import com.academy.course.mapper.ProductMapper;
-import com.academy.course.model.Category;
+
 import com.academy.course.model.Product;
 import com.academy.course.service.validator.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.Set;
 
@@ -29,7 +27,6 @@ public class ProductServiceImpl implements ProductService {
 
     public ProductServiceImpl(IdValidatorFactory idValidatorFactory) {
         this.idValidatorFactory = idValidatorFactory;
-
     }
 
     @Override

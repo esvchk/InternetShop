@@ -21,7 +21,7 @@ public class Category extends DataEntity{
     private String name;
 
     @ToString.Exclude
-    @OneToMany(mappedBy = "category",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "category",fetch = FetchType.LAZY,cascade = CascadeType.MERGE)
     @Builder.Default
     private Set<Product> products = new HashSet<>();
 

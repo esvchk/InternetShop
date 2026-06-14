@@ -34,7 +34,7 @@ public class BusinessProductValidatorImpl implements BusinessProductValidator, E
     @Override
     public void validateGetAllProducts() {
         if (productDAO.getAllProducts() == null || productDAO.getAllProducts().isEmpty()) {
-            logger.warn("List of products is empty");
+            logger.warn("Try to get empty list of categories");
             throw new EmptyListException("Product");
         }
     }

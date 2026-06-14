@@ -81,9 +81,10 @@ public class App {
 
         ItemDAO itemDAO = new ItemDAOImpl();
         CategoryDAO categoryDAO = new CategoryDAOImpl();
-        CategoryService categoryService = new CategoryServiceImpl();
+
 
         IdValidatorFactory idValidatorFactory  = new IdValidatorFactory();
+        CategoryService categoryService = new CategoryServiceImpl(idValidatorFactory);
         BaseEmployeeValidator baseEmployeeValidator = new BaseEmployeeValidatorImpl();
         BusinessEmployeeValidator businessEmployeeValidator = new BusinessEmployeeValidatorImpl(baseEmployeeValidator,employeeDAO);
         BaseProductValidator baseProductValidator = new BaseProductValidatorImpl();
