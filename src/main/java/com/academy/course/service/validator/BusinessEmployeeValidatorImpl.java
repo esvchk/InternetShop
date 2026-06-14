@@ -44,7 +44,7 @@ public class BusinessEmployeeValidatorImpl implements BusinessEmployeeValidator,
        baseEmployeeValidator.loginInputValidator(login);
         if (employeeDAO.getEmployeeByLogin(login) == null) {
             logger.warn("Search employee by login{} failed", login);
-            throw new EntityNotFoundByLoginException(login);
+            throw new EntityNotFoundByNameException(login);
         }
     }
 
@@ -63,10 +63,10 @@ public class BusinessEmployeeValidatorImpl implements BusinessEmployeeValidator,
     }
 
     @Override
-    public void getAllEmployeesValidation() throws ValidationException {
+    public void getAllEmployeesValidation(){
         if (employeeDAO.getAllEmployees() == null || employeeDAO.getAllEmployees().isEmpty()) {
             logger.warn("Receiving list Employees failed");
-            throw new ValidationException("Empty list of Employees");
+            throw new EmptyListException("Empty list of Employees");
         }
     }
 

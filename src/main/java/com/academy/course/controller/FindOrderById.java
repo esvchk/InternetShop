@@ -18,7 +18,7 @@ import java.sql.SQLException;
 public class FindOrderById extends HttpServlet {
 
     IdValidatorFactory idValidatorFactory = new IdValidatorFactory();
-    private final ProductService productService = new ProductServiceImpl();
+    private final ProductService productService = new ProductServiceImpl(idValidatorFactory);
     private final OrderService orderService = new OrderServiceImpl(idValidatorFactory,productService);
 
     @Override

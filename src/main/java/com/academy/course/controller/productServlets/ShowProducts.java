@@ -2,6 +2,7 @@ package com.academy.course.controller.productServlets;
 
 import com.academy.course.service.ProductService;
 import com.academy.course.service.ProductServiceImpl;
+import com.academy.course.service.validator.IdValidatorFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,7 +13,8 @@ import java.io.IOException;
 @WebServlet("/ShowProducts")
 public class ShowProducts extends HttpServlet {
 
-    private final ProductService productService = new ProductServiceImpl();
+    IdValidatorFactory idValidatorFactory = new IdValidatorFactory();
+    private final ProductService productService = new ProductServiceImpl(idValidatorFactory);
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -3,6 +3,7 @@ package com.academy.course.controller.productServlets;
 import com.academy.course.dto.ProductDTO;
 import com.academy.course.service.ProductService;
 import com.academy.course.service.ProductServiceImpl;
+import com.academy.course.service.validator.IdValidatorFactory;
 import com.academy.course.utils.ParameterConverter;
 
 import javax.servlet.ServletException;
@@ -15,8 +16,8 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 @WebServlet("/AddProduct")
 public class AddProduct extends HttpServlet {
-
-    private final ProductService productService = new ProductServiceImpl();
+    IdValidatorFactory idValidatorFactory = new IdValidatorFactory();
+    private final ProductService productService = new ProductServiceImpl(idValidatorFactory);
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

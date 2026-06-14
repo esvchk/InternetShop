@@ -9,6 +9,7 @@ import com.academy.course.dto.ProductDTO;
 import com.academy.course.mapper.ProductMapper;
 import com.academy.course.model.Category;
 import com.academy.course.model.Product;
+import com.academy.course.service.validator.*;
 
 import java.io.Serializable;
 import java.sql.SQLException;
@@ -19,9 +20,20 @@ public class ProductServiceImpl implements ProductService {
     private final ProductDAO productDAO = new ProductDAOImpl();
     private final ProductMapper productMapper = new ProductMapper();
     private final CategoryDAO categoryDAO = new CategoryDAOImpl();
+    private final IdValidatorFactory idValidatorFactory;
+    private final BaseProductValidator baseProductValidator = new BaseProductValidatorImpl();
+    private final BusinessProductValidator businessProductValidator = new BusinessProductValidatorImpl(baseProductValidator,productDAO);
+
+
+    public ProductServiceImpl(IdValidatorFactory idValidatorFactory) {
+        this.idValidatorFactory = idValidatorFactory;
+
+    }
 
     @Override
     public void setProductLimit(ProductDTO productDTO, Integer limit) throws SQLException {
+        idValidatorFactory.getProductValidator().validateId(productDTO.getId());
+        baseProductValidator.validateSetProductLimit(limit);
         Product product = productDAO.get(productDTO.getId());
         if (limit == null) {
             product.setProductLimit(null);
@@ -34,14 +46,14 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void updateProduct(Integer oldValueId, ProductDTO newValue) throws SQLException {
+        idValidatorFactory.getProductValidator().validateId(oldValueId);
+        baseProductValidator.validateUpdatingProduct(newValue);
         Product product = productDAO.get(oldValueId);
-        if (product != null) {
             product.setInfo(newValue.getInfo());
             product.setName(newValue.getName());
             product.setPrice(newValue.getPrice());
             product.setIsAvailable(newValue.getIsAvailable());
             productDAO.update(product);
-        }
     }
 
     @Override

@@ -15,7 +15,7 @@ import java.sql.SQLException;
 public class AddProductInOrder extends HttpServlet {
 
     private final IdValidatorFactory idValidatorFactory = new IdValidatorFactory();
-    private final ProductService productService = new ProductServiceImpl();
+    private final ProductService productService = new ProductServiceImpl(idValidatorFactory);
     private final OrderService orderService = new OrderServiceImpl(idValidatorFactory,productService);
 
 

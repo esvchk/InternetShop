@@ -1,47 +1,50 @@
 package com.academy.course.service.validator;
 
-import com.academy.course.dto.CategoryDTO;
-import com.academy.course.dto.ProductDTO;
+import com.academy.course.dao.productDao.ProductDAO;
 import com.academy.course.exception.EmptyFieldException;
-import com.academy.course.exception.WrongValueException;
+import com.academy.course.exception.EmptyListException;
+import com.academy.course.exception.EntityNotFoundByNameException;
 
-public class BusinessProductValidatorImpl implements BusinessProductValidator,EmptyFieldValidator<String> {
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+
+public class BusinessProductValidatorImpl implements BusinessProductValidator, EmptyFieldValidator<String> {
+
+    private final static Logger logger = LogManager.getLogger(BusinessProductValidatorImpl.class);
+    private final BaseProductValidator baseProductValidator;
+    private final ProductDAO productDAO;
+    public BusinessProductValidatorImpl(BaseProductValidator baseProductValidator, ProductDAO productDAO) {
+        this.baseProductValidator = baseProductValidator;
+        this.productDAO = productDAO;
+
+    }
+
+
     @Override
-    public void validateSetProductLimit(ProductDTO productDTO, Integer limit) {
-        if (limit < 0 ) {
-            throw new WrongValueException("Limit cannot be negative ",String.valueOf(limit));
+    public void validateFindProductByName(String name) {
+        validateField(name);
+        baseProductValidator.nameInputValidation(name);
+        if (productDAO.getByName(name) == null) {
+            logger.warn("Search by name {} failed",name);
+            throw new EntityNotFoundByNameException(name);
         }
     }
 
     @Override
-    public void validateUpdatingProduct(ProductDTO newValue) {
-
-    }
-
-    @Override
-    public void validateCreationProduct(ProductDTO productDTO) {
-
-    }
-
-    @Override
-    public void validateFindProductByName(String name) {
-
-    }
-
-    @Override
     public void validateGetAllProducts() {
-
+        if (productDAO.getAllProducts() == null || productDAO.getAllProducts().isEmpty()) {
+            logger.warn("List of products is empty");
+            throw new EmptyListException("Product");
+        }
     }
 
-    @Override
-    public void validateGetAllProductsFromCategory(CategoryDTO categoryDTO) {
-
-    }
 
     @Override
-    public void validateField(String string) {
-        if (string == null || string.trim().isEmpty() ) {
-            throw new EmptyFieldException(string);
+    public void validateField(String fieldName) {
+        if (fieldName == null || fieldName.trim().isEmpty()) {
+            logger.warn("Try to input empty field{}",fieldName);
+            throw new EmptyFieldException(fieldName);
         }
     }
 }

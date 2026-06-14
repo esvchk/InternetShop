@@ -22,6 +22,7 @@ import javax.xml.bind.ValidationException;
 import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 public class App {
     public static void main(String[] args) throws SQLException, NoSuchFieldException, ValidationException {
@@ -37,7 +38,7 @@ public class App {
 
         Product product = Product.builder()
                 .name("Cappuccino")
-                .price(8.00)
+                .price(-8.80)
                 .isAvailable(true)
                 .category(category)
                 .build();
@@ -76,13 +77,17 @@ public class App {
         OrderDAO orderDAO = new OrderDAOImpl();
         EmployeeDAO employeeDAO = new EmployeeDAOImpl();
 
-        ProductServiceImpl productService = new ProductServiceImpl();
+
 
         ItemDAO itemDAO = new ItemDAOImpl();
         CategoryDAO categoryDAO = new CategoryDAOImpl();
         CategoryService categoryService = new CategoryServiceImpl();
 
         IdValidatorFactory idValidatorFactory  = new IdValidatorFactory();
+        BaseEmployeeValidator baseEmployeeValidator = new BaseEmployeeValidatorImpl();
+        BusinessEmployeeValidator businessEmployeeValidator = new BusinessEmployeeValidatorImpl(baseEmployeeValidator,employeeDAO);
+        BaseProductValidator baseProductValidator = new BaseProductValidatorImpl();
+        ProductServiceImpl productService = new ProductServiceImpl(idValidatorFactory);
         EmployeeService employeeService = new EmployeeServiceImpl(idValidatorFactory);
         OrderService orderService = new OrderServiceImpl(idValidatorFactory,productService);
         idValidatorFactory.setEmployeeDAO(employeeDAO);
@@ -92,13 +97,12 @@ public class App {
         idValidatorFactory.setCategoryDAO(categoryDAO);
         idValidatorFactory.setProductDAO(dao);
 
-        BaseEmployeeValidator baseEmployeeValidator = new BaseEmployeeValidatorImpl();
-        BusinessEmployeeValidator businessEmployeeValidator = new BusinessEmployeeValidatorImpl(baseEmployeeValidator,employeeDAO);
+
 
 
 //        productService.deleteProduct(productMapper.mapToDTO(dao.get(86)));
 
-        orderService.addProductToOrder(productMapper.mapToDTO(dao.get(1)),orderMapper.mapToDTO(orderDAO.get(5)),1);
+//        orderService.addProductToOrder(productMapper.mapToDTO(dao.get(1)),orderMapper.mapToDTO(orderDAO.get(5)),1);
 
 //        orderService.deleteItemFromOrder(itemMapper.mapToDTO(itemDAO.get(85)),7,2);
 
@@ -106,9 +110,14 @@ public class App {
 //        System.out.println(employeeService.findEmployeeByLogin("oleg"));
 //        System.out.println(orderService.getAllOrdersWithItems());
 
-//        productService.setProductLimit(productMapper.mapToDTO(dao.get(1)),1);
+//        productService.setProductLimit(productMapper.mapToDTO(dao.get(1)),-1);
 //        productService.addProduct(productMapper.mapToDTO(product));
 //        employeeService.registerEmployee(employeeMapper.mapToDTO(employee),"12345678Aa",employee.getRole());
+        productService.updateProduct(1,productMapper.mapToDTO(product));
+
+
+
+
 
 
 
