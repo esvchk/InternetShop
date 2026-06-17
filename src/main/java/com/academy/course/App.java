@@ -89,8 +89,8 @@ public class App {
         BusinessEmployeeValidator businessEmployeeValidator = new BusinessEmployeeValidatorImpl(baseEmployeeValidator,employeeDAO);
         BaseProductValidator baseProductValidator = new BaseProductValidatorImpl();
         ProductServiceImpl productService = new ProductServiceImpl(idValidatorFactory);
-        EmployeeService employeeService = new EmployeeServiceImpl(idValidatorFactory);
         OrderService orderService = new OrderServiceImpl(idValidatorFactory,productService);
+        EmployeeService employeeService = new EmployeeServiceImpl(idValidatorFactory,orderService);
         idValidatorFactory.setEmployeeDAO(employeeDAO);
         idValidatorFactory.setCategoryDAO(categoryDAO);
         idValidatorFactory.setOrderDAO(orderDAO);
@@ -99,33 +99,15 @@ public class App {
         idValidatorFactory.setProductDAO(dao);
 
 
+//        orderService.addProductToOrder(productMapper.mapToDTO(dao.get(35)),orderMapper.mapToDTO(orderDAO.get(40)),6);
 
+//        orderService.buyOrder(orderMapper.mapToDTO(orderDAO.get(40)));
+        System.out.println(orderService.countAmountOfAllItems(orderMapper.mapToDTO(orderDAO.get(5))));
 
-//        productService.deleteProduct(productMapper.mapToDTO(dao.get(86)));
+//        employeeService.addNewOrderToEmployee(employeeMapper.mapToDTO(employeeDAO.get(4)));
 
-//        orderService.addProductToOrder(productMapper.mapToDTO(dao.get(1)),orderMapper.mapToDTO(orderDAO.get(5)),1);
-
-//        orderService.deleteItemFromOrder(itemMapper.mapToDTO(itemDAO.get(85)),7,2);
-
-
-//        System.out.println(employeeService.findEmployeeByLogin("oleg"));
-//        System.out.println(orderService.getAllOrdersWithItems());
-
-//        productService.setProductLimit(productMapper.mapToDTO(dao.get(1)),-1);
-//        productService.addProduct(productMapper.mapToDTO(product));
-//        employeeService.registerEmployee(employeeMapper.mapToDTO(employee),"12345678Aa",employee.getRole());
-//        productService.updateProduct(1,productMapper.mapToDTO(product));
-
-//        productService.addProduct(productMapper.mapToDTO(product));
-
-//        productService.deleteProduct(productMapper.mapToDTO(dao.get(1)));
-//        productService.deleteProduct(productMapper.mapToDTO(dao.get(1)));
-//        productService.addProduct(productMapper.mapToDTO(product));
-
-        productService.updateProduct(35,productMapper.mapToDTO(product));
-
-
-
+//        orderService.buyOrder(orderMapper.mapToDTO(orderDAO.get()));
+//        System.out.println(employeeService.getTotalAmountOfOrders());
 
     }
 }

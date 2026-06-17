@@ -1,7 +1,6 @@
 package com.academy.course.controller;
 
-import com.academy.course.service.EmployeeService;
-import com.academy.course.service.EmployeeServiceImpl;
+import com.academy.course.service.*;
 import com.academy.course.service.validator.IdValidatorFactory;
 
 import javax.servlet.ServletException;
@@ -16,8 +15,10 @@ import java.io.IOException;
 public class ShowCustomers extends HttpServlet {
 
 
-    private IdValidatorFactory idValidatorFactory;
-    private final EmployeeService employeeService = new EmployeeServiceImpl(idValidatorFactory);
+    IdValidatorFactory idValidatorFactory = new IdValidatorFactory();
+    ProductService productService = new ProductServiceImpl(idValidatorFactory);
+    OrderService orderService = new OrderServiceImpl(idValidatorFactory,productService);
+    private final EmployeeService employeeService = new EmployeeServiceImpl(idValidatorFactory,orderService);
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

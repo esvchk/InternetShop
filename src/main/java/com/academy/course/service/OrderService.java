@@ -17,5 +17,6 @@ public interface OrderService {
     void deleteOrder(OrderDTO orderDTO) throws SQLException;
     void addProductToOrder(ProductDTO productDTO, OrderDTO orderDTO, Integer quantity) throws SQLException;
     void deleteItemFromOrder(ItemDTO itemDTO,Integer orderId,Integer quantity) throws SQLException;
+    Double countAmountOfAllItems(OrderDTO orderDTO) throws SQLException;
 
 }

@@ -20,12 +20,5 @@ public class ItemDTO {
 
     private Discount discount;
 
-    @Override
-    public String toString() {
-        return "ItemDTO{" +
-                "id=" + id +
-                ", productDTO=" + productDTO +
-                ", quantity=" + quantity +
-                '}';
-    }
+    
 }

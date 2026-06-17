@@ -21,7 +21,7 @@ public class IdValidationService implements IdValidator {
     }
 
     @Override
-    public void validateId(Integer entityId) {
+    public boolean validateId(Integer entityId) {
         if (entityId <= 0) {
             logger.warn("Wrong input id {}",entityId);
             throw new InvalidInputException(String.valueOf(entityId));
@@ -38,7 +38,7 @@ public class IdValidationService implements IdValidator {
         } catch (SQLException e){
             logger.warn("DataBase error",e);
         }
-
+        return true;
     }
 
 }

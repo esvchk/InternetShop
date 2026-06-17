@@ -18,7 +18,7 @@ public class BaseCategoryValidatorImpl implements BaseCategoryValidator,EmptyFie
     }
 
     @Override
-    public void updateCategory(Integer oldValueId, CategoryDTO newValue) {
+    public void updateCategory(CategoryDTO newValue) {
         validateField(newValue.getName());
         namingValidator(newValue.getName());
     }

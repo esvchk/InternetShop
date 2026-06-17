@@ -16,7 +16,7 @@ import java.util.*;
 public class Order extends DataEntity {
 
     @ToString.Exclude
-    @OneToMany(mappedBy = "order",cascade = {CascadeType.REMOVE,CascadeType.MERGE},orphanRemoval = true,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "order",cascade = {CascadeType.MERGE,CascadeType.REMOVE},orphanRemoval = true,fetch = FetchType.EAGER)
     @Builder.Default
     private Set<Item> items = new HashSet<>();
 

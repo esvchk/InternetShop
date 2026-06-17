@@ -23,12 +23,15 @@ public class EmployeeServiceImpl implements EmployeeService {
     private final EmployeeDAO employeeDAO = new EmployeeDAOImpl();
     private final BaseEmployeeValidator baseEmployeeValidator = new BaseEmployeeValidatorImpl();
     private final EmployeeMapper employeeMapper = MapperFactory.getEmployeeMapper();
-    private final BusinessEmployeeValidator businessEmployeeValidator = new BusinessEmployeeValidatorImpl(baseEmployeeValidator,employeeDAO);
     private final IdValidatorFactory factory;
+    private final OrderService orderService;
+    private final BusinessEmployeeValidator businessEmployeeValidator = new BusinessEmployeeValidatorImpl(baseEmployeeValidator,employeeDAO);
 
-    public EmployeeServiceImpl(IdValidatorFactory factory) {
+    public EmployeeServiceImpl(IdValidatorFactory factory, OrderService orderService) {
         this.factory = factory;
+        this.orderService = orderService;
     }
+
 
     @Override
     public void deleteOrderOfEmployee(EmployeeDTO employeeDTO, OrderDTO orderDTO) throws SQLException {
@@ -124,6 +127,18 @@ public class EmployeeServiceImpl implements EmployeeService {
         businessEmployeeValidator.authorizationValidation(login,passWord);
         logger.info("Login {} successfully authorized",login);
         return true;
+    }
+
+    @Override
+    public Double getTotalAmountOfOrders() throws SQLException {
+        Set<OrderDTO> orderDTOS = orderService.getAllOrdersWithItems();
+        double totalAmount = 0;
+        for (OrderDTO orderDTO : orderDTOS){
+            if (orderDTO.getIsBought()) {
+                totalAmount += orderService.countAmountOfAllItems(orderDTO);
+            }
+        }
+        return totalAmount;
     }
 
 }

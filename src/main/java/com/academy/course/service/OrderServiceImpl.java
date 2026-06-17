@@ -11,15 +11,18 @@ import com.academy.course.dao.productDao.ProductDAOImpl;
 import com.academy.course.dto.ItemDTO;
 import com.academy.course.dto.OrderDTO;
 import com.academy.course.dto.ProductDTO;
+import com.academy.course.exception.EntityNotFoundByIdException;
 import com.academy.course.mapper.*;
 import com.academy.course.model.Item;
 import com.academy.course.model.Order;
 import com.academy.course.model.Product;
 import com.academy.course.service.validator.*;
+import com.academy.course.utils.Discount;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.sql.SQLException;
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
@@ -39,6 +42,7 @@ public class OrderServiceImpl implements OrderService {
 
     public OrderServiceImpl(IdValidatorFactory factory, ProductService productService) {
         this.factory = factory;
+
         this.productService = productService;
     }
 
@@ -84,7 +88,7 @@ public class OrderServiceImpl implements OrderService {
                     .build();
             order.addItem(item);
         }
-        if (product.getProductLimit()!= null)
+        if (product.getProductLimit() != null)
             productService.setProductLimit(productMapper.mapToDTO(product),
                     product.getProductLimit() - quantity);
         orderDAO.update(order);
@@ -106,6 +110,19 @@ public class OrderServiceImpl implements OrderService {
         }
         orderDAO.update(order);
         logger.info("Item {} with quantity {} has been successfully removed from order with id {}", itemDTO, quantity, orderId);
+    }
+
+    @Override
+    public Double countAmountOfAllItems(OrderDTO orderDTO) throws SQLException {
+        factory.getOrderValidator().validateId(orderDTO.getId());
+        Order order = orderDAO.get(orderDTO.getId());
+        double totalPrice = 0.0;
+        for (ItemDTO itemDTO : orderDTO.getItemsDTO()){
+            totalPrice += itemDTO.getProductDTO().getPrice() * itemDTO.getQuantity() * itemDTO.getDiscount().getPercentOfDiscount();
+        }
+        order.setTotalCost(totalPrice);
+        orderDAO.update(order);
+        return order.getTotalCost();
     }
 
     @Override

@@ -20,5 +20,6 @@ public interface EmployeeService {
     void updateEmployee(Integer oldValueId, EmployeeDTO newValue) throws SQLException;
     void deleteEmployee(Integer employeeId) throws SQLException;
     boolean login(String login,String passWord) throws NoSuchFieldException, SQLException;
+    Double getTotalAmountOfOrders() throws SQLException;
 
 }

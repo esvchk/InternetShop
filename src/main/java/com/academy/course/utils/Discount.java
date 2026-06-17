@@ -1,7 +1,10 @@
 package com.academy.course.utils;
 
+import lombok.Data;
 import lombok.Getter;
+import lombok.ToString;
 
+@ToString
 @Getter
 public enum Discount {
     PERMANENT_CUSTOMER(0.15),

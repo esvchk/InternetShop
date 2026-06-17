@@ -35,6 +35,7 @@ public class OrderMapper implements Mapper<Order, OrderDTO>, EmptyFieldValidator
         return Order.builder()
                 .items(itemMapper.mapToSetEntities(dto.getItemsDTO()))
                 .isBought(dto.getIsBought())
+                .paymentData(dto.getPaymentData())
                 .totalCost(dto.getTotalCost())
                 .build();
     }
