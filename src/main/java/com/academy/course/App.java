@@ -102,12 +102,12 @@ public class App {
 //        orderService.addProductToOrder(productMapper.mapToDTO(dao.get(35)),orderMapper.mapToDTO(orderDAO.get(40)),6);
 
 //        orderService.buyOrder(orderMapper.mapToDTO(orderDAO.get(40)));
-        System.out.println(orderService.countAmountOfAllItems(orderMapper.mapToDTO(orderDAO.get(5))));
+//        System.out.println(orderService.countAmountOfAllItems(orderMapper.mapToDTO(orderDAO.get(40))));
 
 //        employeeService.addNewOrderToEmployee(employeeMapper.mapToDTO(employeeDAO.get(4)));
 
 //        orderService.buyOrder(orderMapper.mapToDTO(orderDAO.get()));
-//        System.out.println(employeeService.getTotalAmountOfOrders());
+        System.out.println(employeeService.getTotalAmountOfOrders());
 
     }
 }

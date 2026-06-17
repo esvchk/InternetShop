@@ -91,6 +91,7 @@ public class OrderServiceImpl implements OrderService {
         if (product.getProductLimit() != null)
             productService.setProductLimit(productMapper.mapToDTO(product),
                     product.getProductLimit() - quantity);
+        countAmountOfAllItems(orderDTO);
         orderDAO.update(order);
         logger.info("Product {} has been successfully added to order {}" +
                 "with quantity {}", productDTO, orderDTO, quantity);
@@ -116,9 +117,11 @@ public class OrderServiceImpl implements OrderService {
     public Double countAmountOfAllItems(OrderDTO orderDTO) throws SQLException {
         factory.getOrderValidator().validateId(orderDTO.getId());
         Order order = orderDAO.get(orderDTO.getId());
+        Set<ItemDTO> items = itemMapper.mapToSetDTOS(order.getItems());
         double totalPrice = 0.0;
-        for (ItemDTO itemDTO : orderDTO.getItemsDTO()){
-            totalPrice += itemDTO.getProductDTO().getPrice() * itemDTO.getQuantity() * itemDTO.getDiscount().getPercentOfDiscount();
+        for (ItemDTO itemDTO : items){
+            double priceOfItem = itemDTO.getProductDTO().getPrice() * itemDTO.getQuantity();
+            totalPrice += itemDTO.getDiscount().countCostWithDiscount(priceOfItem);
         }
         order.setTotalCost(totalPrice);
         orderDAO.update(order);
