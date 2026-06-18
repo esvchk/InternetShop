@@ -17,16 +17,20 @@ import java.util.Set;
 
 public class ProductServiceImpl implements ProductService {
 
-    private final ProductDAO productDAO = new ProductDAOImpl();
-    private final ProductMapper productMapper = new ProductMapper();
+    private final ProductDAO productDAO;
+    private final ProductMapper productMapper ;
     private final IdValidatorFactory idValidatorFactory;
-    private final BaseProductValidator baseProductValidator = new BaseProductValidatorImpl();
-    private final BusinessProductValidator businessProductValidator = new BusinessProductValidatorImpl(baseProductValidator,productDAO);
+    private final BaseProductValidator baseProductValidator;
+    private final BusinessProductValidator businessProductValidator;
     private final static Logger logger = LogManager.getLogger(ProductServiceImpl.class);
 
 
-    public ProductServiceImpl(IdValidatorFactory idValidatorFactory) {
+    public ProductServiceImpl(ProductDAO productDAO, ProductMapper productMapper, IdValidatorFactory idValidatorFactory, BaseProductValidator baseProductValidator, BusinessProductValidator businessProductValidator) {
+        this.productDAO = productDAO;
+        this.productMapper = productMapper;
         this.idValidatorFactory = idValidatorFactory;
+        this.baseProductValidator = baseProductValidator;
+        this.businessProductValidator = businessProductValidator;
     }
 
     @Override

@@ -5,6 +5,7 @@ import com.academy.course.dao.employeeDao.EmployeeDAOImpl;
 import com.academy.course.dto.EmployeeDTO;
 import com.academy.course.dto.OrderDTO;
 import com.academy.course.mapper.*;
+import com.academy.course.mapper.factory.MapperFactory;
 import com.academy.course.model.Employee;
 import com.academy.course.model.Order;
 
@@ -20,16 +21,20 @@ import java.util.*;
 public class EmployeeServiceImpl implements EmployeeService {
 
     private static final Logger logger = LogManager.getLogger(EmployeeServiceImpl.class);
-    private final EmployeeDAO employeeDAO = new EmployeeDAOImpl();
-    private final BaseEmployeeValidator baseEmployeeValidator = new BaseEmployeeValidatorImpl();
-    private final EmployeeMapper employeeMapper = MapperFactory.getEmployeeMapper();
+    private final EmployeeDAO employeeDAO;
+    private final BaseEmployeeValidator baseEmployeeValidator;
+    private final EmployeeMapper employeeMapper;
     private final IdValidatorFactory factory;
     private final OrderService orderService;
-    private final BusinessEmployeeValidator businessEmployeeValidator = new BusinessEmployeeValidatorImpl(baseEmployeeValidator,employeeDAO);
+    private final BusinessEmployeeValidator businessEmployeeValidator;
 
-    public EmployeeServiceImpl(IdValidatorFactory factory, OrderService orderService) {
+    public EmployeeServiceImpl(EmployeeDAO employeeDAO, BaseEmployeeValidator baseEmployeeValidator, EmployeeMapper employeeMapper, IdValidatorFactory factory, OrderService orderService, BusinessEmployeeValidator businessEmployeeValidator) {
+        this.employeeDAO = employeeDAO;
+        this.baseEmployeeValidator = baseEmployeeValidator;
+        this.employeeMapper = employeeMapper;
         this.factory = factory;
         this.orderService = orderService;
+        this.businessEmployeeValidator = businessEmployeeValidator;
     }
 
 

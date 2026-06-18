@@ -13,6 +13,7 @@ import com.academy.course.dto.OrderDTO;
 import com.academy.course.dto.ProductDTO;
 import com.academy.course.exception.EntityNotFoundByIdException;
 import com.academy.course.mapper.*;
+import com.academy.course.mapper.factory.MapperFactory;
 import com.academy.course.model.Item;
 import com.academy.course.model.Order;
 import com.academy.course.model.Product;
@@ -29,21 +30,30 @@ import java.util.Set;
 public class OrderServiceImpl implements OrderService {
 
     private static final Logger logger = LogManager.getLogger(OrderServiceImpl.class);
-    private final OrderDAO orderDAO = new OrderDAOImpl();
-    private final ProductDAO productDAO = new ProductDAOImpl();
-    private final ItemDAO itemDAO = new ItemDAOImpl();
-    private final ProductMapper productMapper = new ProductMapper();
-    private final ItemMapper itemMapper = new ItemMapper(productMapper);
-    private final OrderMapper orderMapper = new OrderMapper(itemMapper);
+    private final OrderDAO orderDAO ;
+    private final ProductDAO productDAO ;
+    private final ItemDAO itemDAO;
+    private final ProductMapper productMapper;
+    private final ItemMapper itemMapper ;
+    private final OrderMapper orderMapper ;
     private final IdValidatorFactory factory;
-    private final BaseOrderValidator baseOrderValidator = new BaseOrderValidatorImpl();
-    private final BusinessOrderValidator businessOrderValidator = new BusinessOrderValidatorImpl(orderDAO);
-    private final BusinessItemValidator businessItemValidator = new BusinessItemValidatorImpl(itemDAO,orderDAO);
+    private final BaseOrderValidator baseOrderValidator;
+    private final BusinessOrderValidator businessOrderValidator;
+    private final BusinessItemValidator businessItemValidator;
     private final ProductService productService;
     private final ItemService itemService;
 
-    public OrderServiceImpl(IdValidatorFactory factory, ProductService productService, ItemService itemService) {
+    public OrderServiceImpl(OrderDAO orderDAO, ProductDAO productDAO, ItemDAO itemDAO, ProductMapper productMapper, ItemMapper itemMapper, OrderMapper orderMapper, IdValidatorFactory factory, BaseOrderValidator baseOrderValidator, BusinessOrderValidator businessOrderValidator, BusinessItemValidator businessItemValidator, ProductService productService, ItemService itemService) {
+        this.orderDAO = orderDAO;
+        this.productDAO = productDAO;
+        this.itemDAO = itemDAO;
+        this.productMapper = productMapper;
+        this.itemMapper = itemMapper;
+        this.orderMapper = orderMapper;
         this.factory = factory;
+        this.baseOrderValidator = baseOrderValidator;
+        this.businessOrderValidator = businessOrderValidator;
+        this.businessItemValidator = businessItemValidator;
         this.productService = productService;
         this.itemService = itemService;
     }

@@ -1,4 +1,6 @@
-package com.academy.course.mapper;
+package com.academy.course.mapper.factory;
+
+import com.academy.course.mapper.*;
 
 public enum MapperFactory {
 

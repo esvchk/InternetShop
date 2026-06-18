@@ -6,12 +6,11 @@ import com.academy.course.dao.orderDao.OrderDAO;
 import com.academy.course.dao.orderDao.OrderDAOImpl;
 import com.academy.course.dto.ItemDTO;
 import com.academy.course.mapper.ItemMapper;
-import com.academy.course.mapper.MapperFactory;
+import com.academy.course.mapper.factory.MapperFactory;
 import com.academy.course.model.Item;
 import com.academy.course.model.Order;
 import com.academy.course.service.validator.BusinessItemValidator;
 import com.academy.course.service.validator.BusinessItemValidatorImpl;
-import com.academy.course.service.validator.IdValidator;
 import com.academy.course.service.validator.IdValidatorFactory;
 import com.academy.course.utils.Discount;
 import org.apache.logging.log4j.LogManager;
@@ -23,14 +22,18 @@ import java.util.Set;
 public class ItemServiceImpl implements ItemService {
 
     private static final Logger logger = LogManager.getLogger(ItemServiceImpl.class);
-    private final ItemDAO itemDAO = new ItemDAOImpl();
-    private final OrderDAO orderDAO = new OrderDAOImpl();
-    private final ItemMapper itemMapper = MapperFactory.getItemMapperMapper();
+    private final ItemDAO itemDAO;
+    private final OrderDAO orderDAO;
+    private final ItemMapper itemMapper;
     private final IdValidatorFactory factory;
-    private final BusinessItemValidator businessItemValidator = new BusinessItemValidatorImpl(itemDAO,orderDAO);
+    private final BusinessItemValidator businessItemValidator;
 
-    public ItemServiceImpl(IdValidatorFactory factory) {
+    public ItemServiceImpl(ItemDAO itemDAO, OrderDAO orderDAO, ItemMapper itemMapper, IdValidatorFactory factory, BusinessItemValidator businessItemValidator) {
+        this.itemDAO = itemDAO;
+        this.orderDAO = orderDAO;
+        this.itemMapper = itemMapper;
         this.factory = factory;
+        this.businessItemValidator = businessItemValidator;
     }
 
 

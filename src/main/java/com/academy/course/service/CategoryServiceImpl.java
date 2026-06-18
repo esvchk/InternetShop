@@ -7,13 +7,10 @@ import com.academy.course.dao.productDao.ProductDAOImpl;
 import com.academy.course.dto.CategoryDTO;
 import com.academy.course.dto.ProductDTO;
 import com.academy.course.mapper.CategoryMapper;
-import com.academy.course.mapper.MapperFactory;
+import com.academy.course.mapper.factory.MapperFactory;
 import com.academy.course.model.Category;
 import com.academy.course.model.Product;
-import com.academy.course.service.validator.BaseCategoryValidatorImpl;
-import com.academy.course.service.validator.BusinessCategoryValidator;
-import com.academy.course.service.validator.BusinessCategoryValidatorImpl;
-import com.academy.course.service.validator.IdValidatorFactory;
+import com.academy.course.service.validator.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -23,14 +20,23 @@ import java.util.Set;
 public class CategoryServiceImpl implements CategoryService {
 
     private static final Logger logger = LogManager.getLogger(CategoryServiceImpl.class);
-    private final CategoryDAO categoryDAO = new CategoryDAOImpl();
-    private final ProductDAO productDAO = new ProductDAOImpl();
-    private final CategoryMapper categoryMapper = MapperFactory.getCategoryMapper();
-    private final BusinessCategoryValidator businessCategoryValidator = new BusinessCategoryValidatorImpl(categoryDAO);
-    private final BaseCategoryValidatorImpl baseCategoryValidator = new BaseCategoryValidatorImpl();
+    private final CategoryDAO categoryDAO;
+    private final ProductDAO productDAO ;
+    private final CategoryMapper categoryMapper ;
+    private final BusinessCategoryValidator businessCategoryValidator;
+    private final BaseCategoryValidator baseCategoryValidator;
     private final IdValidatorFactory idValidatorFactory;
 
-    public CategoryServiceImpl(IdValidatorFactory idValidatorFactory) {
+    public CategoryServiceImpl(CategoryDAO categoryDAO,
+                               ProductDAO productDAO, CategoryMapper categoryMapper,
+                               BusinessCategoryValidator businessCategoryValidator,
+                               BaseCategoryValidator baseCategoryValidator,
+                               IdValidatorFactory idValidatorFactory) {
+        this.categoryDAO = categoryDAO;
+        this.productDAO = productDAO;
+        this.categoryMapper = categoryMapper;
+        this.businessCategoryValidator = businessCategoryValidator;
+        this.baseCategoryValidator = baseCategoryValidator;
         this.idValidatorFactory = idValidatorFactory;
     }
 
