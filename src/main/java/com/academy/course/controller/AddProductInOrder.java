@@ -14,11 +14,11 @@ import java.sql.SQLException;
 @WebServlet("/AddProductInOrder")
 public class AddProductInOrder extends HttpServlet {
 
-    private final IdValidatorFactory idValidatorFactory = new IdValidatorFactory();
-    private final ProductService productService = new ProductServiceImpl(idValidatorFactory);
-    private final ItemService itemService = new ItemServiceImpl(idValidatorFactory);
-    private final OrderService orderService = new OrderServiceImpl(idValidatorFactory,productService,itemService);
 
+    private ProductService productService ;
+    private ItemService itemService ;
+    private OrderService orderService ;
+;
 
 
     @Override

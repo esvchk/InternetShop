@@ -14,8 +14,8 @@ import java.io.IOException;
 import java.sql.SQLException;
 @WebServlet("/FindProductById")
 public class FindProductById extends HttpServlet {
-    IdValidatorFactory idValidatorFactory = new IdValidatorFactory();
-    private final ProductService productService = new ProductServiceImpl(idValidatorFactory);
+
+    private ProductService productService;
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Integer id = ParameterConverter.getIntegerParameter(request,"id");

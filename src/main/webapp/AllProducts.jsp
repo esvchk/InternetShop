@@ -1,5 +1,5 @@
 <%@ page import="com.academy.course.dto.ProductDTO" %>
-<%@ page import="java.util.List" %>
+<%@ page import="java.util.Set" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -18,11 +18,12 @@
         <th>Price</th>
         <th>Info</th>
         <th>IsAvailable</th>
+        <th>Limit</th>
     </tr>
     </thead>
     <tbody>
     <%
-        List<ProductDTO> products = (List<ProductDTO>) request.getAttribute("products");
+        Set<ProductDTO> products = (Set<ProductDTO>) request.getAttribute("products");
         if (products != null && !products.isEmpty()) {
             for (ProductDTO product : products) {
     %>
@@ -32,6 +33,7 @@
         <td><%= product.getPrice() %></td>
         <td><%= product.getInfo() %></td>
         <td><%= product.getIsAvailable() %></td>
+        <td><%= product.getProductLimit() %></td>
 
         <td>
             <a href="UpdateProduct?id=<%= product.getId() %>">Edit</a>

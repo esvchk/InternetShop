@@ -15,11 +15,9 @@ import java.io.IOException;
 public class ShowCustomers extends HttpServlet {
 
 
-    IdValidatorFactory idValidatorFactory = new IdValidatorFactory();
-    ProductService productService = new ProductServiceImpl(idValidatorFactory);
-    private final ItemService itemService = new ItemServiceImpl(idValidatorFactory);
-    OrderService orderService = new OrderServiceImpl(idValidatorFactory,productService,itemService);
-    private final EmployeeService employeeService = new EmployeeServiceImpl(idValidatorFactory,orderService);
+
+    private ItemService itemService ;
+    private EmployeeService employeeService ;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

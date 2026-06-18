@@ -14,10 +14,9 @@ import java.sql.SQLException;
 @WebServlet("/FindOrderById")
 public class FindOrderById extends HttpServlet {
 
-    IdValidatorFactory idValidatorFactory = new IdValidatorFactory();
-    private final ItemService itemService = new ItemServiceImpl(idValidatorFactory);
-    private final ProductService productService = new ProductServiceImpl(idValidatorFactory);
-    private final OrderService orderService = new OrderServiceImpl(idValidatorFactory,productService,itemService);
+    private ItemService itemService;
+    private ProductService productService;
+    private OrderService orderService ;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -16,8 +16,18 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 @WebServlet("/AddProduct")
 public class AddProduct extends HttpServlet {
-    IdValidatorFactory idValidatorFactory = new IdValidatorFactory();
-    private final ProductService productService = new ProductServiceImpl(idValidatorFactory);
+
+    private ProductService productService ;
+
+    @Override
+    public void init() throws ServletException {
+        super.init();
+    }
+
+    @Override
+    public void destroy() {
+        super.destroy();
+    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

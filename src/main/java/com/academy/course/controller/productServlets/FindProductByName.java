@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 @WebServlet("/FindProductByName")
 public class FindProductByName extends HttpServlet {
-    IdValidatorFactory idValidatorFactory = new IdValidatorFactory();
-    private final ProductService productService = new ProductServiceImpl(idValidatorFactory);
+
+    private ProductService productService;
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
        String name = ParameterConverter.getStringParameter(request,"name");

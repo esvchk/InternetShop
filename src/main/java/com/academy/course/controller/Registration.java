@@ -5,11 +5,12 @@ import com.academy.course.service.EmployeeServiceImpl;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
+import java.sql.SQLException;
 
 @WebServlet("/RegisterCustomer")
 public class Registration extends HttpServlet {
 
-//    private final EmployeeService employeeService = new EmployeeServiceImpl();
+    private EmployeeService employeeService;
 
 //    @Override
 //    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -18,7 +19,7 @@ public class Registration extends HttpServlet {
 //
 //        String context = request.getContextPath();
 //        try {
-//            customerService.register(login, passWord);
+//            employeeService.register(login, passWord);
 //        } catch (SQLException | UserNotFound e) {
 //            throw new RuntimeException(e);
 //        }

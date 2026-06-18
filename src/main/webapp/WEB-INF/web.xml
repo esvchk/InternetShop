@@ -7,8 +7,14 @@
 
     <display-name>Archetype Created Web Application</display-name>
 
+    <listener>
+        <listener-class>com.academy.course.utils.AppContextListener</listener-class>
+    </listener>
+
     <welcome-file-list>
         <welcome-file>HelloPage.jsp</welcome-file>
     </welcome-file-list>
 
 </web-app>
+
+

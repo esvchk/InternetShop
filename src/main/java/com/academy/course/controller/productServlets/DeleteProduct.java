@@ -14,8 +14,11 @@ import java.io.IOException;
 import java.sql.SQLException;
 @WebServlet("/DeleteProduct")
 public class DeleteProduct extends HttpServlet {
-    IdValidatorFactory idValidatorFactory = new IdValidatorFactory();
-    private final ProductService productService = new ProductServiceImpl(idValidatorFactory);
+
+
+    private ProductService productService;
+
+
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Integer id = ParameterConverter.getIntegerParameter(request,"id");

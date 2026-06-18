@@ -14,11 +14,9 @@ import java.sql.SQLException;
 public class LoginCustomer extends HttpServlet {
 
 
-    IdValidatorFactory idValidatorFactory = new IdValidatorFactory();
-    ProductService productService = new ProductServiceImpl(idValidatorFactory);
-    private final ItemService itemService = new ItemServiceImpl(idValidatorFactory);
-    OrderService orderService = new OrderServiceImpl(idValidatorFactory,productService,itemService);
-    private final EmployeeService employeeService = new EmployeeServiceImpl(idValidatorFactory,orderService);
+
+    private ItemService itemService;
+    private EmployeeService employeeService;
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
