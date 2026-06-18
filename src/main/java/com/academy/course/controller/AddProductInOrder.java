@@ -16,7 +16,8 @@ public class AddProductInOrder extends HttpServlet {
 
     private final IdValidatorFactory idValidatorFactory = new IdValidatorFactory();
     private final ProductService productService = new ProductServiceImpl(idValidatorFactory);
-    private final OrderService orderService = new OrderServiceImpl(idValidatorFactory,productService);
+    private final ItemService itemService = new ItemServiceImpl(idValidatorFactory);
+    private final OrderService orderService = new OrderServiceImpl(idValidatorFactory,productService,itemService);
 
 
 

@@ -39,11 +39,12 @@ public class OrderServiceImpl implements OrderService {
     private final BaseOrderValidator baseOrderValidator = new BaseOrderValidatorImpl();
     private final BusinessOrderValidator businessOrderValidator = new BusinessOrderValidatorImpl(orderDAO);
     private final ProductService productService;
+    private final ItemService itemService;
 
-    public OrderServiceImpl(IdValidatorFactory factory, ProductService productService) {
+    public OrderServiceImpl(IdValidatorFactory factory, ProductService productService, ItemService itemService) {
         this.factory = factory;
-
         this.productService = productService;
+        this.itemService = itemService;
     }
 
     @Override
@@ -85,6 +86,7 @@ public class OrderServiceImpl implements OrderService {
                     .productQuantity(quantity)
                     .product(product)
                     .order(order)
+                    .discount(Discount.ZERO_VALUE)
                     .build();
             order.addItem(item);
         }
@@ -126,6 +128,16 @@ public class OrderServiceImpl implements OrderService {
         order.setTotalCost(totalPrice);
         orderDAO.update(order);
         return order.getTotalCost();
+    }
+
+    @Override
+    public void setDiscountOnOrder(Integer orderId, Discount discount) throws SQLException {
+        factory.getOrderValidator().validateId(orderId);
+        Order order = orderDAO.get(orderId);
+        Set<ItemDTO> items = itemMapper.mapToSetDTOS(order.getItems());
+        for (ItemDTO itemDTO : items){
+           itemService.setDiscountOnItem(itemDTO.getId(),discount);
+        }
     }
 
     @Override

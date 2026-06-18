@@ -6,7 +6,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class BusinessOrderValidatorImpl implements BusinessOrderValidator {
-    private static final Logger logger = LogManager.getLogger(BusinessOrderValidator.class);
+    private static final Logger logger = LogManager.getLogger(BusinessOrderValidatorImpl.class);
     private final OrderDAO orderDAO;
 
     public BusinessOrderValidatorImpl(OrderDAO orderDAO) {

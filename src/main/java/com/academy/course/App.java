@@ -16,6 +16,7 @@ import com.academy.course.mapper.*;
 import com.academy.course.model.*;
 import com.academy.course.service.*;
 import com.academy.course.service.validator.*;
+import com.academy.course.utils.Discount;
 import com.academy.course.utils.Role;
 
 import javax.xml.bind.ValidationException;
@@ -73,7 +74,7 @@ public class App {
         OrderMapper orderMapper = new OrderMapper(itemMapper);
         EmployeeMapper employeeMapper = new EmployeeMapper(orderMapper);
         ProductDAO dao = new ProductDAOImpl();
-        ItemService itemService = new ItemServiceImpl();
+
         OrderDAO orderDAO = new OrderDAOImpl();
         EmployeeDAO employeeDAO = new EmployeeDAOImpl();
 
@@ -84,12 +85,13 @@ public class App {
 
 
         IdValidatorFactory idValidatorFactory  = new IdValidatorFactory();
+        ItemService itemService = new ItemServiceImpl(idValidatorFactory);
         CategoryService categoryService = new CategoryServiceImpl(idValidatorFactory);
         BaseEmployeeValidator baseEmployeeValidator = new BaseEmployeeValidatorImpl();
         BusinessEmployeeValidator businessEmployeeValidator = new BusinessEmployeeValidatorImpl(baseEmployeeValidator,employeeDAO);
         BaseProductValidator baseProductValidator = new BaseProductValidatorImpl();
         ProductServiceImpl productService = new ProductServiceImpl(idValidatorFactory);
-        OrderService orderService = new OrderServiceImpl(idValidatorFactory,productService);
+        OrderService orderService = new OrderServiceImpl(idValidatorFactory,productService,itemService);
         EmployeeService employeeService = new EmployeeServiceImpl(idValidatorFactory,orderService);
         idValidatorFactory.setEmployeeDAO(employeeDAO);
         idValidatorFactory.setCategoryDAO(categoryDAO);
@@ -107,7 +109,12 @@ public class App {
 //        employeeService.addNewOrderToEmployee(employeeMapper.mapToDTO(employeeDAO.get(4)));
 
 //        orderService.buyOrder(orderMapper.mapToDTO(orderDAO.get()));
-        System.out.println(employeeService.getTotalAmountOfOrders());
+//        System.out.println(employeeService.getTotalAmountOfOrders());
+
+//        orderService.addProductToOrder(productMapper.mapToDTO(dao.get(35)),orderMapper.mapToDTO(orderDAO.get(62)),5);
+//        employeeService.addNewOrderToEmployee(employeeMapper.mapToDTO(employeeDAO.get(4)));
+
+//        System.out.println(orderService.countAmountOfAllItems(orderMapper.mapToDTO(orderDAO.get(62))));
 
     }
 }

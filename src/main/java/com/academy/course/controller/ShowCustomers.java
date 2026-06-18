@@ -17,7 +17,8 @@ public class ShowCustomers extends HttpServlet {
 
     IdValidatorFactory idValidatorFactory = new IdValidatorFactory();
     ProductService productService = new ProductServiceImpl(idValidatorFactory);
-    OrderService orderService = new OrderServiceImpl(idValidatorFactory,productService);
+    private final ItemService itemService = new ItemServiceImpl(idValidatorFactory);
+    OrderService orderService = new OrderServiceImpl(idValidatorFactory,productService,itemService);
     private final EmployeeService employeeService = new EmployeeServiceImpl(idValidatorFactory,orderService);
 
     @Override

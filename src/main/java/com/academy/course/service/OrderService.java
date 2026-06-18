@@ -4,6 +4,7 @@ import com.academy.course.dto.EmployeeDTO;
 import com.academy.course.dto.ItemDTO;
 import com.academy.course.dto.OrderDTO;
 import com.academy.course.dto.ProductDTO;
+import com.academy.course.utils.Discount;
 
 import java.io.Serializable;
 import java.sql.SQLException;
@@ -18,5 +19,6 @@ public interface OrderService {
     void addProductToOrder(ProductDTO productDTO, OrderDTO orderDTO, Integer quantity) throws SQLException;
     void deleteItemFromOrder(ItemDTO itemDTO,Integer orderId,Integer quantity) throws SQLException;
     Double countAmountOfAllItems(OrderDTO orderDTO) throws SQLException;
+    void setDiscountOnOrder(Integer orderId, Discount discount) throws SQLException;
 
 }

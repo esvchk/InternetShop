@@ -23,11 +23,11 @@ public class Item extends DataEntity {
     @Enumerated(EnumType.ORDINAL)
     private Discount discount;
 
-    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.MERGE)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "product_id")
     private Product product;
 
-    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.MERGE)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "order_id")
     private Order order;
 
