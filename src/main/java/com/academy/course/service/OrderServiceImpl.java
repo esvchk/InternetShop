@@ -38,6 +38,7 @@ public class OrderServiceImpl implements OrderService {
     private final IdValidatorFactory factory;
     private final BaseOrderValidator baseOrderValidator = new BaseOrderValidatorImpl();
     private final BusinessOrderValidator businessOrderValidator = new BusinessOrderValidatorImpl(orderDAO);
+    private final BusinessItemValidator businessItemValidator = new BusinessItemValidatorImpl(itemDAO,orderDAO);
     private final ProductService productService;
     private final ItemService itemService;
 
@@ -90,13 +91,17 @@ public class OrderServiceImpl implements OrderService {
                     .build();
             order.addItem(item);
         }
+
         if (product.getProductLimit() != null)
             productService.setProductLimit(productMapper.mapToDTO(product),
                     product.getProductLimit() - quantity);
+
         countAmountOfAllItems(orderDTO);
+
         orderDAO.update(order);
-        logger.info("Product {} has been successfully added to order {}" +
-                "with quantity {}", productDTO, orderDTO, quantity);
+
+        logger.info("Product {} has been successfully added to order {} with quantity {} "
+                , productDTO, orderDTO, quantity);
     }
 
     @Override
@@ -136,6 +141,7 @@ public class OrderServiceImpl implements OrderService {
         Order order = orderDAO.get(orderId);
         Set<ItemDTO> items = itemMapper.mapToSetDTOS(order.getItems());
         for (ItemDTO itemDTO : items){
+            businessItemValidator.setDiscountOnItem(discount);
            itemService.setDiscountOnItem(itemDTO.getId(),discount);
         }
     }

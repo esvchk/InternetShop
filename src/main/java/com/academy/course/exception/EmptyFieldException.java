@@ -10,4 +10,9 @@ public class EmptyFieldException extends ValidationException {
         super("Field " + fieldName + " cannot be empty");
         this.fieldName = fieldName;
     }
+
+    public EmptyFieldException(String message, String fieldName) {
+        super(message);
+        this.fieldName = fieldName;
+    }
 }

@@ -2,7 +2,6 @@ package com.academy.course.service.validator;
 
 import com.academy.course.dao.itemDao.ItemDAO;
 import com.academy.course.dao.orderDao.OrderDAO;
-import com.academy.course.dto.ItemDTO;
 import com.academy.course.exception.EmptyFieldException;
 import com.academy.course.exception.EmptyListException;
 import com.academy.course.utils.Discount;
@@ -10,7 +9,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.sql.SQLException;
-import java.util.Set;
 
 public class BusinessItemValidatorImpl implements BusinessItemValidator,EmptyFieldValidator<String>{
 
@@ -45,6 +43,13 @@ public class BusinessItemValidatorImpl implements BusinessItemValidator,EmptyFie
         if (orderDAO.get(orderId).getItems() == null ||orderDAO.get(orderId).getItems().isEmpty() ) {
             logger.warn("Empty list of Order with id {}",orderId);
             throw new EmptyListException("Item");
+        }
+    }
+
+    @Override
+    public void setDiscountOnItem(Discount discount) throws SQLException {
+        if (discount == null) {
+           throw new EmptyFieldException("Discount must have a value");
         }
     }
 }

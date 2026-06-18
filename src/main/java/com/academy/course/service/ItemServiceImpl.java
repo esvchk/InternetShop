@@ -70,6 +70,7 @@ public class ItemServiceImpl implements ItemService {
     public void setDiscountOnItem(Integer itemId, Discount discount) throws SQLException {
         factory.getItemValidator().validateId(itemId);
         Item item = itemDAO.get(itemId);
+        businessItemValidator.setDiscountOnItem(discount);
             item.setDiscount(discount);
         itemDAO.update(item);
         logger.info("Successful setting up discount on item with id {}",itemId);
