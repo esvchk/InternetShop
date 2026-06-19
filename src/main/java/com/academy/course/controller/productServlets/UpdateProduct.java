@@ -6,6 +6,7 @@ import com.academy.course.service.ProductServiceImpl;
 import com.academy.course.service.validator.IdValidatorFactory;
 import com.academy.course.utils.ParameterConverter;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,6 +20,12 @@ public class UpdateProduct extends HttpServlet {
 
 
     private ProductService productService;
+
+    @Override
+    public void init() throws ServletException {
+        ServletContext context = getServletContext();
+        productService = (ProductService) context.getAttribute("productService");
+    }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Integer id = ParameterConverter.getIntegerParameter(request,"id");
@@ -38,6 +45,8 @@ public class UpdateProduct extends HttpServlet {
         String name = ParameterConverter.getStringParameter(request,"name");
         Double price = ParameterConverter.getDoubleParameter(request,"price");
         String info = ParameterConverter.getStringParameter(request,"info");
+        Boolean isAvailable = ParameterConverter.getBooleanParameter(request,"isAvailable");
+        Integer limit = ParameterConverter.getIntegerParameter(request,"limit");
 
         String context = request.getContextPath();
 
@@ -46,6 +55,8 @@ public class UpdateProduct extends HttpServlet {
                 .name(name)
                 .price(price)
                 .info(info)
+                .isAvailable(isAvailable)
+                .productLimit(limit)
                 .build();
         try {
             productService.updateProduct(id,productDTO);

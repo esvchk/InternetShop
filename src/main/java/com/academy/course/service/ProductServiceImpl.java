@@ -13,6 +13,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.sql.SQLException;
+import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 
 public class ProductServiceImpl implements ProductService {
@@ -32,6 +34,15 @@ public class ProductServiceImpl implements ProductService {
         this.baseProductValidator = baseProductValidator;
         this.businessProductValidator = businessProductValidator;
     }
+
+    @Override
+    public Set<ProductDTO> getPaginatedListOfProducts(int offSet, int size) {
+        int quantityProducts = productDAO.countProducts();
+
+        return productMapper.mapToSetDTOS(productDAO.getAllProducts(offSet,size));
+    }
+
+
 
     @Override
     public void setProductLimit(ProductDTO productDTO, Integer limit) throws SQLException {
@@ -57,6 +68,7 @@ public class ProductServiceImpl implements ProductService {
             product.setName(newValue.getName());
             product.setPrice(newValue.getPrice());
             product.setIsAvailable(newValue.getIsAvailable());
+            setProductLimit(productMapper.mapToDTO(product), newValue.getProductLimit());
             productDAO.update(product);
             logger.info("Product with id{} has been successfully updated",oldValueId);
     }

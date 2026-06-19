@@ -5,6 +5,7 @@ import com.academy.course.service.ProductServiceImpl;
 import com.academy.course.service.validator.IdValidatorFactory;
 import com.academy.course.utils.ParameterConverter;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,7 +19,11 @@ public class DeleteProduct extends HttpServlet {
 
     private ProductService productService;
 
-
+    @Override
+    public void init() throws ServletException {
+        ServletContext context = getServletContext();
+        productService = (ProductService) context.getAttribute("productService");
+    }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Integer id = ParameterConverter.getIntegerParameter(request,"id");
@@ -29,6 +34,5 @@ public class DeleteProduct extends HttpServlet {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
     }
 }

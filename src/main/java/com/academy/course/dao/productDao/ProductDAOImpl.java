@@ -4,7 +4,9 @@ import com.academy.course.dao.DAOImpl;
 import com.academy.course.model.Product;
 
 import javax.persistence.Query;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class ProductDAOImpl extends DAOImpl<Product> implements ProductDAO{
@@ -16,6 +18,19 @@ public class ProductDAOImpl extends DAOImpl<Product> implements ProductDAO{
     @Override
     public Set<Product> getAllProducts() {
         return new HashSet<>(getEm().createQuery("from Product", Product.class).getResultList());
+    }
+
+    @Override
+    public Set<Product> getAllProducts(int offSet, int size) {
+        return new HashSet<>(getEm().createQuery("FROM Product product ORDER BY product.id", Product.class)
+                .setFirstResult(offSet)
+                .setMaxResults(size)
+                .getResultList());
+    }
+
+    @Override
+    public Integer countProducts() {
+        return getEm().createQuery("SELECT COUNT(product.id) from Product product", Integer.class).getSingleResult();
     }
 
     @Override

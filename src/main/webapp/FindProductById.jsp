@@ -23,8 +23,8 @@
             <th>Name</th>
             <th>Price</th>
             <th>Info</th>
-            <th>Manufacturer</th>
-            <th>Best Before</th>
+            <th>IsAvailable</th>
+            <th>Limit</th>
         </tr>
         </thead>
         <tbody>
@@ -37,6 +37,9 @@
             <td><%= product.getName() %></td>
             <td><%= product.getPrice() %></td>
             <td><%= product.getInfo() %></td>
+            <td><%= product.getIsAvailable() %></td>
+            <td><%= product.getProductLimit() %></td>
+
             <td>
                 <a href="UpdateProduct?id=<%= product.getId() %>">Edit</a>
                 &nbsp;&nbsp;&nbsp;

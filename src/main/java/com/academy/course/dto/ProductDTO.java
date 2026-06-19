@@ -24,15 +24,5 @@ public class ProductDTO {
     private Boolean isAvailable;
 
 
-    @Override
-    public String toString() {
-        return "ProductDTO{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", price=" + price +
-                ", info='" + info + '\'' +
-                '}';
-    }
-
 
 }

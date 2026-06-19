@@ -13,6 +13,7 @@
         Name: <input name = "name" type = "text"/><br/>
         Price: <input name = "price" step="0.01" type = "number"/><br/>
         Info: <input name = "info" type = "text"/><br/>
+        Limit: <input name = "limit" type = "number"/><br/>
         IsAvailable:
         <input type="radio" name="isAvailable" value="true" checked> Yes
         <input type="radio" name="isAvailable" value="false"> No<br/>

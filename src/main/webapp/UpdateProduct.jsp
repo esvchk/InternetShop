@@ -10,33 +10,34 @@
 <html>
 <head>
     <title>Update Product</title>
-    <% ProductDTO productDTO = (ProductDTO) request.getAttribute("product"); %>
+        <% ProductDTO productDTO = (ProductDTO) request.getAttribute("product"); %>
     <head>
         <title>Edit Product</title>
     </head>
-    <body>
-    <h2>Edit Product</h2>
-    <% if (productDTO != null) { %>
-    <form action="UpdateProduct" method="post">
-        <input type="hidden" name="id" value="<%= productDTO.getId() %>">
-        Name: <input type="text" name="name"
-                     value="<%= productDTO.getName() %>" required><br><br>
-        Price: <input type="number" step="0.01" name="price"
-                      value="<%= productDTO.getPrice() %>" required><br><br>
-        Info: <input type="text" name="info"
-                      value="<%= productDTO.getInfo() %>" required><br><br>
-        Manufacturer: <input type="text" name="manufacturer"
-                      value="<%= productDTO.getManufacturer() %>" required><br><br>
-        Best Before: <input type="date" name="bestBefore"
-                      value="<%= productDTO.getBestBefore() %>" required><br><br>
-        <input type="submit" value="Update Product">
-    </form>
-    <br>
-    <a href="ShowProducts">Back to Product List</a>
-    <% } else { %>
-    <p>Product not found!</p>
-    <a href="ShowProducts">Back to Product List</a>
-    <% } %>
-    </body>
+<body>
+<h2>Edit Product</h2>
+<% if (productDTO != null) { %>
+<form action="UpdateProduct" method="post">
+    <input type="hidden" name="id" value="<%= productDTO.getId() %>">
+    Name: <input type="text" name="name"
+                 value="<%= productDTO.getName() %>" required><br><br>
+    Price: <input type="number" step="0.01" name="price"
+                  value="<%= productDTO.getPrice() %>" required><br><br>
+    Info: <input type="text" name="info"
+                 value="<%= productDTO.getInfo() %>" required><br><br>
+    IsAvailable: <input type="radio" name="isAvailable" value="true" checked required> Yes <br><br>
+    <input type="radio" name="isAvailable" value="false" required> No <br><br>
+    Limit: <input type="number" name="limit"
+                  value="<%= productDTO.getProductLimit() %>" required><br><br>
+
+    <input type="submit">
+</form>
+<br>
+<a href="ShowProducts">Back to Product List</a>
+<% } else { %>
+<p>Product not found!</p>
+<a href="ShowProducts">Back to Product List</a>
+<% } %>
+</body>
 
 </html>
