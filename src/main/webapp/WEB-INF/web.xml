@@ -3,7 +3,17 @@
         "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 
-<web-app>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         version="3.0">
+
+    <jsp-config>
+        <jsp-property-group>
+            <url-pattern>*.jsp</url-pattern>
+            <el-ignored>false</el-ignored>
+        </jsp-property-group>
+    </jsp-config>
 
     <display-name>Archetype Created Web Application</display-name>
 
@@ -14,6 +24,7 @@
     <welcome-file-list>
         <welcome-file>HelloPage.jsp</welcome-file>
     </welcome-file-list>
+
 
 </web-app>
 

@@ -41,6 +41,7 @@ public class ProductServiceImpl extends PaginatedResult<ProductDTO> implements P
         Set<ProductDTO> products =
                 productMapper.mapToSetDTOS(productDAO.getAllProducts((offSet - 1) * size, size));
         baseProductValidator.validatePagination(offSet,size,totalSize,products);
+        logger.info("Successful getting pages of products");
         return paginate(offSet,size,totalSize,products);
     }
 
@@ -71,7 +72,7 @@ public class ProductServiceImpl extends PaginatedResult<ProductDTO> implements P
         product.setIsAvailable(newValue.getIsAvailable());
         setProductLimit(productMapper.mapToDTO(product), newValue.getProductLimit());
         productDAO.update(product);
-        logger.info("Product with id{} has been successfully updated", oldValueId);
+        logger.info("Product with id {} has been successfully updated", oldValueId);
     }
 
     @Override

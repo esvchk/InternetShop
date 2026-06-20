@@ -8,7 +8,7 @@ public class PaginatedResult<T> implements Paginator<T> {
     private Integer currentPage;
     private Integer lastPage;
     private Integer pageSize;
-    private Long totalRecords;
+    private Long totalSize;
     private Set<T> entities;
 
     private final Class<T> clazz;
@@ -18,19 +18,19 @@ public class PaginatedResult<T> implements Paginator<T> {
     }
 
     @Override
-    public PaginatedResult<T> paginate(Integer offSet, Integer size, Long totalSize, Set<T> setToPaginate) {
+    public PaginatedResult<T> paginate(Integer currenPage, Integer pageSize, Long listSize, Set<T> setToPaginate) {
         int lastPageNumber;
-        if (totalSize % size == 0) {
-            lastPageNumber = (int) (totalSize / size);
+        if (listSize % pageSize == 0) {
+            lastPageNumber = (int) (listSize / pageSize);
         } else {
-            lastPageNumber = (int) (totalSize / size) + 1;
+            lastPageNumber = (int) (listSize / pageSize) + 1;
         }
         PaginatedResult<T> paginator = new PaginatedResult<>(clazz);
-        paginator.setCurrentPage(offSet);
+        paginator.setCurrentPage(currenPage);
         paginator.setEntities(setToPaginate);
         paginator.setLastPage(lastPageNumber);
-        paginator.setPageSize(size);
-        paginator.setTotalRecords(totalSize);
+        paginator.setPageSize(pageSize);
+        paginator.setTotalSize(listSize);
         return paginator;
     }
 }

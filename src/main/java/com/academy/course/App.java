@@ -12,8 +12,10 @@ import com.academy.course.dao.orderDao.OrderDAOImpl;
 
 import com.academy.course.dao.productDao.ProductDAO;
 import com.academy.course.dao.productDao.ProductDAOImpl;
+import com.academy.course.dto.ProductDTO;
 import com.academy.course.mapper.*;
 import com.academy.course.model.*;
+import com.academy.course.paginator.PaginatedResult;
 import com.academy.course.service.*;
 import com.academy.course.service.validator.*;
 import com.academy.course.utils.Discount;
@@ -98,7 +100,7 @@ public class App {
         ProductService productService = new ProductServiceImpl(dao,productMapper,idValidatorFactory,baseProductValidator,businessProductValidator);
 
 //        System.out.println(productService.getAllProducts());
-        System.out.println(productService.getPaginatedListOfProducts(1,5));
+
 
     }
 }
