@@ -10,6 +10,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class BaseProductValidatorImpl implements BaseProductValidator,EmptyFieldValidator<String>{
 
@@ -73,6 +74,18 @@ public class BaseProductValidatorImpl implements BaseProductValidator,EmptyField
         validateField(String.valueOf(productDTO.getPrice()));
         nameInputValidation(productDTO.getName());
         validateNegativeNumber(productDTO.getPrice());
+    }
+
+    @Override
+    public void validatePagination(Integer offSet, Integer size, Long totalSize, Set<ProductDTO> setToPaginate) {
+        validateField(String.valueOf(offSet));
+        validateField(String.valueOf(size));
+        validateField(String.valueOf(totalSize));
+        if (setToPaginate == null || setToPaginate.isEmpty()) {
+            throw new EmptyListException("Product");
+        }
+        validateNegativeNumber(offSet);
+        validateNegativeNumber(size);
     }
 
     @Override

@@ -98,6 +98,7 @@ public class App {
         ProductService productService = new ProductServiceImpl(dao,productMapper,idValidatorFactory,baseProductValidator,businessProductValidator);
 
 //        System.out.println(productService.getAllProducts());
+        System.out.println(productService.getPaginatedListOfProducts(1,5));
 
     }
 }

@@ -2,25 +2,24 @@ package com.academy.course.service;
 
 
 import com.academy.course.dao.productDao.ProductDAO;
-import com.academy.course.dao.productDao.ProductDAOImpl;
 import com.academy.course.dto.CategoryDTO;
 import com.academy.course.dto.ProductDTO;
 import com.academy.course.mapper.ProductMapper;
-
 import com.academy.course.model.Product;
-import com.academy.course.service.validator.*;
+import com.academy.course.paginator.PaginatedResult;
+import com.academy.course.service.validator.BaseProductValidator;
+import com.academy.course.service.validator.BusinessProductValidator;
+import com.academy.course.service.validator.IdValidatorFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.sql.SQLException;
-import java.util.Collections;
-import java.util.List;
 import java.util.Set;
 
-public class ProductServiceImpl implements ProductService {
+public class ProductServiceImpl extends PaginatedResult<ProductDTO> implements ProductService {
 
     private final ProductDAO productDAO;
-    private final ProductMapper productMapper ;
+    private final ProductMapper productMapper;
     private final IdValidatorFactory idValidatorFactory;
     private final BaseProductValidator baseProductValidator;
     private final BusinessProductValidator businessProductValidator;
@@ -28,6 +27,7 @@ public class ProductServiceImpl implements ProductService {
 
 
     public ProductServiceImpl(ProductDAO productDAO, ProductMapper productMapper, IdValidatorFactory idValidatorFactory, BaseProductValidator baseProductValidator, BusinessProductValidator businessProductValidator) {
+        super(ProductDTO.class);
         this.productDAO = productDAO;
         this.productMapper = productMapper;
         this.idValidatorFactory = idValidatorFactory;
@@ -36,12 +36,13 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Set<ProductDTO> getPaginatedListOfProducts(int offSet, int size) {
-        int quantityProducts = productDAO.countProducts();
-
-        return productMapper.mapToSetDTOS(productDAO.getAllProducts(offSet,size));
+    public PaginatedResult<ProductDTO> getPaginatedListOfProducts(int offSet, int size) {
+        Long totalSize = productDAO.countProducts();
+        Set<ProductDTO> products =
+                productMapper.mapToSetDTOS(productDAO.getAllProducts((offSet - 1) * size, size));
+        baseProductValidator.validatePagination(offSet,size,totalSize,products);
+        return paginate(offSet,size,totalSize,products);
     }
-
 
 
     @Override
@@ -64,33 +65,33 @@ public class ProductServiceImpl implements ProductService {
         idValidatorFactory.getProductValidator().validateId(oldValueId);
         baseProductValidator.validateUpdatingProduct(newValue);
         Product product = productDAO.get(oldValueId);
-            product.setInfo(newValue.getInfo());
-            product.setName(newValue.getName());
-            product.setPrice(newValue.getPrice());
-            product.setIsAvailable(newValue.getIsAvailable());
-            setProductLimit(productMapper.mapToDTO(product), newValue.getProductLimit());
-            productDAO.update(product);
-            logger.info("Product with id{} has been successfully updated",oldValueId);
+        product.setInfo(newValue.getInfo());
+        product.setName(newValue.getName());
+        product.setPrice(newValue.getPrice());
+        product.setIsAvailable(newValue.getIsAvailable());
+        setProductLimit(productMapper.mapToDTO(product), newValue.getProductLimit());
+        productDAO.update(product);
+        logger.info("Product with id{} has been successfully updated", oldValueId);
     }
 
     @Override
     public void addProduct(ProductDTO productDTO) throws SQLException {
         baseProductValidator.validateCreationProduct(productDTO);
         productDAO.save(productMapper.mapToEntity(productDTO));
-        logger.info("New product {} has been successfully added",productDTO);
+        logger.info("New product {} has been successfully added", productDTO);
     }
 
     @Override
     public void deleteProduct(ProductDTO productDTO) throws SQLException {
         idValidatorFactory.getProductValidator().validateId(productDTO.getId());
         productDAO.delete(productDAO.get(productDTO.getId()));
-        logger.info("Product {} has been successfully deleted",productDTO);
+        logger.info("Product {} has been successfully deleted", productDTO);
     }
 
     @Override
     public ProductDTO getProductById(Integer id) throws SQLException {
         idValidatorFactory.getProductValidator().validateId(id);
-        logger.info("Product with id {} was successfully found",id);
+        logger.info("Product with id {} was successfully found", id);
         return productMapper.mapToDTO(productDAO.get(id));
     }
 
@@ -111,9 +112,8 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Set<ProductDTO> getAllProductsFromCategory(CategoryDTO categoryDTO) throws SQLException {
         baseProductValidator.validateGetAllProductsFromCategory(categoryDTO);
-        logger.info("Search products by category {} successful",categoryDTO.getName());
+        logger.info("Search products by category {} successful", categoryDTO.getName());
         return categoryDTO.getProductsDTO();
     }
-
 
 }

@@ -29,8 +29,8 @@ public class ProductDAOImpl extends DAOImpl<Product> implements ProductDAO{
     }
 
     @Override
-    public Integer countProducts() {
-        return getEm().createQuery("SELECT COUNT(product.id) from Product product", Integer.class).getSingleResult();
+    public Long countProducts() {
+        return getEm().createQuery("SELECT COUNT(product.id) from Product product", Long.class).getSingleResult();
     }
 
     @Override

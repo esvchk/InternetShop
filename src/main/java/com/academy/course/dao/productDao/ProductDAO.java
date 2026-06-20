@@ -9,7 +9,7 @@ import java.util.Set;
 public interface ProductDAO extends DAO<Product> {
     Set<Product> getAllProducts();
     Set<Product> getAllProducts(int offSet, int size);
-    Integer countProducts();
+    Long countProducts();
     Product getByName(String name);
 
 }
