@@ -10,7 +10,5 @@
     <include file="db/changelog/2026/06/Category-09-06.xml"/>
     <include file="db/changelog/2026/06/Product-09-06.xml"/>
     <include file="db/changelog/2026/06/Item-09-06.xml"/>
-    <include file="/db/changelog/2026/06/2026-21-06-1-CreateCategoryTable.xml"/>
-
 
 </databaseChangeLog>

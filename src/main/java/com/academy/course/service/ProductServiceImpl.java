@@ -50,11 +50,11 @@ public class ProductServiceImpl extends PaginatedResult<ProductDTO> implements P
     @Override
     public void setProductLimit(ProductDTO productDTO, Integer limit) throws SQLException {
         idValidatorFactory.getProductValidator().validateId(productDTO.getId());
-        baseProductValidator.validateSetProductLimit(limit);
         Product product = productDAO.get(productDTO.getId());
         if (limit == null) {
             product.setProductLimit(null);
         } else {
+            baseProductValidator.validateSetProductLimit(limit);
             product.setProductLimit(limit);
             product.setIsAvailable(!product.getProductLimit().equals(0));
         }

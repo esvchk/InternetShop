@@ -74,7 +74,11 @@
     <c:if test="${currentPage < lastPage}">
         <a href="${pageContext.request.contextPath}/ShowProducts?currentPage=${currentPage + 1}">Next</a>
     </c:if>
+
 </table>
+<c:forEach var="quantityOfRecords" begin="${5}" step="${5}" end="${30}">
+    <a href="${pageContext.request.contextPath}/ShowProducts?pageSize=${quantityOfRecords}">${quantityOfRecords}</a>
+</c:forEach>
 
 
 </body>

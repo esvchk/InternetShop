@@ -30,12 +30,18 @@ public class ShowProducts extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int currentPage = 1;
+        int pageSize = 10;
         if (request.getParameter("currentPage") != null) {
             currentPage = ParameterConverter.getIntegerParameter(request,"currentPage");
         }
-        PaginatedResult<ProductDTO> paginatedResult = productService.getPaginatedListOfProducts(currentPage, Constants.SIZE);
+        if (request.getParameter("pageSize") != null) {
+            pageSize = ParameterConverter.getIntegerParameter(request,"pageSize");
+        }
+
+        PaginatedResult<ProductDTO> paginatedResult = productService.getPaginatedListOfProducts(currentPage, pageSize);
         Set<ProductDTO> products = paginatedResult.getEntities();
         request.setAttribute("products", products);
+        request.setAttribute("pageSize",paginatedResult.getCurrentPage());
         request.setAttribute("currentPage", paginatedResult.getCurrentPage());
         request.setAttribute("lastPage", paginatedResult.getLastPage());
 
