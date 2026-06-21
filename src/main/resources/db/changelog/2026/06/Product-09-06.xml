@@ -17,7 +17,7 @@
             <column name="info" type="VARCHAR(255)">
             <constraints nullable="true"/>
             </column>
-            <column name="isAvailable" type="BOOLEAN"/>
+            <column name="isAvailable" type="bit"/>
             <column name="productLimit" type="INT">
                 <constraints nullable="true"/>
             </column>

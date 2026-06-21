@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Set;
 
@@ -30,18 +31,18 @@ public class ShowProducts extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int currentPage = 1;
-        int pageSize = 10;
+        int pageSize = 5;
+        HttpSession session = request.getSession();
         if (request.getParameter("currentPage") != null) {
             currentPage = ParameterConverter.getIntegerParameter(request,"currentPage");
         }
-        if (request.getParameter("pageSize") != null) {
-            pageSize = ParameterConverter.getIntegerParameter(request,"pageSize");
-        }
+
+
 
         PaginatedResult<ProductDTO> paginatedResult = productService.getPaginatedListOfProducts(currentPage, pageSize);
         Set<ProductDTO> products = paginatedResult.getEntities();
         request.setAttribute("products", products);
-        request.setAttribute("pageSize",paginatedResult.getCurrentPage());
+        session.setAttribute("pageSize",paginatedResult.getPageSize());
         request.setAttribute("currentPage", paginatedResult.getCurrentPage());
         request.setAttribute("lastPage", paginatedResult.getLastPage());
 
