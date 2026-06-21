@@ -4,15 +4,15 @@ import lombok.Getter;
 
 @Getter
 public class EmptyFieldException extends ValidationException {
-    private final String fieldName;
+    private final String value;
 
-    public EmptyFieldException(String fieldName) {
-        super("Field " + fieldName + " cannot be empty");
-        this.fieldName = fieldName;
+    public EmptyFieldException(String value) {
+        super("Value " + value + " cannot be empty or null");
+        this.value = value;
     }
 
-    public EmptyFieldException(String message, String fieldName) {
+    public EmptyFieldException(String message, String value) {
         super(message);
-        this.fieldName = fieldName;
+        this.value = value;
     }
 }

@@ -1,10 +1,7 @@
 package com.academy.course.dto;
 
 import com.academy.course.utils.Discount;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Builder
 @Data

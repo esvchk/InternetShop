@@ -20,6 +20,7 @@ public class Order extends DataEntity {
     @Builder.Default
     private Set<Item> items = new HashSet<>();
 
+
     @Column
     private String paymentData;
 
@@ -29,6 +30,8 @@ public class Order extends DataEntity {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "employee_id")
     private Employee employee;
+
+
     @Column
     private Boolean isBought;
 
@@ -53,12 +56,5 @@ public class Order extends DataEntity {
         item.setOrder(this);
     }
 
-    public void removeItem(Item item){
-        if (this.getItems() == null) {
-            this.setItems(new HashSet<>());
-        }
-        this.items.remove(item);
-        item.setOrder(null);
-    }
 
 }

@@ -29,12 +29,14 @@ public class ShowProducts extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        PaginatedResult<ProductDTO> paginatedResult = productService.getPaginatedListOfProducts(1, 5);
+        int currentPage = 1;
+        if (request.getParameter("currentPage") != null) {
+            currentPage = ParameterConverter.getIntegerParameter(request,"currentPage");
+        }
+        PaginatedResult<ProductDTO> paginatedResult = productService.getPaginatedListOfProducts(currentPage, Constants.SIZE);
         Set<ProductDTO> products = paginatedResult.getEntities();
         request.setAttribute("products", products);
-        request.setAttribute("currentPage",paginatedResult.getCurrentPage());
-        request.setAttribute("pageSize", paginatedResult.getPageSize());
-        request.setAttribute("listSize", paginatedResult.getTotalSize());
+        request.setAttribute("currentPage", paginatedResult.getCurrentPage());
         request.setAttribute("lastPage", paginatedResult.getLastPage());
 
         request.getRequestDispatcher("/AllProducts.jsp")

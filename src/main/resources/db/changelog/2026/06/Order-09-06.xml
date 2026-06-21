@@ -12,10 +12,16 @@
             </column>
             <column name="createDateTime" type="DATETIME"/>
             <column name="updateDateTime" type="DATETIME"/>
-            <column name="paymentData" type="VARCHAR(255)"/>
+            <column name="paymentData" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
             <column name="totalCost" type="DOUBLE"/>
-            <column name="employee_id" type="INT"/>
-            <column name="isBought" type="BIT"/>
+            <column name="employee_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="isBought" type="BIT">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
     </changeSet>
     <changeSet id="1780989274601-2" author="esvchk">

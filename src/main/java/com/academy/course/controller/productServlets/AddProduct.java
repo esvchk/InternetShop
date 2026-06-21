@@ -34,7 +34,6 @@ public class AddProduct extends HttpServlet {
         Double price = ParameterConverter.getDoubleParameter(request,"price");
         String info = ParameterConverter.getStringParameter(request,"info");
         Boolean isAvailable = ParameterConverter.getBooleanParameter(request,"isAvailable");
-        Integer productLimit = ParameterConverter.getIntegerParameter(request,"limit");
 
         String context = request.getContextPath();
         ProductDTO productDTO = ProductDTO.builder()
@@ -42,7 +41,6 @@ public class AddProduct extends HttpServlet {
                 .price(price)
                 .info(info)
                 .isAvailable(isAvailable)
-                .productLimit(productLimit)
                 .build();
         try {
             productService.addProduct(productDTO);

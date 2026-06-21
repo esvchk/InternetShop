@@ -16,11 +16,14 @@ import java.util.*;
 @ToString
 public class Employee extends DataEntity {
 
+
     @Column
     private String login;
 
+
     @Column
     private String passWord;
+
 
     @Column
     @Enumerated(EnumType.STRING)

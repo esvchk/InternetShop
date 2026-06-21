@@ -1,9 +1,6 @@
 package com.academy.course.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Builder
 @Data
@@ -16,7 +13,7 @@ public class ProductDTO {
     private String name;
 
     private Double price;
-
+    
     private String info;
 
     private Integer productLimit;

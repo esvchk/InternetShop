@@ -16,28 +16,25 @@
     </head>
 <body>
 <h2>Edit Product</h2>
-<% if (productDTO != null) { %>
 <form action="UpdateProduct" method="post">
     <input type="hidden" name="id" value="<%= productDTO.getId() %>">
     Name: <input type="text" name="name"
-                 value="<%= productDTO.getName() %>" required><br><br>
+                 value="<%= productDTO.getName() %>" required><br>
     Price: <input type="number" step="0.01" name="price"
-                  value="<%= productDTO.getPrice() %>" required><br><br>
+                  value="<%= productDTO.getPrice() %>" required><br>
     Info: <input type="text" name="info"
-                 value="<%= productDTO.getInfo() %>" required><br><br>
-    IsAvailable: <input type="radio" name="isAvailable" value="true" checked required> Yes <br><br>
-    <input type="radio" name="isAvailable" value="false" required> No <br><br>
+                 value="<%= productDTO.getInfo() %>" ><br>
+    IsAvailable: <input type="radio" name="isAvailable" value="true" required> Yes
+    <input type="radio" name="isAvailable" value="false" required > No <br>
     Limit: <input type="number" name="limit"
-                  value="<%= productDTO.getProductLimit() %>" required><br><br>
-
+                  value="<%= productDTO.getProductLimit() %>"><br>
     <input type="submit">
 </form>
 <br>
 <a href="ShowProducts">Back to Product List</a>
-<% } else { %>
-<p>Product not found!</p>
+
 <a href="ShowProducts">Back to Product List</a>
-<% } %>
+
 </body>
 
 </html>

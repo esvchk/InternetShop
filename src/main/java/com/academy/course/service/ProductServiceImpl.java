@@ -14,6 +14,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.sql.SQLException;
+import java.util.Collections;
 import java.util.Set;
 
 public class ProductServiceImpl extends PaginatedResult<ProductDTO> implements ProductService {
@@ -36,13 +37,13 @@ public class ProductServiceImpl extends PaginatedResult<ProductDTO> implements P
     }
 
     @Override
-    public PaginatedResult<ProductDTO> getPaginatedListOfProducts(int offSet, int size) {
+    public PaginatedResult<ProductDTO> getPaginatedListOfProducts(int offset, int size) {
         Long totalSize = productDAO.countProducts();
         Set<ProductDTO> products =
-                productMapper.mapToSetDTOS(productDAO.getAllProducts((offSet - 1) * size, size));
-        baseProductValidator.validatePagination(offSet,size,totalSize,products);
+                productMapper.mapToSetDTOS(productDAO.getAllProducts((offset - 1) * size, size));
+        baseProductValidator.validatePagination(offset,size,totalSize,products);
         logger.info("Successful getting pages of products");
-        return paginate(offSet,size,totalSize,products);
+        return paginate(offset,size,totalSize,products);
     }
 
 
@@ -83,10 +84,10 @@ public class ProductServiceImpl extends PaginatedResult<ProductDTO> implements P
     }
 
     @Override
-    public void deleteProduct(ProductDTO productDTO) throws SQLException {
-        idValidatorFactory.getProductValidator().validateId(productDTO.getId());
-        productDAO.delete(productDAO.get(productDTO.getId()));
-        logger.info("Product {} has been successfully deleted", productDTO);
+    public void deleteProduct(Integer id) throws SQLException {
+        idValidatorFactory.getProductValidator().validateId(id);
+        productDAO.delete(productDAO.get(id));
+        logger.info("Product {} has been successfully deleted", id);
     }
 
     @Override

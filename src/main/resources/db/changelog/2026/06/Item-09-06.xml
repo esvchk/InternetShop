@@ -12,10 +12,16 @@
             </column>
             <column name="createDateTime" type="DATETIME"/>
             <column name="updateDateTime" type="DATETIME"/>
-            <column name="productQuantity" type="INT"/>
+            <column name="productQuantity" type="INT">
+                <constraints nullable="false"/>
+            </column>
             <column name="discount" type="INT"/>
-            <column name="product_id" type="INT"/>
-            <column name="order_id" type="INT"/>
+            <column name="product_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="order_id" type="INT">
+                <constraints nullable="true"/>
+            </column>
         </createTable>
     </changeSet>
     <changeSet id="1780989254121-2" author="esvchk">

@@ -14,10 +14,16 @@
             <column name="updateDateTime" type="DATETIME"/>
             <column name="name" type="VARCHAR(255)"/>
             <column name="price" type="DOUBLE"/>
-            <column name="info" type="VARCHAR(255)"/>
+            <column name="info" type="VARCHAR(255)">
+                <constraints nullable="true"/>
+            </column>
             <column name="isAvailable" type="BIT"/>
-            <column name="productLimit" type="INT"/>
-            <column name="category_id" type="INT"/>
+            <column name="productLimit" type="INT">
+            <constraints nullable="true"/>
+            </column>
+            <column name="category_id" type="INT">
+                <constraints nullable="true"/>
+            </column>
         </createTable>
     </changeSet>
     <changeSet id="1780989294418-2" author="esvchk">

@@ -8,14 +8,12 @@ import com.academy.course.exception.InvalidInputException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class BaseProductValidatorImpl implements BaseProductValidator,EmptyFieldValidator<String>{
 
 
-    private static final Logger logger = LogManager.getLogger(BaseProductValidator.class);
+    private static final Logger logger = LogManager.getLogger(BaseProductValidatorImpl.class);
 
     @Override
     public void nameInputValidation(String name) {
@@ -48,8 +46,10 @@ public class BaseProductValidatorImpl implements BaseProductValidator,EmptyField
     public void validateNegativeNumber(Number number) {
         validateField(String.valueOf(number));
         if (number instanceof Integer && number.intValue() < 0) {
+            logger.warn("Try to input negative Integer value {}",number);
             throw new InvalidInputException("Negative number", number.toString());
         } else if (number instanceof Double && number.doubleValue() < 0) {
+            logger.warn("Try to input negative Double value{}",number);
             throw new InvalidInputException("Negative number", number.toString());
         }
 
@@ -57,7 +57,10 @@ public class BaseProductValidatorImpl implements BaseProductValidator,EmptyField
 
     @Override
     public void validateSetProductLimit(Integer limit) {
-        validateNegativeNumber(limit);
+        if (limit < 0) {
+            logger.warn("Try to set negative limit{}",limit);
+            throw new InvalidInputException("Limit out of bounds",String.valueOf(limit));
+        }
     }
 
     @Override
@@ -82,7 +85,7 @@ public class BaseProductValidatorImpl implements BaseProductValidator,EmptyField
         validateField(String.valueOf(size));
         validateField(String.valueOf(totalSize));
         if (setToPaginate == null || setToPaginate.isEmpty()) {
-            throw new EmptyListException("Product");
+            setToPaginate = new HashSet<>();
         }
         validateNegativeNumber(offSet);
         validateNegativeNumber(size);

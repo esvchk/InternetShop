@@ -17,14 +17,17 @@ import java.util.*;
 @ToString
 public class Product extends DataEntity {
 
+
     @Column
     private String name;
+
 
     @Column
     private Double price;
 
     @Column
     private String info;
+
 
     @Column
     private Boolean isAvailable;
