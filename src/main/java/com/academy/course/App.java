@@ -97,7 +97,7 @@ public class App {
         idValidatorFactory.setCategoryDAO(categoryDAO);
         idValidatorFactory.setProductDAO(dao);
 
-        ProductService productService = new ProductServiceImpl(dao,productMapper,idValidatorFactory,baseProductValidator,businessProductValidator);
+//        ProductService productService = new ProductServiceImpl(dao,productMapper,idValidatorFactory,baseProductValidator,businessProductValidator);
 
 //        System.out.println(productService.getAllProducts());
 

@@ -10,6 +10,6 @@ public interface ProductDAO extends DAO<Product> {
     Set<Product> getAllProducts();
     Set<Product> getAllProducts(int offSet, int size);
     Long countProducts();
-    Product getByName(String name);
+    Set<Product> getByName(String name);
 
 }

@@ -1,9 +1,8 @@
-package com.academy.course.controller.productServlets;
+package com.academy.course.controller.employeeServlets;
 
-import com.academy.course.dto.ProductDTO;
+import com.academy.course.dto.EmployeeDTO;
 import com.academy.course.paginator.PaginatedResult;
-import com.academy.course.service.ProductService;
-
+import com.academy.course.service.*;
 import com.academy.course.utils.ParameterConverter;
 
 import javax.servlet.ServletContext;
@@ -15,17 +14,16 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Set;
 
-@WebServlet("/ShowProducts")
-public class ShowProducts extends HttpServlet {
-
-
-    private ProductService productService;
+@WebServlet("/ShowEmployees")
+public class ShowEmployees extends HttpServlet {
 
     @Override
-    public void init() {
+    public void init() throws ServletException {
         ServletContext context = getServletContext();
-        productService = (ProductService) context.getAttribute("productService");
+        employeeService = (EmployeeService) context.getAttribute("employeeService");
     }
+
+    private EmployeeService employeeService ;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -38,15 +36,14 @@ public class ShowProducts extends HttpServlet {
         if (request.getParameter("currentPage") != null) {
             currentPage = ParameterConverter.getIntegerParameter(request, "currentPage");
         }
+        PaginatedResult<EmployeeDTO> paginatedResult = employeeService.getAllEmployees(currentPage,pageSize);
+        Set<EmployeeDTO> employees = paginatedResult.getEntities();
+        request.setAttribute("employees", employees);
+        request.setAttribute("pageSize", paginatedResult.getPageSize());
+        request.setAttribute("currentPage", paginatedResult.getCurrentPage());
+        request.setAttribute("lastPage", paginatedResult.getLastPage());
 
-            PaginatedResult<ProductDTO> paginatedResult = productService.getPaginatedListOfProducts(currentPage,pageSize);
-            Set<ProductDTO> products = paginatedResult.getEntities();
-            request.setAttribute("products", products);
-            request.setAttribute("pageSize", paginatedResult.getPageSize());
-            request.setAttribute("currentPage", paginatedResult.getCurrentPage());
-            request.setAttribute("lastPage", paginatedResult.getLastPage());
-
-            request.getRequestDispatcher("/AllProducts.jsp")
-                    .forward(request, response);
-        }
+        request.getRequestDispatcher("/AllEmployees.jsp")
+                .forward(request, response);
     }
+}

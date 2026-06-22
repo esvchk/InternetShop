@@ -9,12 +9,12 @@ import java.util.Set;
 
 public interface ProductService {
     PaginatedResult<ProductDTO> getPaginatedListOfProducts(int offset, int size);
-    void setProductLimit(ProductDTO productDTO,Integer limit) throws SQLException;
+    void setProductLimit(Integer id,Integer limit) throws SQLException;
     void updateProduct(Integer oldValueId,ProductDTO newValue) throws SQLException;
     void addProduct(ProductDTO productDTO) throws SQLException;
     void deleteProduct(Integer id) throws SQLException;
     ProductDTO getProductById(Integer id) throws SQLException;
-    ProductDTO findProductsByName(String name);
+    Set<ProductDTO> findProductsByName(String name);
     Set<ProductDTO> getAllProducts();
     Set<ProductDTO> getAllProductsFromCategory(CategoryDTO categoryDTO) throws SQLException;
 }

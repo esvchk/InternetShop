@@ -25,7 +25,7 @@ public class BusinessProductValidatorImpl implements BusinessProductValidator, E
     public void validateFindProductByName(String name) {
         validateField(name);
         baseProductValidator.nameInputValidation(name);
-        if (productDAO.getByName(name) == null) {
+        if (productDAO.getByName(name) == null || productDAO.getByName(name).isEmpty()) {
             logger.warn("Search by name {} failed",name);
             throw new EntityNotFoundByNameException(name);
         }

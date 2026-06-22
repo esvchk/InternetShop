@@ -79,22 +79,6 @@ public class BaseProductValidatorImpl implements BaseProductValidator,EmptyField
         validateNegativeNumber(productDTO.getPrice());
     }
 
-    @Override
-    public void validatePagination(Integer offSet, Integer size, Long totalSize, Set<ProductDTO> setToPaginate) {
-        validateField(String.valueOf(offSet));
-        validateField(String.valueOf(size));
-        validateNegativeNumber(offSet);
-        validateNegativeNumber(size);
-        if (size == 0) {
-            throw new InvalidInputException(String.valueOf(size));
-        }
-        validateField(String.valueOf(totalSize));
-        if (setToPaginate == null || setToPaginate.isEmpty()) {
-            setToPaginate = Collections.EMPTY_SET;
-        }
-
-
-    }
 
     @Override
     public void validateField(String fieldName) {

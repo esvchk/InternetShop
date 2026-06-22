@@ -4,11 +4,13 @@ import com.academy.course.dao.employeeDao.EmployeeDAO;
 import com.academy.course.dao.employeeDao.EmployeeDAOImpl;
 import com.academy.course.dto.EmployeeDTO;
 import com.academy.course.dto.OrderDTO;
+import com.academy.course.dto.ProductDTO;
 import com.academy.course.mapper.*;
 import com.academy.course.mapper.factory.MapperFactory;
 import com.academy.course.model.Employee;
 import com.academy.course.model.Order;
 
+import com.academy.course.paginator.PaginatedResult;
 import com.academy.course.service.validator.*;
 import com.academy.course.utils.Role;
 import org.apache.logging.log4j.LogManager;
@@ -18,7 +20,7 @@ import javax.xml.bind.ValidationException;
 import java.sql.SQLException;
 import java.util.*;
 
-public class EmployeeServiceImpl implements EmployeeService {
+public class EmployeeServiceImpl extends PaginatedResult <EmployeeDTO> implements EmployeeService {
 
     private static final Logger logger = LogManager.getLogger(EmployeeServiceImpl.class);
     private final EmployeeDAO employeeDAO;
@@ -27,14 +29,17 @@ public class EmployeeServiceImpl implements EmployeeService {
     private final IdValidatorFactory factory;
     private final OrderService orderService;
     private final BusinessEmployeeValidator businessEmployeeValidator;
+    private final BasePaginationValidation basePaginationValidation;
 
-    public EmployeeServiceImpl(EmployeeDAO employeeDAO, BaseEmployeeValidator baseEmployeeValidator, EmployeeMapper employeeMapper, IdValidatorFactory factory, OrderService orderService, BusinessEmployeeValidator businessEmployeeValidator) {
+    public EmployeeServiceImpl(EmployeeDAO employeeDAO, BaseEmployeeValidator baseEmployeeValidator, EmployeeMapper employeeMapper, IdValidatorFactory factory, OrderService orderService, BusinessEmployeeValidator businessEmployeeValidator, BasePaginationValidation basePaginationValidation) {
+        super(EmployeeDTO.class);
         this.employeeDAO = employeeDAO;
         this.baseEmployeeValidator = baseEmployeeValidator;
         this.employeeMapper = employeeMapper;
         this.factory = factory;
         this.orderService = orderService;
         this.businessEmployeeValidator = businessEmployeeValidator;
+        this.basePaginationValidation = basePaginationValidation;
     }
 
 
@@ -50,9 +55,19 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Set<EmployeeDTO> getAllEmployeesWithOrdersAndItems() throws ValidationException {
+    public Set<EmployeeDTO> getAllEmployees() throws ValidationException {
         businessEmployeeValidator.getAllEmployeesValidation();
         return employeeMapper.mapToSetDTOS(employeeDAO.getAllEmployees());
+    }
+
+    @Override
+    public PaginatedResult<EmployeeDTO> getAllEmployees(int offset, int size) {
+        Long totalSize = employeeDAO.countProducts();
+        Set<EmployeeDTO> employees =
+                employeeMapper.mapToSetDTOS(employeeDAO.getAllEmployees((offset - 1) * size, size));
+        basePaginationValidation.validatePagination(offset,size,totalSize,employees.size());
+        logger.info("Successful getting pages of products");
+        return paginate(offset,size,totalSize,employees);
     }
 
     @Override

@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="com.academy.course.dto.ProductDTO" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Set" %>
@@ -23,33 +24,25 @@
         </tr>
         </thead>
         <tbody>
-        <%
-            ProductDTO product = (ProductDTO) request.getAttribute("products");
-            if (product != null && product.getId() != null) {
-        %>
-        <tr>
-            <td><%= product.getId() %></td>
-            <td><%= product.getName() %></td>
-            <td><%= product.getPrice() %></td>
-            <td><%= product.getInfo() %></td>
-            <td><%= product.getIsAvailable() %></td>
-            <td><%= product.getProductLimit() %></td>
-            <td>
-                <a href="UpdateProduct?id=<%= product.getId() %>">Edit</a>
-                &nbsp;&nbsp;&nbsp;
-                <a href="DeleteProduct?id=<%= product.getId() %>">Delete</a>
-            </td>
-        </tr>
-        <%
+        <c:if test="${products != null}">
+        <c:out value="Product not found"/>
+        </c:if>
 
-        } else {
-        %>
-        <tr>
-            <td colspan="5">No operators found</td>
-        </tr>
-        <%
-            }
-        %>
+        <c:forEach  var="product" items="${products}">
+            <tr>
+                <td><c:out value="${product.id}"/></td>
+                <td><c:out value="${product.name}"/></td>
+                <td><c:out value="${product.price}"/></td>
+                <td><c:out value="${product.info}"/></td>
+                <td><c:out value="${product.isAvailable}"/></td>
+                <td><c:out value="${product.productLimit}"/></td>
+                <td>
+                    <a href="UpdateProduct?id=${product.id}">Edit</a>
+                    &nbsp;&nbsp;&nbsp;
+                    <a href="DeleteProduct?id=${product.id}">Delete</a>
+                </td>
+            </tr>
+        </c:forEach>
         </tbody>
     </table>
 </head>

@@ -14,5 +14,4 @@ public interface BaseProductValidator {
     void validateSetProductLimit(Integer limit);
     void validateUpdatingProduct(ProductDTO newValue);
     void validateCreationProduct(ProductDTO productDTO);
-    void validatePagination(Integer offSet, Integer size, Long totalSize, Set<ProductDTO> setToPaginate);
 }

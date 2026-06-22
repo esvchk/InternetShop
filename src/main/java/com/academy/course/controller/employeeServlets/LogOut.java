@@ -1,4 +1,4 @@
-package com.academy.course.controller;
+package com.academy.course.controller.employeeServlets;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

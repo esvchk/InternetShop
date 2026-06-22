@@ -3,6 +3,7 @@ package com.academy.course.dao.employeeDao;
 
 import com.academy.course.dao.DAOImpl;
 import com.academy.course.model.Employee;
+import com.academy.course.model.Product;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -25,6 +26,19 @@ public class EmployeeDAOImpl extends DAOImpl<Employee> implements EmployeeDAO {
             return (Employee) query.getSingleResult();
         }
             return null;
+    }
+
+    @Override
+    public Set<Employee> getAllEmployees(int offSet, int size) {
+        return new HashSet<>(getEm().createQuery("FROM Employee employee ORDER BY employee.id", Employee.class)
+                .setFirstResult(offSet)
+                .setMaxResults(size)
+                .getResultList());
+    }
+
+    @Override
+    public Long countProducts() {
+        return getEm().createQuery("SELECT COUNT(employee.id) from Employee employee", Long.class).getSingleResult();
     }
 
     @Override

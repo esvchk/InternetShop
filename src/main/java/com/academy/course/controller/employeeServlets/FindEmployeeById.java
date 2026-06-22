@@ -1,6 +1,6 @@
-package com.academy.course.controller;
+package com.academy.course.controller.employeeServlets;
 
-import com.academy.course.service.*;
+import com.academy.course.service.EmployeeService;
 import com.academy.course.utils.ParameterConverter;
 
 import javax.servlet.ServletContext;
@@ -11,9 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
-@WebServlet("/Authorization")
-public class Authorization extends HttpServlet {
 
+@WebServlet("/FindEmployeeById")
+public class FindEmployeeById extends HttpServlet {
     private EmployeeService employeeService;
 
     @Override
@@ -22,18 +22,14 @@ public class Authorization extends HttpServlet {
         employeeService = (EmployeeService) context.getAttribute("employeeService");
     }
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String login = ParameterConverter.getStringParameter(request,"login");
-        String passWord = ParameterConverter.getStringParameter(request, "passWord");
-
-        String context = request.getContextPath();
-
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Integer id = ParameterConverter.getIntegerParameter(request,"id");
         try {
-            employeeService.login(login, passWord);
-        } catch (NoSuchFieldException | SQLException e) {
+            request.setAttribute("employee",employeeService.findEmployeeById(id));
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        response.sendRedirect(context + "/ShowProducts");
+        request.getRequestDispatcher("/FindEmployeeById.jsp")
+                .forward(request,response);
     }
 }

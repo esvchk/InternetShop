@@ -51,13 +51,15 @@ public class AppContextListener implements ServletContextListener {
         BaseProductValidator baseProductValidator = new BaseProductValidatorImpl();
         BusinessProductValidator businessProductValidator = new BusinessProductValidatorImpl(baseProductValidator, productDAO);
 
+        BasePaginationValidation basePaginationValidation = new BasePaginationValidationImpl();
+
 
         ProductService productService = new ProductServiceImpl(
                 productDAO
                 , MapperFactory.getProductMapper()
                 , idValidatorFactory
                 , baseProductValidator
-                , businessProductValidator);
+                , businessProductValidator,basePaginationValidation);
 
         ItemService itemService = new ItemServiceImpl(
                 itemDAO
@@ -86,7 +88,8 @@ public class AppContextListener implements ServletContextListener {
                 , MapperFactory.getEmployeeMapper()
                 , idValidatorFactory
                 , orderService
-                , businessEmployeeValidator);
+                , businessEmployeeValidator
+                , basePaginationValidation);
 
         CategoryService categoryService = new CategoryServiceImpl(
                 categoryDAO

@@ -103,7 +103,7 @@ public class OrderServiceImpl implements OrderService {
         }
 
         if (product.getProductLimit() != null)
-            productService.setProductLimit(productMapper.mapToDTO(product),
+            productService.setProductLimit(product.getId(),
                     product.getProductLimit() - quantity);
 
         countAmountOfAllItems(orderDTO);

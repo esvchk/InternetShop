@@ -1,9 +1,6 @@
-package com.academy.course.controller;
+package com.academy.course.controller.employeeServlets;
 
-import com.academy.course.dto.EmployeeDTO;
 import com.academy.course.service.EmployeeService;
-import com.academy.course.service.EmployeeServiceImpl;
-import com.academy.course.service.ProductService;
 import com.academy.course.utils.ParameterConverter;
 import com.academy.course.utils.Role;
 

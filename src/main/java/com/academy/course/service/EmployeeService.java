@@ -3,6 +3,8 @@ package com.academy.course.service;
 import com.academy.course.dto.EmployeeDTO;
 import com.academy.course.dto.OrderDTO;
 
+import com.academy.course.model.Employee;
+import com.academy.course.paginator.PaginatedResult;
 import com.academy.course.utils.Role;
 
 import javax.xml.bind.ValidationException;
@@ -12,7 +14,8 @@ import java.util.Set;
 public interface EmployeeService {
 
     void deleteOrderOfEmployee(EmployeeDTO employeeDTO, OrderDTO orderDTO) throws SQLException;
-    Set<EmployeeDTO> getAllEmployeesWithOrdersAndItems() throws ValidationException;
+    Set<EmployeeDTO> getAllEmployees() throws ValidationException;
+    PaginatedResult<EmployeeDTO> getAllEmployees(int offset, int size);
     EmployeeDTO findEmployeeById(Integer id) throws SQLException;
     EmployeeDTO findEmployeeByLogin(String login);
     void addNewOrderToEmployee(EmployeeDTO employeeDTO) throws SQLException;

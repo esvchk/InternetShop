@@ -39,6 +39,7 @@
             <td><c:out value="${product.productLimit}"/></td>
             <td><a href="${pageContext.request.contextPath}/UpdateProduct?id=${product.id}">Edit</a></td>
             <td><a href="${pageContext.request.contextPath}/DeleteProduct?id=${product.id}">Delete</a></td>
+            <td><a href="${pageContext.request.contextPath}/SetLimit?id=${product.id}">Set Limit</a></td>
         </tr>
     </c:forEach>
     </tbody>
