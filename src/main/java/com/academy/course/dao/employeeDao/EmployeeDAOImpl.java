@@ -7,6 +7,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import java.util.*;
 
 public class EmployeeDAOImpl extends DAOImpl<Employee> implements EmployeeDAO {
@@ -18,14 +19,13 @@ public class EmployeeDAOImpl extends DAOImpl<Employee> implements EmployeeDAO {
 
     @Override
     public Employee getEmployeeByLogin(String login) {
-        Query query = getEm().createQuery("select employee from Employee employee where employee.login LIKE :login", Employee.class);
+        Query query = getEm().createQuery("from Employee employee WHERE employee.login =: login", Employee.class);
         query.setParameter("login",login);
         if (!query.getResultList().isEmpty()) {
             return (Employee) query.getSingleResult();
         }
             return null;
     }
-
 
     @Override
     public Set<Employee> getAllEmployees() {

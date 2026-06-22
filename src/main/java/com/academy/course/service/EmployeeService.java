@@ -16,7 +16,7 @@ public interface EmployeeService {
     EmployeeDTO findEmployeeById(Integer id) throws SQLException;
     EmployeeDTO findEmployeeByLogin(String login);
     void addNewOrderToEmployee(EmployeeDTO employeeDTO) throws SQLException;
-    boolean registerEmployee(EmployeeDTO employeeDTO, String pass, Role role) throws SQLException;
+    boolean registerEmployee(String login, String pass, Role role) throws SQLException;
     void updateEmployee(Integer oldValueId, EmployeeDTO newValue) throws SQLException;
     void deleteEmployee(Integer employeeId) throws SQLException;
     boolean login(String login,String passWord) throws NoSuchFieldException, SQLException;

@@ -9,13 +9,13 @@
 <html>
 <head>
     <title>Authorization</title>
-    <form action = "LoginCustomer" method = "post">
+    <form action = "Authorization" method = "post">
         Login: <input name = "login" type = "text"/><br/>
         Password: <input name = "passWord" type = "text"/><br/>
         <input type = "submit">
     </form>
 
-    <a href="RegisterCustomer.jsp">Registration</a>
+    <a href="RegisterEmployee.jsp">Registration</a>
 </head>
 <body>
 

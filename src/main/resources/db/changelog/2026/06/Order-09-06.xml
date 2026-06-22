@@ -12,9 +12,7 @@
             </column>
             <column name="createDateTime" type="DATETIME"/>
             <column name="updateDateTime" type="DATETIME"/>
-            <column name="paymentData" type="VARCHAR(255)">
-                <constraints nullable="false"/>
-            </column>
+            <column name="paymentData" type="VARCHAR(255)"/>
             <column name="totalCost" type="DOUBLE"/>
             <column name="employee_id" type="INT">
                 <constraints nullable="false"/>

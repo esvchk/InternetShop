@@ -12,9 +12,15 @@
             </column>
             <column name="createDateTime" type="DATETIME"/>
             <column name="updateDateTime" type="DATETIME"/>
-            <column name="login" type="VARCHAR(255)"/>
-            <column name="passWord" type="VARCHAR(255)"/>
-            <column name="role" type="VARCHAR(255)"/>
+            <column name="login" type="VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_bin" >
+                <constraints nullable="false"/>
+            </column>
+            <column name="passWord" type="VARCHAR(255)">
+            <constraints nullable="false" />
+            </column>
+            <column name="role" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
     </changeSet>
 

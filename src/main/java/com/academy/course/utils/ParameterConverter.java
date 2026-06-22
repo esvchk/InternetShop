@@ -23,10 +23,6 @@ public class ParameterConverter {
         return Double.parseDouble(request.getParameter(paramName));
     }
 
-    public static LocalDate getDateParameter(HttpServletRequest request,
-                                             String paramName){
-        return LocalDate.parse(request.getParameter(paramName));
-    }
 
     public static String getStringParameter(HttpServletRequest request,
                                             String paramName){

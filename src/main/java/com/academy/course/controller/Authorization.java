@@ -1,22 +1,26 @@
 package com.academy.course.controller;
 
 import com.academy.course.service.*;
-import com.academy.course.service.validator.IdValidatorFactory;
 import com.academy.course.utils.ParameterConverter;
 
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
-@WebServlet("/LoginCustomer")
-public class LoginCustomer extends HttpServlet {
+@WebServlet("/Authorization")
+public class Authorization extends HttpServlet {
 
-
-
-    private ItemService itemService;
     private EmployeeService employeeService;
+
+    @Override
+    public void init() throws ServletException {
+        ServletContext context = getServletContext();
+        employeeService = (EmployeeService) context.getAttribute("employeeService");
+    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {

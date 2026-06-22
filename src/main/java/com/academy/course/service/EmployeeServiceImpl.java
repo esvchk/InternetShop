@@ -84,12 +84,12 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public boolean registerEmployee(EmployeeDTO employeeDTO, String pass, Role role) throws SQLException {
+    public boolean registerEmployee(String login, String pass, Role role) throws SQLException {
 
-        businessEmployeeValidator.registrationValidation(employeeDTO, pass, role);
+        businessEmployeeValidator.registrationValidation(login, pass, role);
 
         Employee employee = Employee.builder()
-                .login(employeeDTO.getLogin())
+                .login(login)
                 .role(role)
                 .passWord(PasswordHasher.hashPass(pass))
                 .build();
@@ -103,7 +103,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         employeeDAO.save(employee);
 
-        logger.info("Employee {} successfully registered",employeeDTO);
+        logger.info("Employee {} successfully registered",login);
         return true;
 
     }

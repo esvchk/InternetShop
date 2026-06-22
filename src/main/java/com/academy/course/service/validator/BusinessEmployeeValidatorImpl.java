@@ -22,9 +22,9 @@ public class BusinessEmployeeValidatorImpl implements BusinessEmployeeValidator,
     }
 
     @Override
-    public void registrationValidation(EmployeeDTO employeeDTO, String password, Role role) {
-        baseEmployeeValidator.loginInputValidator(employeeDTO.getLogin());
-        validateExistingLogin(employeeDTO.getLogin());
+    public void registrationValidation(String login, String password, Role role) {
+        baseEmployeeValidator.loginInputValidator(login);
+        validateExistingLogin(login);
         baseEmployeeValidator.passwordInputValidator(password);
         validateField(role.toString());
     }
@@ -51,7 +51,7 @@ public class BusinessEmployeeValidatorImpl implements BusinessEmployeeValidator,
     @Override
     public void authorizationValidation(String login, String password) throws NoSuchFieldException {
         validateField(login);
-        if (employeeDAO.getEmployeeByLogin(login) == null) {
+        if (employeeDAO.getEmployeeByLogin(login) == null ) {
             logger.warn("Employee is not exists{}", login);
             throw new WrongLoginException("Wrong Login");
         }

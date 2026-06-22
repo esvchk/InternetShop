@@ -20,7 +20,7 @@ public class AuthFilter implements Filter {
         HttpSession session = httpRequest.getSession(false);
 
         if (session == null || session.getAttribute("loggedIn") == null) {
-            httpResponse.sendRedirect("/CustomerPage.jsp");
+            httpResponse.sendRedirect("/AuthorizationForm.jsp");
             return;
         }
 

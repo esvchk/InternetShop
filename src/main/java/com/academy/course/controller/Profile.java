@@ -16,7 +16,7 @@ public class Profile extends HttpServlet {
         if (session != null && session.getAttribute("loggedIn") != null) {
             String username = (String) session.getAttribute("username");
         } else {
-            resp.sendRedirect("/CustomerPage.jsp");
+            resp.sendRedirect("/AuthorizationForm.jsp");
         }
     }
 }

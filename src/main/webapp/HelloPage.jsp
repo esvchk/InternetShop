@@ -18,9 +18,9 @@
 
     <a href="FindProductByName.jsp">Find Product By Name</a>
 
-    <a href="CustomerPage.jsp">Authorization</a>
+    <a href="AuthorizationForm.jsp">Authorization</a>
 
-    <a href="RegisterCustomer.jsp">Registration</a>
+    <a href="RegisterEmployee.jsp">Registration</a>
 
     <a href="ShowCustomers">Show Customers</a>
 
