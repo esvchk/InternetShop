@@ -15,7 +15,7 @@ public interface OrderService {
     OrderDTO findOrderById(Integer orderId) throws SQLException;
     Set<OrderDTO> getAllOrdersWithItems();
     void buyOrder(OrderDTO orderDTO) throws SQLException;
-    void deleteOrder(OrderDTO orderDTO) throws SQLException;
+    void deleteOrder(Integer id) throws SQLException;
     void addProductToOrder(ProductDTO productDTO, OrderDTO orderDTO, Integer quantity) throws SQLException;
     void deleteItemFromOrder(ItemDTO itemDTO,Integer orderId,Integer quantity) throws SQLException;
     Double countAmountOfAllItems(OrderDTO orderDTO) throws SQLException;

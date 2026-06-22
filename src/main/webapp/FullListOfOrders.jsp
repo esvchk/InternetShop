@@ -40,8 +40,7 @@
             <td><c:out value="${order.paymentData}"/></td>
             <td><c:out value="${order.totalCost}"/></td>
             <td><c:out value="${order.isBought}"/></td>
-            <td><a href="${pageContext.request.contextPath}/UpdateEmployee?id=${product.id}">Edit</a></td>
-            <td><a href="${pageContext.request.contextPath}/DeleteEmployee?id=${product.id}">Delete</a></td>
+            <td><a href="${pageContext.request.contextPath}/DeleteOrder?id=${order.id}">Delete</a></td>
         </tr>
     </c:forEach>
     </tbody>

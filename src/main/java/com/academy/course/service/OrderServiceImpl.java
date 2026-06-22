@@ -73,10 +73,10 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void deleteOrder(OrderDTO orderDTO) throws SQLException {
-        factory.getOrderValidator().validateId(orderDTO.getId());
-        orderDAO.delete(orderDAO.get(orderDTO.getId()));
-        logger.info("Deleting order with id{} successfully", orderDTO.getId());
+    public void deleteOrder(Integer id) throws SQLException {
+        factory.getOrderValidator().validateId(id);
+        orderDAO.delete(orderDAO.get(id));
+        logger.info("Deleting order with id {} successfully", id);
     }
 
     @Override
