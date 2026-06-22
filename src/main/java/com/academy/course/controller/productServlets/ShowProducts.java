@@ -33,22 +33,24 @@ public class ShowProducts extends HttpServlet {
         int currentPage = 1;
         int pageSize = 5;
         HttpSession session = request.getSession();
+        String reqValue = request.getParameter("pageSize");
+        if (reqValue != null) {
+            pageSize = ParameterConverter.getIntegerParameter(request,"pageSize");
+            session.setAttribute("pageSize",pageSize);
+        }
         if (request.getParameter("currentPage") != null) {
-            currentPage = ParameterConverter.getIntegerParameter(request,"currentPage");
+            currentPage = ParameterConverter.getIntegerParameter(request, "currentPage");
         }
 
+            PaginatedResult<ProductDTO> paginatedResult = productService.getPaginatedListOfProducts(currentPage,pageSize);
+            Set<ProductDTO> products = paginatedResult.getEntities();
+            request.setAttribute("products", products);
+            request.setAttribute("pageSize", paginatedResult.getPageSize());
+            request.setAttribute("currentPage", paginatedResult.getCurrentPage());
+            request.setAttribute("lastPage", paginatedResult.getLastPage());
 
+            request.getRequestDispatcher("/AllProducts.jsp")
+                    .forward(request, response);
+        }
 
-        PaginatedResult<ProductDTO> paginatedResult = productService.getPaginatedListOfProducts(currentPage, pageSize);
-        Set<ProductDTO> products = paginatedResult.getEntities();
-        request.setAttribute("products", products);
-        session.setAttribute("pageSize",paginatedResult.getPageSize());
-        request.setAttribute("currentPage", paginatedResult.getCurrentPage());
-        request.setAttribute("lastPage", paginatedResult.getLastPage());
-
-        request.getRequestDispatcher("/AllProducts.jsp")
-                .forward(request, response);
     }
-
-
-}

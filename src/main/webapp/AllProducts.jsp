@@ -43,13 +43,26 @@
         </tr>
     </c:forEach>
     </tbody>
-    <c:set var="records" value="${sessionScope.pageSize}" scope="session"/>
-    <c:forEach var="records" begin="${5}" step="${10}" end="${20}">
-        <a href="${pageContext.request.contextPath}/ShowProducts?pageSize=${records}"> ${records}</a>
+
+    <c:out value="Choose limit of elements on page"/>
+    <br>
+    <c:forEach var="number" begin="${5}" step="${5}" end="${20}">
+        <c:choose>
+            <c:when test="${number == pageSize}">
+                <span> ${number}</span>
+            </c:when>
+            <c:otherwise>
+                <a href="${pageContext.request.contextPath}/ShowProducts?currentPage=${currentPage}&pageSize=${number}"> ${number}</a>
+            </c:otherwise>
+        </c:choose>
     </c:forEach>
 
+<br>
+<br>
+<br>
+
     <c:if test="${currentPage > 1 }">
-        <a href="${pageContext.request.contextPath}/ShowProducts?currentPage=${currentPage - 1}&pageSize=${records}">Back</a>
+        <a href="${pageContext.request.contextPath}/ShowProducts?currentPage=${currentPage - 1}&pageSize=${pageSize}">Back</a>
     </c:if>
 
 
@@ -71,13 +84,13 @@
                 </span>
             </c:when>
             <c:otherwise>
-                <a href="${pageContext.request.contextPath}/ShowProducts?currentPage=${i}"> ${i}</a>
+                <a href="${pageContext.request.contextPath}/ShowProducts?currentPage=${i}&pageSize=${pageSize}"> ${i}</a>
             </c:otherwise>
         </c:choose>
     </c:forEach>
 
     <c:if test="${currentPage < lastPage}">
-        <a href="${pageContext.request.contextPath}/ShowProducts?currentPage=${currentPage + 1}&pageSize=${quantityOfRecords}">Next</a>
+        <a href="${pageContext.request.contextPath}/ShowProducts?currentPage=${currentPage + 1}&pageSize=${pageSize}">Next</a>
     </c:if>
 
 </table>
