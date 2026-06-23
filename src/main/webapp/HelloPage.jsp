@@ -33,6 +33,8 @@
     <a href="FullListOfEmployees">Full list of employees</a>
     <br>
     <a href="FullListOfOrders">Full list of orders</a>
+    <br>
+    <a href="GetCurrentOrder">Order Page</a>
 
 </head>
 <body>

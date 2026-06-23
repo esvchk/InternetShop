@@ -80,13 +80,13 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void addProductToOrder(ProductDTO productDTO,
-                                  OrderDTO orderDTO, Integer quantity) throws SQLException {
-        factory.getProductValidator().validateId(productDTO.getId());
-        factory.getOrderValidator().validateId(orderDTO.getId());
-        baseOrderValidator.validateAddProductToOrder(productDTO, orderDTO, quantity);
-        Order order = orderDAO.get(orderDTO.getId());
-        Product product = productDAO.get(productDTO.getId());
+    public void addProductToOrder(Integer productId,
+                                  Integer orderId, Integer quantity) throws SQLException {
+        factory.getProductValidator().validateId(productId);
+        factory.getOrderValidator().validateId(orderId);
+        businessOrderValidator.validateAddProductToOrder(productId, orderId, quantity);
+        Order order = orderDAO.get(orderId);
+        Product product = productDAO.get(productId);
         Optional<Item> items = order.getItems().stream()
                 .filter(item1 -> item1.getProduct().getId().equals(product.getId()))
                 .findFirst();
@@ -106,12 +106,12 @@ public class OrderServiceImpl implements OrderService {
             productService.setProductLimit(product.getId(),
                     product.getProductLimit() - quantity);
 
-        countAmountOfAllItems(orderDTO);
+        countAmountOfAllItems(orderMapper.mapToDTO(orderDAO.get(orderId)));
 
         orderDAO.update(order);
 
         logger.info("Product {} has been successfully added to order {} with quantity {} "
-                , productDTO, orderDTO, quantity);
+                , product, order, quantity);
     }
 
     @Override

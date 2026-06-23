@@ -16,6 +16,7 @@
     </form>
 
     <a href="RegisterEmployee.jsp">Registration</a>
+    <a href="HelloPage.jsp">Home</a>
 </head>
 <body>
 

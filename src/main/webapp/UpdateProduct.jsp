@@ -38,6 +38,7 @@
 
 <a href="ShowProducts">Back to Product List</a>
 
+<a href="HelloPage.jsp">Home</a>
 </body>
 
 </html>

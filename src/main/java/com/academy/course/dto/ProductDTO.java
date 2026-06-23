@@ -20,6 +20,8 @@ public class ProductDTO {
 
     private Boolean isAvailable;
 
+    private CategoryDTO categoryDTO;
+
 
 
 }

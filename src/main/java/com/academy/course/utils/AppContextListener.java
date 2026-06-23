@@ -46,7 +46,7 @@ public class AppContextListener implements ServletContextListener {
         BusinessItemValidator businessItemValidator = new BusinessItemValidatorImpl(itemDAO, orderDAO);
 
         BaseOrderValidator baseOrderValidator = new BaseOrderValidatorImpl();
-        BusinessOrderValidator businessOrderValidator = new BusinessOrderValidatorImpl(orderDAO);
+        BusinessOrderValidator businessOrderValidator = new BusinessOrderValidatorImpl(orderDAO,productDAO);
 
         BaseProductValidator baseProductValidator = new BaseProductValidatorImpl();
         BusinessProductValidator businessProductValidator = new BusinessProductValidatorImpl(baseProductValidator, productDAO);
@@ -89,7 +89,8 @@ public class AppContextListener implements ServletContextListener {
                 , idValidatorFactory
                 , orderService
                 , businessEmployeeValidator
-                , basePaginationValidation);
+                , basePaginationValidation
+                , MapperFactory.getOrderMapper());
 
         CategoryService categoryService = new CategoryServiceImpl(
                 categoryDAO
@@ -99,6 +100,8 @@ public class AppContextListener implements ServletContextListener {
                 , baseCategoryValidator
                 , idValidatorFactory);
 
+        TablesService tablesService = new TablesServiceImpl(productService,employeeService);
+
 
         ServletContext context = event.getServletContext();
 
@@ -107,6 +110,7 @@ public class AppContextListener implements ServletContextListener {
         context.setAttribute("orderService", orderService);
         context.setAttribute("employeeService", employeeService);
         context.setAttribute("categoryService", categoryService);
+        context.setAttribute("tablesService",tablesService);
 
         logger.info("Initialization of all services successful");
 

@@ -21,6 +21,6 @@
     </form>
 </head>
 <body>
-
+<a href="HelloPage.jsp">Home</a>
 </body>
 </html>

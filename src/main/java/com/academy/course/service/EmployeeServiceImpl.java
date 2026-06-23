@@ -1,12 +1,9 @@
 package com.academy.course.service;
 
 import com.academy.course.dao.employeeDao.EmployeeDAO;
-import com.academy.course.dao.employeeDao.EmployeeDAOImpl;
 import com.academy.course.dto.EmployeeDTO;
 import com.academy.course.dto.OrderDTO;
-import com.academy.course.dto.ProductDTO;
 import com.academy.course.mapper.*;
-import com.academy.course.mapper.factory.MapperFactory;
 import com.academy.course.model.Employee;
 import com.academy.course.model.Order;
 
@@ -30,8 +27,9 @@ public class EmployeeServiceImpl extends PaginatedResult <EmployeeDTO> implement
     private final OrderService orderService;
     private final BusinessEmployeeValidator businessEmployeeValidator;
     private final BasePaginationValidation basePaginationValidation;
+    private final OrderMapper orderMapper;
 
-    public EmployeeServiceImpl(EmployeeDAO employeeDAO, BaseEmployeeValidator baseEmployeeValidator, EmployeeMapper employeeMapper, IdValidatorFactory factory, OrderService orderService, BusinessEmployeeValidator businessEmployeeValidator, BasePaginationValidation basePaginationValidation) {
+    public EmployeeServiceImpl(EmployeeDAO employeeDAO, BaseEmployeeValidator baseEmployeeValidator, EmployeeMapper employeeMapper, IdValidatorFactory factory, OrderService orderService, BusinessEmployeeValidator businessEmployeeValidator, BasePaginationValidation basePaginationValidation, OrderMapper orderMapper) {
         super(EmployeeDTO.class);
         this.employeeDAO = employeeDAO;
         this.baseEmployeeValidator = baseEmployeeValidator;
@@ -40,6 +38,7 @@ public class EmployeeServiceImpl extends PaginatedResult <EmployeeDTO> implement
         this.orderService = orderService;
         this.businessEmployeeValidator = businessEmployeeValidator;
         this.basePaginationValidation = basePaginationValidation;
+        this.orderMapper = orderMapper;
     }
 
 
@@ -159,6 +158,15 @@ public class EmployeeServiceImpl extends PaginatedResult <EmployeeDTO> implement
             }
         }
         return totalAmount;
+    }
+
+    @Override
+    public OrderDTO getCurrentOrderOfEmployee(String login) {
+        Employee employee = employeeDAO.getEmployeeByLogin(login);
+        Order currentOrder = employee.getOrders().stream()
+                .filter(order -> order.getIsBought() == false)
+                .findFirst().get();
+        return orderMapper.mapToDTO(currentOrder);
     }
 
 }

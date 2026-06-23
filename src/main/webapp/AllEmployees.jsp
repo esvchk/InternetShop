@@ -84,4 +84,5 @@
 
 </table>
 </body>
+<a href="HelloPage.jsp">Home</a>
 </html>

@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 @WebServlet("/Authorization")
@@ -28,6 +29,10 @@ public class Authorization extends HttpServlet {
         String passWord = ParameterConverter.getStringParameter(request, "passWord");
 
         String context = request.getContextPath();
+
+
+        HttpSession session  = request.getSession();
+        session.setAttribute("login",login);
 
         try {
             employeeService.login(login, passWord);

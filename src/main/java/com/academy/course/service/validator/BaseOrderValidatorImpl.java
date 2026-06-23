@@ -25,27 +25,7 @@ public class BaseOrderValidatorImpl implements BaseOrderValidator, EmptyFieldVal
         }
     }
 
-    @Override
-    public void validateAddProductToOrder(ProductDTO productDTO, OrderDTO orderDTO, Integer quantity) {
-        validateField(String.valueOf(quantity));
-        List<String> errors = new ArrayList<>();
-        if (orderDTO.getIsBought() == true) {
-            logger.warn("Try to change bought order");
-            errors.add("Try to change bought order");
-        }
-        if (productDTO.getIsAvailable() == false) {
-            logger.warn("Try to add product unavailable product{} to order{}", productDTO, orderDTO);
-            errors.add("This product has been baned" + productDTO);
-        }
-        if (productDTO.getProductLimit() != null && productDTO.getProductLimit() < quantity) {
-            logger.warn("Attempt to add quantity {} of products with a limit {}", quantity, productDTO.getProductLimit());
-            errors.add("Product limit " + productDTO.getProductLimit() + " out of quantity " + quantity);
-        }
-        if (!errors.isEmpty()) {
-            String message = String.join(",",errors);
-            throw new ProductAddingException(message);
-        }
-    }
+
 
     @Override
     public void validateDeleteItemFromOrder(ItemDTO itemDTO, Integer orderId, Integer quantity) {
@@ -59,7 +39,7 @@ public class BaseOrderValidatorImpl implements BaseOrderValidator, EmptyFieldVal
 
     @Override
     public void validateField(String fieldName) {
-        if (fieldName == null || fieldName.trim().isEmpty()) {
+        if (fieldName.equals("null") || fieldName.trim().isEmpty()) {
             logger.warn("Empty field{}", fieldName);
             throw new EmptyFieldException(fieldName);
         }

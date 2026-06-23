@@ -14,6 +14,6 @@
     <a href="AuthorizationForm.jsp">Authorization</a>
 </head>
 <body>
-
+<a href="HelloPage.jsp">Home</a>
 </body>
 </html>

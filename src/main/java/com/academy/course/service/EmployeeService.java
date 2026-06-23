@@ -24,5 +24,6 @@ public interface EmployeeService {
     void deleteEmployee(Integer employeeId) throws SQLException;
     boolean login(String login,String passWord) throws NoSuchFieldException, SQLException;
     Double getTotalAmountOfOrders() throws SQLException;
+    OrderDTO getCurrentOrderOfEmployee(String login);
 
 }

@@ -16,6 +16,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.sql.SQLException;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Set;
 
 public class ProductServiceImpl extends PaginatedResult<ProductDTO> implements ProductService {
@@ -37,6 +38,18 @@ public class ProductServiceImpl extends PaginatedResult<ProductDTO> implements P
         this.baseProductValidator = baseProductValidator;
         this.businessProductValidator = businessProductValidator;
         this.basePaginationValidation = basePaginationValidation;
+    }
+
+    @Override
+    public Set<ProductDTO> getAvailableProducts() {
+        Set<Product> availableProducts = new HashSet<>();
+        Set<Product> allProducts = productDAO.getAllProducts();
+        for (Product product : allProducts){
+            if (product.getIsAvailable()) {
+                availableProducts.add(product);
+            }
+        }
+        return productMapper.mapToSetDTOS(availableProducts);
     }
 
     @Override

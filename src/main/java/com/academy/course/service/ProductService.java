@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.Set;
 
 public interface ProductService {
+    Set<ProductDTO> getAvailableProducts();
     PaginatedResult<ProductDTO> getPaginatedListOfProducts(int offset, int size);
     void setProductLimit(Integer id,Integer limit) throws SQLException;
     void updateProduct(Integer oldValueId,ProductDTO newValue) throws SQLException;

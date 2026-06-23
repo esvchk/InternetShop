@@ -28,6 +28,7 @@
                  value="${worker.role}" required><br>
     <input type="submit">
 </form>
+<a href="HelloPage.jsp">Home</a>
 <br>
 <%--<a href="ShowProducts">Back to Product List</a>--%>
 

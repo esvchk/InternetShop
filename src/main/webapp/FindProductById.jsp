@@ -40,6 +40,6 @@
            </tr>
         </tbody>
     </table>
-
+    <a href="HelloPage.jsp">Home</a>
 </head>
 </html>
