@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @MappedSuperclass
+
 public class DataEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

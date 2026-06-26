@@ -14,9 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+
 
 @WebServlet("/GetCurrentOrder")
 public class GetCurrentOrder extends HttpServlet {
@@ -31,21 +29,10 @@ public class GetCurrentOrder extends HttpServlet {
 
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, IOException {
         HttpSession session = request.getSession(false);
         String login = (String) session.getAttribute("login");
-        Set<Object> orderAndProducts = tablesService.getPairedList(login);
-        OrderDTO order = (OrderDTO) orderAndProducts.stream()
-                .filter(object -> object instanceof OrderDTO)
-                        .findFirst().get();
-        for (ProductDTO product : )
-        ProductDTO product = (ProductDTO) orderAndProducts.stream()
-                        .filter(object -> object instanceof ProductDTO)
-                                .findFirst().get();
-        Set<ProductDTO> productsDTO = new HashSet<>();
-        productsDTO.add(product);
-        request.setAttribute("products",productsDTO);
-        request.setAttribute("order",order);
+        request.setAttribute("productsAndOrder",tablesService.getPairedEntity(login));
 
         request.getRequestDispatcher("/OrderPage.jsp")
                 .forward(request, response);

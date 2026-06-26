@@ -10,6 +10,7 @@ import com.academy.course.dao.orderDao.OrderDAO;
 import com.academy.course.dao.orderDao.OrderDAOImpl;
 import com.academy.course.dao.productDao.ProductDAO;
 import com.academy.course.dao.productDao.ProductDAOImpl;
+import com.academy.course.mapper.ProductConverter;
 import com.academy.course.mapper.factory.MapperFactory;
 import com.academy.course.service.*;
 import com.academy.course.service.validator.*;
@@ -54,12 +55,16 @@ public class AppContextListener implements ServletContextListener {
         BasePaginationValidation basePaginationValidation = new BasePaginationValidationImpl();
 
 
+
+
         ProductService productService = new ProductServiceImpl(
                 productDAO
                 , MapperFactory.getProductMapper()
                 , idValidatorFactory
                 , baseProductValidator
-                , businessProductValidator,basePaginationValidation);
+                , businessProductValidator
+                ,basePaginationValidation
+                );
 
         ItemService itemService = new ItemServiceImpl(
                 itemDAO

@@ -4,6 +4,7 @@ package com.academy.course.service;
 import com.academy.course.dao.productDao.ProductDAO;
 import com.academy.course.dto.CategoryDTO;
 import com.academy.course.dto.ProductDTO;
+import com.academy.course.mapper.ProductConverter;
 import com.academy.course.mapper.ProductMapper;
 import com.academy.course.model.Product;
 import com.academy.course.paginator.PaginatedResult;
@@ -18,6 +19,7 @@ import java.sql.SQLException;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class ProductServiceImpl extends PaginatedResult<ProductDTO> implements ProductService {
 
@@ -27,6 +29,7 @@ public class ProductServiceImpl extends PaginatedResult<ProductDTO> implements P
     private final BaseProductValidator baseProductValidator;
     private final BusinessProductValidator businessProductValidator;
     private final BasePaginationValidation basePaginationValidation;
+
     private final static Logger logger = LogManager.getLogger(ProductServiceImpl.class);
 
 
@@ -110,7 +113,7 @@ public class ProductServiceImpl extends PaginatedResult<ProductDTO> implements P
     public ProductDTO getProductById(Integer id) throws SQLException {
         idValidatorFactory.getProductValidator().validateId(id);
         logger.info("Product with id {} was successfully found", id);
-        return productMapper.mapToDTO(productDAO.get(id));
+        return ProductConverter.INSTANCE.toDto(productDAO.get(id));
     }
 
     @Override
@@ -124,7 +127,9 @@ public class ProductServiceImpl extends PaginatedResult<ProductDTO> implements P
     public Set<ProductDTO> getAllProducts() {
         businessProductValidator.validateGetAllProducts();
         logger.info("Get all products successful");
-        return productMapper.mapToSetDTOS(productDAO.getAllProducts());
+        return productDAO.getAllProducts().stream()
+                .map(ProductConverter.INSTANCE::toDto)
+                .collect(Collectors.toSet());
     }
 
     @Override

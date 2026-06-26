@@ -19,12 +19,5 @@ public class EmployeeDTO {
 
     private Set<OrderDTO> orderDTOs;
 
-    @Override
-    public String toString() {
-        return "EmployeeDTO{" +
-                "id=" + id +
-                ", login='" + login + '\'' +
-                ", orderDTOs=" + orderDTOs +
-                '}';
-    }
+
 }

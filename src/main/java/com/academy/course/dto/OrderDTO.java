@@ -21,13 +21,5 @@ public class OrderDTO {
     private Boolean isBought;
 
 
-    @Override
-    public String toString() {
-        return "OrderDTO{" +
-                "id=" + id +
-                ", itemsDTO=" + itemsDTO +
-                ", paymentData=" + paymentData +
-                ", isBought=" + isBought +
-                '}';
-    }
+
 }

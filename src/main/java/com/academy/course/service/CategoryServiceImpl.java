@@ -42,8 +42,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public void createCategory(CategoryDTO categoryDTO) throws SQLException {
-        idValidatorFactory.getCategoryValidator().validateId(categoryDTO.getId());
-        baseCategoryValidator.createCategory(categoryDTO);
+//        baseCategoryValidator.createCategory(categoryDTO);
         categoryDAO.save(categoryMapper.mapToEntity(categoryDTO));
         logger.info("New category {} was successfully added",categoryDTO.getName());
     }

@@ -1,6 +1,7 @@
 package com.academy.course.service;
 
 import com.academy.course.dto.OrderDTO;
+import com.academy.course.dto.OrderProductsDTO;
 import com.academy.course.dto.ProductDTO;
 
 
@@ -20,12 +21,12 @@ public class TablesServiceImpl implements TablesService {
     }
 
     @Override
-    public Set<Object> getPairedList(String login) {
+    public OrderProductsDTO getPairedEntity(String login) {
         Set<ProductDTO> products = productService.getAvailableProducts();
         OrderDTO order = employeeService.getCurrentOrderOfEmployee(login);
-        Set<Object> entities = new HashSet<>();
-        entities.addAll(products);
-        entities.add(order);
-        return entities;
+        return OrderProductsDTO.builder()
+                .products(products)
+                .orderDTO(order)
+                .build();
     }
 }

@@ -18,6 +18,7 @@ import java.util.Set;
 @ToString
 public class Category extends DataEntity{
 
+    @Column
     private String name;
 
     @ToString.Exclude

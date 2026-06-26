@@ -11,7 +11,7 @@
 <head>
     <title>Current order</title>
 
-    <c:set var="currentOrder" value="${order}" scope="session"/>
+    <c:set var="order" value="${productsAndOrder.orderDTO}" scope="request"/>
     <br>
     <table border="1">
         <thead>
@@ -26,7 +26,7 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach var="item" items="${currentOrder.itemsDTO}">
+        <c:forEach var="item" items="${order.itemsDTO}">
             <td><c:out value="${item.id}"/></td>
             <td><c:out value="${item.productDTO.name}"/></td>
             <td><c:out value="${item.productDTO.price}"/></td>
@@ -52,6 +52,8 @@
     </tr>
     </thead>
     <tbody>
+    <c:set var="products" value="${productsAndOrder.products}"/>
+
     <c:forEach var="product" items="${products}">
         <tr>
         <td><c:out value="${product.id}"/></td>

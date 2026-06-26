@@ -16,12 +16,4 @@ public class CategoryDTO {
 
     private Set<ProductDTO> productsDTO;
 
-    @Override
-    public String toString() {
-        return "CategoryDTO{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", productsDTO=" + productsDTO +
-                '}';
-    }
 }

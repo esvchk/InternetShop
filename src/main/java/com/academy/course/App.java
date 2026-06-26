@@ -43,7 +43,7 @@ public class App {
                 .name("Long-black")
                 .price(7.50)
                 .isAvailable(true)
-                .category(category)
+                .category(null)
                 .build();
 
         Employee employee = Employee.builder()
@@ -76,6 +76,7 @@ public class App {
         OrderMapper orderMapper = new OrderMapper(itemMapper);
         EmployeeMapper employeeMapper = new EmployeeMapper(orderMapper);
         ProductDAO dao = new ProductDAOImpl();
+        ProductConverter productConverter = ProductConverter.INSTANCE;
 
         OrderDAO orderDAO = new OrderDAOImpl();
         EmployeeDAO employeeDAO = new EmployeeDAOImpl();
@@ -94,6 +95,8 @@ public class App {
         BaseEmployeeValidator baseEmployeeValidator = new BaseEmployeeValidatorImpl();
         BusinessEmployeeValidator businessEmployeeValidator = new BusinessEmployeeValidatorImpl(baseEmployeeValidator,employeeDAO);
 
+        BaseCategoryValidator baseCategoryValidator = new BaseCategoryValidatorImpl();
+        BusinessCategoryValidator businessCategoryValidator = new BusinessCategoryValidatorImpl(categoryDAO);
 
 
         IdValidatorFactory idValidatorFactory  = new IdValidatorFactory();
@@ -118,8 +121,10 @@ public class App {
                 employeeMapper,idValidatorFactory,orderService,
                 businessEmployeeValidator,basePaginationValidation,orderMapper);
 
-        TablesService tablesService = new TablesServiceImpl(productService,employeeService);
-        System.out.println(tablesService.getPairedList("Alex"));
+        CategoryService categoryService = new CategoryServiceImpl(categoryDAO,dao,categoryMapper,
+                businessCategoryValidator,baseCategoryValidator,idValidatorFactory);
+//        TablesService tablesService = new TablesServiceImpl(productService,employeeService);
+
 
 //        orderService.addProductToOrder(4,6,2);
 
@@ -127,6 +132,10 @@ public class App {
 //        ProductService productService = new ProductServiceImpl(dao,productMapper,idValidatorFactory,baseProductValidator,businessProductValidator);
 
 //        System.out.println(productService.getAllProducts());
+
+
+        System.out.println(productService.getProductById(1));
+//      categoryService.addProductToCategory(1,productConverter.toDto(dao.get(1)));
 
 
     }
